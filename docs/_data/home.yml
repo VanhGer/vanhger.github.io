@@ -1,0 +1,14 @@
+navbar_entries:
+  - title: about
+    url: about
+
+  - title: blog
+    url: blog
+
+footer_entries:
+  - title: linkedin
+    url: https://www.linkedin.com/in/pham-gia-viet-anh-68676b223/
+
+  - title: github
+    url: https://github.com/vanhger
+
