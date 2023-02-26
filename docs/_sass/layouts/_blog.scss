@@ -3,7 +3,7 @@
   @extend %padding-header;
   display: inline-block;
   width: 100%;
-  height: 100%;
+  height: 300px;
   font-size: 1.2em;
   text-align: center;
   color: rgba(161, 112, 6, 0.918);
@@ -40,22 +40,38 @@
 
 #main {
   background-position: 100% -160px, 0 center, center top;
-  background-attachment: scroll;
 }
 
 #pre {
   text-align: left;
-  margin-left: 60px;
+  margin-left: 5%;
 }
 
 #name {
   text-align: left;
-  margin-left: 60px;
-  margin-top: 50px;
-  font-size: 3em;
+  margin-left: 10%;
+  margin-top: 1%;
+  font-size: 2.8em;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color:rgba(161, 112, 6, 0.918);
 }
+
+#intro {
+  text-align: left;
+  margin-left: 10%;
+  font-size: 1.8em;
+  font-family:'Times New Roman', Times, serif;
+  color:rgba(161, 112, 6, 0.918);
+} 
+
+#quote {
+  text-align: right;
+  margin-right: 10%;
+  font-size: 1em;
+  scrollbar-highlight-color: antiquewhite;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color:rgba(161, 112, 6, 0.918);
+} 
 
 /* --- Post listing --- */
 .posts {
@@ -65,12 +81,16 @@
     width: 90%;
     margin-bottom: 8px;
     margin-top: 20px;
-    margin-left: 60px;
+    margin-left: 5%;
     background-color: rgba(215, 231, 73, 0.521);
     border-radius: 0.8em;
     display: inline-block;
     background-size: cover;
     //border-bottom: 3px solid rgba(9, 205, 219, 0.1);
+
+
+    
+
 
     p a {
       @extend .body-link;
