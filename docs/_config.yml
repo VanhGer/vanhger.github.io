@@ -1,91 +1,61 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# SITE CONFIGURATION
+baseurl: ""
+url: "https://vanhger.github.io"
 
-title: Vanhg
-email: vietanhpg2003@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Hi there.
+# THEME-SPECIFIC CONFIGURATION
+title: Hiimvanhg                                    # site's title
+description: "Smile of an angle, tears of a clown"      # used by search engines
+avatar: hi.png                         # Empty for no avatar in navbar
+favicon: hi.ico                             # Icon displayed in the tab
+color_theme: auto
+# Header and footer text
+header_text: HI THERE  # Change Blog header text
+header_feature_image: assets/img/header/bulbb.jpg
+header_feature_image_responsive: true
+footer_text: 
 
-permalink: /:slug
-favicon: "./hi.jpg"
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://vanhger.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  vanhger
+blog_feature_image: /bgr.png 
+blog_text: BLOG.........
 
-# Build settings
-remote_theme: 
+excerpt: truncate                                           # Or "truncate" (first 250 characters), "false" to disable
+post_navigation: true
+color_image: /assets/img/lineart.png                    # A bit transparent for color posts.
 
-theme_config:
-  appearance: "light" # can be "light", "dark" or "auto"
-  appearance_toggle: true # if appearance can be switched by user
-  back_home_text: "<-" # customize text for homepage link in post layout
-  date_format: "%Y-%m-%d" # customize how date is formatted
-  show_description: true # show blog description
-  show_navbar: true #   
-  show_footer: true # show footer links in home page,add in _data/home.yml
-  show_copyright: true # show copyright notice in footer
-  # following keys are using to create home layout
-  show_projects: true # show projects as cards, add in _data/home.yml
-  show_blog: true # show blog posts added in _posts
-  show_old_projects: true # show old projects as cards, add in _data/home.yml
-  show_misc_list: false # show generic vertical list for misc details, add _data/home.yml
-  show_reading_time: true # show number of words and reading time in the blog posts
-  show_tags: true # show tags in a blog posts
-  # options for "home" page
-  home:
-    title_projects: SVANHG
-    title_misc_list: Details
-    title_blog: Blogg
-    title_old_projects: Old Projects
+# Features
+# More in the _data folder for share buttons, author and language
+# For layout customization, go to the "_sass > base" folder, and check "_variables.scss"
+katex: true                                             # Enable if using math markup
+mermaid: default                                        # Enable mermaid-js for diagrams, use theme: base, forest, dark, default, neutral
+google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
+cookie_consent: false                                   # To respect the usage of cookies
+color_theme: auto                                       # auto, dark or light
 
-highlighter: rouge
-
-sass:
-  style: :compressed
-
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
+# Comments
+comments:
+  disqus_shortname:   hiimvanhg                                  # Your discus shortname for comments
+  cusdis_app_id:                                        # Your cusdis data-app-id
+  utterances:                                           # Enable by filling below information. For more info, go to https://utteranc.es
+    repo:                                               # your public comments repository (e.g. owner/repo)
+    issue-term:                                         # Issue term (e.g. "comment" consider issues with this word in the title as comments)
 
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+# PAGINATION
+paginate: 5
+paginate_path: "blog/page:num/"
 
-
+# PORTFOLIO + BLOG
 collections:
-  - blogposts
-    
+  portfolio:
+    output: true
+    permalink: /:collection/:name
+
+# BUILD SETTINGS
+sass:
+  blog:
+    - _sass
+  style: compressed
+plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed, jekyll-sass-converter]
+exclude: [".jekyll-cache", ".jekyll-metadata", ".idea", "vendor/*", "assets/node_modules/*"]
+
+# theme: type-on-strap                                  # if using the theme as a jekyll theme gem
+remote_theme: sylhare/Type-on-Strap                     # If using as a remote_theme in github

@@ -1,20 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
-  {%- include head.html -%}
+
+<html lang="en">
+  {% include default/head.liquid %}
   <body>
-    <main class="page-content" aria-label="Content">
-      <div class="w">
-        {{ content }}
-        <div class="credits">
-          {%- if site.theme_config.show_copyright == true -%}
-          &copy;&nbsp;{{ "now" | date: "%Y" }}&nbsp;{{site.author}}
-          &nbsp;
-          •
-          &nbsp;
-          {%- endif -%}
-        </div>
-      </div>
-    </main>
-    
+    {% include default/navbar.liquid %}
+    <div class="content">
+      {{ content }}
+    </div>
+    {% include default/footer.liquid %}
   </body>
 </html>

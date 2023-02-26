@@ -1,0 +1,29 @@
+---
+layout: default
+---
+
+<div class="blog">
+    <style scoped>
+        {% assign image = site.blog_feature_image | relative_url | split: '.' %}
+        .call-out_img {
+            background-image: url('{{ image | join: '.' }}');
+        }
+        {% if site.blog_feature_image_responsive %}
+        @media screen and (max-width: 768px) {
+            .call-out_img {
+                background-image: url('{{ image[0] | append: '-medium.' | append: image[1] | default: image}}');
+            }
+        }
+        @media screen and (max-width: 576px) {
+            .call-out_img {
+                background-image: url('{{ image[0] | append: '-small.' | append: image[1] }}');
+            }
+        }
+        {% endif %}
+    </style>
+    <div id="main" class="call-out call-out_img">
+        <h2> {{ site.blog_text | default: "Change <code>blog_text</code> in <code>_config.yml</code>"}} </h2>
+    </div>
+
+        {% include blog/blog.liquid %}
+</div>
