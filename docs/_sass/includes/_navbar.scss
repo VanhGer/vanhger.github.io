@@ -21,7 +21,7 @@
   width: 100%;
 
   .separator {
-    user-select: none;
+    user-select: auto;
     opacity: 0;
 
     &:first-child {
@@ -45,6 +45,7 @@
   }
 
   .site-title {
+    color: black;
     float: left;
     font-weight: bold;
     font-family: $font-family-logo;
@@ -70,7 +71,7 @@ nav {
   li {
     display: inline;
     float: left;
-    margin-right: 0.4em;
+    margin-right: 0.7em;
   }
 
   a {

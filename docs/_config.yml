@@ -7,15 +7,15 @@ title: Hiimvanhg                                    # site's title
 description: "Smile of an angle, tears of a clown"      # used by search engines
 avatar: hi.png                         # Empty for no avatar in navbar
 favicon: hi.ico                             # Icon displayed in the tab
-color_theme: auto
+color_theme: simp
 # Header and footer text
 header_text: HI THERE  # Change Blog header text
 header_feature_image: assets/img/header/bulbb.jpg
 header_feature_image_responsive: true
 footer_text: 
 
-blog_feature_image: /bgr.png 
-blog_text: BLOG.........
+blog_feature_image: /bgr2.png 
+blog_text:    
 
 excerpt: truncate                                           # Or "truncate" (first 250 characters), "false" to disable
 post_navigation: true
@@ -28,7 +28,7 @@ katex: true                                             # Enable if using math m
 mermaid: default                                        # Enable mermaid-js for diagrams, use theme: base, forest, dark, default, neutral
 google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
 cookie_consent: false                                   # To respect the usage of cookies
-color_theme: auto                                       # auto, dark or light
+color_theme: vanhg                                       # auto, dark or light
 
 # Comments
 comments:

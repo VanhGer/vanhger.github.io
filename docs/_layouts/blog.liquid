@@ -22,7 +22,11 @@ layout: default
         {% endif %}
     </style>
     <div id="main" class="call-out call-out_img">
-        <h2> {{ site.blog_text | default: "Change <code>blog_text</code> in <code>_config.yml</code>"}} </h2>
+        <h2> {{ site.blog_text | default: "BLOG"}} </h2>
+    </div>
+    
+    <div id="pre" class="pre">
+        <h3> {{"Most recent posts: "}} </h3>
     </div>
 
         {% include blog/blog.liquid %}
