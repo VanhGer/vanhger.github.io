@@ -1,7 +1,7 @@
 .tag-list {
   width: 100%;
   padding-bottom: $padding-x-small;
-
+  
   a.button {
     margin: 0.1em;
     padding: 0.2em 0.4em;
@@ -42,7 +42,9 @@
 .tag-posts {
   display: inline-block;
   width: 100%;
-
+  //border-bottom: 3px solid rgba(139, 109, 62, 0.925);
+  border: 1px solid var(--border);
+  border-radius: 1em;
   .tag-title {
     margin-top: 0;
     margin-bottom: 0;

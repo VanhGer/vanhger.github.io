@@ -14,7 +14,7 @@ header_feature_image: assets/img/header/sc.png
 header_feature_image_responsive: true
 footer_text: 
 
-blog_feature_image: /bgr2.png 
+blog_feature_image: assets/img/blog/background.png 
 blog_text:    
 
 excerpt: truncate                                           # Or "truncate" (first 250 characters), "false" to disable

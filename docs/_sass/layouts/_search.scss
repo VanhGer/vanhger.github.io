@@ -6,7 +6,7 @@
   font-size: 18px;
   line-height: 1.43;
   color: var(--text);
-  background: var(--background) none;
+  background: rgba(233, 208, 153, 0.918);
   border: 1px solid #ccc;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -17,7 +17,7 @@
 
   &:focus,
   &:hover {
-    border-color: var(--link);
+    border-color: black;
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px var(--link);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px var(--link);
@@ -53,6 +53,6 @@
   }
 
   &:hover {
-    text-decoration: none;
+    text-decoration:solid;
   }
 }
