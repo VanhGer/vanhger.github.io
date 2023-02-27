@@ -10,7 +10,7 @@ favicon: hi.ico                             # Icon displayed in the tab
 color_theme: simp
 # Header and footer text
 header_text: HI THERE  # Change Blog header text
-header_feature_image: assets/img/header/bulbb.jpg
+header_feature_image: assets/img/header/sc.png
 header_feature_image_responsive: true
 footer_text: 
 
