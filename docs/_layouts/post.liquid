@@ -53,6 +53,7 @@ layout: default
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
+      
   }
 
   {% if page.color %}
@@ -72,6 +73,7 @@ layout: default
   header#main {
       background-color: {{ page.color }} !important;
       background-image: url('{{ site.color_image | relative_url }}');
+      
   }
   {% endif %}
 
