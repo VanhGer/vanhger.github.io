@@ -7,7 +7,6 @@ title: Hiimvanhg                                    # site's title
 description: "Smile of an angle, tears of a clown"      # used by search engines
 avatar: hi.png                         # Empty for no avatar in navbar
 favicon: hi.ico                             # Icon displayed in the tab
-color_theme: simp
 # Header and footer text
 header_text: HI THERE  # Change Blog header text
 header_feature_image: assets/img/header/sc.png
