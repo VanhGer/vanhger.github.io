@@ -42,6 +42,6 @@ Mô hình chữ V cũng bao gồm các pha gần giống như thác nước. Tuy
 Bên cạnh đó, việc kiểm thử được chia ra rất rõ ràng các pha như đã nói ở trên. Cụ thể thì unit test (kiểm thử đơn vị) sẽ chịu trách nhiệm kiểm tra từng thành phần phần mềm như mô hình thác nước. Kiểm thử tích hợp là nhóm các thành phần phần mềm do kiến trúc quy định, để kiểm tra sự tương tác của chúng với nhau. Đối tượng kiểm thử không phải là một hệ thống hoàn chỉnh. Ở pha kiểm thử hệ thống, hệ thống hoàn chỉnh sẽ được đội phát triển kiểm tra, đánh giá trước khi gửi cho khách hàng. Cuối cùng là kiểm thử chấp nhận, pha này sẽ do khách hàng dùng thử sản phẩm và đánh giá cuối cùng.
 
 ##  <a name='Tmkt'></a>Tạm kết
-Ở trên là 2 trên 4 loại mô hình phát triển phần mềm truyền thống. Ở phần 2, mình sẽ giới thiệu thêm về bản mẫu và mô hình xoắn ốc
+Ở trên là 2 trên 4 loại mô hình phát triển phần mềm truyền thống. Ở phần 2, mình sẽ giới thiệu thêm về bản mẫu và mô hình xoắn ốc.
 
 

@@ -16,12 +16,14 @@
   #previous-post {
     float: left;
     width: 50%;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
 
   #next-post {
     float: right;
     text-align: right;
     width: 50%;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
 
   @media screen and (max-width: $sm-break) {
