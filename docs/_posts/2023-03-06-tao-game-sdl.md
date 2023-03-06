@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Tạo một game bằng C++ và SDL2.0
+title: Mình đã tạo một game bằng C++ và SDL2.0 như thế nào
 feature-img: "assets/img/blur/iphone2.png"
 thumbnail: "assets/img/feature-img/post4.png"
 tags: [Instruction, Game]
