@@ -1,3 +1,30 @@
-.current {
-    color: green;
+a {
+    text-decoration: none;
+}
+
+.tab_btn {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size:larger;
+    color: rgb(229, 231, 88);
+    font-weight: bold;
+    border-radius: 10%;
+    padding: 2vw;
+}
+
+.current_tab {
+    color: rgb(199, 156, 91);
+}
+
+.tab_container {
+    justify-content: center;
+    background-color: rgba(30, 88, 138, 0.726);
+    padding: 1vh;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 5%;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
