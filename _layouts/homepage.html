@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hiimvanhg</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/home.css">
+    {% feed_meta %}
+    {% seo %}
+  </head>
+  <body>
+    {% include navigation.html %}
+    <img class = "home_img" src = "/assets/images/test.png">
+    <div class = "home_content">
+        <div class = "home_intro">
+            <img class = "home_gif" src = "/assets/images/pikachu2.gif">
+            <h1 class = "home_heading">
+                Hello, my name is Viet Anh.
+            </h1>
+        </div>
+        <div class = "home_description"> {{ content }} </div>
+    </div>
+  </body>
+</html>  
