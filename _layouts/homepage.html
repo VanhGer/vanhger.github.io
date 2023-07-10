@@ -6,11 +6,12 @@
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
     <link rel="stylesheet" href="/assets/css/styles.css">
     <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
     {% feed_meta %}
     {% seo %}
   </head>
   <body>
-    {% include navigation.html %}
+    {% include header.html %}
     <img class = "home_img" src = "/assets/images/test.png">
     <div class = "home_content">
         <div class = "home_intro">
@@ -21,5 +22,17 @@
         </div>
         <div class = "home_description"> {{ content }} </div>
     </div>
+    
+    <div class = "contact">
+        <div class = "contact_container">
+            {% for item in site.data.footer %}
+              <a href="{{ item.link }}"  target="_blank">
+              <img src = {{item.img}} class = "contact_icon">
+              </a>
+            {% endfor %}
+        </div>
+    </div>
+    
+
   </body>
 </html>  

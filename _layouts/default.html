@@ -9,7 +9,14 @@
     {% seo %}
   </head>
   <body>
-    {% include navigation.html %}
-    {{ content }}
+    {% include header.html %}
+    <div class = "default_content">
+      <p class = "page_title">{{ page.title }} </p>
+      {{ content }}
+    </div>
   </body>
+
+  <footer>
+    {% include footer.html %}
+  </footer>
 </html>  

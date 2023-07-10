@@ -33,7 +33,7 @@ a {
 
 .tab_container {
     display: flex;
-    gap: 3vh;
+    gap: 1vw;
     justify-content: center;
     background-color: var(--header_color);
     padding: 1vh;
@@ -43,4 +43,50 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.default_content {
+    margin-left: var(--left-margin);
+    margin-right: var(--right-margin);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.page_title {
+    color: rgb(74, 83, 107);
+    font-size: 7vh;
+    font-weight: bold;
+    margin-bottom: auto;
+}
+.all_post {
+    display:flex;
+    flex-direction: column;
+    gap: 2vh;
+
+}
+.post_item {
+    display: flex;
+    background-color: var(--header_color);
+    width: 100%;
+    border-radius: 1rem;
+}
+.img_title {
+    width: 20vw;
+    height: inherit;
+}
+
+.post_summary {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2vw;
+}
+
+.summary_title {
+    font-size: 25px;
+    font-weight: bolder;
+    color: black;
+    margin-top: 1vh;
+}
+
+.post_excerpt{
+    color: rgb(126, 128, 128);
 }
