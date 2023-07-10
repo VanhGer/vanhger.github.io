@@ -1,0 +1,20 @@
+.post_title {
+    margin-top: 7vh;
+}
+
+.post_detail {
+    color: var(--post-excerpt-color);
+}
+
+.post_img {
+    height: 50vh;
+    width: inherit;
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.img_container {
+    display: flex;
+    justify-content: center;
+}

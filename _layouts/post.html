@@ -1,15 +1,28 @@
----
-layout: default
----
-<h1>{{ page.title }}</h1>
-<p>
-    {{ page.date | date_to_string }} 
-    
-    {% assign author = site.authors | where: 'short_name', page.author | first %} 
-    {% if author %}
-        - <a href="{{ author.url }}">{{ author.name }}</a>
-    {% endif %}
-
-</p>
-
-{{ content }}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hiimvanhg</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    {% feed_meta %}
+    {% seo %}
+  </head>
+  <body>
+    {% include header.html %}
+    <div class = "default_content">
+        <h1 class = "post_title">{{ page.title }}</h1>
+        <p class = "post_detail">
+            {{ page.author}} - {{ page.date | date_to_string }} 
+        </p>
+        <div class = "img_container">
+            <img src = {{page.img_title}} class = "post_img">
+        </div>
+        {{content}}
+    </div>
+  </body>
+  <footer>
+    {% include footer.html %}
+  </footer>
+</html>  

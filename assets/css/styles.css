@@ -4,8 +4,12 @@
     --current_tab_color: rgb(199, 156, 91);
     --header_color:rgb(226, 230, 208); 
     --current_tab_bg: rgba(239, 243, 231, 0.911);
-    --left-margin: 10vh;
-    --right-margin: 10vh;
+    --left-margin: 7vw;
+    --right-margin: 7vw;
+    --page-title: rgb(126, 128, 128);
+    --post-item-color:rgb(228, 230, 221); 
+    --home-header-color: rgb(240, 188, 119);
+    --post-excerpt-color: rgb(126, 128, 128);
 }
 
 body {
@@ -24,6 +28,10 @@ a {
     font-weight: bold;
     border-radius: 0.375rem;
     padding: 3px;
+}
+
+.tab_btn:hover {
+    filter: brightness(80%);
 }
 
 .current_tab {
@@ -52,7 +60,7 @@ a {
 }
 
 .page_title {
-    color: rgb(74, 83, 107);
+    color: var(--home-header-color);
     font-size: 7vh;
     font-weight: bold;
     margin-bottom: auto;
@@ -60,18 +68,19 @@ a {
 .all_post {
     display:flex;
     flex-direction: column;
-    gap: 2vh;
+    gap: 3vh;
 
 }
 .post_item {
     display: flex;
-    background-color: var(--header_color);
+    background-color: var(--post-item-color);
     width: 100%;
     border-radius: 1rem;
 }
 .img_title {
     width: 20vw;
     height: inherit;
+    border-radius: 1rem;
 }
 
 .post_summary {
@@ -88,5 +97,14 @@ a {
 }
 
 .post_excerpt{
-    color: rgb(126, 128, 128);
+    color: var(--post-excerpt-color);
+}
+
+.about_text{
+    color: var(--home-header-color);
+}
+
+.ask {
+    display: flex;
+    gap: 2vw;
 }

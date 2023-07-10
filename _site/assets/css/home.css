@@ -1,5 +1,6 @@
 .home_content {
     margin-left: var(--left-margin);
+    margin-right: var(--right-margin);
 }
 
 .home_img {
@@ -15,7 +16,7 @@
 .home_heading {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    color: rgb(240, 188, 119);
+    color: var(--home-header-color);
 }
 
 .home_description {
