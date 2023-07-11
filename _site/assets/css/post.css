@@ -18,3 +18,8 @@
     display: flex;
     justify-content: center;
 }
+
+.post_content {
+    margin-left: 5vw;
+    margin-right: 5vw;
+}

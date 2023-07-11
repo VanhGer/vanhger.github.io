@@ -1,5 +1,5 @@
 :root {
-    --bg_color: rgba(239, 243, 231, 0.911);
+    --bg_color: rgba(239, 243, 231, 0.664);
     --tab_color: rgb(195, 214, 159);
     --current_tab_color: rgb(199, 156, 91);
     --header_color:rgb(226, 230, 208); 
@@ -61,7 +61,7 @@ a {
 
 .page_title {
     color: var(--home-header-color);
-    font-size: 7vh;
+    font-size: 4vw;
     font-weight: bold;
     margin-bottom: auto;
 }
@@ -87,6 +87,7 @@ a {
     display: flex;
     flex-direction: column;
     margin-left: 2vw;
+    margin-right: 4vw;
 }
 
 .summary_title {
@@ -98,6 +99,10 @@ a {
 
 .post_excerpt{
     color: var(--post-excerpt-color);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    -webkit-box-orient: vertical;
 }
 
 .about_text{
