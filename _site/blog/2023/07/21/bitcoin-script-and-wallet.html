@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hiimvanhg</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Bitcoin Scripts và Ví</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Bitcoin Scripts và Ví" />
+<meta name="author" content="vanhg" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng." />
+<meta property="og:description" content="Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng." />
+<link rel="canonical" href="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet" />
+<meta property="og:url" content="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-07-21T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Bitcoin Scripts và Ví" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"vanhg"},"dateModified":"2023-07-21T00:00:00+07:00","datePublished":"2023-07-21T00:00:00+07:00","description":"Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.","headline":"Bitcoin Scripts và Ví","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet"},"url":"http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+  <body>
+    <div class="header">
+  <div class = "tab_container">
+      
+        <a href="/" 
+        
+        class = "tab_btn">
+        Home
+        </a>
+      
+        <a href="/about.html" 
+        
+        class = "tab_btn">
+        About
+        </a>
+      
+        <a href="/blog.html" 
+        
+        class = "tab_btn">
+        Blog
+        </a>
+      
+        <a href="/staff.html" 
+        
+        class = "tab_btn">
+        Staff
+        </a>
+      
+  </div>
+</div>
+
+    <div class = "default_content">
+        <h1 class = "post_title">Bitcoin Scripts và Ví</h1>
+        <p class = "post_detail">
+            vanhg - 21 Jul 2023 
+        </p>
+        <div class = "img_container">
+            <img src =  class = "post_img">
+        </div>
+        <div class = "post_content">
+          <p>Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.</p>
+
+<h3 id="một-số-lưu-ý">Một số lưu ý</h3>
+<ul>
+  <li>Các Tx sau khi thêm vào khối sẽ không thể bị xoá, do đó khi Tx nhầm thì sẽ bị khoá hoặc mất tiền.</li>
+  <li>Các TxID là độc nhất, vì Input của chúng là độc nhất. Có trường hợp ngoại lệ là các Coinbase vì chúng không có input. Do đó có thể có trùng TxID. Vì vậy, người ta thường thêm Block Height và mỗi ScriptPk của coinbase.</li>
+</ul>
+
+<h2 id="ví-dụ-về-các-loại-bitcoin-scripts">Ví dụ về các loại Bitcoin Scripts</h2>
+<h3 id="bảo-vệ-tài-sản-với-co-signatory">Bảo vệ tài sản với co-signatory</h3>
+<p>addr = 2 - of - 2 (PkA, PkS) với PkS là của custody server.</p>
+
+<h3 id="escrow-service">Escrow Service</h3>
+<p>Giả định: A muốn mua balo từ B với giá 0.1 BTC, nhưng A chỉ có thể trả tiền khi balo đến, và không thể không trả. Do vậy, addr có dạng: 2-of-3 (PkA, PkB, PkJ).</p>
+
+<p>Cách vận hành:</p>
+<ul>
+  <li>A thông báo cho B rằng muốn mua balo với giá 0.1 BTC</li>
+  <li>A post 1 Tx 0.11 BTC đến addr trên (0.01BTC để đảm bảo A sẽ trả tiền cho B).</li>
+  <li>B khi thấy Tx, gửi balo cho A</li>
+  <li>Khi A nhận, gửi SigA trong Tx trên cho B</li>
+  <li>B sẽ sử dụng SigA và SigB để lấy số tiền mà A gửi lên Addr.</li>
+</ul>
+
+<p>Nếu vi phạm xảy ra:</p>
+<ul>
+  <li>B không đưa balo, A sẽ lấy lại tiền với sự trợ giúp của Judge (PkJ).</li>
+  <li>A không đưa SigA, B sẽ lấy tiền với sự giúp đỡ của Judge, A mất thêm 0.01BTC.</li>
+</ul>
+
+<h2 id="ví">Ví</h2>
+<p>Ví giúp user tạo ra các cặp Pk- Sk, tạo ra và xác minh các Tx, đưa ra số dư mà user có.</p>
+
+<h3 id="giúp-đơn-giản-hoá-xác-minh-thanh-toán">Giúp đơn giản hoá xác minh thanh toán</h3>
+<p>Để xác minh một thanh toán đã thực hiện, ví thường tải các block headers. Sau đó, ví gửi lên server danh sách các địa chỉ mà ví đang nắm giữ. Sau đó, server sẽ gửi về ví các Tx liên quan đến địa chỉ và Merkle Proof của Tx đó. Từ đó giúp ví hiển thị đúng số dư và xác minh Tx.</p>
+
+<h3 id="vấn-dề">Vấn dề</h3>
+<ul>
+  <li>Để giải quyết được yếu tố bảo mật, blockheader sẽ được tải từ 10 servers khác nhau hoặc từ 1 nodes tin cậy.</li>
+  <li>Remote server có thể kiểm tra xem addr gửi lên có thuộc về ví hay không.</li>
+</ul>
+
+<h3 id="các-loại-ví">Các loại ví</h3>
+<h4 id="hot-wallet">Hot wallet</h4>
+<ul>
+  <li>Dạng ví điện tử có kết nối Internet, có nhiều chức năng như lưu trữ, gửi nhận Tx, tokens,…</li>
+  <li>Có thể truy cập từ các thiết bị Internet như máy tính, điện thoại,..</li>
+  <li>Có thể bị hack hoặc xâm nhập bởi các hacker.</li>
+</ul>
+
+<h3 id="cold-wallet">Cold wallet</h3>
+<ul>
+  <li>Không cho phép kết nối Internet.</li>
+  <li>Có thiết bị riêng cho cold wallet, thiết bị này phải được khởi động bất cứ khi nào sử dụng và người dùng phải sao chép vật lý dữ liệu từ online device sang offline và ngược lại.</li>
+</ul>
+
+<h2 id="kết-luận">Kết luận</h2>
+<p>Có nhiều loại Bitcoin Script khác như CrossChain,… được sử dụng rất phổ biến ở hiện tại.</p>
+
+        </div>
+        
+    </div>
+  </body>
+  <footer>
+    
+  </footer>
+</html>  

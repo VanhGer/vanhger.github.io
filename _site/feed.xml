@@ -1,4 +1,144 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-07-20T23:12:17+07:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Cấu tạo block và PoW</title><link href="http://localhost:4000/blog/2023/07/20/cau-tao-block-va-pow" rel="alternate" type="text/html" title="Cấu tạo block và PoW" /><published>2023-07-20T00:00:00+07:00</published><updated>2023-07-20T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/20/cau-tao-block-va-pow</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/20/cau-tao-block-va-pow"><![CDATA[<p>Trong bài viết ngày hôm nay, mình sẽ nói kĩ hơn về cấu tạo của block trong blockchain và cơ chế đồng thuận PoW (Proof of Work).</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-07-21T23:38:10+07:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Bitcoin Scripts và Ví</title><link href="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet" rel="alternate" type="text/html" title="Bitcoin Scripts và Ví" /><published>2023-07-21T00:00:00+07:00</published><updated>2023-07-21T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/21/bitcoin-scripts-and-wallet</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet"><![CDATA[<p>Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.</p>
+
+<h3 id="một-số-lưu-ý">Một số lưu ý</h3>
+<ul>
+  <li>Các Tx sau khi thêm vào khối sẽ không thể bị xoá, do đó khi Tx nhầm thì sẽ bị khoá hoặc mất tiền.</li>
+  <li>Các TxID là độc nhất, vì Input của chúng là độc nhất. Có trường hợp ngoại lệ là các Coinbase vì chúng không có input. Do đó có thể có trùng TxID. Vì vậy, người ta thường thêm Block Height và mỗi ScriptPk của coinbase.</li>
+</ul>
+
+<h2 id="ví-dụ-về-các-loại-bitcoin-scripts">Ví dụ về các loại Bitcoin Scripts</h2>
+<h3 id="bảo-vệ-tài-sản-với-co-signatory">Bảo vệ tài sản với co-signatory</h3>
+<p>addr = 2 - of - 2 (PkA, PkS) với PkS là của custody server.</p>
+
+<h3 id="escrow-service">Escrow Service</h3>
+<p>Giả định: A muốn mua balo từ B với giá 0.1 BTC, nhưng A chỉ có thể trả tiền khi balo đến, và không thể không trả. Do vậy, addr có dạng: 2-of-3 (PkA, PkB, PkJ).</p>
+
+<p>Cách vận hành:</p>
+<ul>
+  <li>A thông báo cho B rằng muốn mua balo với giá 0.1 BTC</li>
+  <li>A post 1 Tx 0.11 BTC đến addr trên (0.01BTC để đảm bảo A sẽ trả tiền cho B).</li>
+  <li>B khi thấy Tx, gửi balo cho A</li>
+  <li>Khi A nhận, gửi SigA trong Tx trên cho B</li>
+  <li>B sẽ sử dụng SigA và SigB để lấy số tiền mà A gửi lên Addr.</li>
+</ul>
+
+<p>Nếu vi phạm xảy ra:</p>
+<ul>
+  <li>B không đưa balo, A sẽ lấy lại tiền với sự trợ giúp của Judge (PkJ).</li>
+  <li>A không đưa SigA, B sẽ lấy tiền với sự giúp đỡ của Judge, A mất thêm 0.01BTC.</li>
+</ul>
+
+<h2 id="ví">Ví</h2>
+<p>Ví giúp user tạo ra các cặp Pk- Sk, tạo ra và xác minh các Tx, đưa ra số dư mà user có.</p>
+
+<h3 id="giúp-đơn-giản-hoá-xác-minh-thanh-toán">Giúp đơn giản hoá xác minh thanh toán</h3>
+<p>Để xác minh một thanh toán đã thực hiện, ví thường tải các block headers. Sau đó, ví gửi lên server danh sách các địa chỉ mà ví đang nắm giữ. Sau đó, server sẽ gửi về ví các Tx liên quan đến địa chỉ và Merkle Proof của Tx đó. Từ đó giúp ví hiển thị đúng số dư và xác minh Tx.</p>
+
+<h3 id="vấn-dề">Vấn dề</h3>
+<ul>
+  <li>Để giải quyết được yếu tố bảo mật, blockheader sẽ được tải từ 10 servers khác nhau hoặc từ 1 nodes tin cậy.</li>
+  <li>Remote server có thể kiểm tra xem addr gửi lên có thuộc về ví hay không.</li>
+</ul>
+
+<h3 id="các-loại-ví">Các loại ví</h3>
+<h4 id="hot-wallet">Hot wallet</h4>
+<ul>
+  <li>Dạng ví điện tử có kết nối Internet, có nhiều chức năng như lưu trữ, gửi nhận Tx, tokens,…</li>
+  <li>Có thể truy cập từ các thiết bị Internet như máy tính, điện thoại,..</li>
+  <li>Có thể bị hack hoặc xâm nhập bởi các hacker.</li>
+</ul>
+
+<h3 id="cold-wallet">Cold wallet</h3>
+<ul>
+  <li>Không cho phép kết nối Internet.</li>
+  <li>Có thiết bị riêng cho cold wallet, thiết bị này phải được khởi động bất cứ khi nào sử dụng và người dùng phải sao chép vật lý dữ liệu từ online device sang offline và ngược lại.</li>
+</ul>
+
+<h2 id="kết-luận">Kết luận</h2>
+<p>Có nhiều loại Bitcoin Script khác như CrossChain,… được sử dụng rất phổ biến ở hiện tại.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.]]></summary></entry><entry><title type="html">Cơ bản về đồng thuận</title><link href="http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus" rel="alternate" type="text/html" title="Cơ bản về đồng thuận" /><published>2023-07-21T00:00:00+07:00</published><updated>2023-07-21T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus"><![CDATA[<p>Ở bài viết này, chúng ta sẽ tìm hiểu về cách Bitcoin chống lại việc những nodes không trung thực tấn công vào mạng lưới. 
+Những nodes không trung thực (Adversary) là những nodes gây hại, chúng có mục đích khiến Blockchain không còn minh bạch và nhẩt quán để dễ dàng thêm vào những giao dịch sai mà có lợi cho chúng.</p>
+
+<h2 id="tác-hại-của-adversary">Tác hại của Adversary</h2>
+<p>Có thể gây:</p>
+<ul>
+  <li>Lỗi crash: Nếu các nodes này không gửi và nhận các msg (message)</li>
+  <li>Lỗi bỏ sót: Nếu các nodes này chọn hoặc bỏ qua các msg</li>
+  <li>Lỗi Byzantine: Các node sai có thể đi lệch khỏi giao thức.</li>
+</ul>
+
+<p>Có 2 loại adversary</p>
+<ul>
+  <li>Static: phá huỷ node mà nó chọn trước khi bắt đầu giao thức.</li>
+  <li>Adaptive: có thể phá huỷ các node khi giao thức xảy ra.
+<br />
+Giới hạn sức mạnh của adversary là số node:  f. Ví dụ: f &lt; n/2, f &lt; n/3.</li>
+</ul>
+
+<h2 id="các-nodes-giao-tiếp-với-nhau">Các nodes giao tiếp với nhau</h2>
+<p>Các nodes gửi các tin nhắn (message) cho nhau trong giao thức. Giả sử một node adversary đang điều khiển việc gửi tin nhắn:</p>
+<ul>
+  <li>Trong một mạng đồng bộ: Adversary phải chuyển tin nhắn bất kì trong thời gian Δ giây (Δ đã biết).</li>
+  <li>Trong mạng không đồng bộ: Adversary có thể hoãn msg trong 1 khoảng thời gian hữu hạn, nhưng cuối cùng vẫn phải chuyển.</li>
+  <li>Trong mạng đồng bộ 1 phần: tồn tại 1 sự kiện gọi là GST mà: Một msg gửi bởi 1 honest node ở thời gian t sẽ đến với người nhận trong khoảng thời gian:  Δ + Max(t, GST). 
+<br />
+Điều này tương đương với mạng sẽ không đồng bộ cho tới GST, sau đó sẽ đồng bộ</li>
+</ul>
+
+<h3 id="state-machine-replication-smr">State Machine Replication (SMR)</h3>
+<p>Là phương pháp chung để triển khai dịch vụ chịu lỗi bằng việc sao chép máy chủ và điều phối tương tác của máy client với bản sao đó. Nó cung cấp framework để hiểu và thiết kết giao thức quản lý sao chép.</p>
+
+<p>SMR gồm 2 phần:</p>
+<ul>
+  <li>Replicas: Nhận Tx, chạy giao thức SMR và xác định log. Các Log(Ledger) là chuỗi Tx thứ tự tuyến tính.</li>
+  <li>Client: Giao tiếp với replicas để nhận log (ví dụ: wallet).
+Các wallet không chạy giao thức SMR và cũng không giao tiếp với nhau. Nó hỏi các replicas về các log và chọn kết quả được nhiều replicas gửi về nhất.</li>
+</ul>
+
+<h3 id="bảo-mật-cho-smr">Bảo mật cho SMR</h3>
+<p>Gọi A ≼ B khi A là tiền tố của B. Ví dụ: A = Tx1Tx2Tx3, B = Tx1Tx2Tx3Tx5Tx6 thì A là tiền tố của B.<br />
+Gọi LOG(i, t) là log đưa ra bởi client i ở thời điểm t. Một giao thức SMR là an toàn nếu thoả mãn:</p>
+<ul>
+  <li>Safety: Với client i và j, ở 2 thời gian t và s: <br />
+  LOG(i, t) ≼ LOG(j, s) hoặc LOG(j, s) ≼ LOG(i, t) hoặc cả 2. =&gt; không thể xảy ra Double Spent</li>
+  <li>Liveness: với Tx là input của 1 honest replica ở thời điểm t, =&gt; với mọi i ở thời điểm s ≥ t thì: <br />
+Tx ∈ LOG(i, s).</li>
+</ul>
+
+<h2 id="giao-thức-blockchain">Giao thức Blockchain</h2>
+<p>Các Txs được đóng thành các block để tăng thông lượng. Gọi CH(i, t) là chuỗi được accept bởi client i tại thời gian t. Giao thức blockchain đảm bảo an toàn nếu thoả mãn:</p>
+<ul>
+  <li>Safety: Với client i và j, ở 2 thời gian t và s: <br />
+  CH(i, t) ≼ CH(j, s) hoặc CH(j, s) ≼ CH(i, t) hoặc cả 2</li>
+  <li>Liveness: với Tx là input của 1 honest replica ở thời điểm t, =&gt; với mọi i ở thời điểm s ≥ t thì: <br />
+Tx ∈ CH(i, s).</li>
+</ul>
+
+<p>Mong muốn giao thức phải đảm bảo an toàn dưới môi trường bán đồng bộ. Theo DLS(1988), nếu f ≥ n/3 thì giao thức SMR không thể đảm bảo an toàn. Bây giờ với f &lt; n/3, ta sẽ chứng minh là giao thức này an toàn.</p>
+
+<h2 id="chứng-minh">Chứng minh</h2>
+<p>Thời gian chia thành các epoch, mỗi epoch là 2Δ giây. Có n replicas cố định, mỗi epoch e được chỉ định 1 leader Le bởi hàm Hash.</p>
+<h3 id="baby-streamlet">Baby streamlet</h3>
+<p><strong>Đề xuất khối: </strong> Ở đầu mỗi epoch, Le xác định chuỗi dài nhất nó từng thấy cho đến nay và sẽ đề xuất 1 khối liền sau chuỗi đó. <bn>
+<strong>Finalization: </strong> 1 replica finalizes block (và tiền tố của nó) ở đầu chuỗi. Nếu có nhiều block như thế, chọn block có epoch nhỏ nhất.<br />
+Tuy nhiên, có một nhược điểm là nếu Leader là adversary và network chưa đồng bộ, thì Adversary có thể gửi thông báo các Block cho 1 user bất kì, nhưng thông báo chưa tới các user còn lại cho tới sau GST. 
+/// hình minh hoạ</bn></p>
+
+<h3 id="teen-streamlet">Teen streamlet</h3>
+<p>Votes: 1 vote trên block bởi replica là chữ kí của nó trên block. <br />
+Notarization: 1 block được xem là Notarized dưới góc nhìn của replica nếu block đó có hơn 2n/3 chữ kí từ các replica khác.<br />
+<strong>Đề xuất khối: </strong> Đầu mõi epoch e, Le xác định chuỗi Notarized dài nhất và đề xuất khối sau chuỗi Notarized này.<br />
+<strong> Vote: </strong> ∆ giây ở epoch e,mỗi replica vote cho đề xuất hợp lệ đầu tiên dưới góc nhìn của Le (mở rộng chuỗi dài nhất theo góc nhìn của nó).<br />
+<strong>Finalization: </strong>  1 replica finalize 1 block và tiền tố của nó sau khi thấy khối được notarized.</p>
+
+<p>Ví dụ: /// hình ảnh <br />
+Chứng minh: với f &lt; n/3, với mỗi epoch e, chỉ có tối đa 1 notarized block với epoch là e trong góc nhìn của bất kì replica trung thực nào. <br />
+Giả sử 2 khối cùng epoch e là B và B’. Vì f &lt; n/3 nên tồn tại replica vote cho cả B, B’. Mà số vote của B và B’ lớn hơn 2/3 =&gt; số replica vote cho cả 2 là &gt; n/3. Đây là vô lý. Vậy khi network chưa đồng bộ, giao thức này đảm bảo an toàn.<br />
+Với các block có epoch khác nhau, có thể cùng ở chung 1 độ cao. Gọi 2 block đó là B1 và B2. Ban đầu, ở B, adversarial đề xuất B1 cho 66 replica trung thực, nên B1 chưa được notarized (vì có 66 vote). Tiếp theo, B2 được đề xuất bởi 1 replica trung thực, và được notarized nhưng trong đó có 1 adversarial vote cho B1, nên B1 cũng được notarized. Từ đó dẫn đến vi phạm safety.</p>
+
+<h3 id="streamlet">Streamlet</h3>
+<p><strong>Finalization: </strong> Khi thấy 3 khối kề nhau trong chuỗi được notarized với epoch liên tiếp, thì client sẽ finalize block thứ 2 trong 3 block trên và tẩt cả tiền tố của nó.</p>
+
+<p>Độ phức tạp giao tiếp là O(N^3) message cho mỗi block, vì mỗn honest replica chuyển tiếp các votes nó nhận từ các replica khác cho tất cả các replica.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, chúng ta sẽ tìm hiểu về cách Bitcoin chống lại việc những nodes không trung thực tấn công vào mạng lưới. Những nodes không trung thực (Adversary) là những nodes gây hại, chúng có mục đích khiến Blockchain không còn minh bạch và nhẩt quán để dễ dàng thêm vào những giao dịch sai mà có lợi cho chúng.]]></summary></entry><entry><title type="html">Cấu tạo block và PoW</title><link href="http://localhost:4000/blog/2023/07/20/cau-tao-block-va-pow" rel="alternate" type="text/html" title="Cấu tạo block và PoW" /><published>2023-07-20T00:00:00+07:00</published><updated>2023-07-20T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/20/cau-tao-block-va-pow</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/20/cau-tao-block-va-pow"><![CDATA[<p>Trong bài viết ngày hôm nay, mình sẽ nói kĩ hơn về cấu tạo của block trong blockchain và cơ chế đồng thuận PoW (Proof of Work).</p>
 
 <h2 id="cấu-tạo-block-trong-bitcoin">Cấu tạo block trong bitcoin</h2>
 <p>Các block chứa các dữ liệu về Tx được lưu vào trong sổ cái công khai. Block có các header, nơi chứa các siêu dữ liệu giúp quản lý block đó. Kích thước blockheader là 80 bytes, trong khi các giao dịch trung bình khoảng 250 bytes và mỗi khối trung bình chứa được 500 Tx.</p>
@@ -128,7 +268,48 @@ Từ đây, người gửi (Alice) có thể thêm các điều kiện phức t�
 </ul>
 
 <h2 id="kết-luận">Kết luận</h2>
-<p>Ngoài những dạng Tx ở trên, sẽ có nhiều dạng Tx khác được sử dụng ở trong nhiều trường hợp cụ thể.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Với mỗi Miner, họ sẽ thông thường được connect với 8 người khác. Khi một Tx được gửi đến, Miners sẽ thông báo là nhận được Tx trên mạng P2P. Mọi miners sẽ xác thực rằng Tx đã nhận và lưu vào trong Mempool. Mempool là nơi chứa những Tx đang chờ được xử lý. Các nodes này chia sẻ dữ liệu mempool với nhau bằng cách chuyển tiếp các Tx đã kí với nhau cho đến khi nó được toàn bộ mạng lưới.]]></summary></entry><entry><title type="html">Kĩ thuật Blockchain</title><link href="http://localhost:4000/blog/2023/07/14/blockchain-technology" rel="alternate" type="text/html" title="Kĩ thuật Blockchain" /><published>2023-07-14T00:00:00+07:00</published><updated>2023-07-14T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/14/blockchain-technology</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/14/blockchain-technology"><![CDATA[<p>Blockchain cung cấp sự tin cây cho nhiều bên (mà không cần đến trung gian), đây là ứng dụng có thể xem là mạnh mẽ nhất của blockchain. Dưới đây, mình sẽ viết sâu hơn về các kĩ thuật được sử dụng trong blockchain.</p>
+<p>Ngoài những dạng Tx ở trên, sẽ có nhiều dạng Tx khác được sử dụng ở trong nhiều trường hợp cụ thể.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Với mỗi Miner, họ sẽ thông thường được connect với 8 người khác. Khi một Tx được gửi đến, Miners sẽ thông báo là nhận được Tx trên mạng P2P. Mọi miners sẽ xác thực rằng Tx đã nhận và lưu vào trong Mempool. Mempool là nơi chứa những Tx đang chờ được xử lý. Các nodes này chia sẻ dữ liệu mempool với nhau bằng cách chuyển tiếp các Tx đã kí với nhau cho đến khi nó được toàn bộ mạng lưới.]]></summary></entry><entry><title type="html">Tổng quan về Blockchain</title><link href="http://localhost:4000/blog/2023/07/14/tong-quan-ve-blockchain" rel="alternate" type="text/html" title="Tổng quan về Blockchain" /><published>2023-07-14T00:00:00+07:00</published><updated>2023-07-14T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/14/tong-quan-ve-blockchain</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/14/tong-quan-ve-blockchain"><![CDATA[<p>Blockchain là một xu thế đang khá nổi ở thời điểm hiện tại. Theo những gì mình tìm hiểu và học hỏi được, đây là những chia sẻ tổng quan của mình về blockchain</p>
+
+<h2 id="blockchain-là-gì">Blockchain là gì</h2>
+<p>Blockchain là một sổ cái số phi tập chung ghi lại các dữ liệu giao dịch một cách an toàn, được duy trì bởi các máy tính chuyên dụng trên mạng (hay gọi là các nodes). Nó đảm bảo tính toàn vẹn bất biến thông qua cơ chế mã hoá và đồng thuận. Khi một giao dịch đã được record, nó sẽ không thể bị thay đổi.</p>
+
+<p>Nói một cách đơn giản, blockchain như một loại cơ sở dữ liệu đặc biệt, được duy trì phi tập trung bởi nhiều máy tính phân bổ khắp thế giới. Ngoài ra, dữ liệu trên từng block sắp xếp theo trình tự thời gian, và bảo mật bằng mật mã để tránh bị làm giả dữ liệu</p>
+
+<h2 id="sự-phi-tập-trung-trong-blockchain">Sự phi tập trung trong blockchain</h2>
+<p>Trong Blockchain, quyền quyết định và điều khiển của mạng lưới thì phân bổ cho các user thay vì tập trung tại 1 user hoặc 1 tổ chức. Các giao dịch (Tx) được verified và ghi vào mạng máy tính phân tán hoạt động cùng nhau để duy trì tính toàn vẹn.</p>
+
+<p>Ở trong core, blockchain lưu giao dịch giữa 2 bên. Khi 1 user gửi 1 Tx, nó được truyền đi khắp mạng lưới. Các nodes xác minh giao dịch bằng xác minh chữ kí số (Digital Signature) và các thông tin khác. Khi giao dịch được xác minh, nó sẽ cùng với các Tx khác được thêm vào block. Các block sẽ liên kết với nhau bằng phương pháp mã hoá, tạo thành chuỗi. Quá trình xác minh và thêm vào chuỗi sẽ được thông qua cơ chế đồng thuận.</p>
+
+<h2 id="cơ-chế-đồng-thuận-và-mã-hoá">Cơ chế đồng thuận và mã hoá</h2>
+<p>Cơ chế đồng thuận là tập hợp các quy tắc chi phối các node có đồng thuận về trạng thái của chuỗi hiện tại và tính hợp lệ của giao dịch hay không. Điều này đảm bảo các nodes trong mạng sẽ đều có bản copy đầu đủ của sổ cái.</p>
+
+<p>Mã hoá là chìa khoá duy trì bảo mật, minh bạch và chống giả mạo của blockchain. Có 2 cách mã hoá chính được sử dụng là Hash và cặp khoá. Với Hash, là hàm không thể đảo ngược, giúp chuyển 1 input ở 1 size bất kì sang 1 size cố định. Mỗi khối trong chuỗi chứa hash của khối liền trước nó, nên khi muốn thay đổi 1 khối thì cần phải thay đổi các khối tiếp theo. Điều này giúp giảm khả năng bị thay đổi của khối xuống còn rất nhỏ. Người dùng có 1 cặp khoá Secret - Public của mình. Khi tạo 1 Tx, người đó sử dụng Secret key để kí và tạo chữ kí số. Những người khác xác nhận tính xác thực của Tx này bằng cách áp dụng Public key của người gửi.</p>
+
+<h2 id="crypto-currency">Crypto Currency</h2>
+<p>Tiền điện tử (Tiền mã hoá) là 1 loại tiền kĩ thuật số phi tập trung, sử dụng mật mã để bảo mật. Nó có thể hoạt động độc lập với các trung gian như ngân hàng, cổng thanh toán,..
+Việc phi tập trung tạo điều kiện thuận lợi cho các giao dịch ngang hàng (P2P) giữa các cá nhân thông qua các ví điện tử hoặc sàn giao dịch.
+Các tiền điện tử luôn nằm trong blockchain. Trong trường hợp các sàn giao dịch, nó chứa Secret key cho phép người dùng truy cập vào các tiền đó.</p>
+
+<h3 id="crypto-currency-hoạt-động-như-thế-nào-">Crypto Currency hoạt động như thế nào ?</h3>
+<p>Crypto Currency sử dụng thuật toán toán học tiên tiến để bảo mật các giao dịch và bảo vệ dữ liệu khỏi bị truy cập hoặc thao tác trái phép. Các thuật toán phục vụ 2 chức năng chính là: Duy trì quyền riêng tư của người dùng và xác minh tính xác thực của Tx.</p>
+
+<p>Crypto whitepaper là một document mô tả chi tiết kèm các thông số kĩ thuật về 1 dự án blockchain. Các thông tin nó bao gồm rất đa dạng, có thể kể đến như: project goals, works, tech, roadmap,…</p>
+
+<h3 id="stable-coin">Stable coin</h3>
+<p>Một loại tiền điện tử được thiết kế để duy trì một giá trị cố định. Nó có thể trace giá trị tiền tệ fiat (tiền tệ được các nước sử dụng chính thức) hoặc các loại tài sản khác.</p>
+
+<h2 id="smartcontract">SmartContract</h2>
+<p>Hợp đồng thông minh là một thoả thuận kĩ thuật số được lập trình và lưu trữ trong blockchain, tự vận hành không cần trung gian. Nó có tính bảo mật, minh bạch, cung cấp cho người dùng sự tự do trao đổi, an toàn, khi triển khai các giao dịch. Hợp đồng thông minh được xem là xương sống của các DApps.
+Bất cứ ai truy cập vào blockchain có thể gọi SmartContract và tương tác với nó.</p>
+
+<h2 id="dapp">DApp</h2>
+<p>Decentralized Application (DApp) là ứng dụng phi tập trung được xây dựng trên các nền tảng blockchain. Các ứng dụng này sử dụng SmartContract, và hoạt động không cần sự can thiệp của bất kì bên trung gian nào. Với DApp, mọi thứ đều được mã hoá, bất biến, an toàn, bảo mật và không ai có quyền thay đổi, lừa đảo, gian lận.</p>
+
+<h2 id="nodes">Nodes</h2>
+<p>Là các moderators xây dựng cơ sở cho mạng phi tập trung. Nó lưu trữ bản copy của sổ cái, được đồng bộ hoá và lập trình để thực hiện các giao dịch theo sự đồng thuận của đa số. Các nodes có thể là các máy tính, router,…</p>
+
+<h2 id="tạm-kết">Tạm Kết</h2>
+<p>Đây chỉ là những khái niệm cơ bản về blockchain. Ở bài sau, mình sẽ đi sâu vào cách hoạt động cụ thể của Blockchain.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Blockchain là một xu thế đang khá nổi ở thời điểm hiện tại. Theo những gì mình tìm hiểu và học hỏi được, đây là những chia sẻ tổng quan của mình về blockchain]]></summary></entry><entry><title type="html">Kĩ thuật Blockchain</title><link href="http://localhost:4000/blog/2023/07/14/blockchain-technology" rel="alternate" type="text/html" title="Kĩ thuật Blockchain" /><published>2023-07-14T00:00:00+07:00</published><updated>2023-07-14T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/14/blockchain-technology</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/14/blockchain-technology"><![CDATA[<p>Blockchain cung cấp sự tin cây cho nhiều bên (mà không cần đến trung gian), đây là ứng dụng có thể xem là mạnh mẽ nhất của blockchain. Dưới đây, mình sẽ viết sâu hơn về các kĩ thuật được sử dụng trong blockchain.</p>
 
 <h2 id="các-tầng-của-blockchain">Các tầng của Blockchain</h2>
 <p>Blockchain có thể chia thành các tầng chính như sau:</p>
@@ -194,48 +375,7 @@ Lý do:</p>
 <p>Khi tạo ra các Tx, user đưa Sk + msg để tạo ra chữ kí σ. Các verifier sẽ sử dụng pK, msg và σ để verify các Tx. Việc sử dụng chữ kí số này giúp đảm bảo uỷ quyền Tx, khả năng bầu cử và sự đồng thuận bỏ phiếu của user.</p>
 
 <h2 id="tạm-kết">Tạm kết</h2>
-<p>Ở phần này là những kĩ thuật phổ biến được sử dụng trong blockchain. Trong bài tiếp theo, mình sẽ đi sâu về cấu tạo của từng khối và cách hoạt động của PoW.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Blockchain cung cấp sự tin cây cho nhiều bên (mà không cần đến trung gian), đây là ứng dụng có thể xem là mạnh mẽ nhất của blockchain. Dưới đây, mình sẽ viết sâu hơn về các kĩ thuật được sử dụng trong blockchain.]]></summary></entry><entry><title type="html">Tổng quan về Blockchain</title><link href="http://localhost:4000/blog/2023/07/14/tong-quan-ve-blockchain" rel="alternate" type="text/html" title="Tổng quan về Blockchain" /><published>2023-07-14T00:00:00+07:00</published><updated>2023-07-14T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/14/tong-quan-ve-blockchain</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/14/tong-quan-ve-blockchain"><![CDATA[<p>Blockchain là một xu thế đang khá nổi ở thời điểm hiện tại. Theo những gì mình tìm hiểu và học hỏi được, đây là những chia sẻ tổng quan của mình về blockchain</p>
-
-<h2 id="blockchain-là-gì">Blockchain là gì</h2>
-<p>Blockchain là một sổ cái số phi tập chung ghi lại các dữ liệu giao dịch một cách an toàn, được duy trì bởi các máy tính chuyên dụng trên mạng (hay gọi là các nodes). Nó đảm bảo tính toàn vẹn bất biến thông qua cơ chế mã hoá và đồng thuận. Khi một giao dịch đã được record, nó sẽ không thể bị thay đổi.</p>
-
-<p>Nói một cách đơn giản, blockchain như một loại cơ sở dữ liệu đặc biệt, được duy trì phi tập trung bởi nhiều máy tính phân bổ khắp thế giới. Ngoài ra, dữ liệu trên từng block sắp xếp theo trình tự thời gian, và bảo mật bằng mật mã để tránh bị làm giả dữ liệu</p>
-
-<h2 id="sự-phi-tập-trung-trong-blockchain">Sự phi tập trung trong blockchain</h2>
-<p>Trong Blockchain, quyền quyết định và điều khiển của mạng lưới thì phân bổ cho các user thay vì tập trung tại 1 user hoặc 1 tổ chức. Các giao dịch (Tx) được verified và ghi vào mạng máy tính phân tán hoạt động cùng nhau để duy trì tính toàn vẹn.</p>
-
-<p>Ở trong core, blockchain lưu giao dịch giữa 2 bên. Khi 1 user gửi 1 Tx, nó được truyền đi khắp mạng lưới. Các nodes xác minh giao dịch bằng xác minh chữ kí số (Digital Signature) và các thông tin khác. Khi giao dịch được xác minh, nó sẽ cùng với các Tx khác được thêm vào block. Các block sẽ liên kết với nhau bằng phương pháp mã hoá, tạo thành chuỗi. Quá trình xác minh và thêm vào chuỗi sẽ được thông qua cơ chế đồng thuận.</p>
-
-<h2 id="cơ-chế-đồng-thuận-và-mã-hoá">Cơ chế đồng thuận và mã hoá</h2>
-<p>Cơ chế đồng thuận là tập hợp các quy tắc chi phối các node có đồng thuận về trạng thái của chuỗi hiện tại và tính hợp lệ của giao dịch hay không. Điều này đảm bảo các nodes trong mạng sẽ đều có bản copy đầu đủ của sổ cái.</p>
-
-<p>Mã hoá là chìa khoá duy trì bảo mật, minh bạch và chống giả mạo của blockchain. Có 2 cách mã hoá chính được sử dụng là Hash và cặp khoá. Với Hash, là hàm không thể đảo ngược, giúp chuyển 1 input ở 1 size bất kì sang 1 size cố định. Mỗi khối trong chuỗi chứa hash của khối liền trước nó, nên khi muốn thay đổi 1 khối thì cần phải thay đổi các khối tiếp theo. Điều này giúp giảm khả năng bị thay đổi của khối xuống còn rất nhỏ. Người dùng có 1 cặp khoá Secret - Public của mình. Khi tạo 1 Tx, người đó sử dụng Secret key để kí và tạo chữ kí số. Những người khác xác nhận tính xác thực của Tx này bằng cách áp dụng Public key của người gửi.</p>
-
-<h2 id="crypto-currency">Crypto Currency</h2>
-<p>Tiền điện tử (Tiền mã hoá) là 1 loại tiền kĩ thuật số phi tập trung, sử dụng mật mã để bảo mật. Nó có thể hoạt động độc lập với các trung gian như ngân hàng, cổng thanh toán,..
-Việc phi tập trung tạo điều kiện thuận lợi cho các giao dịch ngang hàng (P2P) giữa các cá nhân thông qua các ví điện tử hoặc sàn giao dịch.
-Các tiền điện tử luôn nằm trong blockchain. Trong trường hợp các sàn giao dịch, nó chứa Secret key cho phép người dùng truy cập vào các tiền đó.</p>
-
-<h3 id="crypto-currency-hoạt-động-như-thế-nào-">Crypto Currency hoạt động như thế nào ?</h3>
-<p>Crypto Currency sử dụng thuật toán toán học tiên tiến để bảo mật các giao dịch và bảo vệ dữ liệu khỏi bị truy cập hoặc thao tác trái phép. Các thuật toán phục vụ 2 chức năng chính là: Duy trì quyền riêng tư của người dùng và xác minh tính xác thực của Tx.</p>
-
-<p>Crypto whitepaper là một document mô tả chi tiết kèm các thông số kĩ thuật về 1 dự án blockchain. Các thông tin nó bao gồm rất đa dạng, có thể kể đến như: project goals, works, tech, roadmap,…</p>
-
-<h3 id="stable-coin">Stable coin</h3>
-<p>Một loại tiền điện tử được thiết kế để duy trì một giá trị cố định. Nó có thể trace giá trị tiền tệ fiat (tiền tệ được các nước sử dụng chính thức) hoặc các loại tài sản khác.</p>
-
-<h2 id="smartcontract">SmartContract</h2>
-<p>Hợp đồng thông minh là một thoả thuận kĩ thuật số được lập trình và lưu trữ trong blockchain, tự vận hành không cần trung gian. Nó có tính bảo mật, minh bạch, cung cấp cho người dùng sự tự do trao đổi, an toàn, khi triển khai các giao dịch. Hợp đồng thông minh được xem là xương sống của các DApps.
-Bất cứ ai truy cập vào blockchain có thể gọi SmartContract và tương tác với nó.</p>
-
-<h2 id="dapp">DApp</h2>
-<p>Decentralized Application (DApp) là ứng dụng phi tập trung được xây dựng trên các nền tảng blockchain. Các ứng dụng này sử dụng SmartContract, và hoạt động không cần sự can thiệp của bất kì bên trung gian nào. Với DApp, mọi thứ đều được mã hoá, bất biến, an toàn, bảo mật và không ai có quyền thay đổi, lừa đảo, gian lận.</p>
-
-<h2 id="nodes">Nodes</h2>
-<p>Là các moderators xây dựng cơ sở cho mạng phi tập trung. Nó lưu trữ bản copy của sổ cái, được đồng bộ hoá và lập trình để thực hiện các giao dịch theo sự đồng thuận của đa số. Các nodes có thể là các máy tính, router,…</p>
-
-<h2 id="tạm-kết">Tạm Kết</h2>
-<p>Đây chỉ là những khái niệm cơ bản về blockchain. Ở bài sau, mình sẽ đi sâu vào cách hoạt động cụ thể của Blockchain.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Blockchain là một xu thế đang khá nổi ở thời điểm hiện tại. Theo những gì mình tìm hiểu và học hỏi được, đây là những chia sẻ tổng quan của mình về blockchain]]></summary></entry><entry><title type="html">Mở đầu</title><link href="http://localhost:4000/blog/2023/07/09/modau" rel="alternate" type="text/html" title="Mở đầu" /><published>2023-07-09T00:00:00+07:00</published><updated>2023-07-09T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/09/modau</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/09/modau"><![CDATA[<p>Bài đầu tiên sau khi create lại.</p>]]></content><author><name>vanhgggg</name></author><summary type="html"><![CDATA[Bài đầu tiên sau khi create lại.]]></summary></entry><entry><title type="html">Mình đã tạo một game bằng C++ và SDL2.0</title><link href="http://localhost:4000/blog/2023/03/06/tao-game-sdl" rel="alternate" type="text/html" title="Mình đã tạo một game bằng C++ và SDL2.0" /><published>2023-03-06T00:00:00+07:00</published><updated>2023-03-06T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/03/06/tao-game-sdl</id><content type="html" xml:base="http://localhost:4000/blog/2023/03/06/tao-game-sdl"><![CDATA[<p>Xin chào mọi người. Ở kì học thứ 2, mình được học môn Lập trình nâng cao, là môn thứ 2 để hướng dẫn học sinh về lập trình sau môn “Nhập môn lập trình” thuộc kì học 1. Tại môn này, mình đã được hướng dẫn làm một project game 2D bằng ngôn ngữ C++ và sử dụng SDL 2.0 để hỗ trợ. Đây là project đầu tiên của mình, và hôm nay mình sẽ viết về cách mà mình tạo ra nó.</p>
+<p>Ở phần này là những kĩ thuật phổ biến được sử dụng trong blockchain. Trong bài tiếp theo, mình sẽ đi sâu về cấu tạo của từng khối và cách hoạt động của PoW.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Blockchain cung cấp sự tin cây cho nhiều bên (mà không cần đến trung gian), đây là ứng dụng có thể xem là mạnh mẽ nhất của blockchain. Dưới đây, mình sẽ viết sâu hơn về các kĩ thuật được sử dụng trong blockchain.]]></summary></entry><entry><title type="html">Mở đầu</title><link href="http://localhost:4000/blog/2023/07/09/modau" rel="alternate" type="text/html" title="Mở đầu" /><published>2023-07-09T00:00:00+07:00</published><updated>2023-07-09T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/09/modau</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/09/modau"><![CDATA[<p>Bài đầu tiên sau khi create lại.</p>]]></content><author><name>vanhgggg</name></author><summary type="html"><![CDATA[Bài đầu tiên sau khi create lại.]]></summary></entry><entry><title type="html">Mình đã tạo một game bằng C++ và SDL2.0</title><link href="http://localhost:4000/blog/2023/03/06/tao-game-sdl" rel="alternate" type="text/html" title="Mình đã tạo một game bằng C++ và SDL2.0" /><published>2023-03-06T00:00:00+07:00</published><updated>2023-03-06T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/03/06/tao-game-sdl</id><content type="html" xml:base="http://localhost:4000/blog/2023/03/06/tao-game-sdl"><![CDATA[<p>Xin chào mọi người. Ở kì học thứ 2, mình được học môn Lập trình nâng cao, là môn thứ 2 để hướng dẫn học sinh về lập trình sau môn “Nhập môn lập trình” thuộc kì học 1. Tại môn này, mình đã được hướng dẫn làm một project game 2D bằng ngôn ngữ C++ và sử dụng SDL 2.0 để hỗ trợ. Đây là project đầu tiên của mình, và hôm nay mình sẽ viết về cách mà mình tạo ra nó.</p>
 
 <h2 id="1-cài-đặt-môi-trường-và-sử-dụng-sdl20">1. Cài đặt môi trường và sử dụng SDL2.0</h2>
 <p>Về môi trường cài đặt, mình đã được giảng viên dành 1 buổi trên lớp để hướng dẫn cụ thể các bước về tải thư viện SDL2.0, chỉnh sửa các câu lệnh và chạy thử. Mình code game này ở trên <b> CodeBlock </b>, và có dựa theo hướng dẫn sau để cài đặt môi trường: <b><a href="https://www.youtube.com/watch?v=Gj3iXwvKmUY">Youtube</a> </b>và <b><a href="https://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php">Lazyfoo</a></b>.
@@ -327,18 +467,4 @@ Có rất nhiều loại mô hình phát triển như thác nước, bản mẫu
 <p>Bên cạnh đó, việc kiểm thử được chia ra rất rõ ràng các pha như đã nói ở trên. Cụ thể thì unit test (kiểm thử đơn vị) sẽ chịu trách nhiệm kiểm tra từng thành phần phần mềm như mô hình thác nước. Kiểm thử tích hợp là nhóm các thành phần phần mềm do kiến trúc quy định, để kiểm tra sự tương tác của chúng với nhau. Đối tượng kiểm thử không phải là một hệ thống hoàn chỉnh. Ở pha kiểm thử hệ thống, hệ thống hoàn chỉnh sẽ được đội phát triển kiểm tra, đánh giá trước khi gửi cho khách hàng. Cuối cùng là kiểm thử chấp nhận, pha này sẽ do khách hàng dùng thử sản phẩm và đánh giá cuối cùng.</p>
 
 <h2 id="tạm-kết">Tạm kết</h2>
-<p>Ở trên là 2 trên 4 loại mô hình phát triển phần mềm truyền thống. Ở phần 2, mình sẽ giới thiệu thêm về bản mẫu và mô hình xoắn ốc.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Mô hình phát triển phần mềm là một quy trình tiêu chuẩn để phát triển phần mềm. Nó xác định các giai đoạn/ pha trong xây dựng phần mềm, từ lúc bắt đầu định hình yêu cầu cho đến khi phần mềm hoạt động được. Mô hình phát triển đóng vai trò rất quan trọng trong việc giúp các nhà phát triển thực hiện phần mềm một cách có hệ thống và hiệu quả, đảm bảo chất lượng và yêu cầu từ khách hàng. Có rất nhiều loại mô hình phát triển như thác nước, bản mẫu, RAD, TDD,… Trong bài viết này, mình sẽ giới thiệu về 2 mô hình đầu tiên trên 4 loại mô hình phát triển truyền thống cơ bản là mô hình thác nước (Waterfall Model), mô hình chữ V (V-model), bản mẫu (Prototype) và mô hình xoắn ốc (Spiral Model).]]></summary></entry><entry><title type="html">Cách mình tạo blog này</title><link href="http://localhost:4000/blog/2023/02/28/cach-tao-blog" rel="alternate" type="text/html" title="Cách mình tạo blog này" /><published>2023-02-28T00:00:00+07:00</published><updated>2023-02-28T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/02/28/cach-tao-blog</id><content type="html" xml:base="http://localhost:4000/blog/2023/02/28/cach-tao-blog"><![CDATA[<p>Hello mọi người, đây là bài viết đầu tiên của mình trên blog này. Và tất nhiên, mình sẽ viết về hành trình và cách mà mình tạo ra blog này.</p>
-
-<h2 id="bắt-đầu">Bắt đầu</h2>
-<p>Mình có suy nghĩ tập viết blog khi đang ở trong khu quân sự. Vì lúc đó mình không được sử dụng điện thoại và laptop thường xuyên, cộng thêm có nhiều thời gian rảnh nên mình chợt nghĩ là mình nên thử viết nhật ký về trải nghiệm khi ở đó xem như thế nào. Tuy vậy, khi viết nhật ký mình thường gặp rất nhiều lỗi về ngữ pháp, bố cục và việc sửa lỗi đó là không khả thi khi viết. Vậy nên, mình quyết định sẽ chuyển sang dạng blog, phù hợp cho mình hơn trong việc sửa lỗi, và đơn giản hơn là mình gõ phím nhanh hơn là viết, hehe.</p>
-
-<h2 id="hành-trình-tạo-blog">Hành trình tạo blog</h2>
-<p>Ban đầu, mình tạo blog dựa trên <a href="https://www.blogger.com">Blogger</a> của Google, và đã bắt đầu viết được một ít bài ở đó. Lúc đó mình chỉ chia sẻ link blog đó cho một số người bạn để họ nhận xét về bài viết của mình. Trùng hợp thay, vào tuần trước khi chpia sẻ với 1 Dũng, người bạn cùng lớp, thì bạn ấy cũng kể là đang tập viết blog. Nhưng khác mình ở chỗ là bạn ấy tự code 1 website trên Github Pages để lưu trữ blog của mình (Đây là link blog của bạn ấy <a href="https://zhaospei.github.io">Zhaospei</a> ). Hiển nhiên, mình cũng nghĩ tại sao lại không thử làm như thế nhỉ, và cuối cùng là blog này ra đời.</p>
-
-<h2 id="cách-tạo-blog-này">Cách tạo blog này</h2>
-<p>Đầu tiên, mình muốn gửi lời cảm ơn đến <a href="https://github.com/zhaospei">Dũng</a> đã giúp đỡ mình rất nhiều trong quá trình tạo blog này. 
-Về việc tạo blog, mình sử dụng Jekyll để tạo trên Github. Mình làm theo những hướng dẫn ở trên link <a href="https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll">này</a> để tạo ra một website cơ bản đầu tiên. Tiếp theo, mình tạo theme dựa trên cảm hứng là theme của <a href="https://sylhare.github.io/Type-on-Strap/">Type-on-Strap</a>. Ngoài ra, mình đã kết nối phần bình luận của <a href="https://disqus.com">Disqus</a> vào blog này để mọi người có thể comment, nhận xét. Cuối cùng, blog này ra đời sau 1 tuần coding miệt mài của mình.
-<!--  --></p>
-
-<h2 id="đôi-lời-về-blog">Đôi lời về blog</h2>
-<p>Vì mình đang tập viết bài trên blog này, nên nếu các bạn thấy nó có điều gì chưa ổn, hãy comment ở dưới để mình cải thiện nhé. Sắp tới, mình sẽ viết những bài viết cả về cuộc sống và học tập của bản thân mình. Mong các bạn sẽ ủng hộ blog này và tìm được gì đó hữu ích trong các bài viết của mình. Cảm ơn rất nhiều.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Hello mọi người, đây là bài viết đầu tiên của mình trên blog này. Và tất nhiên, mình sẽ viết về hành trình và cách mà mình tạo ra blog này.]]></summary></entry></feed>
+<p>Ở trên là 2 trên 4 loại mô hình phát triển phần mềm truyền thống. Ở phần 2, mình sẽ giới thiệu thêm về bản mẫu và mô hình xoắn ốc.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Mô hình phát triển phần mềm là một quy trình tiêu chuẩn để phát triển phần mềm. Nó xác định các giai đoạn/ pha trong xây dựng phần mềm, từ lúc bắt đầu định hình yêu cầu cho đến khi phần mềm hoạt động được. Mô hình phát triển đóng vai trò rất quan trọng trong việc giúp các nhà phát triển thực hiện phần mềm một cách có hệ thống và hiệu quả, đảm bảo chất lượng và yêu cầu từ khách hàng. Có rất nhiều loại mô hình phát triển như thác nước, bản mẫu, RAD, TDD,… Trong bài viết này, mình sẽ giới thiệu về 2 mô hình đầu tiên trên 4 loại mô hình phát triển truyền thống cơ bản là mô hình thác nước (Waterfall Model), mô hình chữ V (V-model), bản mẫu (Prototype) và mô hình xoắn ốc (Spiral Model).]]></summary></entry></feed>
