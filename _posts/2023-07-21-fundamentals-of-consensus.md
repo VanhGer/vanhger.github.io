@@ -81,6 +81,19 @@ Với các block có epoch khác nhau, có thể cùng ở chung 1 độ cao. G�
 <strong>Finalization: </strong> Khi thấy 3 khối kề nhau trong chuỗi được notarized với epoch liên tiếp, thì client sẽ finalize block thứ 2 trong 3 block trên và tẩt cả tiền tố của nó.
 
 Độ phức tạp giao tiếp là O(N^3) message cho mỗi block, vì mỗn honest replica chuyển tiếp các votes nó nhận từ các replica khác cho tất cả các replica.
+Chứng minh tính an toàn:<br>
+<strong> Safety: </strong> Giả sử có 2 block đang trong tình trạng confict ở epoch e và e'. Nếu: <br>
+- e = e': không thể (đã chứng minh ở Teen Streamlet).<br>
+- e < e': suy ra e+1 < e'. Vì B3 được notarized nên có ít nhất S > n/3 replica trung thực vote cho B3 tại e+1. Vậy S sẽ thấy B2 được notarized ở đầu epoch e+1, do đó, S sẽ không vote cho B' vì B' không mở rộng từ chuõi dài nhất. Mà S > n/3 nên B' không được notarized. <br>
+- e > e': suy ra e-1 > e'. Nếu B' được notarized, có S > n/3 replica trung thực vote cho nó tại epoch e'. Vậy S sẽ thấy B" được notarized ở đầu epoch e", do đó S sẽ không vote cho B1. Tương tự, B1 không được notarized. Điều này trái với giả thiết.<br>
+Hình Minh Hoạ: <br>
+Vậy, Streamlet đảm bảo safety<br>
+
+<strong> Liveness: </strong> Giả sử có 4 slot liên tiếp: e, e + 1, e + 2, e + 3 với leader trung thực sau GST. Ở cuối các slot này, client sẽ finalize block được đề xuất bởi các replica trung thực. Trong đó:
+- 1 slot để undo các hành động của adversary. <br>
+- 3 slot để finalize block. <br>
+Ngoài ra, đảm bảo không có 2 block liên tiếp nhau mà chưa được notarized.
+
 
 
 
