@@ -27,6 +27,10 @@ Hash của block là lấy (Tổng của: Merkle Root, Version, Timestamp, Targe
 
 Độ khó (Target Hash) sẽ được thay đổi sau 2016 block (2 tuần) được sinh ra. Nếu thời gian sinh 2016 block này nhanh hơn, Target Hash sẽ được điều chỉnh xuống, ngược lại sẽ tăng lên. Sau khi cập nhập, các nodes cùng chia sẻ một Target.  
 
+### Incentive
+Sau khi tạo được block, miner sẽ nhận phần thưởng và Tx phí thông qua coinbase mà họ đưa vào block. <br>
+Coinbase là giao dịch đầu tiên trong block, được tạo bởi miner nhằm mục đích nhận phần thưởng và Tx phí. Do đó, coinbase không có input, chỉ có output là địa chỉ ví của miner. Bitcoin nhận được từ coinbase không thể được sử dụng cho đến khi đạt 100 xác nhận trong blockchain.
+
 ## Kết luận
 PoW là một cơ chế đồng thuận được sử dụng ở nhiều blockchain khác nhau, tuy nhiên nó cũng mang lại nhiều bất lợi. Những cơ chế đồng thuận khác sẽ được viết ở những bài sau.
 
