@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hiimvanhg</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Solidity và State Trie</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Solidity và State Trie" />
+<meta name="author" content="vanhg" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie" />
+<meta property="og:description" content="Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie" />
+<link rel="canonical" href="http://localhost:4000/blog/2023/07/23/solidity-va-state-trie" />
+<meta property="og:url" content="http://localhost:4000/blog/2023/07/23/solidity-va-state-trie" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-07-24T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Solidity và State Trie" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"vanhg"},"dateModified":"2023-07-24T00:00:00+07:00","datePublished":"2023-07-24T00:00:00+07:00","description":"Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie","headline":"Solidity và State Trie","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2023/07/23/solidity-va-state-trie"},"url":"http://localhost:4000/blog/2023/07/23/solidity-va-state-trie"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+  <body>
+    <div class="header">
+  <div class = "tab_container">
+      
+        <a href="/" 
+        
+        class = "tab_btn">
+        Home
+        </a>
+      
+        <a href="/about.html" 
+        
+        class = "tab_btn">
+        About
+        </a>
+      
+        <a href="/blog.html" 
+        
+        class = "tab_btn">
+        Blog
+        </a>
+      
+        <a href="/staff.html" 
+        
+        class = "tab_btn">
+        Staff
+        </a>
+      
+  </div>
+</div>
+
+    <div class = "default_content">
+        <h1 class = "post_title">Solidity và State Trie</h1>
+        <p class = "post_detail">
+            vanhg - 24 Jul 2023 
+        </p>
+        <div class = "img_container">
+            <img src =  class = "post_img">
+        </div>
+        <div class = "post_content">
+          <p>Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie</p>
+
+<h2 id="solidity">Solidity</h2>
+<p>Solidity là ngôn ngữ lập trình cho Blockchain Ethereum, là ngôn ngữ hướng đối tượng, cấp cao để triển khai các smartcontracts. Smartcontract là chương trình chi phối các hành vi của Account trong Ethereum State. Account contract được tạo ra khi chạy một smartcontract. Mọi người có thể đọc account contract state ở trong storage array, nên không bao giờ được lưu trữ các bí mật trong contract.</p>
+
+<p>Một số dạng biến của Solidity như: uint256, address(byte 32), bool,… Các loại tham chiếu là mảng, struct, string, map,… Khi một giao dịch đi từ A ⇾ B ⇾ C ⇾ D thì tại D, msg.sender là C, nhưng tx.origin là A.</p>
+
+<p>ERC20 là API tiêu chuẩn cho fungible token, cung cấp các chức năng cơ bản để chuyển token hoặc cho phép token được sử dụng bởi bên thứ 3.</p>
+
+<p>Các kiểu lưu trữ:</p>
+<ul>
+  <li>Stack variables: Rẻ để sử dụng, phù hợp với mọi loại dữ liệu (không qua 32 bytes)</li>
+  <li>Calldata: Là 1 mảng byte chỉ đọc, tốn gas</li>
+  <li>Memory: 1 byte mảng, rẻ, nhưng chi phí tăng theo cấp số nhân, lưu được dữ liệu &gt; 32 bytes</li>
+  <li>Storage: Đắt, mappings và các biến state lưu trong này.</li>
+  <li>Event logs: rẻ, không cần truy cập đến contract.</li>
+</ul>
+
+<p>Ở trên là một số hiểu biết của mình về solidity, về mặt coding, mọi người nên xem ở <a href="https://docs.soliditylang.org/en/latest/">đây</a>.</p>
+
+<h2 id="state-trie-ethereum-state-trie">State trie (Ethereum state trie)</h2>
+<p>Hình ảnh đây là cấu trúc được tạo bởi các loại State trong Ethereum: (ở góc phải dưới hình ảnh)</p>
+
+<p><img src="https://i.stack.imgur.com/afWDt.jpg" width="900" height=" 600" /></p>
+
+<p>Có 3 loại state chính là World state, Transaction, và Transaction Receipt.</p>
+
+<h3 id="world-state-trie">World State Trie</h3>
+<p>World State Trie Là mapping giữa địa chỉ và Account State. Nó được update bởi các Tx, và lưu trữ mọi thông tin về accounts và có thể lấy được qua các truy vấn.
+Trong World State Trie có Account Storage Trie, nơi các dữ liệu liên kết với account được lưu trữ. Nó chỉ liên quan đến các contract account và mọi dữ liệu được ánh xạ giữa các số nguyên 32 byte.</p>
+
+<p>Account State là các thông tin về một Ethereum account, như balance, nonce, storage Root, codehash,… và là lá của World State Trie.</p>
+
+<h3 id="transaction-trie">Transaction Trie</h3>
+<p>Transaction Trie lưu trữ các Tx trong Ethereum. Khi các Tx lưu trữ trong block, nó không thể bị thay đổi. Nó được xây dựng theo cấu trúc Modified Merkel Patricia Trie, và chỉ có node root mới được đưa vào trong block.</p>
+
+<h3 id="transaction-receipt-triereceipt-trie">Transaction Receipt Trie(Receipt Trie)</h3>
+<p>Transaction Receipt Trie lưu trữ đầu ra của các Txs. Đầu ra là kết quả của một Tx mà được chạy thành công, bao gồm H(Txs), block number, gas Used, địa chỉ của contract.</p>
+
+<h3 id="ví-dụ-cấu-trúc-của-world-state-một-cách-đơn-giản">Ví dụ cấu trúc của World State (một cách đơn giản)</h3>
+<p>Để đơn giản, ta giả sử các node lá của World State Trie chỉ bao gồm địa chỉ là số dư theo cặp Key - Value. 
+Các loại thông tin:</p>
+<ul>
+  <li>Leaf Node: node lá của cây, chứa các trạng thái của 1 tài khoản có địa chỉ là Key</li>
+  <li>Branch Node: gồm 16 ô, là các tiền tố của Key.</li>
+  <li>Extension Node: node chỉ có 1 child</li>
+  <li>Nibble: Là phần chung trong Key, 1 Nibble = 4 bits, lưu trong keyend hoặc shared nibble.</li>
+  <li>Prefixes:
+    <ul>
+      <li>0: extension node có số chẵn Nibble</li>
+      <li>1: extension node có số lẻ Niblle</li>
+      <li>2: leaf node, có số chẵn Nibble</li>
+      <li>3: leaf node, có số lẻ Nibble.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Minh Hoạ:
+World State Trie với 4 cặp Key - Value như sau:</p>
+<ul>
+  <li>a711355: 45 ETH</li>
+  <li>a77d337: 1 WEI</li>
+  <li>a7f9365: 1.1 ETH</li>
+  <li>a77d397: 0.12 ETH
+<img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SiSYWqaPcJtBlnFR4VAaug.png" /></li>
+</ul>
+
+<h2 id="kêt-luận">Kêt luận</h2>
+<p>Ở trên là một số khái niệm sơ bộ về Solidity và cấu trúc của Ethereum, cụ thể về các State Trie.</p>
+
+
+        </div>
+        
+    </div>
+  </body>
+  <footer>
+    
+  </footer>
+</html>  
