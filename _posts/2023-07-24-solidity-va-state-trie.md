@@ -5,7 +5,7 @@ title: Solidity và State Trie
 # img_title: "assets/images/title_img/post1.png"
 # tags: [Instruction]
 author: vanhg
-permalink: /blog/2023/07/23/solidity-va-state-trie
+permalink: /blog/2023/07/24/solidity-va-state-trie
 
 ---
 
