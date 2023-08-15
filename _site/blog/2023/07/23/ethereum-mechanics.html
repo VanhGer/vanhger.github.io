@@ -83,14 +83,44 @@
   <li>Contracts: Điều khiển bởi code, được tạo lúc tài khoản được tạo, không thể thay đổi.</li>
 </ul>
 
-<p>Các dữ liệu cần thiết với mỗi account:
-| Account Data  | Owned   | Contracts                   |
-|—————|———|—————————–|
-| address(tính) | H(Pk)   | H(CreatorAdd, CreatorNonce) |
-| storage root  | Không   | StorageRoot                 |
-| code          | không   | CodeHash                    |
-| balance       | balance | balance                     |
-| nonce         | nonce   | nonce                       |</p>
+<p>Các dữ liệu cần thiết với mỗi account:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account Data</th>
+      <th>Owned</th>
+      <th>Contracts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>address(tính)</td>
+      <td>H(Pk)</td>
+      <td>H(CreatorAdd, CreatorNonce)</td>
+    </tr>
+    <tr>
+      <td>storage root</td>
+      <td>Không</td>
+      <td>StorageRoot</td>
+    </tr>
+    <tr>
+      <td>code</td>
+      <td>không</td>
+      <td>CodeHash</td>
+    </tr>
+    <tr>
+      <td>balance</td>
+      <td>balance</td>
+      <td>balance</td>
+    </tr>
+    <tr>
+      <td>nonce</td>
+      <td>nonce</td>
+      <td>nonce</td>
+    </tr>
+  </tbody>
+</table>
 
 <p>Trong đó, nonce là số Tx mà acount đã thực hành, tính bằng (#Tx sent) + (#accounts created). Số nonce được dùng để chống replay và khi tạo mới thì luôn bằng 0 (với contract).  Các contract có thể bị ghi đè code, nhưng chỉ khi contract cũ đã SELFDESTRUCT.</p>
 

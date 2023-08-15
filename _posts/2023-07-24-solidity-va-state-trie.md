@@ -65,6 +65,7 @@ World State Trie với 4 cặp Key - Value như sau:
 - a77d337: 1 WEI
 - a7f9365: 1.1 ETH
 - a77d397: 0.12 ETH
+
 <img src = "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SiSYWqaPcJtBlnFR4VAaug.png">
 
 ## Kêt luận

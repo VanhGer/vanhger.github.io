@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hiimvanhg</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Sàn giao dịch phi tập trung</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Sàn giao dịch phi tập trung" />
+<meta name="author" content="vanhg" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Khái niệm" />
+<meta property="og:description" content="Khái niệm" />
+<link rel="canonical" href="http://localhost:4000/blog/2023/08/15/dex" />
+<meta property="og:url" content="http://localhost:4000/blog/2023/08/15/dex" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-08-15T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Sàn giao dịch phi tập trung" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"vanhg"},"dateModified":"2023-08-15T00:00:00+07:00","datePublished":"2023-08-15T00:00:00+07:00","description":"Khái niệm","headline":"Sàn giao dịch phi tập trung","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2023/08/15/dex"},"url":"http://localhost:4000/blog/2023/08/15/dex"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+  <body>
+    <div class="header">
+  <div class = "tab_container">
+      
+        <a href="/" 
+        
+        class = "tab_btn">
+        Home
+        </a>
+      
+        <a href="/about.html" 
+        
+        class = "tab_btn">
+        About
+        </a>
+      
+        <a href="/blog.html" 
+        
+        class = "tab_btn">
+        Blog
+        </a>
+      
+        <a href="/staff.html" 
+        
+        class = "tab_btn">
+        Staff
+        </a>
+      
+  </div>
+</div>
+
+    <div class = "default_content">
+        <h1 class = "post_title">Sàn giao dịch phi tập trung</h1>
+        <p class = "post_detail">
+            vanhg - 15 Aug 2023 
+        </p>
+        <div class = "img_container">
+            <img src =  class = "post_img">
+        </div>
+        <div class = "post_content">
+          <h2 id="khái-niệm">Khái niệm</h2>
+
+<p><strong> Sàn giao dịch phi tập trung </strong> là loại ứng dụng phi tập trung, xây dựng với Smartcontract, cho phép users trao đổi ERC20 token hoặc NFT trực tiếp với các users khác.</p>
+
+<h3 id="lợi-ích">Lợi ích:</h3>
+<ul>
+  <li>Không giữ tiền: Không có bên thứ 3 giữ tiền trung gian các giao dịch</li>
+  <li>Chống kiểm duyệt: Ai gửi Tx đều có thể sử dụng</li>
+  <li>Permissionless: có thể hỗ trợ bất kì asset nào.</li>
+  <li>Thuận tiện: Không phải gửi tài sản trên chuỗi vào một sàn giao dịch</li>
+  <li>Tính lập trình: Thanh khoản có thể xem bởi các smartcontract</li>
+  <li>Tính nguyên tử:</li>
+</ul>
+
+<p><strong> Orderbook </strong> là sổ lệnh, bao gồm các lệnh bạn và mua tài sản theo từng mức giá nhất định. Cơ chế khớp lệnh này khiến lệnh của người dùng được thực thi khi giá của sổ lệnh khớp với giá người dùng mua hoặc bán.</p>
+
+<h2 id="các-loại-dex">Các loại DEX</h2>
+<h3 id="on-chain-orderbook">On-chain orderbook</h3>
+<p>Market makers đặt các order lên chuỗi, người dùng sẽ điền các order này trực tiếp trên chuỗi nếu họ muốn giao dịch. Tuy nhiên, cách này sẽ gây tốn gas rất nhiều.</p>
+
+<h3 id="off-chain-orderbook">Off-chain orderbook</h3>
+<p>Market makers kí các orders ngoài chuỗi. Người dùng sẽ điền các order này rồi submit nó lên chuỗi. Cách này sẽ không tận dụng khả năng lập trình và thanh khoản sẽ không hiển thị với smartcontract.</p>
+
+<h3 id="dutch-auctions">Dutch auctions</h3>
+<p>User đặt các order lên chuỗi, giá sẽ từ từ điều chỉnh để thu hút. Market maker sẽ điền order đó khi họ thích mức giá đó. Vấn đề của cách này là điều chỉnh giá chậm</p>
+
+<h3 id="automated-market-maker">Automated market maker</h3>
+<p>Market markers sẽ đưa các tài sản vào trong 1 pool. Người dùng sẽ trade với pool đó mới mức giá được xác định bởi thuật toán.<br />
+Lợi ích:</p>
+<ul>
+  <li>Tiết kiệm gas</li>
+  <li>Dễ sử dụng, …</li>
+</ul>
+
+<h2 id="cách-automated-market-maker-amm-hoạt-động">Cách Automated market maker (AMM) hoạt động</h2>
+<p>Giả sử 1 AMM có 2 loại tài sản, 1 là X (risky, ví dụ: ETH), 2 là Y (stable, ví dụ DAI). AMM lưu trữ x đồng X và y đồng Y. AMM đề nghị mua hoặc bán tài sản X ở một giá trị p nào đó.<br /></p>
+
+<p>Giả sử, ta muốn duy trì tài sản X và Y trong pool với tỉ lệ a/b. Giả sử là 50/50
+Vì p là giá trị của X nên ta thấy<br />
+                    p.x = y <br />
+                    &lt;=&gt; p = y / x. <br />
+Khi đó, nếu ai đó bán lượng ETH (X) để lấy DAI (Y) thì x sẽ tăng và y giảm xuống. Dó đó giá trị p sẽ giảm đi.
+Điều này tương đương với x, y tỉ lệ nghịch với nhau. <br />
+Gọi x * y = k thì k được gọi là hằng số dự trữ.</p>
+
+<p>Hình ảnh: ///</p>
+
+<p>Ví dụ: Nếu pool có 10 ETH, 1000 DAI. Giá của 1 ETH = 100 DAI. <br />
+Hằng số dự trữ: k = x * y = 10 * 1000 = 10000.</p>
+
+<p>1) Giả sử user muốn đổi DAI lấy ETH. Muốn đổi 500 DAI + 0.3% phí để đổi lấy ETH.  <br />
+Lúc này: y’ = 500 + 1500 = 1500. <br />
+=&gt; x’ = 10000 / 1500 = 6.66 ETH. <br />
+Lúc đó, user này sẽ nhận: 10 - 6.66 = 3.33 ETH =&gt; Giá p của 1 ETH = 150 DAI (Tăng giá).</p>
+
+<p>2) Giả sử user muốn đổi ETH lấy DAI. ĐỔi 6ETH + 0.3% lấy DAI. <br />
+Lúc này: x’ = 10 + 6 = 16 <br />
+=&gt; y’ - 10000/ 16 = 625. User nhận 1000 - 625 = 375 DAI. <br />
+Giá p 1ETH = 62.5 DAI, giảm 37.5 so với ban đầu.</p>
+
+<h3 id="liquidity-provider">Liquidity Provider</h3>
+<p>Là những người cung cấp thanh khoản cho pool, nhận lại được các Liquidity Token, tương đương với thanh khoản mà họ cung cấp. Khi người dùng đổi các tài sản trong pool, phần trăm phí sẽ được trả cho các LP này dựa vào số thanh khoản mà họ cung cấp.</p>
+
+<p>Độ thanh khoản của pool được tính bằng công thức:  L = sqrt(k) = sqrt(x * y).</p>
+
+<h3 id="những-điểm-cần-phát-triển-của-amm">Những điểm cần phát triển của AMM</h3>
+<ul>
+  <li>Phí gas</li>
+  <li>Trượt giá: Biến động giá bởi các giao dịch từ người dùng</li>
+  <li>Chênh lệch giá</li>
+  <li>Hiệu quả sử dụng vốn</li>
+</ul>
+
+<h2 id="concentrated-liquidity">Concentrated Liquidity</h2>
+<p>Để tăng hiệu quả sử dụng vốn, các LP có thể gửi thanh khoản ở mức giá trong khoảng cụ thể. Ví dụ như ở hình ảnh trên, là chuyển đường cong xy = k xuống dưới và sang trái. <br />
+Lí do là vì giá trị p của thanh khoản sẽ chỉ ở trong 1 khoảng nhất định (Ví dụ DAI chỉ ở trong khoảng từ (0.95 ~ 1.05) USD). Do đó, khi PL cung cấp thanh khoản ở khoảng từ (0, ∞) thì hiệu quả sử dụng vốn của họ sẽ không được cao. Do đó, ở mỗi số sàn giao dịch, việc thanh khoản tập trung trông 1 khoảng hữu hạn là 1 vị trí. Vị trí này cần duy trì đủ dữ trữ để hỗ trợ giao dịch trong phạm vi của nó. Từ đó khiến nó hoạt động như một constant product pool với dự trữ lớn hơn trong khoảng đó. Từ đó việc sử dụng vốn sẽ có hiệu quả hơn.</p>
+
+<h2 id="kết-luận">Kết luận</h2>
+<p>Về cách các loại sàn hoạt động, mọi người có thể xem ở các whitePaper, ví dụ với Uniswap: https://uniswap.org/whitepaper.pdf.</p>
+
+        </div>
+        
+    </div>
+  </body>
+  <footer>
+    
+  </footer>
+</html>  

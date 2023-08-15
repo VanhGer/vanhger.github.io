@@ -25,13 +25,14 @@ Có 2 loại tài khoản:
 - Contracts: Điều khiển bởi code, được tạo lúc tài khoản được tạo, không thể thay đổi.
 
 Các dữ liệu cần thiết với mỗi account:
-| Account Data  | Owned   | Contracts                   |
-|---------------|---------|-----------------------------|
-| address(tính) | H(Pk)   | H(CreatorAdd, CreatorNonce) |
-| storage root  | Không   | StorageRoot                 |
-| code          | không   | CodeHash                    |
-| balance       | balance | balance                     |
-| nonce         | nonce   | nonce                       |
+
+| Account Data   |   Owned     |Contracts                      |
+|----------------|-------------|-------------------------------|
+| address(tính)  |   H(Pk)     |   H(CreatorAdd, CreatorNonce) |
+| storage root   | Không       |   StorageRoot                 |
+| code           | không       |   CodeHash                    |
+| balance        | balance     |   balance                     |
+| nonce          | nonce       |   nonce                       |
 
 Trong đó, nonce là số Tx mà acount đã thực hành, tính bằng (#Tx sent) + (#accounts created). Số nonce được dùng để chống replay và khi tạo mới thì luôn bằng 0 (với contract).  Các contract có thể bị ghi đè code, nhưng chỉ khi contract cũ đã SELFDESTRUCT.   
 
