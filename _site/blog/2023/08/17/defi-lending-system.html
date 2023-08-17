@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hiimvanhg</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Hệ thống vay DeFi</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Hệ thống vay DeFi" />
+<meta name="author" content="vanhg" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì." />
+<meta property="og:description" content="Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì." />
+<link rel="canonical" href="http://localhost:4000/blog/2023/08/17/defi-lending-system" />
+<meta property="og:url" content="http://localhost:4000/blog/2023/08/17/defi-lending-system" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-08-17T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Hệ thống vay DeFi" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"vanhg"},"dateModified":"2023-08-17T00:00:00+07:00","datePublished":"2023-08-17T00:00:00+07:00","description":"Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì.","headline":"Hệ thống vay DeFi","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2023/08/17/defi-lending-system"},"url":"http://localhost:4000/blog/2023/08/17/defi-lending-system"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+  <body>
+    <div class="header">
+  <div class = "tab_container">
+      
+        <a href="/" 
+        
+        class = "tab_btn">
+        Home
+        </a>
+      
+        <a href="/about.html" 
+        
+        class = "tab_btn">
+        About
+        </a>
+      
+        <a href="/blog.html" 
+        
+        class = "tab_btn">
+        Blog
+        </a>
+      
+        <a href="/staff.html" 
+        
+        class = "tab_btn">
+        Staff
+        </a>
+      
+  </div>
+</div>
+
+    <div class = "default_content">
+        <h1 class = "post_title">Hệ thống vay DeFi</h1>
+        <p class = "post_detail">
+            vanhg - 17 Aug 2023 
+        </p>
+        <div class = "img_container">
+            <img src =  class = "post_img">
+        </div>
+        <div class = "post_content">
+          <p>Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì.</p>
+
+<h2 id="vay-trong-hệ-thống-tập-trung">Vay trong hệ thống tập trung</h2>
+<p>Vì sao cần vay? Có các lý do chính như sau:</p>
+<ul>
+  <li>Ví dụ, Bob cần vay ETH để mua một NFT trong game nhưng anh ấy không muốn bán tài sản của mình đi.</li>
+  <li>Là chiến lược đầu tư, khi thế chấp ETH để nhận UNI, chờ tỉ giá UNI/ETH giảm, thì số UNI bỏ ra để mua 1ETH trả khoản vay sẽ ít hơn, từ đó nhận được UNI lãi.</li>
+</ul>
+
+<p>Trong hệ thống tập trung, người cho vay gửi tiền vào một Tổ chức tài chính tập trung. Người vay sẽ thế chấp 1 loại tài sản nào đó và sẽ được vay. Sau đó, người vay sẽ phải trả tiền lãi cho đến khi trả xong phần đã vay. Người cho vay sẽ được nhận 1 phần lãi đó. <br /> Tuy nhiên, nếu người vay không trả được khoản vay, Tổ chức tài chính tập trung sẽ mua lại tài sản thế chấp, và trả lại cho người vay phần còn thừa. <br /> Nếu giá trị tài sản thế chấp bị thay đổi và ít hơn tài sản vay, việc thanh lý tài sản thế chấp sẽ xảy ra.</p>
+
+<p>Tuy nhiên, với hệ thống tập trung, có các vấn đề được thấy rõ như sau:</p>
+<ul>
+  <li>User cần tin tưởng Tổ chức, nhưng nếu bị hack hoặc bị xâm nhập trái phép, khả năng mất tiền rất cao.</li>
+  <li>Tổ chức điều chỉnh tỉ lệ lãi,..</li>
+  <li>Người cho vay sẽ nhận ít tiền lãi hơn, vì phải chia 1 phần cho tổ chức.</li>
+</ul>
+
+<p>Do đó, việc tạo ra hệ thống vay phi tập trung không cần bên thứ 3 và áp dụng tính lập trình là mục tiêu được người dùng hướng đến.</p>
+
+<h2 id="các-thuật-ngữ">Các thuật ngữ</h2>
+<p><strong> Collateral </strong>: Tài sản thế chấp. Vai trò là đặt cọc để vay.</p>
+
+<p><strong> Over-collateralization </strong>: Thế chấp vượt mức. Người vay phải đảm bảo giá trị thế chấp &gt; giá trị vay.</p>
+
+<p><strong> Under-collateralization </strong>: Thế chấp dưới mức. Xảy ra khi giá trị thế chấp &lt; giá trị vay.</p>
+
+<p><strong> Collateral Factor </strong>: Giá trị lớn nhất có thể vay, tính theo giá trị thế chấp. Ví dụ CF = 0.6, thế chấp có giá trị là 1000 DAI thì giá trị vay lớn nhất có thể là 0.6 * 1000 = 600 DAI.<br />
+Với tài sản có độ biến động cao, CF thường thấp, ngược lại thì CF cao. Ví dụ: ETH, DAI:  83%, UNI: 75%, MKR:  73%</p>
+
+<p><strong> Thanh lý </strong> : Nếu số tiền vay + lãi (gọi là nợ - Debt) &gt; CF * Collateral (1) <br />
+=&gt; Tài sản thế chấp sẽ được thanh lý đến khi (1) không còn xảy ra.  Tỉ lệ thanh lý giúp người cho vay có thời gian thanh lý trước khi gặp rủi ro.</p>
+
+<p><strong> Health </strong> : Health của 1 món nợ được tính bằng công thức sau: <br /> <img src="https://latex.codecogs.com/svg.image?%20BorrowCapacity=%5Csum_%7Bi%7D%5E%7B%7Dvalue(collateral_%7Bi%7D)*CF_%7Bi%7D" alt="Alt text" /> <br />
+<img src="https://latex.codecogs.com/svg.image?health=%5Cfrac%7BBorowCapacity%7D%7Btotal%20Debt%7D" alt="" /> <br /></p>
+
+<p>Nếu health &lt; 1: Thanh lý sẽ được kích hoạt đến khi health &gt;= 1.</p>
+
+<p><strong> Liquidity </strong>: Thanh khoản. Là loại tài sản mà việc mua bán trên thị trường không thay đổi giá trị thị trường của nó. Nó cũng có khả năng chuyển thành tiền mặt.</p>
+
+<h2 id="defi-lending">DeFi Lending</h2>
+<h3 id="ý-tưởng-với-orderbook-dapp">Ý tưởng với OrderBook Dapp</h3>
+<p>Lưu trữ các giao dịch trên một OrderBook. Người vay tạo giao dịch vay và chờ người cho vay fill.
+Bất lợi:</p>
+<ul>
+  <li>Nhiều Txs, dẫn đến tính toán phức tạp</li>
+  <li>Rủi ro: Không trả được nợ,..</li>
+  <li>Rút tiền phức tạp</li>
+</ul>
+
+<h3 id="liquidity-pool">Liquidity Pool</h3>
+<p>Over-collateralized lending:  Compound and Aave
+Các LP (Liquidity Provider) cung cấp tài sản vào pool, và nhận những token tương ứng với tài sản mà họ đã cung cấp. Số lượng các token dựa vào Exchange Rate hiện tại. Exchange Rate sẽ được tính lại sau mỗi block.</p>
+
+<p>Với người vay, họ gửi tài sản vào Pool và nhận cTokens. Sau đó khi muốn vay (ETH), thì token của họ sẽ bị khoá như là Collateral, sau đó Compound sẽ gửi ETH cho họ. <br />
+Tiền lãi tích luỹ khi vay của người vay sẽ làm tăng Exchange Rate ETH/token, từ đó giúp những người cho vay (giữ các token) được lợi ích khi token sẽ tăng giá.</p>
+
+<h3 id="the-exchange-rate">The Exchange Rate</h3>
+<p>Giả sử với thị trường ETH:</p>
+<ul>
+  <li>Supplying ETH: thêm vào UnderlyingBalance</li>
+  <li>Borrowing ETH: thêm vào totalBorrowBalance</li>
+  <li>Lãi phải trả: thêm lần lượt vào totalBorrowBalance<br /></li>
+</ul>
+
+<p><img src="https://latex.codecogs.com/svg.image?ExchangeRate_%7BETH/token%7D=%5Cfrac%7BUnderlyingBalance&plus;totalBorrowBalance-reserve%7D%7BcTokenSupply%7D" alt="" /></p>
+
+<p>Do đó, nếu tổng lượng vay càng nhiều, thì Exchange Rate sẽ càng tăng. Ngược lại nếu lượng UnderlyingBalance tăng thì lượng cTokenSupply tương ứng cũng sẽ tăng, từ đó dẫn đến ExchangeRate giảm.</p>
+
+<h3 id="interest-rate-lãi-xuất">Interest Rate: Lãi xuất</h3>
+<p>Lãi xuất được cập nhập một cách liên tục. Xác định bởi nhu cầu về tài sản với quy mô thị trường.<br />
+Tỉ lệ sử dụng: <br />
+<img src="https://latex.codecogs.com/svg.image?U_%7BETH%7D=%5Cfrac%7BtotalBorrowBalance%7D%7BavailableBalance&plus;totalBorrowBalance%7D" alt="" /> <br />
+Tỉ lệ này thuộc khoảng [0,1]. <br />
+Tỉ lệ lãi: interestRate = BaseRate + U(ETH) x slope(ETH).</p>
+
+<h3 id="thanh-lý">Thanh lý</h3>
+<p>Nếu health &lt; 1, thì ai cũng có thể gọi hàm: <br />
+liquidate(borrower,   CollateralAsset,   BorrowAsset,  uint amount) <br />
+Trong đó:</p>
+<ul>
+  <li>borrower: address của người vay</li>
+  <li>CollateralAsset: người thanh lý muốn token từ tài sản này (VD: cDAI)</li>
+  <li>BorrowAsset: người thanh lý cung cấp tài sản này (ví dụ ETH) <br /></li>
+</ul>
+
+<p>Hàm này chuyển ETH của người thanh lý ra thị trường ETH và cung cấp cho người thanh lý cDAI từ tài sản thế chấp của người dùng. Điều này tương đương với người thanh lý đang trả khoản nợ ETH cho người vay và nhận cDAI của người dùng.</p>
+
+<h2 id="flash-loan">Flash loan</h2>
+<p>Là khoản vay nhanh được thực hiện và hoàn trả trong 1 giao dịch. <br />
+=&gt; zero risk cho người gửi, và không cần thế chấp.</p>
+<h3 id="các-trường-hợp-được-sử-dụng">Các trường hợp được sử dụng</h3>
+<h4 id="chênh-lệch-giá">Chênh lệch giá:</h4>
+<p>Người dùng Alice thấy chênh lệch giá USDC/DAI trong 2 pool, có thể dùng flash loan để kiếm lời. Ví dụ ở pool A có ExchangeRate là: 1.00, trong khi ở pool B là 1.01 thì Alice có thể flash loan 1 USDC, dùng để đổi được 1.01 DAI từ pool B. Sau đó dùng 1.00 DAI đổi lấy 1 USDC từ pool A, và trả flash loan. Do đó, Alice sẽ lời được 0.01 DAI.</p>
+
+<h4 id="hoán-đổi-tài-sản-thế-chấp">Hoán đổi tài sản thế chấp</h4>
+<p>Nhận thấy việc thế chấp bằng ETH có thể bị sụt giá dẫn đến thanh lý, người dùng có thể đổi tài sản thế chấp thành USDC. Quá trình như sau:</p>
+<ul>
+  <li>Nhận 1000 DAI flash loan</li>
+  <li>Trả 1000 DAI để nhận 1 cETH</li>
+  <li>Đổi 1 cETH lấy 3000 cUSDC</li>
+  <li>Gửi 3000 cUSDC làm thế chấp để Mượn 1000 DAI</li>
+  <li>Trả 1000 DAI flash loan</li>
+</ul>
+
+<h2 id="một-số-thông-tin-khác">Một số thông tin khác</h2>
+
+<h3 id="dao-decentralized-orgs">DAO: Decentralized orgs</h3>
+<p>Là 1 DApp được triển khai onchain tại 1 địa chỉ cụ thể. <br />
+Ai cũng có thể gửi tiền vào kho bạc của DAO và gửi đề xuất lên DAO. Đề xuất được thông qua và được các thành viên tham gia vote.
+Ví dụ:</p>
+<ul>
+  <li>PleaseDAO: đầu tư vào NFTs</li>
+  <li>Gitcoin: Tài trợ cho các dự án openSource.</li>
+</ul>
+
+<h3 id="giao-thức-compound">Giao thức Compound</h3>
+<p>Là giao thức trên Ethereum, thiết lập thị trường tiền tệ, là những nhóm tài sản có lãi suất theo thuật toán, dựa và cung và cầu của tài sản đó. Các nhà cung cấp và người vay sẽ tương tác trực tiếp với giao thức, không cần phải thương lượng các điều khoản như kì hạn, lãi suất, hoặc tài sản thế chấp,..</p>
+
+<h3 id="supplying-assets">Supplying Assets</h3>
+<p>Tổng hợp nguồn cung từ các user. Khi user cung cấp assets, nó trở thành tài nguyên thay thế được, và mang lại tính thanh khoản cáo hơn khi cho vay trực tiếp. Từ đó người cho vay có thể rút tiền bất cứ lúc nào.</p>
+
+<h3 id="borrowing-assets">Borrowing Assets</h3>
+<p>Cho phép người dùng vay dễ dàng, sử dụng cTokens làm thế chấp. Người dùng không cần điều khoản đàm phán, ngày đáo hạn,..</p>
+
+<p>Chi tiết về giao thức Compound, các bạn có thể xem ở <a href="https://compound.finance/documents/Compound.Whitepaper.pdf">đây</a></p>
+
+<h3 id="cross-chain-atomicswap">Cross-chain AtomicSwap</h3>
+<h4 id="các-thuật-ngữ-cơ-bản">Các thuật ngữ cơ bản</h4>
+<p><strong> HTLC</strong>: hash time-locked contract <br /></p>
+
+<p><strong> Time-lock </strong> Khoá thời gian, khi đúng khoá thì cần 1 khoảng thời gian nhất định để pass, tức là hết thời gian thì mới mở được. <br /></p>
+
+<p><strong> Hash lock</strong> Yêu cầu key đúng + secret code. Sau khi nhập code thì sẽ hiển thị lên cho mọi người.</p>
+
+<h4 id="kịch-bản">Kịch bản</h4>
+<p>Alice muốn Bitcoin, Bob muốn BCash. A và B quyết định đổi cho nhau. Các bước như sau:</p>
+<ul>
+  <li>Alice tạo 2 Hashlock, yêu cầu cùng 1 SecretCode. Nhưng key thì 1 cái là key của A, 1 cái cần key của B.</li>
+  <li>Alice đặt HashlockA và HashlockB vào lần lượt mailBoxA và mailBox B.</li>
+  <li>Alice đưa BCash vào mailbox B, Bob đưa Bitcoin vào mailbox A.</li>
+  <li>Sau đso, Alice đến mailboxA, nhập keyA và secretCode, nhận bitcoin. Đồng thời, sau khi Alice nhập, secretCode hiển thị cho mọi người nên Bob sẽ nhập theo + key vào mailBoxB, nhận được BCash.</li>
+</ul>
+
+<p>Trường hợp A không nhập SecreteCode hoặc cố ý chỉnh sai SecretCode ở 2 lock, thì time-lock sẽ được sử dụng:</p>
+<ul>
+  <li>Độ dài của locktime của A phải lớn hơn của B (1 tuần &gt;&lt; 1 ngày) vì A biết secretCode. Do đó, khi B biết A lừa dối, B có thể quay lại mailBoxA và lấy tiền về ngay lập tức (vì lúc đó A vẫn đang đợi hết timelock để lấy được tiền). Ngược lại nếu locktime của A nhỏ hơn hoặc bằng B, thì A có thể đợi đến khi hết hạn, nhập code và lấy tiền (vì A có key của B lúc tạo lock).</li>
+</ul>
+
+<h2 id="kết-luận">Kết luận</h2>
+<p>Ở trên là toàn bộ hiểu biết của mình về hệ thống vay phi tập trung.</p>
+
+
+        </div>
+        
+    </div>
+  </body>
+  <footer>
+    
+  </footer>
+</html>  

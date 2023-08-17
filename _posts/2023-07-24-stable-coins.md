@@ -57,6 +57,10 @@ NFTs là:
 - Không thể có NFT nào giống nhau, nên không thể trao đổi lẫn nhau.
 - Được xác định bởi lịch sử, mức độ tiện ích, tầm quan trọng,...
 
+NFTs được quản lý dưới blockchain vì:
+- Blockchain đảm bảo quyền sở hữu dài hạn cho đến khi bán.
+- Cung cấp một hồ sơ đáng tin cậy về xuất xứ (chống giả mạo).
+
 ### Sở hữu tài sản kĩ thuật số
 NFTs hoạt động như một chứng thư pháp lý:
 - Có thể chuyển quyền sở hữu từ bên này sang bên khác
@@ -72,3 +76,4 @@ Có 2 cách chính là tìm người sở hữu và mua từ học, hoặc lên 
 Đa phần các NFT đều có giá cao, do đó muốn sở hữu thì có thể thuê hoặc tiết kiệm. Sẽ khó bắt đầu kinh doanh NFT nếu không có tiền mặt hoặc nguồn cung cấp đủ lớn.
 
 Một số dịch vụ dựa trên NFTs như: Gameing guild (các item trong game: NFTs), EveryRealm (Bất động sản ảo), Credit Provider,...
+

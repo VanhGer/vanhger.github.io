@@ -19,7 +19,7 @@ Các block chứa các dữ liệu về Tx được lưu vào trong sổ cái c�
 ## Proof of Work
 PoW là một phần dữ liệu khó tạo (là đáp án cho một bài toán) hoặc rất tốn kém, mất thời gian để tạo nhưng chỉ tốn 1 thời gian rất ngắn (đpt O(1)) để có thể kiểm tra xem đáp án đó có đúng không. Quy trình tạo dữ liệu này là ngẫu nhiên với xác suất thấp, cần thử sau rất nhiều lần trước khi tạo ra PoW hợp lệ.
 
-PoW là cách để các nodes cùng đồng thuận về tình trạng của block, tránh việc [chi tiêu khép](https://academy.binance.com/vi/articles/double-spending-explained), từ đó cho phép cập nhập blockchain theo các quy tắc của hệ thống.
+PoW là cách để các nodes cùng đồng thuận về tình trạng của block, tránh việc [chi tiêu kép](https://academy.binance.com/vi/articles/double-spending-explained), từ đó cho phép cập nhập blockchain theo các quy tắc của hệ thống.
 
 ### Ví dụ với Bitcoin:
 Trong quá trình tạo khối, các miner sẽ phải giải được bài toán tìm số nonce để đưa vào blockheader và khiến block hợp lệ. Block hợp lệ là block có hash nhỏ hơn target value hiện tại.
