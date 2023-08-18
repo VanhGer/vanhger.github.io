@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hiimvanhg</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Mở rộng Blockchain (Phần 1)</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Mở rộng Blockchain (Phần 1)" />
+<meta name="author" content="vanhg" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ." />
+<meta property="og:description" content="Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ." />
+<link rel="canonical" href="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1" />
+<meta property="og:url" content="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-08-18T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Mở rộng Blockchain (Phần 1)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"vanhg"},"dateModified":"2023-08-18T00:00:00+07:00","datePublished":"2023-08-18T00:00:00+07:00","description":"Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.","headline":"Mở rộng Blockchain (Phần 1)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1"},"url":"http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+  <body>
+    <div class="header">
+  <div class = "tab_container">
+      
+        <a href="/" 
+        
+        class = "tab_btn">
+        Home
+        </a>
+      
+        <a href="/about.html" 
+        
+        class = "tab_btn">
+        About
+        </a>
+      
+        <a href="/blog.html" 
+        
+        class = "tab_btn">
+        Blog
+        </a>
+      
+        <a href="/staff.html" 
+        
+        class = "tab_btn">
+        Staff
+        </a>
+      
+  </div>
+</div>
+
+    <div class = "default_content">
+        <h1 class = "post_title">Mở rộng Blockchain (Phần 1)</h1>
+        <p class = "post_detail">
+            vanhg - 18 Aug 2023 
+        </p>
+        <div class = "img_container">
+            <img src =  class = "post_img">
+        </div>
+        <div class = "post_content">
+          <p>Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.</p>
+
+<h2 id="payment-channel-ý-tưởng-cơ-bản">Payment Channel: Ý tưởng cơ bản</h2>
+<p>A và B đang muốn giao dịch với nhau. A gửi cho B 5 lần, mỗi lần là 0.01 BTC, là 5 Txs. Thay vì làm như thế, có thể làm như sau: A gửi cho B 1BTC. Sau 1 khoảng thời gian (ví dụ 1 tháng), B sẽ trả lại số BTC dư mà chưa dùng. Vậy số giao dịch chỉ giới hạn đến 2.</p>
+
+<h2 id="unidirectional-payment-channel-kênh-thanh-toán-1-chiều">Unidirectional Payment Channel: Kênh thanh toán 1 chiều</h2>
+<p>Ta có: UTXO A: 1BTC.</p>
+<ul>
+  <li>Tx1: 0.99 cho A/ 0.01 cho B từ UTXO A.</li>
+  <li>Tx2: 0.98 cho A/ 0.02 cho B</li>
+  <li>….</li>
+  <li>Tx5: 0.95 cho A/ 0.05 cho B</li>
+</ul>
+
+<p>Xong xuôi, B post Tx5 lên Blockchain. Nhưng có vấn đề xảy ra là nếu A sử dụng UTXO trước khi B post lên thì Tx5 mà B post lên sẽ không hợp lệ. Do đó, cần sử dụng 1 địa chỉ chung UTXO AB có dạng Multisig 2-2. Điều này sẽ ngăn chặn việc A dùng UTXO vì chưa có chữ kí của B.</p>
+
+<p>Nhưng nếu B không post Tx5 lên chuỗi thì sao? Liệu A có lấy lại được 0.95 BTC. Để giải quyết vấn đề này, cần sử dụng một time-locked Tx, đảm bảo sau một khoảng thời gian, nếu B không post Tx5 lên, thì A sẽ lấy lại được 1BTC (B phải gửi cho A). Ngoài ra, Tx này phải được kí trước khi đưa BTC vào trong AB.</p>
+
+<p>Minh hoạ:</p>
+
+<p>Sau khi trả hoặc lấy lại tiền, kênh sẽ đóng.</p>
+
+<h2 id="bidirectional-payment-channel-kênh-thanh-toán-đa-chiều">Bidirectional Payment Channel: Kênh thanh toán đa chiều</h2>
+<p>Không sử dụng 2 kênh thanh toán 1 chiều thay thế. Thay vào đó, ta sẽ sử dụng contract.</p>
+
+<h3 id="trên-ethereum">Trên Ethereum</h3>
+<p>A và B sẽ tạo một contract chung, mỗi người đóng góp 0.5 ETH. Lúc này, trạng thái của contract sẽ là: <br />
+A: 0.5 ETH      B: 0.5 ETH      Nonce: 0. <br />
+Off chain: B gửi 0.1 ETH cho A bằng cách cả 2 ký vào state mới: <br />
+A: 0.6,  B: 0.4,  Nonce: 1, A sig,  B sig   <br />
+Ở trên chuỗi, contract vẫn không đổi. Giả sử, offchain, A và B đã gửi đi gửi lại nhiều giao dịch:<br />
+A: 0.3,  B: 0.7,  Nonce: 7, A sig,  B sig <br /></p>
+
+<p>Lúc này, A muốn kết thúc kênh, sẽ gửi số dư cuối cùng và các chữ ký cho contract. Lúc này sẽ bắt đầu Challenge Period (ví dụ 3 ngày). <br />
+Onchain: A: 0.3,    B: 0.7,     Nonce: 7. <br /></p>
+<ul>
+  <li>Nếu trong 3 ngày, B không làm gì thì số tiền và trạng thái của contract sẽ theo những gì A gửi lên.</li>
+  <li>Ngược lại, nếu B gửi lên 1 state với số Nonce lớn hơn (ví dụ = 9), thì contract sẽ theo state của B.</li>
+</ul>
+
+<p>Vấn đề được đưa ra là việc A và B phải quan sát thường xuyên xem đối phương có gửi state cũ lên không để có thể kịp thời ngăn chặn. Điều này được giải quyết bằng sự trợ giúp của WatchTower.</p>
+
+<p>Tóm lại, việc giao dịch sẽ chỉ tốn 2 lần onchain:</p>
+<ul>
+  <li>Tạo channel</li>
+  <li>Đóng channel và gửi tiền.</li>
+</ul>
+
+<h3 id="trên-bitcoin">Trên Bitcoin</h3>
+<p>Vì trên UTXO không có trạng thái, nên sẽ khó khăn hơn để tạo 1 kênh thanh toán 2 chiều. Giải pháp được đưa ra là khi update kênh theo A, thì A sẽ nhận được Tx mà làm trạng thái cũ của B mất hiệu lực.</p>
+
+<h4 id="utxo">UTXO</h4>
+<p>Ta sẽ tạo UTXO mà có thể dùng theo 1 trong 2 cách (sử dụng IF trong Opcode):</p>
+<ul>
+  <li>Relative time-lock: UTXO chứa số t. 1 Tx được kí hợp lệ có thể sử dụng UTXO này sau t blocks (hoặc nhiều hơn) sau khi nó được tạo ra.</li>
+  <li>Hash lock: UTXO chứa một số X. Một Tx được kí hợp lệ có thể sử dụng UTXO này nếu có số x mà: SHA256(x) = X.
+(x được gọi là hash preimage của X).</li>
+</ul>
+
+<h4 id="ví-dụ">Ví dụ:</h4>
+<p>Giả sử A và B đưa BTC vào trong 2-2 Multisig UTXO AB, với A là 7BTC, B là 3BTC. <br /></p>
+<ul>
+  <li>A tạo số ngẫu nhiên x, và X = SHA256(x).</li>
+  <li>B tạo số ngẫu nhiên y, và Y = SHA256(y).</li>
+  <li>Sau đó, A đưa X cho B và ngược lại.</li>
+  <li>A tạo Tx1 với input là UTXO AB, output là: <br />
+  1: pay 7 -&gt; A,  <br />
+  2: 3 -&gt; B (7 ngày timelock) hoặc 3 -&gt; A (với điều kiện đưa ra số y mà Y = SHA256(y)).</li>
+  <li>B tạo Tx2 với input là UTXO AB, output là: <br />
+  1: pay 3 -&gt; B, <br />
+  2: 7 -&gt; A (7 ngày timelock) hoặc 7 -&gt; B (với điều kiện đưa ra số x mà X = SHA256(x)).</li>
+  <li>A có thể post Tx2, đợi 7 ngày và lấy 7 BTC về.</li>
+  <li>Giờ nếu A gửi 1BTC cho B offchain. A tạo x’ và X’ = SHA256(x’). Sau đó đưa X’ cho B.</li>
+  <li>A tạo Tx3 với input là UTXO AB, output là: <br />
+  1: pay 6 -&gt; A,  <br />
+  2: 4 -&gt; B (7 ngày timelock) hoặc 4 -&gt; A (với điều kiện đưa ra số y mà Y = SHA256(y)).</li>
+  <li>B tạo Tx4 với input là UTXO AB, output là: <br />
+  1: pay 4 -&gt; B, <br />
+  2: 6 -&gt; A (7 ngày timelock) hoặc 6 -&gt; B (với điều kiện đưa ra số x’ mà X’ = SHA256(x’)).</li>
+  <li>Lúc này, A có thể post Tx3 và đợi 7 ngày. Nhưng nếu A post stale state là Tx2, B sẽ sử dụng x để lấy hết BTC. Do đó, A không thể gian lận và post lên trạng thái cũ.</li>
+</ul>
+
+<h2 id="multihop-payments-thanh-toán-nhiều-lần">Multihop payments: Thanh toán nhiều lần</h2>
+<p>A muốn thanh toán cho C qua trung gian không tin cậy là B (Vì A, C có channel với B).</p>
+
+<h3 id="the-lightning-network">The lightning network</h3>
+<p>Nhiều open payment channel 2 chiều. Khi A muốn tạo kênh với B thì chỉ cần tìm tuyến đường qua đồ thị với đỉnh là các trung gian.</p>
+
+<h2 id="kết-luận">Kết luận</h2>
+<p>Đây là cách tiếp cận đầu tiên để tăng lượng Tx trong 1sec. Ở bài viết sau, mình sẽ giới thiệu các khác giúp giải quyết vấnd dề này.</p>
+
+        </div>
+        
+    </div>
+  </body>
+  <footer>
+    
+  </footer>
+</html>  

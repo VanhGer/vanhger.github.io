@@ -1,4 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-17T17:37:30+07:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Hệ thống vay DeFi</title><link href="http://localhost:4000/blog/2023/08/17/defi-lending-system" rel="alternate" type="text/html" title="Hệ thống vay DeFi" /><published>2023-08-17T00:00:00+07:00</published><updated>2023-08-17T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/17/defi-lending-system</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/17/defi-lending-system"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-18T15:41:08+07:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Mở rộng Blockchain (Phần 1)</title><link href="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1" rel="alternate" type="text/html" title="Mở rộng Blockchain (Phần 1)" /><published>2023-08-18T00:00:00+07:00</published><updated>2023-08-18T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1"><![CDATA[<p>Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.</p>
+
+<h2 id="payment-channel-ý-tưởng-cơ-bản">Payment Channel: Ý tưởng cơ bản</h2>
+<p>A và B đang muốn giao dịch với nhau. A gửi cho B 5 lần, mỗi lần là 0.01 BTC, là 5 Txs. Thay vì làm như thế, có thể làm như sau: A gửi cho B 1BTC. Sau 1 khoảng thời gian (ví dụ 1 tháng), B sẽ trả lại số BTC dư mà chưa dùng. Vậy số giao dịch chỉ giới hạn đến 2.</p>
+
+<h2 id="unidirectional-payment-channel-kênh-thanh-toán-1-chiều">Unidirectional Payment Channel: Kênh thanh toán 1 chiều</h2>
+<p>Ta có: UTXO A: 1BTC.</p>
+<ul>
+  <li>Tx1: 0.99 cho A/ 0.01 cho B từ UTXO A.</li>
+  <li>Tx2: 0.98 cho A/ 0.02 cho B</li>
+  <li>….</li>
+  <li>Tx5: 0.95 cho A/ 0.05 cho B</li>
+</ul>
+
+<p>Xong xuôi, B post Tx5 lên Blockchain. Nhưng có vấn đề xảy ra là nếu A sử dụng UTXO trước khi B post lên thì Tx5 mà B post lên sẽ không hợp lệ. Do đó, cần sử dụng 1 địa chỉ chung UTXO AB có dạng Multisig 2-2. Điều này sẽ ngăn chặn việc A dùng UTXO vì chưa có chữ kí của B.</p>
+
+<p>Nhưng nếu B không post Tx5 lên chuỗi thì sao? Liệu A có lấy lại được 0.95 BTC. Để giải quyết vấn đề này, cần sử dụng một time-locked Tx, đảm bảo sau một khoảng thời gian, nếu B không post Tx5 lên, thì A sẽ lấy lại được 1BTC (B phải gửi cho A). Ngoài ra, Tx này phải được kí trước khi đưa BTC vào trong AB.</p>
+
+<p>Minh hoạ:</p>
+
+<p>Sau khi trả hoặc lấy lại tiền, kênh sẽ đóng.</p>
+
+<h2 id="bidirectional-payment-channel-kênh-thanh-toán-đa-chiều">Bidirectional Payment Channel: Kênh thanh toán đa chiều</h2>
+<p>Không sử dụng 2 kênh thanh toán 1 chiều thay thế. Thay vào đó, ta sẽ sử dụng contract.</p>
+
+<h3 id="trên-ethereum">Trên Ethereum</h3>
+<p>A và B sẽ tạo một contract chung, mỗi người đóng góp 0.5 ETH. Lúc này, trạng thái của contract sẽ là: <br />
+A: 0.5 ETH      B: 0.5 ETH      Nonce: 0. <br />
+Off chain: B gửi 0.1 ETH cho A bằng cách cả 2 ký vào state mới: <br />
+A: 0.6,  B: 0.4,  Nonce: 1, A sig,  B sig   <br />
+Ở trên chuỗi, contract vẫn không đổi. Giả sử, offchain, A và B đã gửi đi gửi lại nhiều giao dịch:<br />
+A: 0.3,  B: 0.7,  Nonce: 7, A sig,  B sig <br /></p>
+
+<p>Lúc này, A muốn kết thúc kênh, sẽ gửi số dư cuối cùng và các chữ ký cho contract. Lúc này sẽ bắt đầu Challenge Period (ví dụ 3 ngày). <br />
+Onchain: A: 0.3,    B: 0.7,     Nonce: 7. <br /></p>
+<ul>
+  <li>Nếu trong 3 ngày, B không làm gì thì số tiền và trạng thái của contract sẽ theo những gì A gửi lên.</li>
+  <li>Ngược lại, nếu B gửi lên 1 state với số Nonce lớn hơn (ví dụ = 9), thì contract sẽ theo state của B.</li>
+</ul>
+
+<p>Vấn đề được đưa ra là việc A và B phải quan sát thường xuyên xem đối phương có gửi state cũ lên không để có thể kịp thời ngăn chặn. Điều này được giải quyết bằng sự trợ giúp của WatchTower.</p>
+
+<p>Tóm lại, việc giao dịch sẽ chỉ tốn 2 lần onchain:</p>
+<ul>
+  <li>Tạo channel</li>
+  <li>Đóng channel và gửi tiền.</li>
+</ul>
+
+<h3 id="trên-bitcoin">Trên Bitcoin</h3>
+<p>Vì trên UTXO không có trạng thái, nên sẽ khó khăn hơn để tạo 1 kênh thanh toán 2 chiều. Giải pháp được đưa ra là khi update kênh theo A, thì A sẽ nhận được Tx mà làm trạng thái cũ của B mất hiệu lực.</p>
+
+<h4 id="utxo">UTXO</h4>
+<p>Ta sẽ tạo UTXO mà có thể dùng theo 1 trong 2 cách (sử dụng IF trong Opcode):</p>
+<ul>
+  <li>Relative time-lock: UTXO chứa số t. 1 Tx được kí hợp lệ có thể sử dụng UTXO này sau t blocks (hoặc nhiều hơn) sau khi nó được tạo ra.</li>
+  <li>Hash lock: UTXO chứa một số X. Một Tx được kí hợp lệ có thể sử dụng UTXO này nếu có số x mà: SHA256(x) = X.
+(x được gọi là hash preimage của X).</li>
+</ul>
+
+<h4 id="ví-dụ">Ví dụ:</h4>
+<p>Giả sử A và B đưa BTC vào trong 2-2 Multisig UTXO AB, với A là 7BTC, B là 3BTC. <br /></p>
+<ul>
+  <li>A tạo số ngẫu nhiên x, và X = SHA256(x).</li>
+  <li>B tạo số ngẫu nhiên y, và Y = SHA256(y).</li>
+  <li>Sau đó, A đưa X cho B và ngược lại.</li>
+  <li>A tạo Tx1 với input là UTXO AB, output là: <br />
+  1: pay 7 -&gt; A,  <br />
+  2: 3 -&gt; B (7 ngày timelock) hoặc 3 -&gt; A (với điều kiện đưa ra số y mà Y = SHA256(y)).</li>
+  <li>B tạo Tx2 với input là UTXO AB, output là: <br />
+  1: pay 3 -&gt; B, <br />
+  2: 7 -&gt; A (7 ngày timelock) hoặc 7 -&gt; B (với điều kiện đưa ra số x mà X = SHA256(x)).</li>
+  <li>A có thể post Tx2, đợi 7 ngày và lấy 7 BTC về.</li>
+  <li>Giờ nếu A gửi 1BTC cho B offchain. A tạo x’ và X’ = SHA256(x’). Sau đó đưa X’ cho B.</li>
+  <li>A tạo Tx3 với input là UTXO AB, output là: <br />
+  1: pay 6 -&gt; A,  <br />
+  2: 4 -&gt; B (7 ngày timelock) hoặc 4 -&gt; A (với điều kiện đưa ra số y mà Y = SHA256(y)).</li>
+  <li>B tạo Tx4 với input là UTXO AB, output là: <br />
+  1: pay 4 -&gt; B, <br />
+  2: 6 -&gt; A (7 ngày timelock) hoặc 6 -&gt; B (với điều kiện đưa ra số x’ mà X’ = SHA256(x’)).</li>
+  <li>Lúc này, A có thể post Tx3 và đợi 7 ngày. Nhưng nếu A post stale state là Tx2, B sẽ sử dụng x để lấy hết BTC. Do đó, A không thể gian lận và post lên trạng thái cũ.</li>
+</ul>
+
+<h2 id="multihop-payments-thanh-toán-nhiều-lần">Multihop payments: Thanh toán nhiều lần</h2>
+<p>A muốn thanh toán cho C qua trung gian không tin cậy là B (Vì A, C có channel với B).</p>
+
+<h3 id="the-lightning-network">The lightning network</h3>
+<p>Nhiều open payment channel 2 chiều. Khi A muốn tạo kênh với B thì chỉ cần tìm tuyến đường qua đồ thị với đỉnh là các trung gian.</p>
+
+<h2 id="kết-luận">Kết luận</h2>
+<p>Đây là cách tiếp cận đầu tiên để tăng lượng Tx trong 1sec. Ở bài viết sau, mình sẽ giới thiệu các khác giúp giải quyết vấnd dề này.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.]]></summary></entry><entry><title type="html">Hệ thống vay DeFi</title><link href="http://localhost:4000/blog/2023/08/17/defi-lending-system" rel="alternate" type="text/html" title="Hệ thống vay DeFi" /><published>2023-08-17T00:00:00+07:00</published><updated>2023-08-17T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/17/defi-lending-system</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/17/defi-lending-system"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì.</p>
 
 <h2 id="vay-trong-hệ-thống-tập-trung">Vay trong hệ thống tập trung</h2>
 <p>Vì sao cần vay? Có các lý do chính như sau:</p>
@@ -381,70 +470,7 @@ Bất kì ai giữ DAI có thể khoá DAI của mình trong MakerDAO contract. 
 <h3 id="nft-cost-issue">NFT cost issue:</h3>
 <p>Đa phần các NFT đều có giá cao, do đó muốn sở hữu thì có thể thuê hoặc tiết kiệm. Sẽ khó bắt đầu kinh doanh NFT nếu không có tiền mặt hoặc nguồn cung cấp đủ lớn.</p>
 
-<p>Một số dịch vụ dựa trên NFTs như: Gameing guild (các item trong game: NFTs), EveryRealm (Bất động sản ảo), Credit Provider,…</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.]]></summary></entry><entry><title type="html">Proof Of Stake</title><link href="http://localhost:4000/blog/2023/07/23/proof-of-stake" rel="alternate" type="text/html" title="Proof Of Stake" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/proof-of-stake</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/proof-of-stake"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu một cơ chế đồng thuận đang được sử dụng rất nhiều trong các blockchain hiện nay, đó là Proof of Stake.</p>
-
-<h3 id="accountable-safety">Accountable Safety</h3>
-<p>Một giao thức với resilence là n/3 khi giao thức đó an toàn nếu nó có ít hơn n/3 Adverserial node (Ví dụ streamlet). <br />
-Một giao thức với Accountable Safety resilence n/3 là giao thức:</p>
-<ul>
-  <li>An toàn nếu ít hơn Adverserial node.</li>
-  <li>Nếu vi phạm safety, thì những người giám sát (các node không phải người được chọn để đề xuất khối) có thể xác định rõ các node vi phạm.</li>
-  <li>Không có cáo buộc sai với các node trung thực.</li>
-</ul>
-
-<h3 id="finality-và-dynamic-availability">Finality và Dynamic availability</h3>
-<p>Gọi một giao thức là finality nếu nó duy trì safety trong thời gian không đồng bộ (trước GST). Ở các giao thức này, Tx được finalize nhanh hơn confirm trong bitcoin (60 phút). <br />
-Gọi một giao thức là Dynamic availability nếu giao thức đó có thể tiếp tục confirm các giao dịch ngay cả khi nhiều node offline.</p>
-
-<p>Không có giao thức SMR nào đảm bảo cung cấp cả 2. Do đó, một cách giải quyết là sử dụng Nested chains.</p>
-
-<h3 id="nested-chains">Nested chains</h3>
-<ul>
-  <li>Available chain được xác định bởi giao thức Π_ava, thoả mãn Dynamic availability (VD: Nakamoto consensus).</li>
-  <li>Finalized chain được xác định bởi giao thức checkpoint Π_fin thoả mãn security dưới mạng đồng bộ 1 phần.</li>
-  <li>Chuỗi confirm bởi Π_ava là available chain.</li>
-  <li>Π_fin kiểm tra các block trong availbale chain.</li>
-  <li>Tiền tố của checkpoint cuối cùng tạo thành finalized chain. Tương đương với Finalized chain là prefix của available. Chuỗi này safe dưới mạng bất đồng bộ</li>
-  <li>Các block của available chain luôn extend từ điểm checkpoint cuối cùng.</li>
-</ul>
-
-<p>Minh hoạ: hình ảnh</p>
-
-<h2 id="proof-of-stake">Proof of Stake</h2>
-<h3 id="tổng-quan">Tổng quan:</h3>
-<ul>
-  <li>Trong giao thức Pos, các nodes khoá (Stake) tiền của họ trong giao thức để đủ điều kiện tham gia consensus.</li>
-  <li>Càng nhiều coin được stake bởi 1 node thì khả năng cao node đó được chọn làm validator. Vì thuật toán lựa chọn validator là giả ngẫu nhiên.</li>
-  <li>Nếu node bị bắt quả tang thực hiện 1 hành động bất lợi (xác thực giao dịch sai) thì node đó sẽ bị burn số tiền đã stake và không thể tham gia vào quá trình đề xuất khối tiếp theo. (Slashing).</li>
-</ul>
-
-<p>Do đó, trong PoS, nodes sẽ có trách nhiệm trong cách hành động của mình. PoS giúp thay đổi cơ chế block được verify. Ngoài ra, để trở thành validator, các node phải có điều kiện (ví dụ: có ít nhất 32 ETH,..), sau khi đóng 1 khối, khối đó sẽ được các validator khác validate theo nhiều method khác nhau tuỳ vào blockchain.</p>
-
-<h3 id="cụ-thể-với-ethereum-20">Cụ thể với Ethereum 2.0</h3>
-
-<h4 id="chọn-validator-và-block-proposer">Chọn Validator và Block Proposer</h4>
-<p>Để thành một validator, phải gửi ít nhất 32 ETH vào contract và chạy 3 phần mềm riêng biệt (sẽ giới thiệu ở sau) và tham gia hàng đợi. Thời gian của blocks chia thành các slot: 12s, epoch: 32 slot. Sau khi được active, validator đó sẽ tham ra vào quá trình phê duyệt. 1 validator ngẫu nhiên sẽ được chọn để xác thực giao dịch và đề xuất khối ở mỗi slot (Block proposer). Số còn lại sẽ làm giám sát để phê duyệt và kiểm tra xem validator đó có gian lận không.</p>
-
-<p>Chọn Block Proposer quá trình giả ngẫu nhiên gồm nhiều yêu tố như staking age, số tiền stake,… Ở đây, mình sẽ giới thiệu 2 phương pháp lựa chọn là:</p>
-<ul>
-  <li><strong> Randomize block selection: </strong> lựa chọn bằng cách tìm kiếm nodes có sự kết hợp của hash value thấp nhất và stake cao nhất. Vì size của các stakes là công khai nên có thể dự đoán được.</li>
-  <li><strong> Coin Age Selection: </strong> là phương thức chọn các nodes dựa vào khoảng thời gian stake. Coin Age được tính bằng: số ngày đặt cược x số lượng coin. Khi một node forge một block, coin age của nó được cài về 0.</li>
-</ul>
-
-<h4 id="quy-trình-xác-thực">Quy trình xác thực</h4>
-<p>Khi một user tạo Tx và submit lên Ethereum, nó sẽ được kiểm tra tính hợp lệ (Ví dụ đảm bảo số tiền, key đúng,…) sau đó được đưa đến mempool và phát tán nó đến các node khác. <br />
-Một node được chọn làm Block Proposer để đề xuất khối ở slot này, có trách nhiệm đóng và phát tán block vào chuỗi và cập nhập trạng thái. Nodes chạy 3 phần mềm:</p>
-<ul>
-  <li>Execution client: gộp các Txs từ mempool thành “execution payload” và chạy nó ở local để tạo ra sự thay đổi trạng thái. Thông tin này được chuyển đến consensus client</li>
-  <li>Consensus client: đóng gói payload thành 1 phần của “beacon block” (gồm payload, slashing,…) cho phép mạng thống nhất trình tự về các khối.</li>
-  <li>Validator client: Các node nhận được beacon block qua tầng gossip network. Sau đó chuyển đến Execution client của nó để chạy lại, nhằm chắc chắn trạng thái là đúng. Sau đóm Validator client sẽ chứng thực khối đó hợp lệ và là khối tiếp theo trong góc nhìn của chuỗi (available chain). Khối cũng được thêm vào cơ sở dữ liệu local của các node.</li>
-</ul>
-
-<h4 id="finality">Finality</h4>
-<p>Như đã nói ở trên, các block của available chain luôn extend từ điểm checkpoint cuối cùng. Checkpoint là các block đầu tiên ở mỗi epoch. Các validators có thể vote cho cặp checkpoint (1 epoch), nếu ít nhất 2/3 vote cho nó, cặp checkpoint này sẽ được cập nhập, và các block nằm giữa sẽ được cập nhập thành finalized chain. Nếu chuỗi không thể finalized trong nhiều hơn 4 epoch liên tục, stake ETH từ các validator chống lại đa số sẽ bị biến mất, cho phép đa số chiếm hơn 2/3 và finalized chuỗi.</p>
-
-<h2 id="lời-kết">Lời kết</h2>
-<p>Ở trên là cách hoạt động cơ bản của POS. Mọi người có thể xem thêm các thông tin về POS trong Ethereum tại <a href="https://ethereum.org/vi/developers/docs/consensus-mechanisms/pos/">đây</a>.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu một cơ chế đồng thuận đang được sử dụng rất nhiều trong các blockchain hiện nay, đó là Proof of Stake.]]></summary></entry><entry><title type="html">Cơ chế Ethereum</title><link href="http://localhost:4000/blog/2023/07/23/ethereum-mechanics" rel="alternate" type="text/html" title="Cơ chế Ethereum" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/ethereum-mechanics</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/ethereum-mechanics"><![CDATA[<p>Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội</p>
+<p>Một số dịch vụ dựa trên NFTs như: Gameing guild (các item trong game: NFTs), EveryRealm (Bất động sản ảo), Credit Provider,…</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.]]></summary></entry><entry><title type="html">Cơ chế Ethereum</title><link href="http://localhost:4000/blog/2023/07/23/ethereum-mechanics" rel="alternate" type="text/html" title="Cơ chế Ethereum" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/ethereum-mechanics</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/ethereum-mechanics"><![CDATA[<p>Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội</p>
 
 <h3 id="so-sánh-chung">So sánh chung</h3>
 <p>Bitcoin như một máy chuyển trạng thái. Bitcoin rule: S x I ⇾ S, với tập S là các trạng thái, I là tập tất cả các input. Còn với Ethereum, hàm chuyển trạng thái của nó sẽ phong phú hơn nhiều, và mỗi lần chuyển đổi thì sẽ thực hiện toàn bộ chương trình.</p>
@@ -572,7 +598,70 @@ MaxTxFee = gasLimit x gasPice <br />
 <p>ETH bị BURN vì giúp giảm lạm phát, tăng tính khan hiếm, có lợi cho nhà đầu tư, chặn các proposer tạo ra các Tx giả, không khuyến khích các thoả thuận ngoài chuỗi.</p>
 
 <h2 id="kết-luận">Kết luận</h2>
-<p>Ở trên là toàn bộ hiểu biết của mình về cơ chế Ethereum.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội]]></summary></entry><entry><title type="html">Đồng thuận trên mạng</title><link href="http://localhost:4000/blog/2023/07/22/dong-thuan-tren-mang" rel="alternate" type="text/html" title="Đồng thuận trên mạng" /><published>2023-07-22T00:00:00+07:00</published><updated>2023-07-22T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/22/dong-thuan-tren-mang</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/22/dong-thuan-tren-mang"><![CDATA[<p>Ở bài trước, ta đã biết rằng các node sẽ tham gia vào giao thức có thể là Adversary và có thể gây hại cho blockchain. Vậy làm cách nào để chọn các node tham gia vào consensus.</p>
+<p>Ở trên là toàn bộ hiểu biết của mình về cơ chế Ethereum.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội]]></summary></entry><entry><title type="html">Proof Of Stake</title><link href="http://localhost:4000/blog/2023/07/23/proof-of-stake" rel="alternate" type="text/html" title="Proof Of Stake" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/proof-of-stake</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/proof-of-stake"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu một cơ chế đồng thuận đang được sử dụng rất nhiều trong các blockchain hiện nay, đó là Proof of Stake.</p>
+
+<h3 id="accountable-safety">Accountable Safety</h3>
+<p>Một giao thức với resilence là n/3 khi giao thức đó an toàn nếu nó có ít hơn n/3 Adverserial node (Ví dụ streamlet). <br />
+Một giao thức với Accountable Safety resilence n/3 là giao thức:</p>
+<ul>
+  <li>An toàn nếu ít hơn Adverserial node.</li>
+  <li>Nếu vi phạm safety, thì những người giám sát (các node không phải người được chọn để đề xuất khối) có thể xác định rõ các node vi phạm.</li>
+  <li>Không có cáo buộc sai với các node trung thực.</li>
+</ul>
+
+<h3 id="finality-và-dynamic-availability">Finality và Dynamic availability</h3>
+<p>Gọi một giao thức là finality nếu nó duy trì safety trong thời gian không đồng bộ (trước GST). Ở các giao thức này, Tx được finalize nhanh hơn confirm trong bitcoin (60 phút). <br />
+Gọi một giao thức là Dynamic availability nếu giao thức đó có thể tiếp tục confirm các giao dịch ngay cả khi nhiều node offline.</p>
+
+<p>Không có giao thức SMR nào đảm bảo cung cấp cả 2. Do đó, một cách giải quyết là sử dụng Nested chains.</p>
+
+<h3 id="nested-chains">Nested chains</h3>
+<ul>
+  <li>Available chain được xác định bởi giao thức Π_ava, thoả mãn Dynamic availability (VD: Nakamoto consensus).</li>
+  <li>Finalized chain được xác định bởi giao thức checkpoint Π_fin thoả mãn security dưới mạng đồng bộ 1 phần.</li>
+  <li>Chuỗi confirm bởi Π_ava là available chain.</li>
+  <li>Π_fin kiểm tra các block trong availbale chain.</li>
+  <li>Tiền tố của checkpoint cuối cùng tạo thành finalized chain. Tương đương với Finalized chain là prefix của available. Chuỗi này safe dưới mạng bất đồng bộ</li>
+  <li>Các block của available chain luôn extend từ điểm checkpoint cuối cùng.</li>
+</ul>
+
+<p>Minh hoạ: hình ảnh</p>
+
+<h2 id="proof-of-stake">Proof of Stake</h2>
+<h3 id="tổng-quan">Tổng quan:</h3>
+<ul>
+  <li>Trong giao thức Pos, các nodes khoá (Stake) tiền của họ trong giao thức để đủ điều kiện tham gia consensus.</li>
+  <li>Càng nhiều coin được stake bởi 1 node thì khả năng cao node đó được chọn làm validator. Vì thuật toán lựa chọn validator là giả ngẫu nhiên.</li>
+  <li>Nếu node bị bắt quả tang thực hiện 1 hành động bất lợi (xác thực giao dịch sai) thì node đó sẽ bị burn số tiền đã stake và không thể tham gia vào quá trình đề xuất khối tiếp theo. (Slashing).</li>
+</ul>
+
+<p>Do đó, trong PoS, nodes sẽ có trách nhiệm trong cách hành động của mình. PoS giúp thay đổi cơ chế block được verify. Ngoài ra, để trở thành validator, các node phải có điều kiện (ví dụ: có ít nhất 32 ETH,..), sau khi đóng 1 khối, khối đó sẽ được các validator khác validate theo nhiều method khác nhau tuỳ vào blockchain.</p>
+
+<h3 id="cụ-thể-với-ethereum-20">Cụ thể với Ethereum 2.0</h3>
+
+<h4 id="chọn-validator-và-block-proposer">Chọn Validator và Block Proposer</h4>
+<p>Để thành một validator, phải gửi ít nhất 32 ETH vào contract và chạy 3 phần mềm riêng biệt (sẽ giới thiệu ở sau) và tham gia hàng đợi. Thời gian của blocks chia thành các slot: 12s, epoch: 32 slot. Sau khi được active, validator đó sẽ tham ra vào quá trình phê duyệt. 1 validator ngẫu nhiên sẽ được chọn để xác thực giao dịch và đề xuất khối ở mỗi slot (Block proposer). Số còn lại sẽ làm giám sát để phê duyệt và kiểm tra xem validator đó có gian lận không.</p>
+
+<p>Chọn Block Proposer quá trình giả ngẫu nhiên gồm nhiều yêu tố như staking age, số tiền stake,… Ở đây, mình sẽ giới thiệu 2 phương pháp lựa chọn là:</p>
+<ul>
+  <li><strong> Randomize block selection: </strong> lựa chọn bằng cách tìm kiếm nodes có sự kết hợp của hash value thấp nhất và stake cao nhất. Vì size của các stakes là công khai nên có thể dự đoán được.</li>
+  <li><strong> Coin Age Selection: </strong> là phương thức chọn các nodes dựa vào khoảng thời gian stake. Coin Age được tính bằng: số ngày đặt cược x số lượng coin. Khi một node forge một block, coin age của nó được cài về 0.</li>
+</ul>
+
+<h4 id="quy-trình-xác-thực">Quy trình xác thực</h4>
+<p>Khi một user tạo Tx và submit lên Ethereum, nó sẽ được kiểm tra tính hợp lệ (Ví dụ đảm bảo số tiền, key đúng,…) sau đó được đưa đến mempool và phát tán nó đến các node khác. <br />
+Một node được chọn làm Block Proposer để đề xuất khối ở slot này, có trách nhiệm đóng và phát tán block vào chuỗi và cập nhập trạng thái. Nodes chạy 3 phần mềm:</p>
+<ul>
+  <li>Execution client: gộp các Txs từ mempool thành “execution payload” và chạy nó ở local để tạo ra sự thay đổi trạng thái. Thông tin này được chuyển đến consensus client</li>
+  <li>Consensus client: đóng gói payload thành 1 phần của “beacon block” (gồm payload, slashing,…) cho phép mạng thống nhất trình tự về các khối.</li>
+  <li>Validator client: Các node nhận được beacon block qua tầng gossip network. Sau đó chuyển đến Execution client của nó để chạy lại, nhằm chắc chắn trạng thái là đúng. Sau đóm Validator client sẽ chứng thực khối đó hợp lệ và là khối tiếp theo trong góc nhìn của chuỗi (available chain). Khối cũng được thêm vào cơ sở dữ liệu local của các node.</li>
+</ul>
+
+<h4 id="finality">Finality</h4>
+<p>Như đã nói ở trên, các block của available chain luôn extend từ điểm checkpoint cuối cùng. Checkpoint là các block đầu tiên ở mỗi epoch. Các validators có thể vote cho cặp checkpoint (1 epoch), nếu ít nhất 2/3 vote cho nó, cặp checkpoint này sẽ được cập nhập, và các block nằm giữa sẽ được cập nhập thành finalized chain. Nếu chuỗi không thể finalized trong nhiều hơn 4 epoch liên tục, stake ETH từ các validator chống lại đa số sẽ bị biến mất, cho phép đa số chiếm hơn 2/3 và finalized chuỗi.</p>
+
+<h2 id="lời-kết">Lời kết</h2>
+<p>Ở trên là cách hoạt động cơ bản của POS. Mọi người có thể xem thêm các thông tin về POS trong Ethereum tại <a href="https://ethereum.org/vi/developers/docs/consensus-mechanisms/pos/">đây</a>.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu một cơ chế đồng thuận đang được sử dụng rất nhiều trong các blockchain hiện nay, đó là Proof of Stake.]]></summary></entry><entry><title type="html">Đồng thuận trên mạng</title><link href="http://localhost:4000/blog/2023/07/22/dong-thuan-tren-mang" rel="alternate" type="text/html" title="Đồng thuận trên mạng" /><published>2023-07-22T00:00:00+07:00</published><updated>2023-07-22T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/22/dong-thuan-tren-mang</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/22/dong-thuan-tren-mang"><![CDATA[<p>Ở bài trước, ta đã biết rằng các node sẽ tham gia vào giao thức có thể là Adversary và có thể gây hại cho blockchain. Vậy làm cách nào để chọn các node tham gia vào consensus.</p>
 
 <h2 id="bitcoin-mining">Bitcoin Mining</h2>
 <p>Bitcoin chọn các nodes tham gia vào giao thức bằng các sử dụng POW, giải bài toán tìm số nonce (xem chi tiết <a href="http://127.0.0.1:4000/blog/2023/07/20/cau-tao-block-va-pow">tại</a>). 
@@ -620,64 +709,7 @@ Theo phân bố mũ, xác suất để T lớn hơn s bất kì là: P[T &gt; s]
 </ul>
 
 <h2 id="kêt-luận">Kêt luận</h2>
-<p>Nếu mọi người muốn xem chi tiết về cách chứng minh, hãy truy cập vào <a href="https://eprint.iacr.org/2019/943.pdf">đây</a>.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài trước, ta đã biết rằng các node sẽ tham gia vào giao thức có thể là Adversary và có thể gây hại cho blockchain. Vậy làm cách nào để chọn các node tham gia vào consensus.]]></summary></entry><entry><title type="html">Bitcoin Scripts và Ví</title><link href="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet" rel="alternate" type="text/html" title="Bitcoin Scripts và Ví" /><published>2023-07-21T00:00:00+07:00</published><updated>2023-07-21T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/21/bitcoin-scripts-and-wallet</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet"><![CDATA[<p>Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.</p>
-
-<h3 id="một-số-lưu-ý">Một số lưu ý</h3>
-<ul>
-  <li>Các Tx sau khi thêm vào khối sẽ không thể bị xoá, do đó khi Tx nhầm thì sẽ bị khoá hoặc mất tiền.</li>
-  <li>Các TxID là độc nhất, vì Input của chúng là độc nhất. Có trường hợp ngoại lệ là các Coinbase vì chúng không có input. Do đó có thể có trùng TxID. Vì vậy, người ta thường thêm Block Height và mỗi ScriptPk của coinbase.</li>
-</ul>
-
-<h2 id="ví-dụ-về-các-loại-bitcoin-scripts">Ví dụ về các loại Bitcoin Scripts</h2>
-<h3 id="bảo-vệ-tài-sản-với-co-signatory">Bảo vệ tài sản với co-signatory</h3>
-<p>addr = 2 - of - 2 (PkA, PkS) với PkS là của custody server.</p>
-
-<h3 id="escrow-service">Escrow Service</h3>
-<p>Giả định: A muốn mua balo từ B với giá 0.1 BTC, nhưng A chỉ có thể trả tiền khi balo đến, và không thể không trả. Do vậy, addr có dạng: 2-of-3 (PkA, PkB, PkJ).</p>
-
-<p>Cách vận hành:</p>
-<ul>
-  <li>A thông báo cho B rằng muốn mua balo với giá 0.1 BTC</li>
-  <li>A post 1 Tx 0.11 BTC đến addr trên (0.01BTC để đảm bảo A sẽ trả tiền cho B).</li>
-  <li>B khi thấy Tx, gửi balo cho A</li>
-  <li>Khi A nhận, gửi SigA trong Tx trên cho B</li>
-  <li>B sẽ sử dụng SigA và SigB để lấy số tiền mà A gửi lên Addr.</li>
-</ul>
-
-<p>Nếu vi phạm xảy ra:</p>
-<ul>
-  <li>B không đưa balo, A sẽ lấy lại tiền với sự trợ giúp của Judge (PkJ).</li>
-  <li>A không đưa SigA, B sẽ lấy tiền với sự giúp đỡ của Judge, A mất thêm 0.01BTC.</li>
-</ul>
-
-<h2 id="ví">Ví</h2>
-<p>Ví giúp user tạo ra các cặp Pk- Sk, tạo ra và xác minh các Tx, đưa ra số dư mà user có.</p>
-
-<h3 id="giúp-đơn-giản-hoá-xác-minh-thanh-toán">Giúp đơn giản hoá xác minh thanh toán</h3>
-<p>Để xác minh một thanh toán đã thực hiện, ví thường tải các block headers. Sau đó, ví gửi lên server danh sách các địa chỉ mà ví đang nắm giữ. Sau đó, server sẽ gửi về ví các Tx liên quan đến địa chỉ và Merkle Proof của Tx đó. Từ đó giúp ví hiển thị đúng số dư và xác minh Tx.</p>
-
-<h3 id="vấn-dề">Vấn dề</h3>
-<ul>
-  <li>Để giải quyết được yếu tố bảo mật, blockheader sẽ được tải từ 10 servers khác nhau hoặc từ 1 nodes tin cậy.</li>
-  <li>Remote server có thể kiểm tra xem addr gửi lên có thuộc về ví hay không.</li>
-</ul>
-
-<h3 id="các-loại-ví">Các loại ví</h3>
-<h4 id="hot-wallet">Hot wallet</h4>
-<ul>
-  <li>Dạng ví điện tử có kết nối Internet, có nhiều chức năng như lưu trữ, gửi nhận Tx, tokens,…</li>
-  <li>Có thể truy cập từ các thiết bị Internet như máy tính, điện thoại,..</li>
-  <li>Có thể bị hack hoặc xâm nhập bởi các hacker.</li>
-</ul>
-
-<h3 id="cold-wallet">Cold wallet</h3>
-<ul>
-  <li>Không cho phép kết nối Internet.</li>
-  <li>Có thiết bị riêng cho cold wallet, thiết bị này phải được khởi động bất cứ khi nào sử dụng và người dùng phải sao chép vật lý dữ liệu từ online device sang offline và ngược lại.</li>
-</ul>
-
-<h2 id="kết-luận">Kết luận</h2>
-<p>Có nhiều loại Bitcoin Script khác như CrossChain,… được sử dụng rất phổ biến ở hiện tại.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.]]></summary></entry><entry><title type="html">Cơ bản về đồng thuận</title><link href="http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus" rel="alternate" type="text/html" title="Cơ bản về đồng thuận" /><published>2023-07-21T00:00:00+07:00</published><updated>2023-07-21T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus"><![CDATA[<p>Ở bài viết này, chúng ta sẽ tìm hiểu về cách Bitcoin chống lại việc những nodes không trung thực tấn công vào mạng lưới. 
+<p>Nếu mọi người muốn xem chi tiết về cách chứng minh, hãy truy cập vào <a href="https://eprint.iacr.org/2019/943.pdf">đây</a>.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài trước, ta đã biết rằng các node sẽ tham gia vào giao thức có thể là Adversary và có thể gây hại cho blockchain. Vậy làm cách nào để chọn các node tham gia vào consensus.]]></summary></entry><entry><title type="html">Cơ bản về đồng thuận</title><link href="http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus" rel="alternate" type="text/html" title="Cơ bản về đồng thuận" /><published>2023-07-21T00:00:00+07:00</published><updated>2023-07-21T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus"><![CDATA[<p>Ở bài viết này, chúng ta sẽ tìm hiểu về cách Bitcoin chống lại việc những nodes không trung thực tấn công vào mạng lưới. 
 Những nodes không trung thực (Adversary) là những nodes gây hại, chúng có mục đích khiến Blockchain không còn minh bạch và nhẩt quán để dễ dàng thêm vào những giao dịch sai mà có lợi cho chúng.</p>
 
 <h2 id="tác-hại-của-adversary">Tác hại của Adversary</h2>
@@ -776,115 +808,61 @@ Vậy, Streamlet đảm bảo safety<br /></li>
   <li>1 slot để undo các hành động của adversary. <br /></li>
   <li>3 slot để finalize block. <br />
 Ngoài ra, đảm bảo không có 2 block liên tiếp nhau mà chưa được notarized.</li>
-</ul>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, chúng ta sẽ tìm hiểu về cách Bitcoin chống lại việc những nodes không trung thực tấn công vào mạng lưới. Những nodes không trung thực (Adversary) là những nodes gây hại, chúng có mục đích khiến Blockchain không còn minh bạch và nhẩt quán để dễ dàng thêm vào những giao dịch sai mà có lợi cho chúng.]]></summary></entry><entry><title type="html">Cơ chế Bitcoin</title><link href="http://localhost:4000/blog/2023/07/20/co-che-Bitcoin" rel="alternate" type="text/html" title="Cơ chế Bitcoin" /><published>2023-07-20T00:00:00+07:00</published><updated>2023-07-20T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/20/co-che-bitcoin</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/20/co-che-Bitcoin"><![CDATA[<p>Với mỗi Miner, họ sẽ thông thường được connect với 8 người khác. Khi một Tx được gửi đến, Miners sẽ thông báo là nhận được Tx trên mạng P2P. Mọi miners sẽ xác thực rằng Tx đã nhận và lưu vào trong Mempool. Mempool là nơi chứa những Tx đang chờ được xử lý. Các nodes này chia sẻ dữ liệu mempool với nhau bằng cách chuyển tiếp các Tx đã kí với nhau cho đến khi nó được toàn bộ mạng lưới.</p>
+</ul>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, chúng ta sẽ tìm hiểu về cách Bitcoin chống lại việc những nodes không trung thực tấn công vào mạng lưới. Những nodes không trung thực (Adversary) là những nodes gây hại, chúng có mục đích khiến Blockchain không còn minh bạch và nhẩt quán để dễ dàng thêm vào những giao dịch sai mà có lợi cho chúng.]]></summary></entry><entry><title type="html">Bitcoin Scripts và Ví</title><link href="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet" rel="alternate" type="text/html" title="Bitcoin Scripts và Ví" /><published>2023-07-21T00:00:00+07:00</published><updated>2023-07-21T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/21/bitcoin-scripts-and-wallet</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet"><![CDATA[<p>Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.</p>
 
-<h3 id="thời-gian-đóng-các-khối">Thời gian đóng các khối</h3>
-<p>Cứ sau mỗi 10 phút, mỗi miner sẽ tạo 1 block tiềm năng từ các Tx trong mempool của nó. Các Tx được ưu tiên theo phí giao dịch. 1 miner được chọn (sau khi giải được bài toán PoW) sẽ phân tán block đó cho toàn mạng và mọi miner khác sẽ xem được block, sau đó block được đưa vào chuỗi. Phần thưởng là 6.25 BTC. Phần thưởng này được gửi cho miner thông qua coinbase Tx (là Tx đầu tiên trong block chứa địa chỉ ví của miner do ,miner thêm vào).</p>
-
-<h2 id="cấu-trúc-của-một-transaction">Cấu trúc của một Transaction</h2>
-<p>Transaction trong Bitcoin chia làm 2 phần chính là Input và Output.
-Input gồm 3 phần chính:</p>
+<h3 id="một-số-lưu-ý">Một số lưu ý</h3>
 <ul>
-  <li>Previous Tx ID: ID của Tx trước đó mà tạo ra Bitcoin ở Output để sử dụng trong giao dịch hiện tại.</li>
-  <li>Previous Tx index: Vì một Tx có thể có nhiều Output nên index này được sử dụng để xác định output trong Tx trước đó. Danh sách các output được xem như 1 tập hợp bên trong Tx.</li>
-  <li>ScriptSig: Script Signature. Nó mã hoá Public key và chữ kí của người sở hữu Bitcoin ở hiện tại.</li>
+  <li>Các Tx sau khi thêm vào khối sẽ không thể bị xoá, do đó khi Tx nhầm thì sẽ bị khoá hoặc mất tiền.</li>
+  <li>Các TxID là độc nhất, vì Input của chúng là độc nhất. Có trường hợp ngoại lệ là các Coinbase vì chúng không có input. Do đó có thể có trùng TxID. Vì vậy, người ta thường thêm Block Height và mỗi ScriptPk của coinbase.</li>
 </ul>
 
-<p>Output: là những bitcoin mới được khoá với Hash của Public Key của người nhận. Bitcoin sử dụng mô hình UTXO là Bitcoin chỉ có thể sử dụng 1 lần, sau mỗi giao dịch thì bitcoin cũ sẽ bị loại bỏ và một lượng bitcoin mới được tạo ra. Output gồm 2 phần chính:</p>
+<h2 id="ví-dụ-về-các-loại-bitcoin-scripts">Ví dụ về các loại Bitcoin Scripts</h2>
+<h3 id="bảo-vệ-tài-sản-với-co-signatory">Bảo vệ tài sản với co-signatory</h3>
+<p>addr = 2 - of - 2 (PkA, PkS) với PkS là của custody server.</p>
+
+<h3 id="escrow-service">Escrow Service</h3>
+<p>Giả định: A muốn mua balo từ B với giá 0.1 BTC, nhưng A chỉ có thể trả tiền khi balo đến, và không thể không trả. Do vậy, addr có dạng: 2-of-3 (PkA, PkB, PkJ).</p>
+
+<p>Cách vận hành:</p>
 <ul>
-  <li>Value: Số lượng bitcoin mà được gửi cho người nhận. (Min: 1 satoshi = 10^-8 BTC)</li>
-  <li>ScriptPubKey: Là một dãy các chỉ dẫn (Như 1 hàm) mà nhận ScriptSig là Input và trả về True nếu người sở hữu hợp lệ mở khoá Bitcoin này. Ngược lại, nó trả về false.</li>
+  <li>A thông báo cho B rằng muốn mua balo với giá 0.1 BTC</li>
+  <li>A post 1 Tx 0.11 BTC đến addr trên (0.01BTC để đảm bảo A sẽ trả tiền cho B).</li>
+  <li>B khi thấy Tx, gửi balo cho A</li>
+  <li>Khi A nhận, gửi SigA trong Tx trên cho B</li>
+  <li>B sẽ sử dụng SigA và SigB để lấy số tiền mà A gửi lên Addr.</li>
 </ul>
 
-<p>Một giao dịch có thể có nhiều Input và Output. Các input có thể từ nhiều user (gọi là MultiSig Tx), các output có thể đến nhiều user.</p>
-
-<p>Ngoài ra, trong Tx còn có 2 phần khác là segwit và locktime.</p>
-
-<h3 id="miner-xác-minh-một-tx-như-thế-nào">Miner xác minh một Tx như thế nào</h3>
-<p>Một Tx thoả mãn khi:</p>
+<p>Nếu vi phạm xảy ra:</p>
 <ul>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>ScriptSig</td>
-          <td>ScriptPK trả về True. Tức là với điều kiện nào thì UTXO có thể được tiêu.</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>TxID</td>
-          <td>index: hiện ở trong tập các UTXO</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>tổng Input values &gt; tổng Output values: Không thể tiêu nhiều hơn số tiền đang có.
-Sau khi 1 Tx được post lên, miners sẽ xoá UTXO tương ứng của nó trong tập.</li>
+  <li>B không đưa balo, A sẽ lấy lại tiền với sự trợ giúp của Judge (PkJ).</li>
+  <li>A không đưa SigA, B sẽ lấy tiền với sự giúp đỡ của Judge, A mất thêm 0.01BTC.</li>
 </ul>
 
-<h2 id="các-loại-tx">Các loại Tx</h2>
-<h3 id="pay-to-public-key-hash-p2pkh">Pay to public key hash (P2PKH)</h3>
-<p>Trước tiên, mọi người cần hiểu về một số op codes hoạt động trong Bitcoin Script ở <a href="https://wiki.bitcoinsv.io/index.php/Opcodes_used_in_Bitcoin_Script">đây</a>. 
-Giả sử Alice muốn gửi cho Bob 5BTC. Alice và Bob sẽ làm các bước sau:</p>
-<ul>
-  <li>Bob tạo sig : gọi Gen():  (pkB, skB)</li>
-  <li>Bob tính địa chỉ bitcoin của mình bằng: addrB = H(pkB)</li>
-  <li>Bob gửi addrB cho Alice</li>
-  <li>
-    <p>Alice tạo giao dịch Tx-fund với Output[0] là: UTXO[0]: 5, ScriptPkB với ScriptPkB là:</p>
+<h2 id="ví">Ví</h2>
+<p>Ví giúp user tạo ra các cặp Pk- Sk, tạo ra và xác minh các Tx, đưa ra số dư mà user có.</p>
 
-    <p>DUP  HASH256  «addrB»  EQVERIFY  CHECKSIG</p>
-  </li>
+<h3 id="giúp-đơn-giản-hoá-xác-minh-thanh-toán">Giúp đơn giản hoá xác minh thanh toán</h3>
+<p>Để xác minh một thanh toán đã thực hiện, ví thường tải các block headers. Sau đó, ví gửi lên server danh sách các địa chỉ mà ví đang nắm giữ. Sau đó, server sẽ gửi về ví các Tx liên quan đến địa chỉ và Merkle Proof của Tx đó. Từ đó giúp ví hiển thị đúng số dư và xác minh Tx.</p>
+
+<h3 id="vấn-dề">Vấn dề</h3>
+<ul>
+  <li>Để giải quyết được yếu tố bảo mật, blockheader sẽ được tải từ 10 servers khác nhau hoặc từ 1 nodes tin cậy.</li>
+  <li>Remote server có thể kiểm tra xem addr gửi lên có thuộc về ví hay không.</li>
 </ul>
 
-<p>còn ở Input, Alice có ScriptSig để xác thực Bitcoin của Alice có chứa chữ ký của Alice lên Tx này, khiến cho không ai có quyền thay đổi ScriptPkB.</p>
-
-<p>Sau đó, Bob muốn sử dụng UTXO[0] thì sẽ tạo 1 Tx-spend với ScriptSigB trong input, bao gồm «sig» và «pkB» với Sig = Sig(skB, Tx) (Tx này là Tx-spend nhưng không chứa các ScriptSig).</p>
-
-<p>Miner có thể xác thực ScriptSigB|ScriptPkB = true và cho phép B sử dụng số tiền.
-Một số lưu ý như:</p>
+<h3 id="các-loại-ví">Các loại ví</h3>
+<h4 id="hot-wallet">Hot wallet</h4>
 <ul>
-  <li>Người nhận (Bob) không thể tiết lộ PkB cho đến khi UTXO được dùng (vì bảo mật).</li>
-  <li>Vì tránh việc tấn công bằng cách thay đổi Sig, Sig được chuyển vào phần witness và TxID được tính bằng:               TxID = H(Tx không chứa witness).</li>
+  <li>Dạng ví điện tử có kết nối Internet, có nhiều chức năng như lưu trữ, gửi nhận Tx, tokens,…</li>
+  <li>Có thể truy cập từ các thiết bị Internet như máy tính, điện thoại,..</li>
+  <li>Có thể bị hack hoặc xâm nhập bởi các hacker.</li>
 </ul>
 
-<h3 id="pay-to-script-hash-p2sh">Pay to script hash (P2SH)</h3>
-<p>Người nhận (Bob) thay vì tạo address là H(pkB) thì tạo 1 redeem script, sau đó gán địa chỉ để người gửi (Alice) chuyển qua thành H(redeem script).
-Ví dụ:</p>
+<h3 id="cold-wallet">Cold wallet</h3>
 <ul>
-  <li>ScriptPK ở UTXO: HASH160   «H(redeem script)»  EQUAL</li>
-  <li>ScriptSig để tiêu: {sig1 , sig2, …, sign, redeem script}
-Từ đây, người gửi (Alice) có thể thêm các điều kiện phức tạp để xác định khi nào người nhận (Bob) có thể tiêu.</li>
-</ul>
-
-<p>Reedem Script: là các điều kiện thoả mãn để có thể sử dụng UTXO như: số chữ kí tối thiểu, thời gian,…</p>
-
-<p>Các miner xác minh bằng cách:</p>
-<ul>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>ScriptSig</td>
-          <td>ScriptPk = true: Bob gửi đúng script.</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>ScriptSig = true: script là thoả mãn (tức là sẽ tồn tại điều kiện để Bob có thể dùng UTXO).</li>
-</ul>
-
-<h4 id="ví-dụ-multisig">Ví dụ: MultiSig</h4>
-<p>Muốn dùng UTXO thì cần t/n chữ kí. Ví dụ với 2 / 3 chữ kí. Redeem Script và ScriptSig được viết như sau:</p>
-<ul>
-  <li>Redeem Script: 	2, PK1, PK2, PK3, 3, CHECKMULTISIG</li>
-  <li>ScriptSig: 0, sig1, sig3, redeem script</li>
+  <li>Không cho phép kết nối Internet.</li>
+  <li>Có thiết bị riêng cho cold wallet, thiết bị này phải được khởi động bất cứ khi nào sử dụng và người dùng phải sao chép vật lý dữ liệu từ online device sang offline và ngược lại.</li>
 </ul>
 
 <h2 id="kết-luận">Kết luận</h2>
-<p>Ngoài những dạng Tx ở trên, sẽ có nhiều dạng Tx khác được sử dụng ở trong nhiều trường hợp cụ thể.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Với mỗi Miner, họ sẽ thông thường được connect với 8 người khác. Khi một Tx được gửi đến, Miners sẽ thông báo là nhận được Tx trên mạng P2P. Mọi miners sẽ xác thực rằng Tx đã nhận và lưu vào trong Mempool. Mempool là nơi chứa những Tx đang chờ được xử lý. Các nodes này chia sẻ dữ liệu mempool với nhau bằng cách chuyển tiếp các Tx đã kí với nhau cho đến khi nó được toàn bộ mạng lưới.]]></summary></entry></feed>
+<p>Có nhiều loại Bitcoin Script khác như CrossChain,… được sử dụng rất phổ biến ở hiện tại.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.]]></summary></entry></feed>
