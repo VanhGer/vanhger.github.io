@@ -1,4 +1,149 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-18T15:41:08+07:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Mở rộng Blockchain (Phần 1)</title><link href="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1" rel="alternate" type="text/html" title="Mở rộng Blockchain (Phần 1)" /><published>2023-08-18T00:00:00+07:00</published><updated>2023-08-18T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1"><![CDATA[<p>Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-19T10:15:07+07:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Mở rộng Blockchain (Phần 2)</title><link href="http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2" rel="alternate" type="text/html" title="Mở rộng Blockchain (Phần 2)" /><published>2023-08-19T00:00:00+07:00</published><updated>2023-08-19T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2"><![CDATA[<p>Trong bài viết hôm nay, mình sẽ giới thiệu đến mọi người một kĩ thuật giúp tăng tốc độ các Tx trong mạng blockchain. Đó là Rollups.</p>
+
+<h2 id="ý-tưởng">Ý tưởng</h2>
+<p>Trong layer-1 của blockchain như Ethereum chứa world state. Khi một giao dịch được đưa vào, world state sẽ bị thay đổi. Từ đây, ý tưởng cơ bản của Rollup là hợp hàng trăm Tx lại thành một Tx duy nhất, từ đó giúp tăng tốc độ lên khoảng 100 lần.</p>
+
+<p>Ta có hình minh hoạ như sau:</p>
+
+<p>Từ đây, ta gọi Rollup state là L2, để phân biệt với L1 (layer-1 của blockchain). <br />
+Rollup contract ở L1 sẽ giữ các tài sản và Merkle state root của các Rollup account. Rollup state chỉ bao gồm số dư của các Rollup account.</p>
+
+<p>/// hình ảnh</p>
+
+<h2 id="hiệu-năng">Hiệu năng</h2>
+<p><strong> Chuyển tiền trong 1 Rollup </strong></p>
+<ul>
+  <li>Chuyển tiền trong 1 Rollup (L2 -&gt; L2) rất dễ dàng. Các coordinators chỉ cần cập nhập lại Merkle Root của Rollup Contract trên L1 là xong.</li>
+</ul>
+
+<p><strong> Chuyển tiền từ funds đến Rollup </strong></p>
+<ul>
+  <li>Chuyển tiền từ funds đến Rollup (L1 -&gt; L2) thì chậm và đắt. Lý do vì cần phải update các state trong L1, số dư trong contract và cả trong Rollup và cập nhập lại Root của contract đó.</li>
+</ul>
+
+<p><strong> Chuyển tiền ra khỏi Rollup </strong></p>
+<ul>
+  <li>Chuyển tiền ra khỏi Rollup cần phí gas thêm từ L1 trong quá trình chuyển vì cần post nhiều dữ liệu.</li>
+</ul>
+
+<p><strong> Chuyển tiền từ 2 Rollup </strong></p>
+<ul>
+  <li>Nếu chuyển tiền từ 2 Rollup (L2 -&gt; L2’) mà qua L1 thì sẽ rất đắt, nhưng nếu qua 1 cầu trực tiếp L2 &lt;=&gt; L2 thì sẽ rẻ.</li>
+</ul>
+
+<h3 id="chạy-contract-trong-rollup">Chạy contract trong Rollup</h3>
+<p>Khi contract chạy trong Rollup (Ví dụ Uniswap), thì việc tương tác với contract đó sẽ rẩt rẻ cho người dùng. <br />
+<strong> Coordinator </strong> duy trì trạng thái của tất cả contracts trong hệ thống Rollup:</p>
+<ul>
+  <li>Nó cập nhập Uniswap Merkle Leaf mỗi khi 1 Tx nào đó đến Uniswap</li>
+  <li>Ghi update cho Rollup state root trên L1.</li>
+</ul>
+
+<p>Rollup có chức năng giống Ethereum, nhưng không có cơ chế đồng thuận vì nó dựa vào L1 để chứng thực trạng thái hiện tại.</p>
+
+<h2 id="các-vấn-đề">Các vấn đề</h2>
+<p><strong> Vấn đề 1 </strong>: Điều gì xảy ra nếu Coordinator không trung thực. Nó có thể lấy hết tiền trong Rollup hoặc tạo các giao dịch giả.</p>
+
+<p><strong> Vấn đề 2 </strong>: Nếu Coordinator ngừng cung cấp dịch vụ ? Làm sao để lấy lại trạng thái Rollup để đưa cho Coordinator mới.</p>
+
+<h2 id="các-phương-án-giải-quyết">Các phương án giải quyết</h2>
+<h3 id="vấn-đề-1-coordinator-không-trung-thực">Vấn đề 1: Coordinator không trung thực</h3>
+<p>Coordinator không thể lấy tiền từ Rollup users, vì L1 sẽ xác minh update trạng thái của Rollup bằng cách kiểm tra xem tất cả các Tx có valid và được ký hợp lệ bởi người dùng hay không. <br />
+Để làm điều này một cách rẻ, có thể có các cách tiếp cận sau:</p>
+
+<h4 id="validity-proofs-còn-gọi-là-zk-rollup">Validity Proofs (còn gọi là zk-Rollup)</h4>
+<p>Khi coordinator gửi updated root và Tx List cho L1, nó cần gửi kèm theo một SNARK proof cho valid Tx để chứng minh tập hàng trăm các Tx này là hợp lệ. <br />
+<strong> SNARK proof </strong> là loại proof ngắn và nhanh để xác minh, từ đó giúp việc xác minh trên L1 trở nên rẻ. (với sự giúp đỡ của EVM)  <br />
+Bao gồm:</p>
+<ul>
+  <li>Public statement:   (old state root,  new state root,  Tx list)</li>
+  <li>Witness: (state trước - sau của những tài khoản bị thay đổi, bằng chứng Merkle, chữ kí của user)</li>
+  <li>SNARK proof sẽ chứng minh rằng:
+    <ul>
+      <li>Tất cả chữ ký trên đều valid</li>
+      <li>Tất cả bằng chứng Merkle đều valid</li>
+      <li>Trạng thái sau = trạng thái trước + Tx.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong> zkEVM </strong>  <br />
+Khi một contract (Uniswap) chạy trong Rollup:</p>
+<ul>
+  <li>Coordinator sẽ tạo 1 SNARK proof về việc thực hiện đúng 1 chương trình EVM. Đó gọi là zkEVM.</li>
+  <li>Tạo bằng chứng thì sẽ yêu cầu rất cao về tính toán nhưng khi xác minh thì lại rất nhanh.</li>
+</ul>
+
+<p>Có 2 chức năng của zkEVM là:</p>
+<ul>
+  <li>Chứng minh EVM bytecode chạy đúng</li>
+  <li>Biên dịch Solidity to SNARK-friendly circuit.</li>
+</ul>
+
+<p><strong> Kết quả </strong></p>
+<ul>
+  <li>Rollup contract đảm bảo coordinator không thể gian lận và sẽ chấp nhận các update nếu có proof phù hợp</li>
+  <li>Ai cũng có thể làm coordinator nếu có đủ sức mạnh tính toán</li>
+</ul>
+
+<h4 id="fraud-proof-còn-gọi-là-optimistic-rollup">Fraud proof (còn gọi là Optimistic Rollup)</h4>
+<ul>
+  <li>Coordinator sẽ stake 1 khoản vào L1 Rollup Contract</li>
+  <li>Coordinator sẽ đưa updated root lên L1 mà không cần bằng chứng</li>
+  <li>Nếu update không valid, trong vòng 7 ngày ai cũng có thể chứng minh điều này bằng việc gửi fraud proof.</li>
+  <li>Nếu fraud proof là đúng, coordinator sẽ bị Slash, ngược lại người gửi proof sẽ tốn phí.</li>
+</ul>
+
+<p>Để chứng minh Fraud đến Rollup contract trong L1, ta sẽ sử dụng Binary Search. <br />
+Việc Coordinator và Người gửi Proof (A) tạo ra state(n) và state(n’) khác nhau buộc L1 cần kiểm tra xem ai mới là người đúng. Do đó, sử dụng Merkle tree và tìm kiếm nhị phân, với việc chia đôi từ state(n/2), state(n/4)… có thể dễ dàng tìm được xem state nào bị sai sau Log2(n) round.</p>
+
+<p>Tuy nhiên, cách này gặp 1 số khó khăn như:</p>
+<ul>
+  <li>Giao dịch chỉ giải quyết sau 7 ngày (Sau khi hết hạn gian lận)</li>
+  <li>Khi 1 bằng chứng Fraud được chấp nhận, các Tx sau phải được gửi lại</li>
+</ul>
+
+<p><strong> Kết quả </strong></p>
+<ul>
+  <li>Có thể dễ dàng đưa smartcontract vào optimistic Rollup</li>
+  <li>Thông lượng Tx cao: ~ 4000Tx / s</li>
+  <li>Ai cũng có thể làm coordinator và verifier</li>
+  <li>Giải quyết giao dịch chậm 7 ngày.</li>
+</ul>
+
+<h3 id="vấn-đề-2-coordinator-ngừng-cung-cấp-dịch-vụ">Vấn đề 2: Coordinator ngừng cung cấp dịch vụ</h3>
+<p>Cần tạo Coordinator mới, nhưng lại cần trạng thái mới nhất của Rollup.</p>
+
+<p>Ta thấy, Rollup state có thể phục hồi từ dữ liệu trong L1 bằng việc đọc các msg và re-excecute Tx. Nhưng việc này sẽ rất đắt vì tương tác nhiều trên L1 và cần nhiều dữ liệu.</p>
+
+<p>Để giảm Tx fees:</p>
+<ul>
+  <li>Lưu L2 state root trong L1</li>
+  <li>Lưu Tx data với Data Availability Committee (DAC):
+    <ul>
+      <li>Gồm tập hợp các node tin cậy giữ cho data available</li>
+      <li>Rẻ hơn lưu ở L1</li>
+      <li>L1 chấp nhận update khi và chỉ khi tất cả các node trong DAC đều kí. Từ đó giúp đảm bảo các member trong DAC đều chấp nhập dữ liệu Tx.</li>
+    </ul>
+  </li>
+  <li>Tạo 1 coordinator mới phụ thuộc vào tính khả dụng của DAC</li>
+</ul>
+
+<h4 id="validium">Validium</h4>
+<p>1 L2 sử dụng DAC để lưu trữ và Validity proof (SNARKs):</p>
+<ul>
+  <li>Phù hợp cho tài sản giá trị thấp</li>
+  <li>Chỉ các thành viên DAC mới thấy được dữ liệu</li>
+</ul>
+
+<h4 id="điều-gì-xảy-ra-nếu-coordinator-từ-chối-1-tx">Điều gì xảy ra nếu Coordinator từ chối 1 Tx</h4>
+<ul>
+  <li>Người tạo có thể post Tx trực tiếp lên L1 Rollup contract.</li>
+  <li>L1 Rollup contract chỉ chấp nhận update khi mà update có cả Tx trên. Từ đó dẫn đến toàn bộ Rollup bị đóng băng.</li>
+</ul>
+
+<h2 id="lời-kết">Lời kết</h2>
+<p>Ở trên đây là các cách được áp dụng để tăng tốc độ Tx trong blockchain.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Trong bài viết hôm nay, mình sẽ giới thiệu đến mọi người một kĩ thuật giúp tăng tốc độ các Tx trong mạng blockchain. Đó là Rollups.]]></summary></entry><entry><title type="html">Mở rộng Blockchain (Phần 1)</title><link href="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1" rel="alternate" type="text/html" title="Mở rộng Blockchain (Phần 1)" /><published>2023-08-18T00:00:00+07:00</published><updated>2023-08-18T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1"><![CDATA[<p>Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.</p>
 
 <h2 id="payment-channel-ý-tưởng-cơ-bản">Payment Channel: Ý tưởng cơ bản</h2>
 <p>A và B đang muốn giao dịch với nhau. A gửi cho B 5 lần, mỗi lần là 0.01 BTC, là 5 Txs. Thay vì làm như thế, có thể làm như sau: A gửi cho B 1BTC. Sau 1 khoảng thời gian (ví dụ 1 tháng), B sẽ trả lại số BTC dư mà chưa dùng. Vậy số giao dịch chỉ giới hạn đến 2.</p>
@@ -87,7 +232,7 @@ Onchain: A: 0.3,    B: 0.7,     Nonce: 7. <br /></p>
 <p>Nhiều open payment channel 2 chiều. Khi A muốn tạo kênh với B thì chỉ cần tìm tuyến đường qua đồ thị với đỉnh là các trung gian.</p>
 
 <h2 id="kết-luận">Kết luận</h2>
-<p>Đây là cách tiếp cận đầu tiên để tăng lượng Tx trong 1sec. Ở bài viết sau, mình sẽ giới thiệu các khác giúp giải quyết vấnd dề này.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.]]></summary></entry><entry><title type="html">Hệ thống vay DeFi</title><link href="http://localhost:4000/blog/2023/08/17/defi-lending-system" rel="alternate" type="text/html" title="Hệ thống vay DeFi" /><published>2023-08-17T00:00:00+07:00</published><updated>2023-08-17T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/17/defi-lending-system</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/17/defi-lending-system"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì.</p>
+<p>Đây là cách tiếp cận đầu tiên để tăng tốc độ các Tx trong blockchain. Ở bài viết sau, mình sẽ giới thiệu một kĩ thuật khác giúp giải quyết vấn đề này.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.]]></summary></entry><entry><title type="html">Hệ thống vay DeFi</title><link href="http://localhost:4000/blog/2023/08/17/defi-lending-system" rel="alternate" type="text/html" title="Hệ thống vay DeFi" /><published>2023-08-17T00:00:00+07:00</published><updated>2023-08-17T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/17/defi-lending-system</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/17/defi-lending-system"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì.</p>
 
 <h2 id="vay-trong-hệ-thống-tập-trung">Vay trong hệ thống tập trung</h2>
 <p>Vì sao cần vay? Có các lý do chính như sau:</p>
@@ -315,76 +460,7 @@ Giá p 1ETH = 62.5 DAI, giảm 37.5 so với ban đầu.</p>
 Lí do là vì giá trị p của thanh khoản sẽ chỉ ở trong 1 khoảng nhất định (Ví dụ DAI chỉ ở trong khoảng từ (0.95 ~ 1.05) USD). Do đó, khi PL cung cấp thanh khoản ở khoảng từ (0, ∞) thì hiệu quả sử dụng vốn của họ sẽ không được cao. Do đó, ở mỗi số sàn giao dịch, việc thanh khoản tập trung trông 1 khoảng hữu hạn là 1 vị trí. Vị trí này cần duy trì đủ dữ trữ để hỗ trợ giao dịch trong phạm vi của nó. Từ đó khiến nó hoạt động như một constant product pool với dự trữ lớn hơn trong khoảng đó. Từ đó việc sử dụng vốn sẽ có hiệu quả hơn.</p>
 
 <h2 id="kết-luận">Kết luận</h2>
-<p>Về cách các loại sàn hoạt động, mọi người có thể xem ở các whitePaper, ví dụ với <a href="https://uniswap.org/whitepaper.pdf">Uniswap</a> .</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Khái niệm]]></summary></entry><entry><title type="html">Solidity và State Trie</title><link href="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie" rel="alternate" type="text/html" title="Solidity và State Trie" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/solidity-va-state-trie</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie</p>
-
-<h2 id="solidity">Solidity</h2>
-<p>Solidity là ngôn ngữ lập trình cho Blockchain Ethereum, là ngôn ngữ hướng đối tượng, cấp cao để triển khai các smartcontracts. Smartcontract là chương trình chi phối các hành vi của Account trong Ethereum State. Account contract được tạo ra khi chạy một smartcontract. Mọi người có thể đọc account contract state ở trong storage array, nên không bao giờ được lưu trữ các bí mật trong contract.</p>
-
-<p>Một số dạng biến của Solidity như: uint256, address(byte 32), bool,… Các loại tham chiếu là mảng, struct, string, map,… Khi một giao dịch đi từ A ⇾ B ⇾ C ⇾ D thì tại D, msg.sender là C, nhưng tx.origin là A.</p>
-
-<p>ERC20 là API tiêu chuẩn cho fungible token, cung cấp các chức năng cơ bản để chuyển token hoặc cho phép token được sử dụng bởi bên thứ 3.</p>
-
-<p>Các kiểu lưu trữ:</p>
-<ul>
-  <li>Stack variables: Rẻ để sử dụng, phù hợp với mọi loại dữ liệu (không qua 32 bytes)</li>
-  <li>Calldata: Là 1 mảng byte chỉ đọc, tốn gas</li>
-  <li>Memory: 1 byte mảng, rẻ, nhưng chi phí tăng theo cấp số nhân, lưu được dữ liệu &gt; 32 bytes</li>
-  <li>Storage: Đắt, mappings và các biến state lưu trong này.</li>
-  <li>Event logs: rẻ, không cần truy cập đến contract.</li>
-</ul>
-
-<p>Ở trên là một số hiểu biết của mình về solidity, về mặt coding, mọi người nên xem ở <a href="https://docs.soliditylang.org/en/latest/">đây</a>.</p>
-
-<h2 id="state-trie-ethereum-state-trie">State trie (Ethereum state trie)</h2>
-<p>Hình ảnh đây là cấu trúc được tạo bởi các loại State trong Ethereum: (ở góc phải dưới hình ảnh)</p>
-
-<p><img src="https://i.stack.imgur.com/afWDt.jpg" width="900" height=" 600" /></p>
-
-<p>Có 3 loại state chính là World state, Transaction, và Transaction Receipt.</p>
-
-<h3 id="world-state-trie">World State Trie</h3>
-<p>World State Trie Là mapping giữa địa chỉ và Account State. Nó được update bởi các Tx, và lưu trữ mọi thông tin về accounts và có thể lấy được qua các truy vấn.
-Trong World State Trie có Account Storage Trie, nơi các dữ liệu liên kết với account được lưu trữ. Nó chỉ liên quan đến các contract account và mọi dữ liệu được ánh xạ giữa các số nguyên 32 byte.</p>
-
-<p>Account State là các thông tin về một Ethereum account, như balance, nonce, storage Root, codehash,… và là lá của World State Trie.</p>
-
-<h3 id="transaction-trie">Transaction Trie</h3>
-<p>Transaction Trie lưu trữ các Tx trong Ethereum. Khi các Tx lưu trữ trong block, nó không thể bị thay đổi. Nó được xây dựng theo cấu trúc Modified Merkel Patricia Trie, và chỉ có node root mới được đưa vào trong block.</p>
-
-<h3 id="transaction-receipt-triereceipt-trie">Transaction Receipt Trie(Receipt Trie)</h3>
-<p>Transaction Receipt Trie lưu trữ đầu ra của các Txs. Đầu ra là kết quả của một Tx mà được chạy thành công, bao gồm H(Txs), block number, gas Used, địa chỉ của contract.</p>
-
-<h3 id="ví-dụ-cấu-trúc-của-world-state-một-cách-đơn-giản">Ví dụ cấu trúc của World State (một cách đơn giản)</h3>
-<p>Để đơn giản, ta giả sử các node lá của World State Trie chỉ bao gồm địa chỉ là số dư theo cặp Key - Value. 
-Các loại thông tin:</p>
-<ul>
-  <li>Leaf Node: node lá của cây, chứa các trạng thái của 1 tài khoản có địa chỉ là Key</li>
-  <li>Branch Node: gồm 16 ô, là các tiền tố của Key.</li>
-  <li>Extension Node: node chỉ có 1 child</li>
-  <li>Nibble: Là phần chung trong Key, 1 Nibble = 4 bits, lưu trong keyend hoặc shared nibble.</li>
-  <li>Prefixes:
-    <ul>
-      <li>0: extension node có số chẵn Nibble</li>
-      <li>1: extension node có số lẻ Niblle</li>
-      <li>2: leaf node, có số chẵn Nibble</li>
-      <li>3: leaf node, có số lẻ Nibble.</li>
-    </ul>
-  </li>
-</ul>
-
-<p>Minh Hoạ:
-World State Trie với 4 cặp Key - Value như sau:</p>
-<ul>
-  <li>a711355: 45 ETH</li>
-  <li>a77d337: 1 WEI</li>
-  <li>a7f9365: 1.1 ETH</li>
-  <li>a77d397: 0.12 ETH</li>
-</ul>
-
-<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SiSYWqaPcJtBlnFR4VAaug.png" /></p>
-
-<h2 id="kêt-luận">Kêt luận</h2>
-<p>Ở trên là một số khái niệm sơ bộ về Solidity và cấu trúc của Ethereum, cụ thể về các State Trie.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie]]></summary></entry><entry><title type="html">Stablecoins</title><link href="http://localhost:4000/blog/2023/07/24/stable-coins" rel="alternate" type="text/html" title="Stablecoins" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/stable-coins</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/stable-coins"><![CDATA[<p>Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.</p>
+<p>Về cách các loại sàn hoạt động, mọi người có thể xem ở các whitePaper, ví dụ với <a href="https://uniswap.org/whitepaper.pdf">Uniswap</a> .</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Khái niệm]]></summary></entry><entry><title type="html">Stablecoins</title><link href="http://localhost:4000/blog/2023/07/24/stable-coins" rel="alternate" type="text/html" title="Stablecoins" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/stable-coins</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/stable-coins"><![CDATA[<p>Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.</p>
 
 <h2 id="custodial-stablecoin-stablecoin-kí-gửi">Custodial Stablecoin: Stablecoin kí gửi</h2>
 <p>Custodian giữ kho bạc trong 1 ngân hàng truyền thống, mọi giao dịch đều thông qua nó. Ngoài ra, nó có quyền mạnh mẽ như kiểm duyệt khác hàng rút tiền hoặc xoá số dư người dùng. Điều này sẽ nguy hiểm nếu chẳng may bị hack hoặc nhầm lẫn và không đảm bảo sự phi tập trung. Do đó, cách này không được ưu tiên và sử dụng ở thực tế.</p>
@@ -470,7 +546,76 @@ Bất kì ai giữ DAI có thể khoá DAI của mình trong MakerDAO contract. 
 <h3 id="nft-cost-issue">NFT cost issue:</h3>
 <p>Đa phần các NFT đều có giá cao, do đó muốn sở hữu thì có thể thuê hoặc tiết kiệm. Sẽ khó bắt đầu kinh doanh NFT nếu không có tiền mặt hoặc nguồn cung cấp đủ lớn.</p>
 
-<p>Một số dịch vụ dựa trên NFTs như: Gameing guild (các item trong game: NFTs), EveryRealm (Bất động sản ảo), Credit Provider,…</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.]]></summary></entry><entry><title type="html">Cơ chế Ethereum</title><link href="http://localhost:4000/blog/2023/07/23/ethereum-mechanics" rel="alternate" type="text/html" title="Cơ chế Ethereum" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/ethereum-mechanics</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/ethereum-mechanics"><![CDATA[<p>Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội</p>
+<p>Một số dịch vụ dựa trên NFTs như: Gameing guild (các item trong game: NFTs), EveryRealm (Bất động sản ảo), Credit Provider,…</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.]]></summary></entry><entry><title type="html">Solidity và State Trie</title><link href="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie" rel="alternate" type="text/html" title="Solidity và State Trie" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/solidity-va-state-trie</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie</p>
+
+<h2 id="solidity">Solidity</h2>
+<p>Solidity là ngôn ngữ lập trình cho Blockchain Ethereum, là ngôn ngữ hướng đối tượng, cấp cao để triển khai các smartcontracts. Smartcontract là chương trình chi phối các hành vi của Account trong Ethereum State. Account contract được tạo ra khi chạy một smartcontract. Mọi người có thể đọc account contract state ở trong storage array, nên không bao giờ được lưu trữ các bí mật trong contract.</p>
+
+<p>Một số dạng biến của Solidity như: uint256, address(byte 32), bool,… Các loại tham chiếu là mảng, struct, string, map,… Khi một giao dịch đi từ A ⇾ B ⇾ C ⇾ D thì tại D, msg.sender là C, nhưng tx.origin là A.</p>
+
+<p>ERC20 là API tiêu chuẩn cho fungible token, cung cấp các chức năng cơ bản để chuyển token hoặc cho phép token được sử dụng bởi bên thứ 3.</p>
+
+<p>Các kiểu lưu trữ:</p>
+<ul>
+  <li>Stack variables: Rẻ để sử dụng, phù hợp với mọi loại dữ liệu (không qua 32 bytes)</li>
+  <li>Calldata: Là 1 mảng byte chỉ đọc, tốn gas</li>
+  <li>Memory: 1 byte mảng, rẻ, nhưng chi phí tăng theo cấp số nhân, lưu được dữ liệu &gt; 32 bytes</li>
+  <li>Storage: Đắt, mappings và các biến state lưu trong này.</li>
+  <li>Event logs: rẻ, không cần truy cập đến contract.</li>
+</ul>
+
+<p>Ở trên là một số hiểu biết của mình về solidity, về mặt coding, mọi người nên xem ở <a href="https://docs.soliditylang.org/en/latest/">đây</a>.</p>
+
+<h2 id="state-trie-ethereum-state-trie">State trie (Ethereum state trie)</h2>
+<p>Hình ảnh đây là cấu trúc được tạo bởi các loại State trong Ethereum: (ở góc phải dưới hình ảnh)</p>
+
+<p><img src="https://i.stack.imgur.com/afWDt.jpg" width="900" height=" 600" /></p>
+
+<p>Có 3 loại state chính là World state, Transaction, và Transaction Receipt.</p>
+
+<h3 id="world-state-trie">World State Trie</h3>
+<p>World State Trie Là mapping giữa địa chỉ và Account State. Nó được update bởi các Tx, và lưu trữ mọi thông tin về accounts và có thể lấy được qua các truy vấn.
+Trong World State Trie có Account Storage Trie, nơi các dữ liệu liên kết với account được lưu trữ. Nó chỉ liên quan đến các contract account và mọi dữ liệu được ánh xạ giữa các số nguyên 32 byte.</p>
+
+<p>Account State là các thông tin về một Ethereum account, như balance, nonce, storage Root, codehash,… và là lá của World State Trie.</p>
+
+<h3 id="transaction-trie">Transaction Trie</h3>
+<p>Transaction Trie lưu trữ các Tx trong Ethereum. Khi các Tx lưu trữ trong block, nó không thể bị thay đổi. Nó được xây dựng theo cấu trúc Modified Merkel Patricia Trie, và chỉ có node root mới được đưa vào trong block.</p>
+
+<h3 id="transaction-receipt-triereceipt-trie">Transaction Receipt Trie(Receipt Trie)</h3>
+<p>Transaction Receipt Trie lưu trữ đầu ra của các Txs. Đầu ra là kết quả của một Tx mà được chạy thành công, bao gồm H(Txs), block number, gas Used, địa chỉ của contract.</p>
+
+<h3 id="ví-dụ-cấu-trúc-của-world-state-một-cách-đơn-giản">Ví dụ cấu trúc của World State (một cách đơn giản)</h3>
+<p>Để đơn giản, ta giả sử các node lá của World State Trie chỉ bao gồm địa chỉ là số dư theo cặp Key - Value. 
+Các loại thông tin:</p>
+<ul>
+  <li>Leaf Node: node lá của cây, chứa các trạng thái của 1 tài khoản có địa chỉ là Key</li>
+  <li>Branch Node: gồm 16 ô, là các tiền tố của Key.</li>
+  <li>Extension Node: node chỉ có 1 child</li>
+  <li>Nibble: Là phần chung trong Key, 1 Nibble = 4 bits, lưu trong keyend hoặc shared nibble.</li>
+  <li>Prefixes:
+    <ul>
+      <li>0: extension node có số chẵn Nibble</li>
+      <li>1: extension node có số lẻ Niblle</li>
+      <li>2: leaf node, có số chẵn Nibble</li>
+      <li>3: leaf node, có số lẻ Nibble.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Minh Hoạ:
+World State Trie với 4 cặp Key - Value như sau:</p>
+<ul>
+  <li>a711355: 45 ETH</li>
+  <li>a77d337: 1 WEI</li>
+  <li>a7f9365: 1.1 ETH</li>
+  <li>a77d397: 0.12 ETH</li>
+</ul>
+
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SiSYWqaPcJtBlnFR4VAaug.png" /></p>
+
+<h2 id="kêt-luận">Kêt luận</h2>
+<p>Ở trên là một số khái niệm sơ bộ về Solidity và cấu trúc của Ethereum, cụ thể về các State Trie.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie]]></summary></entry><entry><title type="html">Cơ chế Ethereum</title><link href="http://localhost:4000/blog/2023/07/23/ethereum-mechanics" rel="alternate" type="text/html" title="Cơ chế Ethereum" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/ethereum-mechanics</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/ethereum-mechanics"><![CDATA[<p>Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội</p>
 
 <h3 id="so-sánh-chung">So sánh chung</h3>
 <p>Bitcoin như một máy chuyển trạng thái. Bitcoin rule: S x I ⇾ S, với tập S là các trạng thái, I là tập tất cả các input. Còn với Ethereum, hàm chuyển trạng thái của nó sẽ phong phú hơn nhiều, và mỗi lần chuyển đổi thì sẽ thực hiện toàn bộ chương trình.</p>
@@ -709,106 +854,7 @@ Theo phân bố mũ, xác suất để T lớn hơn s bất kì là: P[T &gt; s]
 </ul>
 
 <h2 id="kêt-luận">Kêt luận</h2>
-<p>Nếu mọi người muốn xem chi tiết về cách chứng minh, hãy truy cập vào <a href="https://eprint.iacr.org/2019/943.pdf">đây</a>.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài trước, ta đã biết rằng các node sẽ tham gia vào giao thức có thể là Adversary và có thể gây hại cho blockchain. Vậy làm cách nào để chọn các node tham gia vào consensus.]]></summary></entry><entry><title type="html">Cơ bản về đồng thuận</title><link href="http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus" rel="alternate" type="text/html" title="Cơ bản về đồng thuận" /><published>2023-07-21T00:00:00+07:00</published><updated>2023-07-21T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/21/fundamentals-of-consensus"><![CDATA[<p>Ở bài viết này, chúng ta sẽ tìm hiểu về cách Bitcoin chống lại việc những nodes không trung thực tấn công vào mạng lưới. 
-Những nodes không trung thực (Adversary) là những nodes gây hại, chúng có mục đích khiến Blockchain không còn minh bạch và nhẩt quán để dễ dàng thêm vào những giao dịch sai mà có lợi cho chúng.</p>
-
-<h2 id="tác-hại-của-adversary">Tác hại của Adversary</h2>
-<p>Có thể gây:</p>
-<ul>
-  <li>Lỗi crash: Nếu các nodes này không gửi và nhận các msg (message)</li>
-  <li>Lỗi bỏ sót: Nếu các nodes này chọn hoặc bỏ qua các msg</li>
-  <li>Lỗi Byzantine: Các node sai có thể đi lệch khỏi giao thức.</li>
-</ul>
-
-<p>Có 2 loại adversary</p>
-<ul>
-  <li>Static: phá huỷ node mà nó chọn trước khi bắt đầu giao thức.</li>
-  <li>Adaptive: có thể phá huỷ các node khi giao thức xảy ra.
-<br />
-Giới hạn sức mạnh của adversary là số node:  f. Ví dụ: f &lt; n/2, f &lt; n/3.</li>
-</ul>
-
-<h2 id="các-nodes-giao-tiếp-với-nhau">Các nodes giao tiếp với nhau</h2>
-<p>Các nodes gửi các tin nhắn (message) cho nhau trong giao thức. Giả sử một node adversary đang điều khiển việc gửi tin nhắn:</p>
-<ul>
-  <li>Trong một mạng đồng bộ: Adversary phải chuyển tin nhắn bất kì trong thời gian Δ giây (Δ đã biết).</li>
-  <li>Trong mạng không đồng bộ: Adversary có thể hoãn msg trong 1 khoảng thời gian hữu hạn, nhưng cuối cùng vẫn phải chuyển.</li>
-  <li>Trong mạng đồng bộ 1 phần: tồn tại 1 sự kiện gọi là GST mà: Một msg gửi bởi 1 honest node ở thời gian t sẽ đến với người nhận trong khoảng thời gian:  Δ + Max(t, GST). 
-<br />
-Điều này tương đương với mạng sẽ không đồng bộ cho tới GST, sau đó sẽ đồng bộ</li>
-</ul>
-
-<h3 id="state-machine-replication-smr">State Machine Replication (SMR)</h3>
-<p>Là phương pháp chung để triển khai dịch vụ chịu lỗi bằng việc sao chép máy chủ và điều phối tương tác của máy client với bản sao đó. Nó cung cấp framework để hiểu và thiết kết giao thức quản lý sao chép.</p>
-
-<p>SMR gồm 2 phần:</p>
-<ul>
-  <li>Replicas: Nhận Tx, chạy giao thức SMR và xác định log. Các Log(Ledger) là chuỗi Tx thứ tự tuyến tính.</li>
-  <li>Client: Giao tiếp với replicas để nhận log (ví dụ: wallet).
-Các wallet không chạy giao thức SMR và cũng không giao tiếp với nhau. Nó hỏi các replicas về các log và chọn kết quả được nhiều replicas gửi về nhất.</li>
-</ul>
-
-<h3 id="bảo-mật-cho-smr">Bảo mật cho SMR</h3>
-<p>Gọi A ≼ B khi A là tiền tố của B. Ví dụ: A = Tx1Tx2Tx3, B = Tx1Tx2Tx3Tx5Tx6 thì A là tiền tố của B.<br />
-Gọi LOG(i, t) là log đưa ra bởi client i ở thời điểm t. Một giao thức SMR là an toàn nếu thoả mãn:</p>
-<ul>
-  <li>Safety: Với client i và j, ở 2 thời gian t và s: <br />
-  LOG(i, t) ≼ LOG(j, s) hoặc LOG(j, s) ≼ LOG(i, t) hoặc cả 2. =&gt; không thể xảy ra Double Spent</li>
-  <li>Liveness: với Tx là input của 1 honest replica ở thời điểm t, =&gt; với mọi i ở thời điểm s ≥ t thì: <br />
-Tx ∈ LOG(i, s).</li>
-</ul>
-
-<h2 id="giao-thức-blockchain">Giao thức Blockchain</h2>
-<p>Các Txs được đóng thành các block để tăng thông lượng. Gọi CH(i, t) là chuỗi được accept bởi client i tại thời gian t. Giao thức blockchain đảm bảo an toàn nếu thoả mãn:</p>
-<ul>
-  <li>Safety: Với client i và j, ở 2 thời gian t và s: <br />
-  CH(i, t) ≼ CH(j, s) hoặc CH(j, s) ≼ CH(i, t) hoặc cả 2</li>
-  <li>Liveness: với Tx là input của 1 honest replica ở thời điểm t, =&gt; với mọi i ở thời điểm s ≥ t thì: <br />
-Tx ∈ CH(i, s).</li>
-</ul>
-
-<p>Mong muốn giao thức phải đảm bảo an toàn dưới môi trường bán đồng bộ. Theo DLS(1988), nếu f ≥ n/3 thì giao thức SMR không thể đảm bảo an toàn. Bây giờ với f &lt; n/3, ta sẽ chứng minh là giao thức này an toàn.</p>
-
-<h2 id="chứng-minh">Chứng minh</h2>
-<p>Thời gian chia thành các epoch, mỗi epoch là 2Δ giây. Có n replicas cố định, mỗi epoch e được chỉ định 1 leader Le bởi hàm Hash.</p>
-<h3 id="baby-streamlet">Baby streamlet</h3>
-<p><strong>Đề xuất khối: </strong> Ở đầu mỗi epoch, Le xác định chuỗi dài nhất nó từng thấy cho đến nay và sẽ đề xuất 1 khối liền sau chuỗi đó. <bn>
-<strong>Finalization: </strong> 1 replica finalizes block (và tiền tố của nó) ở đầu chuỗi. Nếu có nhiều block như thế, chọn block có epoch nhỏ nhất.<br />
-Tuy nhiên, có một nhược điểm là nếu Leader là adversary và network chưa đồng bộ, thì Adversary có thể gửi thông báo các Block cho 1 user bất kì, nhưng thông báo chưa tới các user còn lại cho tới sau GST. 
-/// hình minh hoạ</bn></p>
-
-<h3 id="teen-streamlet">Teen streamlet</h3>
-<p>Votes: 1 vote trên block bởi replica là chữ kí của nó trên block. <br />
-Notarization: 1 block được xem là Notarized dưới góc nhìn của replica nếu block đó có hơn 2n/3 chữ kí từ các replica khác.<br />
-<strong>Đề xuất khối: </strong> Đầu mõi epoch e, Le xác định chuỗi Notarized dài nhất và đề xuất khối sau chuỗi Notarized này.<br />
-<strong> Vote: </strong> ∆ giây ở epoch e,mỗi replica vote cho đề xuất hợp lệ đầu tiên dưới góc nhìn của Le (mở rộng chuỗi dài nhất theo góc nhìn của nó).<br />
-<strong>Finalization: </strong>  1 replica finalize 1 block và tiền tố của nó sau khi thấy khối được notarized.</p>
-
-<p>Ví dụ: /// hình ảnh <br />
-Chứng minh: với f &lt; n/3, với mỗi epoch e, chỉ có tối đa 1 notarized block với epoch là e trong góc nhìn của bất kì replica trung thực nào. <br />
-Giả sử 2 khối cùng epoch e là B và B’. Vì f &lt; n/3 nên tồn tại replica vote cho cả B, B’. Mà số vote của B và B’ lớn hơn 2/3 =&gt; số replica vote cho cả 2 là &gt; n/3. Đây là vô lý. Vậy khi network chưa đồng bộ, giao thức này đảm bảo an toàn.<br />
-Với các block có epoch khác nhau, có thể cùng ở chung 1 độ cao. Gọi 2 block đó là B1 và B2. Ban đầu, ở B, adversarial đề xuất B1 cho 66 replica trung thực, nên B1 chưa được notarized (vì có 66 vote). Tiếp theo, B2 được đề xuất bởi 1 replica trung thực, và được notarized nhưng trong đó có 1 adversarial vote cho B1, nên B1 cũng được notarized. Từ đó dẫn đến vi phạm safety.</p>
-
-<h3 id="streamlet">Streamlet</h3>
-<p><strong>Finalization: </strong> Khi thấy 3 khối kề nhau trong chuỗi được notarized với epoch liên tiếp, thì client sẽ finalize block thứ 2 trong 3 block trên và tẩt cả tiền tố của nó.</p>
-
-<p>Độ phức tạp giao tiếp là O(N^3) message cho mỗi block, vì mỗn honest replica chuyển tiếp các votes nó nhận từ các replica khác cho tất cả các replica.
-Chứng minh tính an toàn:<br />
-<strong> Safety: </strong> Giả sử có 2 block đang trong tình trạng confict ở epoch e và e’. Nếu: <br /></p>
-<ul>
-  <li>e = e’: không thể (đã chứng minh ở Teen Streamlet).<br /></li>
-  <li>e &lt; e’: suy ra e+1 &lt; e’. Vì B3 được notarized nên có ít nhất S &gt; n/3 replica trung thực vote cho B3 tại e+1. Vậy S sẽ thấy B2 được notarized ở đầu epoch e+1, do đó, S sẽ không vote cho B’ vì B’ không mở rộng từ chuõi dài nhất. Mà S &gt; n/3 nên B’ không được notarized. <br /></li>
-  <li>e &gt; e’: suy ra e-1 &gt; e’. Nếu B’ được notarized, có S &gt; n/3 replica trung thực vote cho nó tại epoch e’. Vậy S sẽ thấy B” được notarized ở đầu epoch e”, do đó S sẽ không vote cho B1. Tương tự, B1 không được notarized. Điều này trái với giả thiết.<br />
-Hình Minh Hoạ: <br />
-Vậy, Streamlet đảm bảo safety<br /></li>
-</ul>
-
-<p><strong> Liveness: </strong> Giả sử có 4 slot liên tiếp: e, e + 1, e + 2, e + 3 với leader trung thực sau GST. Ở cuối các slot này, client sẽ finalize block được đề xuất bởi các replica trung thực. Trong đó:</p>
-<ul>
-  <li>1 slot để undo các hành động của adversary. <br /></li>
-  <li>3 slot để finalize block. <br />
-Ngoài ra, đảm bảo không có 2 block liên tiếp nhau mà chưa được notarized.</li>
-</ul>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, chúng ta sẽ tìm hiểu về cách Bitcoin chống lại việc những nodes không trung thực tấn công vào mạng lưới. Những nodes không trung thực (Adversary) là những nodes gây hại, chúng có mục đích khiến Blockchain không còn minh bạch và nhẩt quán để dễ dàng thêm vào những giao dịch sai mà có lợi cho chúng.]]></summary></entry><entry><title type="html">Bitcoin Scripts và Ví</title><link href="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet" rel="alternate" type="text/html" title="Bitcoin Scripts và Ví" /><published>2023-07-21T00:00:00+07:00</published><updated>2023-07-21T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/21/bitcoin-scripts-and-wallet</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet"><![CDATA[<p>Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.</p>
+<p>Nếu mọi người muốn xem chi tiết về cách chứng minh, hãy truy cập vào <a href="https://eprint.iacr.org/2019/943.pdf">đây</a>.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài trước, ta đã biết rằng các node sẽ tham gia vào giao thức có thể là Adversary và có thể gây hại cho blockchain. Vậy làm cách nào để chọn các node tham gia vào consensus.]]></summary></entry><entry><title type="html">Bitcoin Scripts và Ví</title><link href="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet" rel="alternate" type="text/html" title="Bitcoin Scripts và Ví" /><published>2023-07-21T00:00:00+07:00</published><updated>2023-07-21T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/21/bitcoin-scripts-and-wallet</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet"><![CDATA[<p>Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.</p>
 
 <h3 id="một-số-lưu-ý">Một số lưu ý</h3>
 <ul>

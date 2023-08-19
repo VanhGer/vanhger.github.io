@@ -89,4 +89,4 @@ A muốn thanh toán cho C qua trung gian không tin cậy là B (Vì A, C có c
 Nhiều open payment channel 2 chiều. Khi A muốn tạo kênh với B thì chỉ cần tìm tuyến đường qua đồ thị với đỉnh là các trung gian. 
 
 ## Kết luận
-Đây là cách tiếp cận đầu tiên để tăng lượng Tx trong 1sec. Ở bài viết sau, mình sẽ giới thiệu các khác giúp giải quyết vấnd dề này.
+Đây là cách tiếp cận đầu tiên để tăng tốc độ các Tx trong blockchain. Ở bài viết sau, mình sẽ giới thiệu một kĩ thuật khác giúp giải quyết vấn đề này.
