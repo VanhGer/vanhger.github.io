@@ -1,4 +1,190 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-19T10:15:07+07:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Mở rộng Blockchain (Phần 2)</title><link href="http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2" rel="alternate" type="text/html" title="Mở rộng Blockchain (Phần 2)" /><published>2023-08-19T00:00:00+07:00</published><updated>2023-08-19T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2"><![CDATA[<p>Trong bài viết hôm nay, mình sẽ giới thiệu đến mọi người một kĩ thuật giúp tăng tốc độ các Tx trong mạng blockchain. Đó là Rollups.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-20T11:55:40+07:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Quyền riêng tư trên blockchain và Zk-SNARK</title><link href="http://localhost:4000/blog/2023/08/20/zksnark" rel="alternate" type="text/html" title="Quyền riêng tư trên blockchain và Zk-SNARK" /><published>2023-08-20T00:00:00+07:00</published><updated>2023-08-20T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/20/zksnark</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/20/zksnark"><![CDATA[<p>Trong hệ thống tài chính, việc riêng tư là điều cần thiết. Một vài ví dụ như: Một nhà sản xuất không muốn tiết lộ số tiền họ trả cho nhà cung cấp của mình cho các bộ phận, Người dùng cuối cần quyền riêng tư để thuê, quyên góp, mua hàng,… Do đó, blockchain không thể phát huy hết tiềm năng nếu không có một số Tx riêng tư.</p>
+
+<h2 id="sự-riêng-tư-trong-các-blockchain">Sự riêng tư trong các blockchain</h2>
+<ul>
+  <li>Với Ethereum, mọi số dư đều công khai. Trong các DApps, code và state cũng công khai cho người dùng. Ngoài ra, các Tx cũng nối đến các account.</li>
+  <li>Với Bitcoin, dữ liệu Tx có thể được sử dụng để kết nối 1 địa chỉ tới 1 định danh vật lý.</li>
+</ul>
+
+<h2 id="tx-riêng-tư-trên-blockchain-công-khai">Tx riêng tư trên blockchain công khai</h2>
+<p>Chúng ta có thể sử dụng commitments và zero knowledge proof để làm điều này.</p>
+
+<p><strong> Committed data </strong>: cam kết ngắn (ẩn) ở trên chuỗi.
+<strong> Proof 𝝅 </strong>: succinct Zero knowledge (Zk) proof:</p>
+<ul>
+  <li>Committed Tx data nhất quán với trạng thái commited hiện tại.</li>
+  <li>Committed update state thì đúng. Từ đó, ai cũng có thể xác thực 𝝅.</li>
+</ul>
+
+<p>Minh hoạ: ///</p>
+
+<h3 id="review-commitment">Review: Commitment</h3>
+<p>Được sử dụng với nhiều mục đích, ví dụ Đấu giá kín. Người tham gia cam kết giá, sau khi hết thời gian thì mọi người sẽ mở cam kết của họ. <br />
+<strong> Cú pháp </strong> 2 thuật toán: <br /></p>
+<ul>
+  <li>commit(msg, r) -&gt; com.  r là randombit, com là string ngắn</li>
+  <li>verify(msg, com, r) -&gt; reject / accept.</li>
+</ul>
+
+<h3 id="tính-bảo-mật">Tính bảo mật</h3>
+<p><strong> Binding </strong>: Không thể tạo 2 valid openings cho com. <br />
+Tức là: tạo ra com, (m1, r1), (m2, r2) mà:</p>
+<ul>
+  <li>verify(m1, com, r1) = accept. Và</li>
+  <li>verify(m2, com, r2) = accept với m1 ≠ m2.</li>
+</ul>
+
+<p><strong> Hiding </strong>: Com không tiết lộ gì về data đã committed. Tức là com sẽ độc lập với m.</p>
+
+<h2 id="zk-snark-là-gì">zk-SNARK là gì?</h2>
+<h3 id="các-khái-niệm">Các khái niệm</h3>
+<p>Để verify 1 Tx, Validator cần phải xem thông tin trong Tx đó và kiểm tra xem có thoả mãn không. Nhưng nếu các Tx là private thì Validator sẽ kiểm tra như thế nào? Lúc này, zk-SNARK được ra đời.</p>
+
+<p><strong> SNARK </strong>: là 1 proof ngắn gọn để chứng minh 1 statement là đúng. Ngoài ra, nó cần nhanh để xác thực bởi người xác thực. <br />
+Ví dụ: statement: “Tôi biết một m mà SHA256(m) = 0”.
+<strong> zk-SNARK </strong>: là SNARK không tiết lộ gì về nội dung. Ví dụ trong statement kia thì zk-SNARK sẽ không tiết lộ gì về giá trị của m.</p>
+
+<p>Ứng dụng:</p>
+<ul>
+  <li>Private Tx</li>
+  <li>zkBrigde: nối các chuỗi khối</li>
+  <li>tính riêng tư trong zk-Rollups</li>
+</ul>
+
+<h3 id="kĩ-thuật-zk-snark">Kĩ thuật zk-SNARK</h3>
+
+<h4 id="arithmetic-circuits-ac">Arithmetic Circuits (AC)</h4>
+<p>Cho 1 trường hữu hạn:  𝔽={0, …, 𝑝−1} với p là số nguyên tố &gt; 2. <br />
+Arithmetic Circuit: C: 𝔽^𝑛 ⇾ 𝔽. <br />
+C lấy input là list gồm n phần tử thuộc F, output là 1 phần tử thuộc F. <br />
+|C| = số gates trong mạch C.
+// minh hoạ</p>
+
+<p><strong> Ví dụ: </strong></p>
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>C_hash(h, m) = 0 nếu SHA256(m) = h, ≠0 nếu ngược lại.</td>
+          <td>C_hash</td>
+          <td>~ 20K gates</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>C_sig(pk, msg, σ) = 0 nếu chữ kí σ là hợp lệ trên msg với pk.</li>
+</ul>
+
+<h4 id="argument-system">Argument System</h4>
+<p>Cho một AC: C(x, w) -&gt; F với:</p>
+<ul>
+  <li>x: là statement công khai</li>
+  <li>w: secret witness.</li>
+</ul>
+
+<p>Prover P cần thuyết phục các Verifier V rằng tồn tại w mà C(x, w) = 0 nhưng không muốn gửi w vì lý do bảo mật.</p>
+
+<p>Có 2 loại argument systems: Interactive vs Non-interactives.</p>
+<ul>
+  <li>Interactive: P &lt;-&gt; V tương tác với nhau nhiều lần để V đồng ý. Cách này chỉ áp dụng với hệ thống có ít V.</li>
+  <li>Non-interactive: P chỉ gửi duy nhất 1 msg là proof cho V. Cách này có ích khi có nhiều Verifier (Ví dụ nhiều Validator muốn xác thực 1 Tx).</li>
+</ul>
+
+<h4 id="nark-non-interactive-argument-of-knowledge">NARK: Non-interactive Argument of Knowledge</h4>
+<p>Với mạch C(x, w) ⇾  𝔽. <br />
+<strong> Preprocessing </strong>: S(C) ⇾ public parameters(Sp, Sv).</p>
+
+<p>Minh hoạ:</p>
+
+<p>Một preprocessing NARK là bộ 3 (S, P, V):</p>
+<ul>
+  <li>S(C) ⇾ public parameters(Sp, Sv).</li>
+  <li>P(Sp, x, w) ⇾  proof  𝜋</li>
+  <li>V(𝑣𝑝, 𝒙, 𝝅)  ⇾  accept / reject</li>
+</ul>
+
+<p><strong> Yêu cầu </strong></p>
+<ul>
+  <li>Complete: ∀𝑥, 𝑤:  𝐶(𝒙, 𝒘) = 0 ⇒ Pr[ V(𝑣𝑝, 𝑥, P(𝑝𝑝, 𝒙, 𝒘)) = accept] = 1.</li>
+  <li>Argument of knowledge: V accepts ⇒ P biết 𝑤</li>
+  <li>Zero knowledge: (𝐶, 𝑝𝑝,𝑣𝑝 ,𝒙, 𝜋)  không tiết lộ gì về 𝒘</li>
+</ul>
+
+<p><strong> Succinct </strong>
+Một NARK gọi là SNARK khi việc tạo ra và xác minh proof với thời gian nhanh:</p>
+<ul>
+  <li>S(𝐶)  ⇾  public parameters  (S𝑝, S𝑣)</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>P(𝑝𝑝, 𝒙, 𝒘)  ⇾  short proof  𝜋;</td>
+          <td>𝜋</td>
+          <td>=𝑂_𝜆(𝐥𝐨𝐠⁡(</td>
+          <td>𝑪</td>
+          <td>))</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>V(𝑣𝑝, 𝒙, 𝝅)    nhanh để thẩm định:    time(V) = 𝑂_𝜆 (</td>
+          <td>𝑥</td>
+          <td>, 𝐥𝐨𝐠⁡(</td>
+          <td>𝑪</td>
+          <td>)).</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<p>Do đó, với SNARK thì việc đọc toàn bộ mạch C là không kịp thời gian. VÌ vậy cần bước preprocessing.</p>
+
+<p><strong> Tóm lại: </strong></p>
+<ul>
+  <li>SNARK: bộ (S, P, V) thoả mãn: Complete, Argument of knowledge, Succinct.</li>
+  <li>zk-SNARK: SNARK có zero knowledge.</li>
+</ul>
+
+<h4 id="các-loại-preprocessing">Các loại Preprocessing</h4>
+<ul>
+  <li>trusted setup per circuit: S(C) sử dụng data bí mật (Ví dụ: randombit r).</li>
+  <li>trusted but universal: Randombit r độc lập khỏi C: <br />
+  S = (S_init, S_index) với:
+    <ul>
+      <li>𝑆_𝑖𝑛𝑖𝑡 (𝜆;𝑟) ⇾ U: 1 lần duy nhất.</li>
+      <li>𝑆_𝑖𝑛𝑑𝑒𝑥 (U,𝐶) ⇾ (S𝑝, S𝑣): Không chứa secret data.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="argurment-of-knowledge">Argurment of knowledge</h4>
+<p>P biết w nếu w có thể được extracted từ P. <br />
+Bộ 3 (S, P, V) là Argurment of knowledge với mạch C nếu:</p>
+<ul>
+  <li>A = (A0, A1) là adversary mà có thể bị extracted thông tin:
+    <ul>
+      <li>S(C) ⇾ (Sp, Sv),  A0(Sp) ⇾ (x, st)</li>
+      <li>𝜋 ⇽ A1(𝑝𝑝, 𝑥, st):   Pr[V(vp, 𝑥, 𝜋) = accept] &gt; 1/10^6	(không đáng kể )</li>
+    </ul>
+  </li>
+  <li>Có extractor E (sử dụng A1 là blackbox) và tạo ra được w bằng tương tác với A1(Sp, x, st).</li>
+</ul>
+
+<h4 id="zero-knowledge">Zero knowledge</h4>
+<p>Proof 𝜋 không tiết lộ về 𝒘 nếu Verifier tự tạo 𝜋, hay Verifier không học được gì từ proof 𝜋. <br />
+<strong> Tức là: </strong></p>
+<ul>
+  <li>Tồn tại 1 hàm Sim() sao cho: (S𝑝, S𝑣, 𝜋) ⇽ Sim(𝐶,𝑥). Hay Sim() có thể tạo ra proof 𝜋 mà không cần w.</li>
+</ul>
+
+<h2 id="lời-kết">Lời kết</h2>
+<p>Ở trên là sơ lược về tính riêng tư trong Blockchain và cái nhìn tổng quan về zk-SNARK.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Trong hệ thống tài chính, việc riêng tư là điều cần thiết. Một vài ví dụ như: Một nhà sản xuất không muốn tiết lộ số tiền họ trả cho nhà cung cấp của mình cho các bộ phận, Người dùng cuối cần quyền riêng tư để thuê, quyên góp, mua hàng,… Do đó, blockchain không thể phát huy hết tiềm năng nếu không có một số Tx riêng tư.]]></summary></entry><entry><title type="html">Mở rộng Blockchain (Phần 2)</title><link href="http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2" rel="alternate" type="text/html" title="Mở rộng Blockchain (Phần 2)" /><published>2023-08-19T00:00:00+07:00</published><updated>2023-08-19T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2"><![CDATA[<p>Trong bài viết hôm nay, mình sẽ giới thiệu đến mọi người một kĩ thuật giúp tăng tốc độ các Tx trong mạng blockchain. Đó là Rollups.</p>
 
 <h2 id="ý-tưởng">Ý tưởng</h2>
 <p>Trong layer-1 của blockchain như Ethereum chứa world state. Khi một giao dịch được đưa vào, world state sẽ bị thay đổi. Từ đây, ý tưởng cơ bản của Rollup là hợp hàng trăm Tx lại thành một Tx duy nhất, từ đó giúp tăng tốc độ lên khoảng 100 lần.</p>
@@ -460,7 +646,76 @@ Giá p 1ETH = 62.5 DAI, giảm 37.5 so với ban đầu.</p>
 Lí do là vì giá trị p của thanh khoản sẽ chỉ ở trong 1 khoảng nhất định (Ví dụ DAI chỉ ở trong khoảng từ (0.95 ~ 1.05) USD). Do đó, khi PL cung cấp thanh khoản ở khoảng từ (0, ∞) thì hiệu quả sử dụng vốn của họ sẽ không được cao. Do đó, ở mỗi số sàn giao dịch, việc thanh khoản tập trung trông 1 khoảng hữu hạn là 1 vị trí. Vị trí này cần duy trì đủ dữ trữ để hỗ trợ giao dịch trong phạm vi của nó. Từ đó khiến nó hoạt động như một constant product pool với dự trữ lớn hơn trong khoảng đó. Từ đó việc sử dụng vốn sẽ có hiệu quả hơn.</p>
 
 <h2 id="kết-luận">Kết luận</h2>
-<p>Về cách các loại sàn hoạt động, mọi người có thể xem ở các whitePaper, ví dụ với <a href="https://uniswap.org/whitepaper.pdf">Uniswap</a> .</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Khái niệm]]></summary></entry><entry><title type="html">Stablecoins</title><link href="http://localhost:4000/blog/2023/07/24/stable-coins" rel="alternate" type="text/html" title="Stablecoins" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/stable-coins</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/stable-coins"><![CDATA[<p>Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.</p>
+<p>Về cách các loại sàn hoạt động, mọi người có thể xem ở các whitePaper, ví dụ với <a href="https://uniswap.org/whitepaper.pdf">Uniswap</a> .</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Khái niệm]]></summary></entry><entry><title type="html">Solidity và State Trie</title><link href="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie" rel="alternate" type="text/html" title="Solidity và State Trie" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/solidity-va-state-trie</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie</p>
+
+<h2 id="solidity">Solidity</h2>
+<p>Solidity là ngôn ngữ lập trình cho Blockchain Ethereum, là ngôn ngữ hướng đối tượng, cấp cao để triển khai các smartcontracts. Smartcontract là chương trình chi phối các hành vi của Account trong Ethereum State. Account contract được tạo ra khi chạy một smartcontract. Mọi người có thể đọc account contract state ở trong storage array, nên không bao giờ được lưu trữ các bí mật trong contract.</p>
+
+<p>Một số dạng biến của Solidity như: uint256, address(byte 32), bool,… Các loại tham chiếu là mảng, struct, string, map,… Khi một giao dịch đi từ A ⇾ B ⇾ C ⇾ D thì tại D, msg.sender là C, nhưng tx.origin là A.</p>
+
+<p>ERC20 là API tiêu chuẩn cho fungible token, cung cấp các chức năng cơ bản để chuyển token hoặc cho phép token được sử dụng bởi bên thứ 3.</p>
+
+<p>Các kiểu lưu trữ:</p>
+<ul>
+  <li>Stack variables: Rẻ để sử dụng, phù hợp với mọi loại dữ liệu (không qua 32 bytes)</li>
+  <li>Calldata: Là 1 mảng byte chỉ đọc, tốn gas</li>
+  <li>Memory: 1 byte mảng, rẻ, nhưng chi phí tăng theo cấp số nhân, lưu được dữ liệu &gt; 32 bytes</li>
+  <li>Storage: Đắt, mappings và các biến state lưu trong này.</li>
+  <li>Event logs: rẻ, không cần truy cập đến contract.</li>
+</ul>
+
+<p>Ở trên là một số hiểu biết của mình về solidity, về mặt coding, mọi người nên xem ở <a href="https://docs.soliditylang.org/en/latest/">đây</a>.</p>
+
+<h2 id="state-trie-ethereum-state-trie">State trie (Ethereum state trie)</h2>
+<p>Hình ảnh đây là cấu trúc được tạo bởi các loại State trong Ethereum: (ở góc phải dưới hình ảnh)</p>
+
+<p><img src="https://i.stack.imgur.com/afWDt.jpg" width="900" height=" 600" /></p>
+
+<p>Có 3 loại state chính là World state, Transaction, và Transaction Receipt.</p>
+
+<h3 id="world-state-trie">World State Trie</h3>
+<p>World State Trie Là mapping giữa địa chỉ và Account State. Nó được update bởi các Tx, và lưu trữ mọi thông tin về accounts và có thể lấy được qua các truy vấn.
+Trong World State Trie có Account Storage Trie, nơi các dữ liệu liên kết với account được lưu trữ. Nó chỉ liên quan đến các contract account và mọi dữ liệu được ánh xạ giữa các số nguyên 32 byte.</p>
+
+<p>Account State là các thông tin về một Ethereum account, như balance, nonce, storage Root, codehash,… và là lá của World State Trie.</p>
+
+<h3 id="transaction-trie">Transaction Trie</h3>
+<p>Transaction Trie lưu trữ các Tx trong Ethereum. Khi các Tx lưu trữ trong block, nó không thể bị thay đổi. Nó được xây dựng theo cấu trúc Modified Merkel Patricia Trie, và chỉ có node root mới được đưa vào trong block.</p>
+
+<h3 id="transaction-receipt-triereceipt-trie">Transaction Receipt Trie(Receipt Trie)</h3>
+<p>Transaction Receipt Trie lưu trữ đầu ra của các Txs. Đầu ra là kết quả của một Tx mà được chạy thành công, bao gồm H(Txs), block number, gas Used, địa chỉ của contract.</p>
+
+<h3 id="ví-dụ-cấu-trúc-của-world-state-một-cách-đơn-giản">Ví dụ cấu trúc của World State (một cách đơn giản)</h3>
+<p>Để đơn giản, ta giả sử các node lá của World State Trie chỉ bao gồm địa chỉ là số dư theo cặp Key - Value. 
+Các loại thông tin:</p>
+<ul>
+  <li>Leaf Node: node lá của cây, chứa các trạng thái của 1 tài khoản có địa chỉ là Key</li>
+  <li>Branch Node: gồm 16 ô, là các tiền tố của Key.</li>
+  <li>Extension Node: node chỉ có 1 child</li>
+  <li>Nibble: Là phần chung trong Key, 1 Nibble = 4 bits, lưu trong keyend hoặc shared nibble.</li>
+  <li>Prefixes:
+    <ul>
+      <li>0: extension node có số chẵn Nibble</li>
+      <li>1: extension node có số lẻ Niblle</li>
+      <li>2: leaf node, có số chẵn Nibble</li>
+      <li>3: leaf node, có số lẻ Nibble.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Minh Hoạ:
+World State Trie với 4 cặp Key - Value như sau:</p>
+<ul>
+  <li>a711355: 45 ETH</li>
+  <li>a77d337: 1 WEI</li>
+  <li>a7f9365: 1.1 ETH</li>
+  <li>a77d397: 0.12 ETH</li>
+</ul>
+
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SiSYWqaPcJtBlnFR4VAaug.png" /></p>
+
+<h2 id="kêt-luận">Kêt luận</h2>
+<p>Ở trên là một số khái niệm sơ bộ về Solidity và cấu trúc của Ethereum, cụ thể về các State Trie.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie]]></summary></entry><entry><title type="html">Stablecoins</title><link href="http://localhost:4000/blog/2023/07/24/stable-coins" rel="alternate" type="text/html" title="Stablecoins" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/stable-coins</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/stable-coins"><![CDATA[<p>Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.</p>
 
 <h2 id="custodial-stablecoin-stablecoin-kí-gửi">Custodial Stablecoin: Stablecoin kí gửi</h2>
 <p>Custodian giữ kho bạc trong 1 ngân hàng truyền thống, mọi giao dịch đều thông qua nó. Ngoài ra, nó có quyền mạnh mẽ như kiểm duyệt khác hàng rút tiền hoặc xoá số dư người dùng. Điều này sẽ nguy hiểm nếu chẳng may bị hack hoặc nhầm lẫn và không đảm bảo sự phi tập trung. Do đó, cách này không được ưu tiên và sử dụng ở thực tế.</p>
@@ -546,76 +801,7 @@ Bất kì ai giữ DAI có thể khoá DAI của mình trong MakerDAO contract. 
 <h3 id="nft-cost-issue">NFT cost issue:</h3>
 <p>Đa phần các NFT đều có giá cao, do đó muốn sở hữu thì có thể thuê hoặc tiết kiệm. Sẽ khó bắt đầu kinh doanh NFT nếu không có tiền mặt hoặc nguồn cung cấp đủ lớn.</p>
 
-<p>Một số dịch vụ dựa trên NFTs như: Gameing guild (các item trong game: NFTs), EveryRealm (Bất động sản ảo), Credit Provider,…</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.]]></summary></entry><entry><title type="html">Solidity và State Trie</title><link href="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie" rel="alternate" type="text/html" title="Solidity và State Trie" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/solidity-va-state-trie</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie</p>
-
-<h2 id="solidity">Solidity</h2>
-<p>Solidity là ngôn ngữ lập trình cho Blockchain Ethereum, là ngôn ngữ hướng đối tượng, cấp cao để triển khai các smartcontracts. Smartcontract là chương trình chi phối các hành vi của Account trong Ethereum State. Account contract được tạo ra khi chạy một smartcontract. Mọi người có thể đọc account contract state ở trong storage array, nên không bao giờ được lưu trữ các bí mật trong contract.</p>
-
-<p>Một số dạng biến của Solidity như: uint256, address(byte 32), bool,… Các loại tham chiếu là mảng, struct, string, map,… Khi một giao dịch đi từ A ⇾ B ⇾ C ⇾ D thì tại D, msg.sender là C, nhưng tx.origin là A.</p>
-
-<p>ERC20 là API tiêu chuẩn cho fungible token, cung cấp các chức năng cơ bản để chuyển token hoặc cho phép token được sử dụng bởi bên thứ 3.</p>
-
-<p>Các kiểu lưu trữ:</p>
-<ul>
-  <li>Stack variables: Rẻ để sử dụng, phù hợp với mọi loại dữ liệu (không qua 32 bytes)</li>
-  <li>Calldata: Là 1 mảng byte chỉ đọc, tốn gas</li>
-  <li>Memory: 1 byte mảng, rẻ, nhưng chi phí tăng theo cấp số nhân, lưu được dữ liệu &gt; 32 bytes</li>
-  <li>Storage: Đắt, mappings và các biến state lưu trong này.</li>
-  <li>Event logs: rẻ, không cần truy cập đến contract.</li>
-</ul>
-
-<p>Ở trên là một số hiểu biết của mình về solidity, về mặt coding, mọi người nên xem ở <a href="https://docs.soliditylang.org/en/latest/">đây</a>.</p>
-
-<h2 id="state-trie-ethereum-state-trie">State trie (Ethereum state trie)</h2>
-<p>Hình ảnh đây là cấu trúc được tạo bởi các loại State trong Ethereum: (ở góc phải dưới hình ảnh)</p>
-
-<p><img src="https://i.stack.imgur.com/afWDt.jpg" width="900" height=" 600" /></p>
-
-<p>Có 3 loại state chính là World state, Transaction, và Transaction Receipt.</p>
-
-<h3 id="world-state-trie">World State Trie</h3>
-<p>World State Trie Là mapping giữa địa chỉ và Account State. Nó được update bởi các Tx, và lưu trữ mọi thông tin về accounts và có thể lấy được qua các truy vấn.
-Trong World State Trie có Account Storage Trie, nơi các dữ liệu liên kết với account được lưu trữ. Nó chỉ liên quan đến các contract account và mọi dữ liệu được ánh xạ giữa các số nguyên 32 byte.</p>
-
-<p>Account State là các thông tin về một Ethereum account, như balance, nonce, storage Root, codehash,… và là lá của World State Trie.</p>
-
-<h3 id="transaction-trie">Transaction Trie</h3>
-<p>Transaction Trie lưu trữ các Tx trong Ethereum. Khi các Tx lưu trữ trong block, nó không thể bị thay đổi. Nó được xây dựng theo cấu trúc Modified Merkel Patricia Trie, và chỉ có node root mới được đưa vào trong block.</p>
-
-<h3 id="transaction-receipt-triereceipt-trie">Transaction Receipt Trie(Receipt Trie)</h3>
-<p>Transaction Receipt Trie lưu trữ đầu ra của các Txs. Đầu ra là kết quả của một Tx mà được chạy thành công, bao gồm H(Txs), block number, gas Used, địa chỉ của contract.</p>
-
-<h3 id="ví-dụ-cấu-trúc-của-world-state-một-cách-đơn-giản">Ví dụ cấu trúc của World State (một cách đơn giản)</h3>
-<p>Để đơn giản, ta giả sử các node lá của World State Trie chỉ bao gồm địa chỉ là số dư theo cặp Key - Value. 
-Các loại thông tin:</p>
-<ul>
-  <li>Leaf Node: node lá của cây, chứa các trạng thái của 1 tài khoản có địa chỉ là Key</li>
-  <li>Branch Node: gồm 16 ô, là các tiền tố của Key.</li>
-  <li>Extension Node: node chỉ có 1 child</li>
-  <li>Nibble: Là phần chung trong Key, 1 Nibble = 4 bits, lưu trong keyend hoặc shared nibble.</li>
-  <li>Prefixes:
-    <ul>
-      <li>0: extension node có số chẵn Nibble</li>
-      <li>1: extension node có số lẻ Niblle</li>
-      <li>2: leaf node, có số chẵn Nibble</li>
-      <li>3: leaf node, có số lẻ Nibble.</li>
-    </ul>
-  </li>
-</ul>
-
-<p>Minh Hoạ:
-World State Trie với 4 cặp Key - Value như sau:</p>
-<ul>
-  <li>a711355: 45 ETH</li>
-  <li>a77d337: 1 WEI</li>
-  <li>a7f9365: 1.1 ETH</li>
-  <li>a77d397: 0.12 ETH</li>
-</ul>
-
-<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SiSYWqaPcJtBlnFR4VAaug.png" /></p>
-
-<h2 id="kêt-luận">Kêt luận</h2>
-<p>Ở trên là một số khái niệm sơ bộ về Solidity và cấu trúc của Ethereum, cụ thể về các State Trie.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie]]></summary></entry><entry><title type="html">Cơ chế Ethereum</title><link href="http://localhost:4000/blog/2023/07/23/ethereum-mechanics" rel="alternate" type="text/html" title="Cơ chế Ethereum" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/ethereum-mechanics</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/ethereum-mechanics"><![CDATA[<p>Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội</p>
+<p>Một số dịch vụ dựa trên NFTs như: Gameing guild (các item trong game: NFTs), EveryRealm (Bất động sản ảo), Credit Provider,…</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.]]></summary></entry><entry><title type="html">Cơ chế Ethereum</title><link href="http://localhost:4000/blog/2023/07/23/ethereum-mechanics" rel="alternate" type="text/html" title="Cơ chế Ethereum" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/ethereum-mechanics</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/ethereum-mechanics"><![CDATA[<p>Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội</p>
 
 <h3 id="so-sánh-chung">So sánh chung</h3>
 <p>Bitcoin như một máy chuyển trạng thái. Bitcoin rule: S x I ⇾ S, với tập S là các trạng thái, I là tập tất cả các input. Còn với Ethereum, hàm chuyển trạng thái của nó sẽ phong phú hơn nhiều, và mỗi lần chuyển đổi thì sẽ thực hiện toàn bộ chương trình.</p>
@@ -854,61 +1040,4 @@ Theo phân bố mũ, xác suất để T lớn hơn s bất kì là: P[T &gt; s]
 </ul>
 
 <h2 id="kêt-luận">Kêt luận</h2>
-<p>Nếu mọi người muốn xem chi tiết về cách chứng minh, hãy truy cập vào <a href="https://eprint.iacr.org/2019/943.pdf">đây</a>.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài trước, ta đã biết rằng các node sẽ tham gia vào giao thức có thể là Adversary và có thể gây hại cho blockchain. Vậy làm cách nào để chọn các node tham gia vào consensus.]]></summary></entry><entry><title type="html">Bitcoin Scripts và Ví</title><link href="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet" rel="alternate" type="text/html" title="Bitcoin Scripts và Ví" /><published>2023-07-21T00:00:00+07:00</published><updated>2023-07-21T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/21/bitcoin-scripts-and-wallet</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/21/bitcoin-script-and-wallet"><![CDATA[<p>Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.</p>
-
-<h3 id="một-số-lưu-ý">Một số lưu ý</h3>
-<ul>
-  <li>Các Tx sau khi thêm vào khối sẽ không thể bị xoá, do đó khi Tx nhầm thì sẽ bị khoá hoặc mất tiền.</li>
-  <li>Các TxID là độc nhất, vì Input của chúng là độc nhất. Có trường hợp ngoại lệ là các Coinbase vì chúng không có input. Do đó có thể có trùng TxID. Vì vậy, người ta thường thêm Block Height và mỗi ScriptPk của coinbase.</li>
-</ul>
-
-<h2 id="ví-dụ-về-các-loại-bitcoin-scripts">Ví dụ về các loại Bitcoin Scripts</h2>
-<h3 id="bảo-vệ-tài-sản-với-co-signatory">Bảo vệ tài sản với co-signatory</h3>
-<p>addr = 2 - of - 2 (PkA, PkS) với PkS là của custody server.</p>
-
-<h3 id="escrow-service">Escrow Service</h3>
-<p>Giả định: A muốn mua balo từ B với giá 0.1 BTC, nhưng A chỉ có thể trả tiền khi balo đến, và không thể không trả. Do vậy, addr có dạng: 2-of-3 (PkA, PkB, PkJ).</p>
-
-<p>Cách vận hành:</p>
-<ul>
-  <li>A thông báo cho B rằng muốn mua balo với giá 0.1 BTC</li>
-  <li>A post 1 Tx 0.11 BTC đến addr trên (0.01BTC để đảm bảo A sẽ trả tiền cho B).</li>
-  <li>B khi thấy Tx, gửi balo cho A</li>
-  <li>Khi A nhận, gửi SigA trong Tx trên cho B</li>
-  <li>B sẽ sử dụng SigA và SigB để lấy số tiền mà A gửi lên Addr.</li>
-</ul>
-
-<p>Nếu vi phạm xảy ra:</p>
-<ul>
-  <li>B không đưa balo, A sẽ lấy lại tiền với sự trợ giúp của Judge (PkJ).</li>
-  <li>A không đưa SigA, B sẽ lấy tiền với sự giúp đỡ của Judge, A mất thêm 0.01BTC.</li>
-</ul>
-
-<h2 id="ví">Ví</h2>
-<p>Ví giúp user tạo ra các cặp Pk- Sk, tạo ra và xác minh các Tx, đưa ra số dư mà user có.</p>
-
-<h3 id="giúp-đơn-giản-hoá-xác-minh-thanh-toán">Giúp đơn giản hoá xác minh thanh toán</h3>
-<p>Để xác minh một thanh toán đã thực hiện, ví thường tải các block headers. Sau đó, ví gửi lên server danh sách các địa chỉ mà ví đang nắm giữ. Sau đó, server sẽ gửi về ví các Tx liên quan đến địa chỉ và Merkle Proof của Tx đó. Từ đó giúp ví hiển thị đúng số dư và xác minh Tx.</p>
-
-<h3 id="vấn-dề">Vấn dề</h3>
-<ul>
-  <li>Để giải quyết được yếu tố bảo mật, blockheader sẽ được tải từ 10 servers khác nhau hoặc từ 1 nodes tin cậy.</li>
-  <li>Remote server có thể kiểm tra xem addr gửi lên có thuộc về ví hay không.</li>
-</ul>
-
-<h3 id="các-loại-ví">Các loại ví</h3>
-<h4 id="hot-wallet">Hot wallet</h4>
-<ul>
-  <li>Dạng ví điện tử có kết nối Internet, có nhiều chức năng như lưu trữ, gửi nhận Tx, tokens,…</li>
-  <li>Có thể truy cập từ các thiết bị Internet như máy tính, điện thoại,..</li>
-  <li>Có thể bị hack hoặc xâm nhập bởi các hacker.</li>
-</ul>
-
-<h3 id="cold-wallet">Cold wallet</h3>
-<ul>
-  <li>Không cho phép kết nối Internet.</li>
-  <li>Có thiết bị riêng cho cold wallet, thiết bị này phải được khởi động bất cứ khi nào sử dụng và người dùng phải sao chép vật lý dữ liệu từ online device sang offline và ngược lại.</li>
-</ul>
-
-<h2 id="kết-luận">Kết luận</h2>
-<p>Có nhiều loại Bitcoin Script khác như CrossChain,… được sử dụng rất phổ biến ở hiện tại.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, chúng ta sẽ đi sâu hơn về một số ví dụ của Bitcoin Script và các loại ví thường được sử dụng.]]></summary></entry></feed>
+<p>Nếu mọi người muốn xem chi tiết về cách chứng minh, hãy truy cập vào <a href="https://eprint.iacr.org/2019/943.pdf">đây</a>.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài trước, ta đã biết rằng các node sẽ tham gia vào giao thức có thể là Adversary và có thể gây hại cho blockchain. Vậy làm cách nào để chọn các node tham gia vào consensus.]]></summary></entry></feed>
