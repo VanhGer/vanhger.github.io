@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hiimvanhg</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Bridging và MEV</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Bridging và MEV" />
+<meta name="author" content="vanhg" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau." />
+<meta property="og:description" content="Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau." />
+<link rel="canonical" href="http://localhost:4000/blog/2023/08/29/bridging-and-mev" />
+<meta property="og:url" content="http://localhost:4000/blog/2023/08/29/bridging-and-mev" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-08-29T00:00:00+07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Bridging và MEV" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"vanhg"},"dateModified":"2023-08-29T00:00:00+07:00","datePublished":"2023-08-29T00:00:00+07:00","description":"Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau.","headline":"Bridging và MEV","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2023/08/29/bridging-and-mev"},"url":"http://localhost:4000/blog/2023/08/29/bridging-and-mev"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+  <body>
+    <div class="header">
+  <div class = "tab_container">
+      
+        <a href="/" 
+        
+        class = "tab_btn">
+        Home
+        </a>
+      
+        <a href="/about.html" 
+        
+        class = "tab_btn">
+        About
+        </a>
+      
+        <a href="/blog.html" 
+        
+        class = "tab_btn">
+        Blog
+        </a>
+      
+        <a href="/staff.html" 
+        
+        class = "tab_btn">
+        Staff
+        </a>
+      
+  </div>
+</div>
+
+    <div class = "default_content">
+        <h1 class = "post_title">Bridging và MEV</h1>
+        <p class = "post_detail">
+            vanhg - 29 Aug 2023 
+        </p>
+        <div class = "img_container">
+            <img src =  class = "post_img">
+        </div>
+        <div class = "post_content">
+          <p>Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau.</p>
+
+<h2 id="mev">MEV</h2>
+<h3 id="khái-niệm">Khái niệm</h3>
+<p>MEV là Maximal Extractable Value. Đây là giá trị lớn nhất có thể thu được từ việc sản xuất các block vượt qua các phần thưởng block tiêu chuẩn và phí gas bằng việc thêm, loại bỏ, thay đổi thứ tự các Tx trong khối.</p>
+
+<h3 id="searchers">Searchers</h3>
+<p>Searchers là những người post các Tx để cân bằng thị trường, thanh lý và lấy lợi nhuận. Ví dụ: <br />
+Uniswap DAI/USDC có ExchangeRate là 1.001, trong khi Sushiswap là 1.002.  Lúc này, Searchers có thể vay 1 khoản DAI, đổi DAI thành USDC trong Uniswap rồi dùng nó để đổi lại DAI trong Sushiswap.  <br />
+Ngoài ra, còn nhiều cách để nhận MEV từ việc thay đổi chuỗi Tx (Bundle).\</p>
+
+<h3 id="vấn-đề-của-mev">Vấn đề của MEV</h3>
+<p>Khi searchers post Tx lên mempool, những điều sau có thể xảy ra:</p>
+<ul>
+  <li>Validator: có thể tự tạo Tx của họ với cách tương tự Tx của searchers nhưng người thụ hưởng sẽ là validator đó và đặt nó trước Tx của searchers.</li>
+  <li>Searchers khác: tự tạo Tx của họ nhưng với phí gas ưu tiên (maxPriorityFee) cao hơn. (Thường được thực hiện bởi các bots).</li>
+</ul>
+
+<h4 id="hậu-quả">Hậu quả:</h4>
+<p><strong> Với Honest users: </strong> Việc submit lại nhiều lần các Tx với phí gas ưu tiên cao hơn cho đến khi validator chọn được 1 Tx trong ít giây (Đấu giá gas) sẽ dẫn đến việc tắc nghẽn và phí gas cao.</p>
+
+<p><strong> Với consensus: </strong> Tấn công vào chuỗi dài nhất. Lý do vì MEV sẽ tạo lợi nhuận cho miner nhiều hơn phần thưởng khối.</p>
+
+<p><strong> Gây ra Centralization </strong>: Các validator có thể trộm MEV Tx từ các searchers. Do đó nhiều searchers chỉ gửi Tx cho 1 vài validator mà họ tin tưởng. Lâu dần sẽ khiến một số Validators giữ số lượng lớn các Tx.</p>
+
+<h3 id="giải-pháp-proposer-builder-separation-pbs">Giải pháp: Proposer Builder Separation (PBS)</h3>
+<p><strong> Mục tiêu: </strong></p>
+<ul>
+  <li>Giảm việc đấu giá gas</li>
+  <li>Thay vào đó, tạo ra một open market mà searchers cạnh tranh về vị trí bundle của họ trong block.</li>
+  <li>Mọi validators có thể kiếm MEV payment từ searchers. Từ đó tránh việc centralization.</li>
+</ul>
+
+<p>Minh hoạ:</p>
+
+<p><strong> Builder </strong>: thu thập các Bundles và Txs sau đó build 1 block. (trong block bao gồm feeRecipient (MEV offer) cho validator).</p>
+
+<p><strong> Relay </strong>: thu nhận các blocks, chọn block với MEV offer lớn nhất:</p>
+<ul>
+  <li>Gửi block header (và MEV offer) cho block proposer.</li>
+  <li>Không tiết lộ nội dung bên trong khối cho propser.</li>
+</ul>
+
+<p><strong> Proposer </strong>: chọn offer tốt nhất và kí header với staking key của nó. Sau đó Relay sẽ tiết lộ nội dung block. Sau đó proposer sẽ gửi block lên network.</p>
+
+<p><strong> Cụ thể </strong></p>
+<ul>
+  <li>Searchers sẽ phải thắng 2 cuộc đấu giá để bundle của họ được đưa vào block (là builder auction và relay auction).</li>
+  <li>Searchers phải làm việc với builder mà họ tin tưởng và phải tin tưởng relay làm việc cùng với builder đó. Searchers không cần phải tin Proposer.</li>
+  <li>Proposer không thể bỏ lỡ slot. Nếu relay không đưa cho họ block hợp lệ, proposer sẽ tự tạo block từ mempool của nó.</li>
+  <li>Khi proposer kí header, nó không thể kí khối khác, nếu không sẽ bị slash.</li>
+</ul>
+
+<p>Một số ví dụ về relay là Flashbot, BloXroute.</p>
+
+<h2 id="khả-năng-tương-tác-giữa-các-blockchain">Khả năng tương tác giữa các blockchain.</h2>
+
+<p><strong> Tương tác </strong>: Cho phép user chuyển tài sản qua các chain khác nhau. <br />
+<strong> Kết hợp </strong>: Cho phép 1 DApp từ 1 chuỗi có thể  gọi DApp từ chuỗi khác.</p>
+
+<p>Để làm được điều này, cần sử dụng các Bridges.</p>
+
+<h3 id="ví-dụ-chuyển-btc-trong-ethereum">Ví dụ: Chuyển BTC trong Ethereum</h3>
+<p>Sử dụng wrapped coins.</p>
+
+<p>Với wBTC</p>
+<ul>
+  <li>Alice lock 1 BTC trong custodian’s BTC address</li>
+  <li>Custodian trung gian sau khi thấy điều này, sẽ gửi msg đến ERC20 (bridge contract), xác nhận</li>
+  <li>ERC20 sẽ tạo wBTC cho Alice trong Ethereum</li>
+  <li>Sau khi dùng xong, Alice sẽ burn wBTC.</li>
+  <li>Custodian trung gian sau khi thấy điều này, sẽ gửi msg đến custodian BTC.</li>
+  <li>Custodian BTC sẽ unlock 1 BTC cho Alice.</li>
+</ul>
+
+<p>Minh hoạ:</p>
+
+<p>Vấn đề đưa ra là liệu các Custodian có tin tưởng được không? <br />
+Để giải quyết, ta sẽ sử dụng tBTC như sau:</p>
+<ul>
+  <li>Chọn ngẫu nhiên 3 custodian và tạo P2PKH Bitcoin address cho Alice.</li>
+  <li>Khoá chữ ký 3-3 là bí mật giữa 3 người.</li>
+  <li>Alice gửi BTC vào địa chỉ P2PKH, nhận tBTC</li>
+  <li>Custodians cần khoá 1.5x ETH stake cho BTC họ quản lý. Nếu BTC locked mà bị mất, Alice sẽ lấy staked ETH.</li>
+</ul>
+
+<h3 id="2-loại-bridges">2 loại Bridges:</h3>
+<p><strong> Loại 1: </strong> lock-and-mint bridge</p>
+<ul>
+  <li>SRC ⇾ DEST: user lock tiền ở SRC, wrapped token sẽ được mint ở DEST.</li>
+  <li>DEST ⇾ SRC: fund khi được burned từ DEST, thì SRC sẽ release lock.</li>
+</ul>
+
+<p><strong> Loại 2: </strong> liquidity pool bridge</p>
+<ul>
+  <li>Cả 2 phía đều có Liquidity provider</li>
+  <li>SRC -&gt; DEST: người dùng gửi funds ở SRC, số tiền tương đương sẽ được giải phóng từ DEST.</li>
+</ul>
+
+<h3 id="bridging-smart-chain">Bridging smart chain</h3>
+<ul>
+  <li>Bước 1: Tạo một hệ thống message xuyên chuỗi an toàn</li>
+  <li>Bước 2: Xây 1 bridge sử dụng hệ thống message</li>
+</ul>
+
+<p>Minh hoạ</p>
+
+<p>Có 2 loại hệ thống message: <br />
+<strong> Externally verified </strong>: các bên bên ngoài (Trustee) sẽ xác minh các message trên chuỗi S. <br />
+RelayerT chuyển msg cho người nhận khi các trustees đều kí ⟹ nếu DApp-Y tin trustees, thì sẽ biết được DApp-X gửi msg. <br />
+Nếu trustee kí và post fake msg cho RelayerT thì những bên offchain có thể gửi signature của trustee cho relayerS, khiến trustee bị slashed.</p>
+
+<p><strong> Onchain verified </strong>: chuỗi T verifies block header của chuỗi S. <br />
+Oracle gửi msg cho relayerT, cùng với finalized block header của chuỗi S. Oracle sẽ không được gọi là trustee vì nó chỉ chuyển các finalized block.<br />
+RelayerT sẽ chạy client nhẹ để xác thực xem chuỗi S có nhận msg mà gửi đi hay không.</p>
+
+<p>Tuy nhiên, vấn đề đặt ra là việc chuỗi T verify state của chuỗi S sẽ tốn gas. Để giải quyết điều này, cần sử dụng zkBridge: sử dụng SNARK để giảm việc tính toán cho relayerT.</p>
+
+<h2 id="tạm-kết">Tạm kết</h2>
+<p>Với briding, trong tương lai sẽ giúp việc di chuyển các assets nhanh và rẻ qua các chain, khiến các project thanh khoản sẽ được thực hiện ở trong tất cả các chain.</p>
+
+        </div>
+        
+    </div>
+  </body>
+  <footer>
+    
+  </footer>
+</html>  
