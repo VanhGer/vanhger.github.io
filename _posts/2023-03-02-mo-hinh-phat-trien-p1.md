@@ -1,10 +1,11 @@
 ---
+layout: post
 title: Các mô hình phát triển phần mềm (P1)
 # feature-img: "assets/img/blur/red1.png"
-img_title: "assets/images/title_img/post2.png"
+# img_title: "assets/images/title_img/post2.png"
 # tags: [Software]
-author: vanhg
-permalink: /blog/2023/03/02/mo-hinh-phat-trien-p1
+# author: vanhg
+# permalink: /blog/2023/03/02/mo-hinh-phat-trien-p1
 
 ---
 
@@ -16,7 +17,7 @@ Mô hình thác nước là mô hình phát triển phần mềm theo quy trình
 
 Minh hoạ mô hình thác nước: 
 
-<!-- {% include aligner.html images="post-pic/post2-1.png" column = 3%} -->
+
 
 Trong giai đoạn định nghĩa yêu cầu, các yêu cầu từ khách hàng sẽ được xác định và đặc tả chi tiết trong tài liệu, làm cơ sở để thực hiện giai đoạn thiết kế. Ở giai đoạn thiết kế, các nhà phát triển phải thảo luận, tìm ra yêu cầu của phần cứng, và đưa ra kiến trúc tổng thể của hệ thống phần mềm. Trong pha triển khai, nhà phát triển sẽ lập trình các chương trình nhỏ để tích hợp trong giai đoạn tiếp theo. Cuối cùng, sẽ là việc tích hợp các chương trình và kiểm thử trước khi đưa ra cho khách hàng sản phẩm.
 
@@ -28,7 +29,7 @@ Trong thực tế, việc xây dựng các pha đầy đủ và không mắc ph�
 ## 2. V-model:
 Về vấn đề kĩ thuật, mô hình thác nước còn có các điểm cần khắc phục là việc kiểm thử vẫn đang quá chung chung, chưa được đề cập rõ ràng. Hơn nữa, việc sinh test muộn (bước cuối cùng mới sinh test để kiểm tra sản phẩm) sẽ dễ đến việc chât lượng bộ test thấp, không đủ tính khách quan. Từ đó khiến chất lượng của phần mềm sẽ không đảm bảo.Do vậy, V-model ra đời nhằm cải tiến những điểm yếu về kĩ thuật này. 
 
-<!-- Minh hoạ V-model: {% include aligner.html images="post-pic/post2-2.png" column = 3%} -->
+
  
 Mô hình chữ V cũng bao gồm các pha gần giống như thác nước. Tuy nhiên để tránh việc chung chung trong kiểm thử, mô hình này đã cụ thể các pha kiểm thử là kiểm thử tích hợp, kiểm thử hệ thống và kiểm thử cấp nhận. V-model đưa việc sinh các test song song với các giai đoạn. Ví dụ khi ở giai đoạn đặc tả yêu cầu, khi có yêu cầu, nhà phát triển sẽ sinh bộ test cho việc đặc tả đó, vv. Sau khi cài đặt xong, sẽ lấy những bộ test đó để kiểm tra hiểu quả của từng pha. Việc sinh test này sẽ khách quan hơn rất nhiều so với mô hình thác nước, và chất lượng bộ test cũng sẽ cao hơn. Lý do chính là việc sinh test do chủ quan người phát triển. Nếu như sinh test trước từng pha, test sẽ cụ thể hơn và giúp tăng khả năng phát hiện lỗi hơn rất nhiều. Ngược lại, việc sinh test sau khi có sản phẩm, bộ test sẽ rất chung chung, dễ pass. 
 

@@ -1,11 +1,11 @@
 ---
-
+layout: post
 title: Đồng thuận trên mạng
 # feature-img: "assets/img/blur/bandb.png"
 # img_title: "assets/images/title_img/post1.png"
 # tags: [Instruction]
-author: vanhg
-permalink: /blog/2023/07/22/dong-thuan-tren-mang
+# author: vanhg
+# permalink: /blog/2023/07/22/dong-thuan-tren-mang
 
 ---
 Ở bài trước, ta đã biết rằng các node sẽ tham gia vào giao thức có thể là Adversary và có thể gây hại cho blockchain. Vậy làm cách nào để chọn các node tham gia vào consensus.

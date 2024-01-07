@@ -1,11 +1,11 @@
 ---
-
+layout: post
 title: Các mô hình phát triển phần mềm (P2)
 # feature-img: "assets/img/blur/iphone3.png"
-img_title: "assets/images/title_img/post3.png"
+# img_title: "assets/images/title_img/post3.png"
 # tags: [Software]
-author: vanhg
-permalink: /blog/2023/03/03/mo-hinh-phat-trien-p2
+#author: vanhg
+# permalink: /blog/2023/03/03/mo-hinh-phat-trien-p2
 ---
 
 Ở phần 2 này, mình sẽ giới thiệu về 2 loại mô hình truyền thống còn lại là Bản mẫu (Prototype) và mô hình xoắn ốc (Spiral Model).
@@ -15,7 +15,7 @@ permalink: /blog/2023/03/03/mo-hinh-phat-trien-p2
 ## 3. Bản mẫu (Prototype)
 Thực tế, các yêu cầu đặc tả từ khách hàng rất hiếm khi rõ ràng, đầy đủ ngay từ đầu để thuận tiện cho việc sử dụng mô hình thác nước hay chữ V, nên mô hình bản mẫu được ra đời nhằm giải quyết vấn đề này. Bản mẫu là mô hình phát triển dựa trên việc thiết kế các bản thử của phần mềm theo yêu cầu của khách hàng, và khách hàng tham gia vào quá trình phát triển, từ đó giúp có cái nhìn tổng quát về hệ thống.
 Mô hình bản mẫu: 
- <!-- {% include aligner.html images="post-pic/post3.png" column = 3%} -->
+
 Trong sơ đồ trên, các pha có nhiều điểm tương đồng với mô hình thác nước. Tuy nhiên, ở pha tinh chế bản mẫu, các bản mẫu sau khi được khách hàng đánh giá, sẽ phải tinh chế theo các yêu cầu của khách hàng, rồi xây dựng lại bản mẫu khác đến khi đáp ứng những yêu cầu của khách hàng thì đưa sản phẩm.
 Bản mẫu là mô hình có nhiều ưu điểm. Ưu điểm dễ nhận thấy nhất là việc nhanh có sản phẩm thử. Việc thực hiện bản mẫu cần có sản phẩm thử (bản mẫu) để khách hàng có thể đánh giá, từ đó giúp yêu cầu đặc tả kĩ càng hơn. Thứ hai là giải quyết các yêu cầu không rõ ràng. Việc đưa ra 1 bản mẫu, và thu thập yêu cầu của khách hàng dựa trên bản mẫu đó sẽ giúp ích cho khách hàng có thể hình dung ra được sản phẩm họ cần là gì, từ đó sẽ có đặc tả yêu cầu rõ ràng từ khách hàng, giúp cho việc phát triển phần mềm chính xác và đáp ứng được những gì khách hàng đưa ra.
 

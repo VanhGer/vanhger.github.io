@@ -1,1114 +1,1114 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-29T10:50:34+07:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Bridging và MEV</title><link href="http://localhost:4000/blog/2023/08/29/bridging-and-mev" rel="alternate" type="text/html" title="Bridging và MEV" /><published>2023-08-29T00:00:00+07:00</published><updated>2023-08-29T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/29/bridging-and-mev</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/29/bridging-and-mev"><![CDATA[<p>Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2024-01-07T20:19:15+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Simple Texture</title><subtitle>A gem-based responsive simple texture styled Jekyll theme.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;job_title&quot;=&gt;nil, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;social_links&quot;=&gt;[{&quot;name&quot;=&gt;&quot;facebook&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;github&quot;, &quot;url&quot;=&gt;&quot;https://github.com/yizeng/jekyll-theme-simple-texture&quot;}, {&quot;name&quot;=&gt;&quot;instagram&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;linkedin&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;stackoverflow&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;twitter&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;vk&quot;, &quot;url&quot;=&gt;nil}]}</name></author><entry><title type="html">Bridging và MEV</title><link href="http://localhost:4000/blog/2023/08/29/bridging-and-mev/" rel="alternate" type="text/html" title="Bridging và MEV" /><published>2023-08-29T00:00:00+07:00</published><updated>2023-08-29T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/29/bridging-and-mev</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/29/bridging-and-mev/">&lt;p&gt;Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau.&lt;/p&gt;
 
-<h2 id="mev">MEV</h2>
-<h3 id="khái-niệm">Khái niệm</h3>
-<p>MEV là Maximal Extractable Value. Đây là giá trị lớn nhất có thể thu được từ việc sản xuất các block vượt qua các phần thưởng block tiêu chuẩn và phí gas bằng việc thêm, loại bỏ, thay đổi thứ tự các Tx trong khối.</p>
+&lt;h2 id=&quot;heading-mev&quot;&gt;MEV&lt;/h2&gt;
+&lt;h3 id=&quot;heading-khái-niệm&quot;&gt;Khái niệm&lt;/h3&gt;
+&lt;p&gt;MEV là Maximal Extractable Value. Đây là giá trị lớn nhất có thể thu được từ việc sản xuất các block vượt qua các phần thưởng block tiêu chuẩn và phí gas bằng việc thêm, loại bỏ, thay đổi thứ tự các Tx trong khối.&lt;/p&gt;
 
-<h3 id="searchers">Searchers</h3>
-<p>Searchers là những người post các Tx để cân bằng thị trường, thanh lý và lấy lợi nhuận. Ví dụ: <br />
-Uniswap DAI/USDC có ExchangeRate là 1.001, trong khi Sushiswap là 1.002.  Lúc này, Searchers có thể vay 1 khoản DAI, đổi DAI thành USDC trong Uniswap rồi dùng nó để đổi lại DAI trong Sushiswap.  <br />
-Ngoài ra, còn nhiều cách để nhận MEV từ việc thay đổi chuỗi Tx (Bundle).\</p>
+&lt;h3 id=&quot;heading-searchers&quot;&gt;Searchers&lt;/h3&gt;
+&lt;p&gt;Searchers là những người post các Tx để cân bằng thị trường, thanh lý và lấy lợi nhuận. Ví dụ: &lt;br /&gt;
+Uniswap DAI/USDC có ExchangeRate là 1.001, trong khi Sushiswap là 1.002.  Lúc này, Searchers có thể vay 1 khoản DAI, đổi DAI thành USDC trong Uniswap rồi dùng nó để đổi lại DAI trong Sushiswap.  &lt;br /&gt;
+Ngoài ra, còn nhiều cách để nhận MEV từ việc thay đổi chuỗi Tx (Bundle).\&lt;/p&gt;
 
-<h3 id="vấn-đề-của-mev">Vấn đề của MEV</h3>
-<p>Khi searchers post Tx lên mempool, những điều sau có thể xảy ra:</p>
-<ul>
-  <li>Validator: có thể tự tạo Tx của họ với cách tương tự Tx của searchers nhưng người thụ hưởng sẽ là validator đó và đặt nó trước Tx của searchers.</li>
-  <li>Searchers khác: tự tạo Tx của họ nhưng với phí gas ưu tiên (maxPriorityFee) cao hơn. (Thường được thực hiện bởi các bots).</li>
-</ul>
+&lt;h3 id=&quot;heading-vấn-đề-của-mev&quot;&gt;Vấn đề của MEV&lt;/h3&gt;
+&lt;p&gt;Khi searchers post Tx lên mempool, những điều sau có thể xảy ra:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Validator: có thể tự tạo Tx của họ với cách tương tự Tx của searchers nhưng người thụ hưởng sẽ là validator đó và đặt nó trước Tx của searchers.&lt;/li&gt;
+  &lt;li&gt;Searchers khác: tự tạo Tx của họ nhưng với phí gas ưu tiên (maxPriorityFee) cao hơn. (Thường được thực hiện bởi các bots).&lt;/li&gt;
+&lt;/ul&gt;
 
-<h4 id="hậu-quả">Hậu quả:</h4>
-<p><strong> Với Honest users: </strong> Việc submit lại nhiều lần các Tx với phí gas ưu tiên cao hơn cho đến khi validator chọn được 1 Tx trong ít giây (Đấu giá gas) sẽ dẫn đến việc tắc nghẽn và phí gas cao.</p>
+&lt;h4 id=&quot;heading-hậu-quả&quot;&gt;Hậu quả:&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt; Với Honest users: &lt;/strong&gt; Việc submit lại nhiều lần các Tx với phí gas ưu tiên cao hơn cho đến khi validator chọn được 1 Tx trong ít giây (Đấu giá gas) sẽ dẫn đến việc tắc nghẽn và phí gas cao.&lt;/p&gt;
 
-<p><strong> Với consensus: </strong> Tấn công vào chuỗi dài nhất. Lý do vì MEV sẽ tạo lợi nhuận cho miner nhiều hơn phần thưởng khối.</p>
+&lt;p&gt;&lt;strong&gt; Với consensus: &lt;/strong&gt; Tấn công vào chuỗi dài nhất. Lý do vì MEV sẽ tạo lợi nhuận cho miner nhiều hơn phần thưởng khối.&lt;/p&gt;
 
-<p><strong> Gây ra Centralization </strong>: Các validator có thể trộm MEV Tx từ các searchers. Do đó nhiều searchers chỉ gửi Tx cho 1 vài validator mà họ tin tưởng. Lâu dần sẽ khiến một số Validators giữ số lượng lớn các Tx.</p>
+&lt;p&gt;&lt;strong&gt; Gây ra Centralization &lt;/strong&gt;: Các validator có thể trộm MEV Tx từ các searchers. Do đó nhiều searchers chỉ gửi Tx cho 1 vài validator mà họ tin tưởng. Lâu dần sẽ khiến một số Validators giữ số lượng lớn các Tx.&lt;/p&gt;
 
-<h3 id="giải-pháp-proposer-builder-separation-pbs">Giải pháp: Proposer Builder Separation (PBS)</h3>
-<p><strong> Mục tiêu: </strong></p>
-<ul>
-  <li>Giảm việc đấu giá gas</li>
-  <li>Thay vào đó, tạo ra một open market mà searchers cạnh tranh về vị trí bundle của họ trong block.</li>
-  <li>Mọi validators có thể kiếm MEV payment từ searchers. Từ đó tránh việc centralization.</li>
-</ul>
+&lt;h3 id=&quot;heading-giải-pháp-proposer-builder-separation-pbs&quot;&gt;Giải pháp: Proposer Builder Separation (PBS)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt; Mục tiêu: &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Giảm việc đấu giá gas&lt;/li&gt;
+  &lt;li&gt;Thay vào đó, tạo ra một open market mà searchers cạnh tranh về vị trí bundle của họ trong block.&lt;/li&gt;
+  &lt;li&gt;Mọi validators có thể kiếm MEV payment từ searchers. Từ đó tránh việc centralization.&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Minh hoạ:</p>
+&lt;p&gt;Minh hoạ:&lt;/p&gt;
 
-<p><strong> Builder </strong>: thu thập các Bundles và Txs sau đó build 1 block. (trong block bao gồm feeRecipient (MEV offer) cho validator).</p>
+&lt;p&gt;&lt;strong&gt; Builder &lt;/strong&gt;: thu thập các Bundles và Txs sau đó build 1 block. (trong block bao gồm feeRecipient (MEV offer) cho validator).&lt;/p&gt;
 
-<p><strong> Relay </strong>: thu nhận các blocks, chọn block với MEV offer lớn nhất:</p>
-<ul>
-  <li>Gửi block header (và MEV offer) cho block proposer.</li>
-  <li>Không tiết lộ nội dung bên trong khối cho propser.</li>
-</ul>
+&lt;p&gt;&lt;strong&gt; Relay &lt;/strong&gt;: thu nhận các blocks, chọn block với MEV offer lớn nhất:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Gửi block header (và MEV offer) cho block proposer.&lt;/li&gt;
+  &lt;li&gt;Không tiết lộ nội dung bên trong khối cho propser.&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><strong> Proposer </strong>: chọn offer tốt nhất và kí header với staking key của nó. Sau đó Relay sẽ tiết lộ nội dung block. Sau đó proposer sẽ gửi block lên network.</p>
+&lt;p&gt;&lt;strong&gt; Proposer &lt;/strong&gt;: chọn offer tốt nhất và kí header với staking key của nó. Sau đó Relay sẽ tiết lộ nội dung block. Sau đó proposer sẽ gửi block lên network.&lt;/p&gt;
 
-<p><strong> Cụ thể </strong></p>
-<ul>
-  <li>Searchers sẽ phải thắng 2 cuộc đấu giá để bundle của họ được đưa vào block (là builder auction và relay auction).</li>
-  <li>Searchers phải làm việc với builder mà họ tin tưởng và phải tin tưởng relay làm việc cùng với builder đó. Searchers không cần phải tin Proposer.</li>
-  <li>Proposer không thể bỏ lỡ slot. Nếu relay không đưa cho họ block hợp lệ, proposer sẽ tự tạo block từ mempool của nó.</li>
-  <li>Khi proposer kí header, nó không thể kí khối khác, nếu không sẽ bị slash.</li>
-</ul>
+&lt;p&gt;&lt;strong&gt; Cụ thể &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Searchers sẽ phải thắng 2 cuộc đấu giá để bundle của họ được đưa vào block (là builder auction và relay auction).&lt;/li&gt;
+  &lt;li&gt;Searchers phải làm việc với builder mà họ tin tưởng và phải tin tưởng relay làm việc cùng với builder đó. Searchers không cần phải tin Proposer.&lt;/li&gt;
+  &lt;li&gt;Proposer không thể bỏ lỡ slot. Nếu relay không đưa cho họ block hợp lệ, proposer sẽ tự tạo block từ mempool của nó.&lt;/li&gt;
+  &lt;li&gt;Khi proposer kí header, nó không thể kí khối khác, nếu không sẽ bị slash.&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Một số ví dụ về relay là Flashbot, BloXroute.</p>
+&lt;p&gt;Một số ví dụ về relay là Flashbot, BloXroute.&lt;/p&gt;
 
-<h2 id="khả-năng-tương-tác-giữa-các-blockchain">Khả năng tương tác giữa các blockchain.</h2>
+&lt;h2 id=&quot;heading-khả-năng-tương-tác-giữa-các-blockchain&quot;&gt;Khả năng tương tác giữa các blockchain.&lt;/h2&gt;
 
-<p><strong> Tương tác </strong>: Cho phép user chuyển tài sản qua các chain khác nhau. <br />
-<strong> Kết hợp </strong>: Cho phép 1 DApp từ 1 chuỗi có thể  gọi DApp từ chuỗi khác.</p>
+&lt;p&gt;&lt;strong&gt; Tương tác &lt;/strong&gt;: Cho phép user chuyển tài sản qua các chain khác nhau. &lt;br /&gt;
+&lt;strong&gt; Kết hợp &lt;/strong&gt;: Cho phép 1 DApp từ 1 chuỗi có thể  gọi DApp từ chuỗi khác.&lt;/p&gt;
 
-<p>Để làm được điều này, cần sử dụng các Bridges.</p>
+&lt;p&gt;Để làm được điều này, cần sử dụng các Bridges.&lt;/p&gt;
 
-<h3 id="ví-dụ-chuyển-btc-trong-ethereum">Ví dụ: Chuyển BTC trong Ethereum</h3>
-<p>Sử dụng wrapped coins.</p>
+&lt;h3 id=&quot;heading-ví-dụ-chuyển-btc-trong-ethereum&quot;&gt;Ví dụ: Chuyển BTC trong Ethereum&lt;/h3&gt;
+&lt;p&gt;Sử dụng wrapped coins.&lt;/p&gt;
 
-<p>Với wBTC</p>
-<ul>
-  <li>Alice lock 1 BTC trong custodian’s BTC address</li>
-  <li>Custodian trung gian sau khi thấy điều này, sẽ gửi msg đến ERC20 (bridge contract), xác nhận</li>
-  <li>ERC20 sẽ tạo wBTC cho Alice trong Ethereum</li>
-  <li>Sau khi dùng xong, Alice sẽ burn wBTC.</li>
-  <li>Custodian trung gian sau khi thấy điều này, sẽ gửi msg đến custodian BTC.</li>
-  <li>Custodian BTC sẽ unlock 1 BTC cho Alice.</li>
-</ul>
+&lt;p&gt;Với wBTC&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Alice lock 1 BTC trong custodian&apos;s BTC address&lt;/li&gt;
+  &lt;li&gt;Custodian trung gian sau khi thấy điều này, sẽ gửi msg đến ERC20 (bridge contract), xác nhận&lt;/li&gt;
+  &lt;li&gt;ERC20 sẽ tạo wBTC cho Alice trong Ethereum&lt;/li&gt;
+  &lt;li&gt;Sau khi dùng xong, Alice sẽ burn wBTC.&lt;/li&gt;
+  &lt;li&gt;Custodian trung gian sau khi thấy điều này, sẽ gửi msg đến custodian BTC.&lt;/li&gt;
+  &lt;li&gt;Custodian BTC sẽ unlock 1 BTC cho Alice.&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Minh hoạ:</p>
+&lt;p&gt;Minh hoạ:&lt;/p&gt;
 
-<p>Vấn đề đưa ra là liệu các Custodian có tin tưởng được không? <br />
-Để giải quyết, ta sẽ sử dụng tBTC như sau:</p>
-<ul>
-  <li>Chọn ngẫu nhiên 3 custodian và tạo P2PKH Bitcoin address cho Alice.</li>
-  <li>Khoá chữ ký 3-3 là bí mật giữa 3 người.</li>
-  <li>Alice gửi BTC vào địa chỉ P2PKH, nhận tBTC</li>
-  <li>Custodians cần khoá 1.5x ETH stake cho BTC họ quản lý. Nếu BTC locked mà bị mất, Alice sẽ lấy staked ETH.</li>
-</ul>
+&lt;p&gt;Vấn đề đưa ra là liệu các Custodian có tin tưởng được không? &lt;br /&gt;
+Để giải quyết, ta sẽ sử dụng tBTC như sau:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Chọn ngẫu nhiên 3 custodian và tạo P2PKH Bitcoin address cho Alice.&lt;/li&gt;
+  &lt;li&gt;Khoá chữ ký 3-3 là bí mật giữa 3 người.&lt;/li&gt;
+  &lt;li&gt;Alice gửi BTC vào địa chỉ P2PKH, nhận tBTC&lt;/li&gt;
+  &lt;li&gt;Custodians cần khoá 1.5x ETH stake cho BTC họ quản lý. Nếu BTC locked mà bị mất, Alice sẽ lấy staked ETH.&lt;/li&gt;
+&lt;/ul&gt;
 
-<h3 id="2-loại-bridges">2 loại Bridges:</h3>
-<p><strong> Loại 1: </strong> lock-and-mint bridge</p>
-<ul>
-  <li>SRC ⇾ DEST: user lock tiền ở SRC, wrapped token sẽ được mint ở DEST.</li>
-  <li>DEST ⇾ SRC: fund khi được burned từ DEST, thì SRC sẽ release lock.</li>
-</ul>
+&lt;h3 id=&quot;heading-2-loại-bridges&quot;&gt;2 loại Bridges:&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt; Loại 1: &lt;/strong&gt; lock-and-mint bridge&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;SRC ⇾ DEST: user lock tiền ở SRC, wrapped token sẽ được mint ở DEST.&lt;/li&gt;
+  &lt;li&gt;DEST ⇾ SRC: fund khi được burned từ DEST, thì SRC sẽ release lock.&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><strong> Loại 2: </strong> liquidity pool bridge</p>
-<ul>
-  <li>Cả 2 phía đều có Liquidity provider</li>
-  <li>SRC -&gt; DEST: người dùng gửi funds ở SRC, số tiền tương đương sẽ được giải phóng từ DEST.</li>
-</ul>
+&lt;p&gt;&lt;strong&gt; Loại 2: &lt;/strong&gt; liquidity pool bridge&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Cả 2 phía đều có Liquidity provider&lt;/li&gt;
+  &lt;li&gt;SRC -&amp;gt; DEST: người dùng gửi funds ở SRC, số tiền tương đương sẽ được giải phóng từ DEST.&lt;/li&gt;
+&lt;/ul&gt;
 
-<h3 id="bridging-smart-chain">Bridging smart chain</h3>
-<ul>
-  <li>Bước 1: Tạo một hệ thống message xuyên chuỗi an toàn</li>
-  <li>Bước 2: Xây 1 bridge sử dụng hệ thống message</li>
-</ul>
+&lt;h3 id=&quot;heading-bridging-smart-chain&quot;&gt;Bridging smart chain&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Bước 1: Tạo một hệ thống message xuyên chuỗi an toàn&lt;/li&gt;
+  &lt;li&gt;Bước 2: Xây 1 bridge sử dụng hệ thống message&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Minh hoạ</p>
+&lt;p&gt;Minh hoạ&lt;/p&gt;
 
-<p>Có 2 loại hệ thống message: <br />
-<strong> Externally verified </strong>: các bên bên ngoài (Trustee) sẽ xác minh các message trên chuỗi S. <br />
-RelayerT chuyển msg cho người nhận khi các trustees đều kí ⟹ nếu DApp-Y tin trustees, thì sẽ biết được DApp-X gửi msg. <br />
-Nếu trustee kí và post fake msg cho RelayerT thì những bên offchain có thể gửi signature của trustee cho relayerS, khiến trustee bị slashed.</p>
+&lt;p&gt;Có 2 loại hệ thống message: &lt;br /&gt;
+&lt;strong&gt; Externally verified &lt;/strong&gt;: các bên bên ngoài (Trustee) sẽ xác minh các message trên chuỗi S. &lt;br /&gt;
+RelayerT chuyển msg cho người nhận khi các trustees đều kí ⟹ nếu DApp-Y tin trustees, thì sẽ biết được DApp-X gửi msg. &lt;br /&gt;
+Nếu trustee kí và post fake msg cho RelayerT thì những bên offchain có thể gửi signature của trustee cho relayerS, khiến trustee bị slashed.&lt;/p&gt;
 
-<p><strong> Onchain verified </strong>: chuỗi T verifies block header của chuỗi S. <br />
-Oracle gửi msg cho relayerT, cùng với finalized block header của chuỗi S. Oracle sẽ không được gọi là trustee vì nó chỉ chuyển các finalized block.<br />
-RelayerT sẽ chạy client nhẹ để xác thực xem chuỗi S có nhận msg mà gửi đi hay không.</p>
+&lt;p&gt;&lt;strong&gt; Onchain verified &lt;/strong&gt;: chuỗi T verifies block header của chuỗi S. &lt;br /&gt;
+Oracle gửi msg cho relayerT, cùng với finalized block header của chuỗi S. Oracle sẽ không được gọi là trustee vì nó chỉ chuyển các finalized block.&lt;br /&gt;
+RelayerT sẽ chạy client nhẹ để xác thực xem chuỗi S có nhận msg mà gửi đi hay không.&lt;/p&gt;
 
-<p>Tuy nhiên, vấn đề đặt ra là việc chuỗi T verify state của chuỗi S sẽ tốn gas. Để giải quyết điều này, cần sử dụng zkBridge: sử dụng SNARK để giảm việc tính toán cho relayerT.</p>
+&lt;p&gt;Tuy nhiên, vấn đề đặt ra là việc chuỗi T verify state của chuỗi S sẽ tốn gas. Để giải quyết điều này, cần sử dụng zkBridge: sử dụng SNARK để giảm việc tính toán cho relayerT.&lt;/p&gt;
 
-<h2 id="tạm-kết">Tạm kết</h2>
-<p>Với briding, trong tương lai sẽ giúp việc di chuyển các assets nhanh và rẻ qua các chain, khiến các project thanh khoản sẽ được thực hiện ở trong tất cả các chain.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau.]]></summary></entry><entry><title type="html">Quyền riêng tư trên blockchain và Zk-SNARK</title><link href="http://localhost:4000/blog/2023/08/20/zksnark" rel="alternate" type="text/html" title="Quyền riêng tư trên blockchain và Zk-SNARK" /><published>2023-08-20T00:00:00+07:00</published><updated>2023-08-20T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/20/zksnark</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/20/zksnark"><![CDATA[<p>Trong hệ thống tài chính, việc riêng tư là điều cần thiết. Một vài ví dụ như: Một nhà sản xuất không muốn tiết lộ số tiền họ trả cho nhà cung cấp của mình cho các bộ phận, Người dùng cuối cần quyền riêng tư để thuê, quyên góp, mua hàng,… Do đó, blockchain không thể phát huy hết tiềm năng nếu không có một số Tx riêng tư.</p>
+&lt;h2 id=&quot;heading-tạm-kết&quot;&gt;Tạm kết&lt;/h2&gt;
+&lt;p&gt;Với briding, trong tương lai sẽ giúp việc di chuyển các assets nhanh và rẻ qua các chain, khiến các project thanh khoản sẽ được thực hiện ở trong tất cả các chain.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;job_title&quot;=&gt;nil, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;social_links&quot;=&gt;[{&quot;name&quot;=&gt;&quot;facebook&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;github&quot;, &quot;url&quot;=&gt;&quot;https://github.com/yizeng/jekyll-theme-simple-texture&quot;}, {&quot;name&quot;=&gt;&quot;instagram&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;linkedin&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;stackoverflow&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;twitter&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;vk&quot;, &quot;url&quot;=&gt;nil}]}</name></author><summary type="html">Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau.</summary></entry><entry><title type="html">Quyền riêng tư trên blockchain và Zk-SNARK</title><link href="http://localhost:4000/blog/2023/08/20/zksnark/" rel="alternate" type="text/html" title="Quyền riêng tư trên blockchain và Zk-SNARK" /><published>2023-08-20T00:00:00+07:00</published><updated>2023-08-20T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/20/zksnark</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/20/zksnark/">&lt;p&gt;Trong hệ thống tài chính, việc riêng tư là điều cần thiết. Một vài ví dụ như: Một nhà sản xuất không muốn tiết lộ số tiền họ trả cho nhà cung cấp của mình cho các bộ phận, Người dùng cuối cần quyền riêng tư để thuê, quyên góp, mua hàng,… Do đó, blockchain không thể phát huy hết tiềm năng nếu không có một số Tx riêng tư.&lt;/p&gt;
 
-<h2 id="sự-riêng-tư-trong-các-blockchain">Sự riêng tư trong các blockchain</h2>
-<ul>
-  <li>Với Ethereum, mọi số dư đều công khai. Trong các DApps, code và state cũng công khai cho người dùng. Ngoài ra, các Tx cũng nối đến các account.</li>
-  <li>Với Bitcoin, dữ liệu Tx có thể được sử dụng để kết nối 1 địa chỉ tới 1 định danh vật lý.</li>
-</ul>
+&lt;h2 id=&quot;heading-sự-riêng-tư-trong-các-blockchain&quot;&gt;Sự riêng tư trong các blockchain&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Với Ethereum, mọi số dư đều công khai. Trong các DApps, code và state cũng công khai cho người dùng. Ngoài ra, các Tx cũng nối đến các account.&lt;/li&gt;
+  &lt;li&gt;Với Bitcoin, dữ liệu Tx có thể được sử dụng để kết nối 1 địa chỉ tới 1 định danh vật lý.&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2 id="tx-riêng-tư-trên-blockchain-công-khai">Tx riêng tư trên blockchain công khai</h2>
-<p>Chúng ta có thể sử dụng commitments và zero knowledge proof để làm điều này.</p>
+&lt;h2 id=&quot;heading-tx-riêng-tư-trên-blockchain-công-khai&quot;&gt;Tx riêng tư trên blockchain công khai&lt;/h2&gt;
+&lt;p&gt;Chúng ta có thể sử dụng commitments và zero knowledge proof để làm điều này.&lt;/p&gt;
 
-<p><strong> Committed data </strong>: cam kết ngắn (ẩn) ở trên chuỗi.
-<strong> Proof 𝝅 </strong>: succinct Zero knowledge (Zk) proof:</p>
-<ul>
-  <li>Committed Tx data nhất quán với trạng thái commited hiện tại.</li>
-  <li>Committed update state thì đúng. Từ đó, ai cũng có thể xác thực 𝝅.</li>
-</ul>
+&lt;p&gt;&lt;strong&gt; Committed data &lt;/strong&gt;: cam kết ngắn (ẩn) ở trên chuỗi.
+&lt;strong&gt; Proof 𝝅 &lt;/strong&gt;: succinct Zero knowledge (Zk) proof:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Committed Tx data nhất quán với trạng thái commited hiện tại.&lt;/li&gt;
+  &lt;li&gt;Committed update state thì đúng. Từ đó, ai cũng có thể xác thực 𝝅.&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Minh hoạ: ///</p>
+&lt;p&gt;Minh hoạ: ///&lt;/p&gt;
 
-<h3 id="review-commitment">Review: Commitment</h3>
-<p>Được sử dụng với nhiều mục đích, ví dụ Đấu giá kín. Người tham gia cam kết giá, sau khi hết thời gian thì mọi người sẽ mở cam kết của họ. <br />
-<strong> Cú pháp </strong> 2 thuật toán: <br /></p>
-<ul>
-  <li>commit(msg, r) -&gt; com.  r là randombit, com là string ngắn</li>
-  <li>verify(msg, com, r) -&gt; reject / accept.</li>
-</ul>
+&lt;h3 id=&quot;heading-review-commitment&quot;&gt;Review: Commitment&lt;/h3&gt;
+&lt;p&gt;Được sử dụng với nhiều mục đích, ví dụ Đấu giá kín. Người tham gia cam kết giá, sau khi hết thời gian thì mọi người sẽ mở cam kết của họ. &lt;br /&gt;
+&lt;strong&gt; Cú pháp &lt;/strong&gt; 2 thuật toán: &lt;br /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;commit(msg, r) -&amp;gt; com.  r là randombit, com là string ngắn&lt;/li&gt;
+  &lt;li&gt;verify(msg, com, r) -&amp;gt; reject / accept.&lt;/li&gt;
+&lt;/ul&gt;
 
-<h3 id="tính-bảo-mật">Tính bảo mật</h3>
-<p><strong> Binding </strong>: Không thể tạo 2 valid openings cho com. <br />
-Tức là: tạo ra com, (m1, r1), (m2, r2) mà:</p>
-<ul>
-  <li>verify(m1, com, r1) = accept. Và</li>
-  <li>verify(m2, com, r2) = accept với m1 ≠ m2.</li>
-</ul>
+&lt;h3 id=&quot;heading-tính-bảo-mật&quot;&gt;Tính bảo mật&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt; Binding &lt;/strong&gt;: Không thể tạo 2 valid openings cho com. &lt;br /&gt;
+Tức là: tạo ra com, (m1, r1), (m2, r2) mà:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;verify(m1, com, r1) = accept. Và&lt;/li&gt;
+  &lt;li&gt;verify(m2, com, r2) = accept với m1 ≠ m2.&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><strong> Hiding </strong>: Com không tiết lộ gì về data đã committed. Tức là com sẽ độc lập với m.</p>
+&lt;p&gt;&lt;strong&gt; Hiding &lt;/strong&gt;: Com không tiết lộ gì về data đã committed. Tức là com sẽ độc lập với m.&lt;/p&gt;
 
-<h2 id="zk-snark-là-gì">zk-SNARK là gì?</h2>
-<h3 id="các-khái-niệm">Các khái niệm</h3>
-<p>Để verify 1 Tx, Validator cần phải xem thông tin trong Tx đó và kiểm tra xem có thoả mãn không. Nhưng nếu các Tx là private thì Validator sẽ kiểm tra như thế nào? Lúc này, zk-SNARK được ra đời.</p>
+&lt;h2 id=&quot;heading-zk-snark-là-gì&quot;&gt;zk-SNARK là gì?&lt;/h2&gt;
+&lt;h3 id=&quot;heading-các-khái-niệm&quot;&gt;Các khái niệm&lt;/h3&gt;
+&lt;p&gt;Để verify 1 Tx, Validator cần phải xem thông tin trong Tx đó và kiểm tra xem có thoả mãn không. Nhưng nếu các Tx là private thì Validator sẽ kiểm tra như thế nào? Lúc này, zk-SNARK được ra đời.&lt;/p&gt;
 
-<p><strong> SNARK </strong>: là 1 proof ngắn gọn để chứng minh 1 statement là đúng. Ngoài ra, nó cần nhanh để xác thực bởi người xác thực. <br />
-Ví dụ: statement: “Tôi biết một m mà SHA256(m) = 0”.
-<strong> zk-SNARK </strong>: là SNARK không tiết lộ gì về nội dung. Ví dụ trong statement kia thì zk-SNARK sẽ không tiết lộ gì về giá trị của m.</p>
+&lt;p&gt;&lt;strong&gt; SNARK &lt;/strong&gt;: là 1 proof ngắn gọn để chứng minh 1 statement là đúng. Ngoài ra, nó cần nhanh để xác thực bởi người xác thực. &lt;br /&gt;
+Ví dụ: statement: &quot;Tôi biết một m mà SHA256(m) = 0&quot;.
+&lt;strong&gt; zk-SNARK &lt;/strong&gt;: là SNARK không tiết lộ gì về nội dung. Ví dụ trong statement kia thì zk-SNARK sẽ không tiết lộ gì về giá trị của m.&lt;/p&gt;
 
-<p>Ứng dụng:</p>
-<ul>
-  <li>Private Tx</li>
-  <li>zkBrigde: nối các chuỗi khối</li>
-  <li>tính riêng tư trong zk-Rollups</li>
-</ul>
+&lt;p&gt;Ứng dụng:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Private Tx&lt;/li&gt;
+  &lt;li&gt;zkBrigde: nối các chuỗi khối&lt;/li&gt;
+  &lt;li&gt;tính riêng tư trong zk-Rollups&lt;/li&gt;
+&lt;/ul&gt;
 
-<h3 id="kĩ-thuật-zk-snark">Kĩ thuật zk-SNARK</h3>
+&lt;h3 id=&quot;heading-kĩ-thuật-zk-snark&quot;&gt;Kĩ thuật zk-SNARK&lt;/h3&gt;
 
-<h4 id="arithmetic-circuits-ac">Arithmetic Circuits (AC)</h4>
-<p>Cho 1 trường hữu hạn:  𝔽={0, …, 𝑝−1} với p là số nguyên tố &gt; 2. <br />
-Arithmetic Circuit: C: 𝔽^𝑛 ⇾ 𝔽. <br />
-C lấy input là list gồm n phần tử thuộc F, output là 1 phần tử thuộc F. <br />
+&lt;h4 id=&quot;heading-arithmetic-circuits-ac&quot;&gt;Arithmetic Circuits (AC)&lt;/h4&gt;
+&lt;p&gt;Cho 1 trường hữu hạn:  𝔽={0, …, 𝑝−1} với p là số nguyên tố &amp;gt; 2. &lt;br /&gt;
+Arithmetic Circuit: C: 𝔽^𝑛 ⇾ 𝔽. &lt;br /&gt;
+C lấy input là list gồm n phần tử thuộc F, output là 1 phần tử thuộc F. &lt;br /&gt;
 |C| = số gates trong mạch C.
-// minh hoạ</p>
+// minh hoạ&lt;/p&gt;
 
-<p><strong> Ví dụ: </strong></p>
-<ul>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>C_hash(h, m) = 0 nếu SHA256(m) = h, ≠0 nếu ngược lại.</td>
-          <td>C_hash</td>
-          <td>~ 20K gates</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>C_sig(pk, msg, σ) = 0 nếu chữ kí σ là hợp lệ trên msg với pk.</li>
-</ul>
+&lt;p&gt;&lt;strong&gt; Ví dụ: &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;C_hash(h, m) = 0 nếu SHA256(m) = h, ≠0 nếu ngược lại.&lt;/td&gt;
+          &lt;td&gt;C_hash&lt;/td&gt;
+          &lt;td&gt;~ 20K gates&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;C_sig(pk, msg, σ) = 0 nếu chữ kí σ là hợp lệ trên msg với pk.&lt;/li&gt;
+&lt;/ul&gt;
 
-<h4 id="argument-system">Argument System</h4>
-<p>Cho một AC: C(x, w) -&gt; F với:</p>
-<ul>
-  <li>x: là statement công khai</li>
-  <li>w: secret witness.</li>
-</ul>
+&lt;h4 id=&quot;heading-argument-system&quot;&gt;Argument System&lt;/h4&gt;
+&lt;p&gt;Cho một AC: C(x, w) -&amp;gt; F với:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;x: là statement công khai&lt;/li&gt;
+  &lt;li&gt;w: secret witness.&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Prover P cần thuyết phục các Verifier V rằng tồn tại w mà C(x, w) = 0 nhưng không muốn gửi w vì lý do bảo mật.</p>
+&lt;p&gt;Prover P cần thuyết phục các Verifier V rằng tồn tại w mà C(x, w) = 0 nhưng không muốn gửi w vì lý do bảo mật.&lt;/p&gt;
 
-<p>Có 2 loại argument systems: Interactive vs Non-interactives.</p>
-<ul>
-  <li>Interactive: P &lt;-&gt; V tương tác với nhau nhiều lần để V đồng ý. Cách này chỉ áp dụng với hệ thống có ít V.</li>
-  <li>Non-interactive: P chỉ gửi duy nhất 1 msg là proof cho V. Cách này có ích khi có nhiều Verifier (Ví dụ nhiều Validator muốn xác thực 1 Tx).</li>
-</ul>
+&lt;p&gt;Có 2 loại argument systems: Interactive vs Non-interactives.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Interactive: P &amp;lt;-&amp;gt; V tương tác với nhau nhiều lần để V đồng ý. Cách này chỉ áp dụng với hệ thống có ít V.&lt;/li&gt;
+  &lt;li&gt;Non-interactive: P chỉ gửi duy nhất 1 msg là proof cho V. Cách này có ích khi có nhiều Verifier (Ví dụ nhiều Validator muốn xác thực 1 Tx).&lt;/li&gt;
+&lt;/ul&gt;
 
-<h4 id="nark-non-interactive-argument-of-knowledge">NARK: Non-interactive Argument of Knowledge</h4>
-<p>Với mạch C(x, w) ⇾  𝔽. <br />
-<strong> Preprocessing </strong>: S(C) ⇾ public parameters(Sp, Sv).</p>
+&lt;h4 id=&quot;heading-nark-non-interactive-argument-of-knowledge&quot;&gt;NARK: Non-interactive Argument of Knowledge&lt;/h4&gt;
+&lt;p&gt;Với mạch C(x, w) ⇾  𝔽. &lt;br /&gt;
+&lt;strong&gt; Preprocessing &lt;/strong&gt;: S(C) ⇾ public parameters(Sp, Sv).&lt;/p&gt;
 
-<p>Minh hoạ:</p>
+&lt;p&gt;Minh hoạ:&lt;/p&gt;
 
-<p>Một preprocessing NARK là bộ 3 (S, P, V):</p>
-<ul>
-  <li>S(C) ⇾ public parameters(Sp, Sv).</li>
-  <li>P(Sp, x, w) ⇾  proof  𝜋</li>
-  <li>V(𝑣𝑝, 𝒙, 𝝅)  ⇾  accept / reject</li>
-</ul>
+&lt;p&gt;Một preprocessing NARK là bộ 3 (S, P, V):&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;S(C) ⇾ public parameters(Sp, Sv).&lt;/li&gt;
+  &lt;li&gt;P(Sp, x, w) ⇾  proof  𝜋&lt;/li&gt;
+  &lt;li&gt;V(𝑣𝑝, 𝒙, 𝝅)  ⇾  accept / reject&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><strong> Yêu cầu </strong></p>
-<ul>
-  <li>Complete: ∀𝑥, 𝑤:  𝐶(𝒙, 𝒘) = 0 ⇒ Pr[ V(𝑣𝑝, 𝑥, P(𝑝𝑝, 𝒙, 𝒘)) = accept] = 1.</li>
-  <li>Argument of knowledge: V accepts ⇒ P biết 𝑤</li>
-  <li>Zero knowledge: (𝐶, 𝑝𝑝,𝑣𝑝 ,𝒙, 𝜋)  không tiết lộ gì về 𝒘</li>
-</ul>
+&lt;p&gt;&lt;strong&gt; Yêu cầu &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Complete: ∀𝑥, 𝑤:  𝐶(𝒙, 𝒘) = 0 ⇒ Pr[ V(𝑣𝑝, 𝑥, P(𝑝𝑝, 𝒙, 𝒘)) = accept] = 1.&lt;/li&gt;
+  &lt;li&gt;Argument of knowledge: V accepts ⇒ P biết 𝑤&lt;/li&gt;
+  &lt;li&gt;Zero knowledge: (𝐶, 𝑝𝑝,𝑣𝑝 ,𝒙, 𝜋)  không tiết lộ gì về 𝒘&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><strong> Succinct </strong>
-Một NARK gọi là SNARK khi việc tạo ra và xác minh proof với thời gian nhanh:</p>
-<ul>
-  <li>S(𝐶)  ⇾  public parameters  (S𝑝, S𝑣)</li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>P(𝑝𝑝, 𝒙, 𝒘)  ⇾  short proof  𝜋;</td>
-          <td>𝜋</td>
-          <td>=𝑂_𝜆(𝐥𝐨𝐠⁡(</td>
-          <td>𝑪</td>
-          <td>))</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>V(𝑣𝑝, 𝒙, 𝝅)    nhanh để thẩm định:    time(V) = 𝑂_𝜆 (</td>
-          <td>𝑥</td>
-          <td>, 𝐥𝐨𝐠⁡(</td>
-          <td>𝑪</td>
-          <td>)).</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-</ul>
+&lt;p&gt;&lt;strong&gt; Succinct &lt;/strong&gt;
+Một NARK gọi là SNARK khi việc tạo ra và xác minh proof với thời gian nhanh:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;S(𝐶)  ⇾  public parameters  (S𝑝, S𝑣)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;P(𝑝𝑝, 𝒙, 𝒘)  ⇾  short proof  𝜋;&lt;/td&gt;
+          &lt;td&gt;𝜋&lt;/td&gt;
+          &lt;td&gt;=𝑂_𝜆(𝐥𝐨𝐠⁡(&lt;/td&gt;
+          &lt;td&gt;𝑪&lt;/td&gt;
+          &lt;td&gt;))&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;V(𝑣𝑝, 𝒙, 𝝅)    nhanh để thẩm định:    time(V) = 𝑂_𝜆 (&lt;/td&gt;
+          &lt;td&gt;𝑥&lt;/td&gt;
+          &lt;td&gt;, 𝐥𝐨𝐠⁡(&lt;/td&gt;
+          &lt;td&gt;𝑪&lt;/td&gt;
+          &lt;td&gt;)).&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Do đó, với SNARK thì việc đọc toàn bộ mạch C là không kịp thời gian. VÌ vậy cần bước preprocessing.</p>
+&lt;p&gt;Do đó, với SNARK thì việc đọc toàn bộ mạch C là không kịp thời gian. VÌ vậy cần bước preprocessing.&lt;/p&gt;
 
-<p><strong> Tóm lại: </strong></p>
-<ul>
-  <li>SNARK: bộ (S, P, V) thoả mãn: Complete, Argument of knowledge, Succinct.</li>
-  <li>zk-SNARK: SNARK có zero knowledge.</li>
-</ul>
+&lt;p&gt;&lt;strong&gt; Tóm lại: &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;SNARK: bộ (S, P, V) thoả mãn: Complete, Argument of knowledge, Succinct.&lt;/li&gt;
+  &lt;li&gt;zk-SNARK: SNARK có zero knowledge.&lt;/li&gt;
+&lt;/ul&gt;
 
-<h4 id="các-loại-preprocessing">Các loại Preprocessing</h4>
-<ul>
-  <li>trusted setup per circuit: S(C) sử dụng data bí mật (Ví dụ: randombit r).</li>
-  <li>trusted but universal: Randombit r độc lập khỏi C: <br />
+&lt;h4 id=&quot;heading-các-loại-preprocessing&quot;&gt;Các loại Preprocessing&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;trusted setup per circuit: S(C) sử dụng data bí mật (Ví dụ: randombit r).&lt;/li&gt;
+  &lt;li&gt;trusted but universal: Randombit r độc lập khỏi C: &lt;br /&gt;
   S = (S_init, S_index) với:
-    <ul>
-      <li>𝑆_𝑖𝑛𝑖𝑡 (𝜆;𝑟) ⇾ U: 1 lần duy nhất.</li>
-      <li>𝑆_𝑖𝑛𝑑𝑒𝑥 (U,𝐶) ⇾ (S𝑝, S𝑣): Không chứa secret data.</li>
-    </ul>
-  </li>
-</ul>
-
-<h4 id="argurment-of-knowledge">Argurment of knowledge</h4>
-<p>P biết w nếu w có thể được extracted từ P. <br />
-Bộ 3 (S, P, V) là Argurment of knowledge với mạch C nếu:</p>
-<ul>
-  <li>A = (A0, A1) là adversary mà có thể bị extracted thông tin:
-    <ul>
-      <li>S(C) ⇾ (Sp, Sv),  A0(Sp) ⇾ (x, st)</li>
-      <li>𝜋 ⇽ A1(𝑝𝑝, 𝑥, st):   Pr[V(vp, 𝑥, 𝜋) = accept] &gt; 1/10^6	(không đáng kể )</li>
-    </ul>
-  </li>
-  <li>Có extractor E (sử dụng A1 là blackbox) và tạo ra được w bằng tương tác với A1(Sp, x, st).</li>
-</ul>
-
-<h4 id="zero-knowledge">Zero knowledge</h4>
-<p>Proof 𝜋 không tiết lộ về 𝒘 nếu Verifier tự tạo 𝜋, hay Verifier không học được gì từ proof 𝜋. <br />
-<strong> Tức là: </strong></p>
-<ul>
-  <li>Tồn tại 1 hàm Sim() sao cho: (S𝑝, S𝑣, 𝜋) ⇽ Sim(𝐶,𝑥). Hay Sim() có thể tạo ra proof 𝜋 mà không cần w.</li>
-</ul>
-
-<h2 id="lời-kết">Lời kết</h2>
-<p>Ở trên là sơ lược về tính riêng tư trong Blockchain và cái nhìn tổng quan về zk-SNARK.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Trong hệ thống tài chính, việc riêng tư là điều cần thiết. Một vài ví dụ như: Một nhà sản xuất không muốn tiết lộ số tiền họ trả cho nhà cung cấp của mình cho các bộ phận, Người dùng cuối cần quyền riêng tư để thuê, quyên góp, mua hàng,… Do đó, blockchain không thể phát huy hết tiềm năng nếu không có một số Tx riêng tư.]]></summary></entry><entry><title type="html">Mở rộng Blockchain (Phần 2)</title><link href="http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2" rel="alternate" type="text/html" title="Mở rộng Blockchain (Phần 2)" /><published>2023-08-19T00:00:00+07:00</published><updated>2023-08-19T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2"><![CDATA[<p>Trong bài viết hôm nay, mình sẽ giới thiệu đến mọi người một kĩ thuật giúp tăng tốc độ các Tx trong mạng blockchain. Đó là Rollups.</p>
-
-<h2 id="ý-tưởng">Ý tưởng</h2>
-<p>Trong layer-1 của blockchain như Ethereum chứa world state. Khi một giao dịch được đưa vào, world state sẽ bị thay đổi. Từ đây, ý tưởng cơ bản của Rollup là hợp hàng trăm Tx lại thành một Tx duy nhất, từ đó giúp tăng tốc độ lên khoảng 100 lần.</p>
-
-<p>Ta có hình minh hoạ như sau:</p>
-
-<p>Từ đây, ta gọi Rollup state là L2, để phân biệt với L1 (layer-1 của blockchain). <br />
-Rollup contract ở L1 sẽ giữ các tài sản và Merkle state root của các Rollup account. Rollup state chỉ bao gồm số dư của các Rollup account.</p>
-
-<p>/// hình ảnh</p>
-
-<h2 id="hiệu-năng">Hiệu năng</h2>
-<p><strong> Chuyển tiền trong 1 Rollup </strong></p>
-<ul>
-  <li>Chuyển tiền trong 1 Rollup (L2 -&gt; L2) rất dễ dàng. Các coordinators chỉ cần cập nhập lại Merkle Root của Rollup Contract trên L1 là xong.</li>
-</ul>
-
-<p><strong> Chuyển tiền từ funds đến Rollup </strong></p>
-<ul>
-  <li>Chuyển tiền từ funds đến Rollup (L1 -&gt; L2) thì chậm và đắt. Lý do vì cần phải update các state trong L1, số dư trong contract và cả trong Rollup và cập nhập lại Root của contract đó.</li>
-</ul>
-
-<p><strong> Chuyển tiền ra khỏi Rollup </strong></p>
-<ul>
-  <li>Chuyển tiền ra khỏi Rollup cần phí gas thêm từ L1 trong quá trình chuyển vì cần post nhiều dữ liệu.</li>
-</ul>
-
-<p><strong> Chuyển tiền từ 2 Rollup </strong></p>
-<ul>
-  <li>Nếu chuyển tiền từ 2 Rollup (L2 -&gt; L2’) mà qua L1 thì sẽ rất đắt, nhưng nếu qua 1 cầu trực tiếp L2 &lt;=&gt; L2 thì sẽ rẻ.</li>
-</ul>
-
-<h3 id="chạy-contract-trong-rollup">Chạy contract trong Rollup</h3>
-<p>Khi contract chạy trong Rollup (Ví dụ Uniswap), thì việc tương tác với contract đó sẽ rẩt rẻ cho người dùng. <br />
-<strong> Coordinator </strong> duy trì trạng thái của tất cả contracts trong hệ thống Rollup:</p>
-<ul>
-  <li>Nó cập nhập Uniswap Merkle Leaf mỗi khi 1 Tx nào đó đến Uniswap</li>
-  <li>Ghi update cho Rollup state root trên L1.</li>
-</ul>
-
-<p>Rollup có chức năng giống Ethereum, nhưng không có cơ chế đồng thuận vì nó dựa vào L1 để chứng thực trạng thái hiện tại.</p>
-
-<h2 id="các-vấn-đề">Các vấn đề</h2>
-<p><strong> Vấn đề 1 </strong>: Điều gì xảy ra nếu Coordinator không trung thực. Nó có thể lấy hết tiền trong Rollup hoặc tạo các giao dịch giả.</p>
-
-<p><strong> Vấn đề 2 </strong>: Nếu Coordinator ngừng cung cấp dịch vụ ? Làm sao để lấy lại trạng thái Rollup để đưa cho Coordinator mới.</p>
-
-<h2 id="các-phương-án-giải-quyết">Các phương án giải quyết</h2>
-<h3 id="vấn-đề-1-coordinator-không-trung-thực">Vấn đề 1: Coordinator không trung thực</h3>
-<p>Coordinator không thể lấy tiền từ Rollup users, vì L1 sẽ xác minh update trạng thái của Rollup bằng cách kiểm tra xem tất cả các Tx có valid và được ký hợp lệ bởi người dùng hay không. <br />
-Để làm điều này một cách rẻ, có thể có các cách tiếp cận sau:</p>
-
-<h4 id="validity-proofs-còn-gọi-là-zk-rollup">Validity Proofs (còn gọi là zk-Rollup)</h4>
-<p>Khi coordinator gửi updated root và Tx List cho L1, nó cần gửi kèm theo một SNARK proof cho valid Tx để chứng minh tập hàng trăm các Tx này là hợp lệ. <br />
-<strong> SNARK proof </strong> là loại proof ngắn và nhanh để xác minh, từ đó giúp việc xác minh trên L1 trở nên rẻ. (với sự giúp đỡ của EVM)  <br />
-Bao gồm:</p>
-<ul>
-  <li>Public statement:   (old state root,  new state root,  Tx list)</li>
-  <li>Witness: (state trước - sau của những tài khoản bị thay đổi, bằng chứng Merkle, chữ kí của user)</li>
-  <li>SNARK proof sẽ chứng minh rằng:
-    <ul>
-      <li>Tất cả chữ ký trên đều valid</li>
-      <li>Tất cả bằng chứng Merkle đều valid</li>
-      <li>Trạng thái sau = trạng thái trước + Tx.</li>
-    </ul>
-  </li>
-</ul>
-
-<p><strong> zkEVM </strong>  <br />
-Khi một contract (Uniswap) chạy trong Rollup:</p>
-<ul>
-  <li>Coordinator sẽ tạo 1 SNARK proof về việc thực hiện đúng 1 chương trình EVM. Đó gọi là zkEVM.</li>
-  <li>Tạo bằng chứng thì sẽ yêu cầu rất cao về tính toán nhưng khi xác minh thì lại rất nhanh.</li>
-</ul>
-
-<p>Có 2 chức năng của zkEVM là:</p>
-<ul>
-  <li>Chứng minh EVM bytecode chạy đúng</li>
-  <li>Biên dịch Solidity to SNARK-friendly circuit.</li>
-</ul>
-
-<p><strong> Kết quả </strong></p>
-<ul>
-  <li>Rollup contract đảm bảo coordinator không thể gian lận và sẽ chấp nhận các update nếu có proof phù hợp</li>
-  <li>Ai cũng có thể làm coordinator nếu có đủ sức mạnh tính toán</li>
-</ul>
-
-<h4 id="fraud-proof-còn-gọi-là-optimistic-rollup">Fraud proof (còn gọi là Optimistic Rollup)</h4>
-<ul>
-  <li>Coordinator sẽ stake 1 khoản vào L1 Rollup Contract</li>
-  <li>Coordinator sẽ đưa updated root lên L1 mà không cần bằng chứng</li>
-  <li>Nếu update không valid, trong vòng 7 ngày ai cũng có thể chứng minh điều này bằng việc gửi fraud proof.</li>
-  <li>Nếu fraud proof là đúng, coordinator sẽ bị Slash, ngược lại người gửi proof sẽ tốn phí.</li>
-</ul>
-
-<p>Để chứng minh Fraud đến Rollup contract trong L1, ta sẽ sử dụng Binary Search. <br />
-Việc Coordinator và Người gửi Proof (A) tạo ra state(n) và state(n’) khác nhau buộc L1 cần kiểm tra xem ai mới là người đúng. Do đó, sử dụng Merkle tree và tìm kiếm nhị phân, với việc chia đôi từ state(n/2), state(n/4)… có thể dễ dàng tìm được xem state nào bị sai sau Log2(n) round.</p>
-
-<p>Tuy nhiên, cách này gặp 1 số khó khăn như:</p>
-<ul>
-  <li>Giao dịch chỉ giải quyết sau 7 ngày (Sau khi hết hạn gian lận)</li>
-  <li>Khi 1 bằng chứng Fraud được chấp nhận, các Tx sau phải được gửi lại</li>
-</ul>
-
-<p><strong> Kết quả </strong></p>
-<ul>
-  <li>Có thể dễ dàng đưa smartcontract vào optimistic Rollup</li>
-  <li>Thông lượng Tx cao: ~ 4000Tx / s</li>
-  <li>Ai cũng có thể làm coordinator và verifier</li>
-  <li>Giải quyết giao dịch chậm 7 ngày.</li>
-</ul>
-
-<h3 id="vấn-đề-2-coordinator-ngừng-cung-cấp-dịch-vụ">Vấn đề 2: Coordinator ngừng cung cấp dịch vụ</h3>
-<p>Cần tạo Coordinator mới, nhưng lại cần trạng thái mới nhất của Rollup.</p>
-
-<p>Ta thấy, Rollup state có thể phục hồi từ dữ liệu trong L1 bằng việc đọc các msg và re-excecute Tx. Nhưng việc này sẽ rất đắt vì tương tác nhiều trên L1 và cần nhiều dữ liệu.</p>
-
-<p>Để giảm Tx fees:</p>
-<ul>
-  <li>Lưu L2 state root trong L1</li>
-  <li>Lưu Tx data với Data Availability Committee (DAC):
-    <ul>
-      <li>Gồm tập hợp các node tin cậy giữ cho data available</li>
-      <li>Rẻ hơn lưu ở L1</li>
-      <li>L1 chấp nhận update khi và chỉ khi tất cả các node trong DAC đều kí. Từ đó giúp đảm bảo các member trong DAC đều chấp nhập dữ liệu Tx.</li>
-    </ul>
-  </li>
-  <li>Tạo 1 coordinator mới phụ thuộc vào tính khả dụng của DAC</li>
-</ul>
-
-<h4 id="validium">Validium</h4>
-<p>1 L2 sử dụng DAC để lưu trữ và Validity proof (SNARKs):</p>
-<ul>
-  <li>Phù hợp cho tài sản giá trị thấp</li>
-  <li>Chỉ các thành viên DAC mới thấy được dữ liệu</li>
-</ul>
-
-<h4 id="điều-gì-xảy-ra-nếu-coordinator-từ-chối-1-tx">Điều gì xảy ra nếu Coordinator từ chối 1 Tx</h4>
-<ul>
-  <li>Người tạo có thể post Tx trực tiếp lên L1 Rollup contract.</li>
-  <li>L1 Rollup contract chỉ chấp nhận update khi mà update có cả Tx trên. Từ đó dẫn đến toàn bộ Rollup bị đóng băng.</li>
-</ul>
-
-<h2 id="lời-kết">Lời kết</h2>
-<p>Ở trên đây là các cách được áp dụng để tăng tốc độ Tx trong blockchain.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Trong bài viết hôm nay, mình sẽ giới thiệu đến mọi người một kĩ thuật giúp tăng tốc độ các Tx trong mạng blockchain. Đó là Rollups.]]></summary></entry><entry><title type="html">Mở rộng Blockchain (Phần 1)</title><link href="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1" rel="alternate" type="text/html" title="Mở rộng Blockchain (Phần 1)" /><published>2023-08-18T00:00:00+07:00</published><updated>2023-08-18T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1"><![CDATA[<p>Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.</p>
-
-<h2 id="payment-channel-ý-tưởng-cơ-bản">Payment Channel: Ý tưởng cơ bản</h2>
-<p>A và B đang muốn giao dịch với nhau. A gửi cho B 5 lần, mỗi lần là 0.01 BTC, là 5 Txs. Thay vì làm như thế, có thể làm như sau: A gửi cho B 1BTC. Sau 1 khoảng thời gian (ví dụ 1 tháng), B sẽ trả lại số BTC dư mà chưa dùng. Vậy số giao dịch chỉ giới hạn đến 2.</p>
-
-<h2 id="unidirectional-payment-channel-kênh-thanh-toán-1-chiều">Unidirectional Payment Channel: Kênh thanh toán 1 chiều</h2>
-<p>Ta có: UTXO A: 1BTC.</p>
-<ul>
-  <li>Tx1: 0.99 cho A/ 0.01 cho B từ UTXO A.</li>
-  <li>Tx2: 0.98 cho A/ 0.02 cho B</li>
-  <li>….</li>
-  <li>Tx5: 0.95 cho A/ 0.05 cho B</li>
-</ul>
-
-<p>Xong xuôi, B post Tx5 lên Blockchain. Nhưng có vấn đề xảy ra là nếu A sử dụng UTXO trước khi B post lên thì Tx5 mà B post lên sẽ không hợp lệ. Do đó, cần sử dụng 1 địa chỉ chung UTXO AB có dạng Multisig 2-2. Điều này sẽ ngăn chặn việc A dùng UTXO vì chưa có chữ kí của B.</p>
-
-<p>Nhưng nếu B không post Tx5 lên chuỗi thì sao? Liệu A có lấy lại được 0.95 BTC. Để giải quyết vấn đề này, cần sử dụng một time-locked Tx, đảm bảo sau một khoảng thời gian, nếu B không post Tx5 lên, thì A sẽ lấy lại được 1BTC (B phải gửi cho A). Ngoài ra, Tx này phải được kí trước khi đưa BTC vào trong AB.</p>
-
-<p>Minh hoạ:</p>
-
-<p>Sau khi trả hoặc lấy lại tiền, kênh sẽ đóng.</p>
-
-<h2 id="bidirectional-payment-channel-kênh-thanh-toán-đa-chiều">Bidirectional Payment Channel: Kênh thanh toán đa chiều</h2>
-<p>Không sử dụng 2 kênh thanh toán 1 chiều thay thế. Thay vào đó, ta sẽ sử dụng contract.</p>
-
-<h3 id="trên-ethereum">Trên Ethereum</h3>
-<p>A và B sẽ tạo một contract chung, mỗi người đóng góp 0.5 ETH. Lúc này, trạng thái của contract sẽ là: <br />
-A: 0.5 ETH      B: 0.5 ETH      Nonce: 0. <br />
-Off chain: B gửi 0.1 ETH cho A bằng cách cả 2 ký vào state mới: <br />
-A: 0.6,  B: 0.4,  Nonce: 1, A sig,  B sig   <br />
-Ở trên chuỗi, contract vẫn không đổi. Giả sử, offchain, A và B đã gửi đi gửi lại nhiều giao dịch:<br />
-A: 0.3,  B: 0.7,  Nonce: 7, A sig,  B sig <br /></p>
-
-<p>Lúc này, A muốn kết thúc kênh, sẽ gửi số dư cuối cùng và các chữ ký cho contract. Lúc này sẽ bắt đầu Challenge Period (ví dụ 3 ngày). <br />
-Onchain: A: 0.3,    B: 0.7,     Nonce: 7. <br /></p>
-<ul>
-  <li>Nếu trong 3 ngày, B không làm gì thì số tiền và trạng thái của contract sẽ theo những gì A gửi lên.</li>
-  <li>Ngược lại, nếu B gửi lên 1 state với số Nonce lớn hơn (ví dụ = 9), thì contract sẽ theo state của B.</li>
-</ul>
-
-<p>Vấn đề được đưa ra là việc A và B phải quan sát thường xuyên xem đối phương có gửi state cũ lên không để có thể kịp thời ngăn chặn. Điều này được giải quyết bằng sự trợ giúp của WatchTower.</p>
-
-<p>Tóm lại, việc giao dịch sẽ chỉ tốn 2 lần onchain:</p>
-<ul>
-  <li>Tạo channel</li>
-  <li>Đóng channel và gửi tiền.</li>
-</ul>
-
-<h3 id="trên-bitcoin">Trên Bitcoin</h3>
-<p>Vì trên UTXO không có trạng thái, nên sẽ khó khăn hơn để tạo 1 kênh thanh toán 2 chiều. Giải pháp được đưa ra là khi update kênh theo A, thì A sẽ nhận được Tx mà làm trạng thái cũ của B mất hiệu lực.</p>
-
-<h4 id="utxo">UTXO</h4>
-<p>Ta sẽ tạo UTXO mà có thể dùng theo 1 trong 2 cách (sử dụng IF trong Opcode):</p>
-<ul>
-  <li>Relative time-lock: UTXO chứa số t. 1 Tx được kí hợp lệ có thể sử dụng UTXO này sau t blocks (hoặc nhiều hơn) sau khi nó được tạo ra.</li>
-  <li>Hash lock: UTXO chứa một số X. Một Tx được kí hợp lệ có thể sử dụng UTXO này nếu có số x mà: SHA256(x) = X.
-(x được gọi là hash preimage của X).</li>
-</ul>
-
-<h4 id="ví-dụ">Ví dụ:</h4>
-<p>Giả sử A và B đưa BTC vào trong 2-2 Multisig UTXO AB, với A là 7BTC, B là 3BTC. <br /></p>
-<ul>
-  <li>A tạo số ngẫu nhiên x, và X = SHA256(x).</li>
-  <li>B tạo số ngẫu nhiên y, và Y = SHA256(y).</li>
-  <li>Sau đó, A đưa X cho B và ngược lại.</li>
-  <li>A tạo Tx1 với input là UTXO AB, output là: <br />
-  1: pay 7 -&gt; A,  <br />
-  2: 3 -&gt; B (7 ngày timelock) hoặc 3 -&gt; A (với điều kiện đưa ra số y mà Y = SHA256(y)).</li>
-  <li>B tạo Tx2 với input là UTXO AB, output là: <br />
-  1: pay 3 -&gt; B, <br />
-  2: 7 -&gt; A (7 ngày timelock) hoặc 7 -&gt; B (với điều kiện đưa ra số x mà X = SHA256(x)).</li>
-  <li>A có thể post Tx2, đợi 7 ngày và lấy 7 BTC về.</li>
-  <li>Giờ nếu A gửi 1BTC cho B offchain. A tạo x’ và X’ = SHA256(x’). Sau đó đưa X’ cho B.</li>
-  <li>A tạo Tx3 với input là UTXO AB, output là: <br />
-  1: pay 6 -&gt; A,  <br />
-  2: 4 -&gt; B (7 ngày timelock) hoặc 4 -&gt; A (với điều kiện đưa ra số y mà Y = SHA256(y)).</li>
-  <li>B tạo Tx4 với input là UTXO AB, output là: <br />
-  1: pay 4 -&gt; B, <br />
-  2: 6 -&gt; A (7 ngày timelock) hoặc 6 -&gt; B (với điều kiện đưa ra số x’ mà X’ = SHA256(x’)).</li>
-  <li>Lúc này, A có thể post Tx3 và đợi 7 ngày. Nhưng nếu A post stale state là Tx2, B sẽ sử dụng x để lấy hết BTC. Do đó, A không thể gian lận và post lên trạng thái cũ.</li>
-</ul>
-
-<h2 id="multihop-payments-thanh-toán-nhiều-lần">Multihop payments: Thanh toán nhiều lần</h2>
-<p>A muốn thanh toán cho C qua trung gian không tin cậy là B (Vì A, C có channel với B).</p>
-
-<h3 id="the-lightning-network">The lightning network</h3>
-<p>Nhiều open payment channel 2 chiều. Khi A muốn tạo kênh với B thì chỉ cần tìm tuyến đường qua đồ thị với đỉnh là các trung gian.</p>
-
-<h2 id="kết-luận">Kết luận</h2>
-<p>Đây là cách tiếp cận đầu tiên để tăng tốc độ các Tx trong blockchain. Ở bài viết sau, mình sẽ giới thiệu một kĩ thuật khác giúp giải quyết vấn đề này.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.]]></summary></entry><entry><title type="html">Hệ thống vay DeFi</title><link href="http://localhost:4000/blog/2023/08/17/defi-lending-system" rel="alternate" type="text/html" title="Hệ thống vay DeFi" /><published>2023-08-17T00:00:00+07:00</published><updated>2023-08-17T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/17/defi-lending-system</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/17/defi-lending-system"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì.</p>
-
-<h2 id="vay-trong-hệ-thống-tập-trung">Vay trong hệ thống tập trung</h2>
-<p>Vì sao cần vay? Có các lý do chính như sau:</p>
-<ul>
-  <li>Ví dụ, Bob cần vay ETH để mua một NFT trong game nhưng anh ấy không muốn bán tài sản của mình đi.</li>
-  <li>Là chiến lược đầu tư, khi thế chấp ETH để nhận UNI, chờ tỉ giá UNI/ETH giảm, thì số UNI bỏ ra để mua 1ETH trả khoản vay sẽ ít hơn, từ đó nhận được UNI lãi.</li>
-</ul>
-
-<p>Trong hệ thống tập trung, người cho vay gửi tiền vào một Tổ chức tài chính tập trung. Người vay sẽ thế chấp 1 loại tài sản nào đó và sẽ được vay. Sau đó, người vay sẽ phải trả tiền lãi cho đến khi trả xong phần đã vay. Người cho vay sẽ được nhận 1 phần lãi đó. <br /> Tuy nhiên, nếu người vay không trả được khoản vay, Tổ chức tài chính tập trung sẽ mua lại tài sản thế chấp, và trả lại cho người vay phần còn thừa. <br /> Nếu giá trị tài sản thế chấp bị thay đổi và ít hơn tài sản vay, việc thanh lý tài sản thế chấp sẽ xảy ra.</p>
-
-<p>Tuy nhiên, với hệ thống tập trung, có các vấn đề được thấy rõ như sau:</p>
-<ul>
-  <li>User cần tin tưởng Tổ chức, nhưng nếu bị hack hoặc bị xâm nhập trái phép, khả năng mất tiền rất cao.</li>
-  <li>Tổ chức điều chỉnh tỉ lệ lãi,..</li>
-  <li>Người cho vay sẽ nhận ít tiền lãi hơn, vì phải chia 1 phần cho tổ chức.</li>
-</ul>
-
-<p>Do đó, việc tạo ra hệ thống vay phi tập trung không cần bên thứ 3 và áp dụng tính lập trình là mục tiêu được người dùng hướng đến.</p>
-
-<h2 id="các-thuật-ngữ">Các thuật ngữ</h2>
-<p><strong> Collateral </strong>: Tài sản thế chấp. Vai trò là đặt cọc để vay.</p>
-
-<p><strong> Over-collateralization </strong>: Thế chấp vượt mức. Người vay phải đảm bảo giá trị thế chấp &gt; giá trị vay.</p>
-
-<p><strong> Under-collateralization </strong>: Thế chấp dưới mức. Xảy ra khi giá trị thế chấp &lt; giá trị vay.</p>
-
-<p><strong> Collateral Factor </strong>: Giá trị lớn nhất có thể vay, tính theo giá trị thế chấp. Ví dụ CF = 0.6, thế chấp có giá trị là 1000 DAI thì giá trị vay lớn nhất có thể là 0.6 * 1000 = 600 DAI.<br />
-Với tài sản có độ biến động cao, CF thường thấp, ngược lại thì CF cao. Ví dụ: ETH, DAI:  83%, UNI: 75%, MKR:  73%</p>
-
-<p><strong> Thanh lý </strong> : Nếu số tiền vay + lãi (gọi là nợ - Debt) &gt; CF * Collateral (1) <br />
-=&gt; Tài sản thế chấp sẽ được thanh lý đến khi (1) không còn xảy ra.  Tỉ lệ thanh lý giúp người cho vay có thời gian thanh lý trước khi gặp rủi ro.</p>
-
-<p><strong> Health </strong> : Health của 1 món nợ được tính bằng công thức sau: <br /> <img src="https://latex.codecogs.com/svg.image?%20BorrowCapacity=%5Csum_%7Bi%7D%5E%7B%7Dvalue(collateral_%7Bi%7D)*CF_%7Bi%7D" alt="Alt text" /> <br />
-<img src="https://latex.codecogs.com/svg.image?health=%5Cfrac%7BBorowCapacity%7D%7Btotal%20Debt%7D" alt="" /> <br /></p>
-
-<p>Nếu health &lt; 1: Thanh lý sẽ được kích hoạt đến khi health &gt;= 1.</p>
-
-<p><strong> Liquidity </strong>: Thanh khoản. Là loại tài sản mà việc mua bán trên thị trường không thay đổi giá trị thị trường của nó. Nó cũng có khả năng chuyển thành tiền mặt.</p>
-
-<h2 id="defi-lending">DeFi Lending</h2>
-<h3 id="ý-tưởng-với-orderbook-dapp">Ý tưởng với OrderBook Dapp</h3>
-<p>Lưu trữ các giao dịch trên một OrderBook. Người vay tạo giao dịch vay và chờ người cho vay fill.
-Bất lợi:</p>
-<ul>
-  <li>Nhiều Txs, dẫn đến tính toán phức tạp</li>
-  <li>Rủi ro: Không trả được nợ,..</li>
-  <li>Rút tiền phức tạp</li>
-</ul>
-
-<h3 id="liquidity-pool">Liquidity Pool</h3>
-<p>Over-collateralized lending:  Compound and Aave
-Các LP (Liquidity Provider) cung cấp tài sản vào pool, và nhận những token tương ứng với tài sản mà họ đã cung cấp. Số lượng các token dựa vào Exchange Rate hiện tại. Exchange Rate sẽ được tính lại sau mỗi block.</p>
-
-<p>Với người vay, họ gửi tài sản vào Pool và nhận cTokens. Sau đó khi muốn vay (ETH), thì token của họ sẽ bị khoá như là Collateral, sau đó Compound sẽ gửi ETH cho họ. <br />
-Tiền lãi tích luỹ khi vay của người vay sẽ làm tăng Exchange Rate ETH/token, từ đó giúp những người cho vay (giữ các token) được lợi ích khi token sẽ tăng giá.</p>
-
-<h3 id="the-exchange-rate">The Exchange Rate</h3>
-<p>Giả sử với thị trường ETH:</p>
-<ul>
-  <li>Supplying ETH: thêm vào UnderlyingBalance</li>
-  <li>Borrowing ETH: thêm vào totalBorrowBalance</li>
-  <li>Lãi phải trả: thêm lần lượt vào totalBorrowBalance<br /></li>
-</ul>
-
-<p><img src="https://latex.codecogs.com/svg.image?ExchangeRate_%7BETH/token%7D=%5Cfrac%7BUnderlyingBalance&plus;totalBorrowBalance-reserve%7D%7BcTokenSupply%7D" alt="" /></p>
-
-<p>Do đó, nếu tổng lượng vay càng nhiều, thì Exchange Rate sẽ càng tăng. Ngược lại nếu lượng UnderlyingBalance tăng thì lượng cTokenSupply tương ứng cũng sẽ tăng, từ đó dẫn đến ExchangeRate giảm.</p>
-
-<h3 id="interest-rate-lãi-xuất">Interest Rate: Lãi xuất</h3>
-<p>Lãi xuất được cập nhập một cách liên tục. Xác định bởi nhu cầu về tài sản với quy mô thị trường.<br />
-Tỉ lệ sử dụng: <br />
-<img src="https://latex.codecogs.com/svg.image?U_%7BETH%7D=%5Cfrac%7BtotalBorrowBalance%7D%7BavailableBalance&plus;totalBorrowBalance%7D" alt="" /> <br />
-Tỉ lệ này thuộc khoảng [0,1]. <br />
-Tỉ lệ lãi: interestRate = BaseRate + U(ETH) x slope(ETH).</p>
-
-<h3 id="thanh-lý">Thanh lý</h3>
-<p>Nếu health &lt; 1, thì ai cũng có thể gọi hàm: <br />
-liquidate(borrower,   CollateralAsset,   BorrowAsset,  uint amount) <br />
-Trong đó:</p>
-<ul>
-  <li>borrower: address của người vay</li>
-  <li>CollateralAsset: người thanh lý muốn token từ tài sản này (VD: cDAI)</li>
-  <li>BorrowAsset: người thanh lý cung cấp tài sản này (ví dụ ETH) <br /></li>
-</ul>
-
-<p>Hàm này chuyển ETH của người thanh lý ra thị trường ETH và cung cấp cho người thanh lý cDAI từ tài sản thế chấp của người dùng. Điều này tương đương với người thanh lý đang trả khoản nợ ETH cho người vay và nhận cDAI của người dùng.</p>
-
-<h2 id="flash-loan">Flash loan</h2>
-<p>Là khoản vay nhanh được thực hiện và hoàn trả trong 1 giao dịch. <br />
-=&gt; zero risk cho người gửi, và không cần thế chấp.</p>
-<h3 id="các-trường-hợp-được-sử-dụng">Các trường hợp được sử dụng</h3>
-<h4 id="chênh-lệch-giá">Chênh lệch giá:</h4>
-<p>Người dùng Alice thấy chênh lệch giá USDC/DAI trong 2 pool, có thể dùng flash loan để kiếm lời. Ví dụ ở pool A có ExchangeRate là: 1.00, trong khi ở pool B là 1.01 thì Alice có thể flash loan 1 USDC, dùng để đổi được 1.01 DAI từ pool B. Sau đó dùng 1.00 DAI đổi lấy 1 USDC từ pool A, và trả flash loan. Do đó, Alice sẽ lời được 0.01 DAI.</p>
-
-<h4 id="hoán-đổi-tài-sản-thế-chấp">Hoán đổi tài sản thế chấp</h4>
-<p>Nhận thấy việc thế chấp bằng ETH có thể bị sụt giá dẫn đến thanh lý, người dùng có thể đổi tài sản thế chấp thành USDC. Quá trình như sau:</p>
-<ul>
-  <li>Nhận 1000 DAI flash loan</li>
-  <li>Trả 1000 DAI để nhận 1 cETH</li>
-  <li>Đổi 1 cETH lấy 3000 cUSDC</li>
-  <li>Gửi 3000 cUSDC làm thế chấp để Mượn 1000 DAI</li>
-  <li>Trả 1000 DAI flash loan</li>
-</ul>
-
-<h2 id="một-số-thông-tin-khác">Một số thông tin khác</h2>
-
-<h3 id="dao-decentralized-orgs">DAO: Decentralized orgs</h3>
-<p>Là 1 DApp được triển khai onchain tại 1 địa chỉ cụ thể. <br />
+    &lt;ul&gt;
+      &lt;li&gt;𝑆_𝑖𝑛𝑖𝑡 (𝜆;𝑟) ⇾ U: 1 lần duy nhất.&lt;/li&gt;
+      &lt;li&gt;𝑆_𝑖𝑛𝑑𝑒𝑥 (U,𝐶) ⇾ (S𝑝, S𝑣): Không chứa secret data.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;heading-argurment-of-knowledge&quot;&gt;Argurment of knowledge&lt;/h4&gt;
+&lt;p&gt;P biết w nếu w có thể được extracted từ P. &lt;br /&gt;
+Bộ 3 (S, P, V) là Argurment of knowledge với mạch C nếu:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;A = (A0, A1) là adversary mà có thể bị extracted thông tin:
+    &lt;ul&gt;
+      &lt;li&gt;S(C) ⇾ (Sp, Sv),  A0(Sp) ⇾ (x, st)&lt;/li&gt;
+      &lt;li&gt;𝜋 ⇽ A1(𝑝𝑝, 𝑥, st):   Pr[V(vp, 𝑥, 𝜋) = accept] &amp;gt; 1/10^6	(không đáng kể )&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Có extractor E (sử dụng A1 là blackbox) và tạo ra được w bằng tương tác với A1(Sp, x, st).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;heading-zero-knowledge&quot;&gt;Zero knowledge&lt;/h4&gt;
+&lt;p&gt;Proof 𝜋 không tiết lộ về 𝒘 nếu Verifier tự tạo 𝜋, hay Verifier không học được gì từ proof 𝜋. &lt;br /&gt;
+&lt;strong&gt; Tức là: &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Tồn tại 1 hàm Sim() sao cho: (S𝑝, S𝑣, 𝜋) ⇽ Sim(𝐶,𝑥). Hay Sim() có thể tạo ra proof 𝜋 mà không cần w.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;heading-lời-kết&quot;&gt;Lời kết&lt;/h2&gt;
+&lt;p&gt;Ở trên là sơ lược về tính riêng tư trong Blockchain và cái nhìn tổng quan về zk-SNARK.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;job_title&quot;=&gt;nil, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;social_links&quot;=&gt;[{&quot;name&quot;=&gt;&quot;facebook&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;github&quot;, &quot;url&quot;=&gt;&quot;https://github.com/yizeng/jekyll-theme-simple-texture&quot;}, {&quot;name&quot;=&gt;&quot;instagram&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;linkedin&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;stackoverflow&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;twitter&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;vk&quot;, &quot;url&quot;=&gt;nil}]}</name></author><summary type="html">Trong hệ thống tài chính, việc riêng tư là điều cần thiết. Một vài ví dụ như: Một nhà sản xuất không muốn tiết lộ số tiền họ trả cho nhà cung cấp của mình cho các bộ phận, Người dùng cuối cần quyền riêng tư để thuê, quyên góp, mua hàng,… Do đó, blockchain không thể phát huy hết tiềm năng nếu không có một số Tx riêng tư.</summary></entry><entry><title type="html">Mở rộng Blockchain (Phần 2)</title><link href="http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2/" rel="alternate" type="text/html" title="Mở rộng Blockchain (Phần 2)" /><published>2023-08-19T00:00:00+07:00</published><updated>2023-08-19T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/19/scaling-the-blockchain-p2/">&lt;p&gt;Trong bài viết hôm nay, mình sẽ giới thiệu đến mọi người một kĩ thuật giúp tăng tốc độ các Tx trong mạng blockchain. Đó là Rollups.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-ý-tưởng&quot;&gt;Ý tưởng&lt;/h2&gt;
+&lt;p&gt;Trong layer-1 của blockchain như Ethereum chứa world state. Khi một giao dịch được đưa vào, world state sẽ bị thay đổi. Từ đây, ý tưởng cơ bản của Rollup là hợp hàng trăm Tx lại thành một Tx duy nhất, từ đó giúp tăng tốc độ lên khoảng 100 lần.&lt;/p&gt;
+
+&lt;p&gt;Ta có hình minh hoạ như sau:&lt;/p&gt;
+
+&lt;p&gt;Từ đây, ta gọi Rollup state là L2, để phân biệt với L1 (layer-1 của blockchain). &lt;br /&gt;
+Rollup contract ở L1 sẽ giữ các tài sản và Merkle state root của các Rollup account. Rollup state chỉ bao gồm số dư của các Rollup account.&lt;/p&gt;
+
+&lt;p&gt;/// hình ảnh&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-hiệu-năng&quot;&gt;Hiệu năng&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt; Chuyển tiền trong 1 Rollup &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Chuyển tiền trong 1 Rollup (L2 -&amp;gt; L2) rất dễ dàng. Các coordinators chỉ cần cập nhập lại Merkle Root của Rollup Contract trên L1 là xong.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt; Chuyển tiền từ funds đến Rollup &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Chuyển tiền từ funds đến Rollup (L1 -&amp;gt; L2) thì chậm và đắt. Lý do vì cần phải update các state trong L1, số dư trong contract và cả trong Rollup và cập nhập lại Root của contract đó.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt; Chuyển tiền ra khỏi Rollup &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Chuyển tiền ra khỏi Rollup cần phí gas thêm từ L1 trong quá trình chuyển vì cần post nhiều dữ liệu.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt; Chuyển tiền từ 2 Rollup &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Nếu chuyển tiền từ 2 Rollup (L2 -&amp;gt; L2&apos;) mà qua L1 thì sẽ rất đắt, nhưng nếu qua 1 cầu trực tiếp L2 &amp;lt;=&amp;gt; L2 thì sẽ rẻ.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-chạy-contract-trong-rollup&quot;&gt;Chạy contract trong Rollup&lt;/h3&gt;
+&lt;p&gt;Khi contract chạy trong Rollup (Ví dụ Uniswap), thì việc tương tác với contract đó sẽ rẩt rẻ cho người dùng. &lt;br /&gt;
+&lt;strong&gt; Coordinator &lt;/strong&gt; duy trì trạng thái của tất cả contracts trong hệ thống Rollup:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Nó cập nhập Uniswap Merkle Leaf mỗi khi 1 Tx nào đó đến Uniswap&lt;/li&gt;
+  &lt;li&gt;Ghi update cho Rollup state root trên L1.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Rollup có chức năng giống Ethereum, nhưng không có cơ chế đồng thuận vì nó dựa vào L1 để chứng thực trạng thái hiện tại.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-các-vấn-đề&quot;&gt;Các vấn đề&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt; Vấn đề 1 &lt;/strong&gt;: Điều gì xảy ra nếu Coordinator không trung thực. Nó có thể lấy hết tiền trong Rollup hoặc tạo các giao dịch giả.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; Vấn đề 2 &lt;/strong&gt;: Nếu Coordinator ngừng cung cấp dịch vụ ? Làm sao để lấy lại trạng thái Rollup để đưa cho Coordinator mới.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-các-phương-án-giải-quyết&quot;&gt;Các phương án giải quyết&lt;/h2&gt;
+&lt;h3 id=&quot;heading-vấn-đề-1-coordinator-không-trung-thực&quot;&gt;Vấn đề 1: Coordinator không trung thực&lt;/h3&gt;
+&lt;p&gt;Coordinator không thể lấy tiền từ Rollup users, vì L1 sẽ xác minh update trạng thái của Rollup bằng cách kiểm tra xem tất cả các Tx có valid và được ký hợp lệ bởi người dùng hay không. &lt;br /&gt;
+Để làm điều này một cách rẻ, có thể có các cách tiếp cận sau:&lt;/p&gt;
+
+&lt;h4 id=&quot;heading-validity-proofs-còn-gọi-là-zk-rollup&quot;&gt;Validity Proofs (còn gọi là zk-Rollup)&lt;/h4&gt;
+&lt;p&gt;Khi coordinator gửi updated root và Tx List cho L1, nó cần gửi kèm theo một SNARK proof cho valid Tx để chứng minh tập hàng trăm các Tx này là hợp lệ. &lt;br /&gt;
+&lt;strong&gt; SNARK proof &lt;/strong&gt; là loại proof ngắn và nhanh để xác minh, từ đó giúp việc xác minh trên L1 trở nên rẻ. (với sự giúp đỡ của EVM)  &lt;br /&gt;
+Bao gồm:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Public statement:   (old state root,  new state root,  Tx list)&lt;/li&gt;
+  &lt;li&gt;Witness: (state trước - sau của những tài khoản bị thay đổi, bằng chứng Merkle, chữ kí của user)&lt;/li&gt;
+  &lt;li&gt;SNARK proof sẽ chứng minh rằng:
+    &lt;ul&gt;
+      &lt;li&gt;Tất cả chữ ký trên đều valid&lt;/li&gt;
+      &lt;li&gt;Tất cả bằng chứng Merkle đều valid&lt;/li&gt;
+      &lt;li&gt;Trạng thái sau = trạng thái trước + Tx.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt; zkEVM &lt;/strong&gt;  &lt;br /&gt;
+Khi một contract (Uniswap) chạy trong Rollup:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Coordinator sẽ tạo 1 SNARK proof về việc thực hiện đúng 1 chương trình EVM. Đó gọi là zkEVM.&lt;/li&gt;
+  &lt;li&gt;Tạo bằng chứng thì sẽ yêu cầu rất cao về tính toán nhưng khi xác minh thì lại rất nhanh.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Có 2 chức năng của zkEVM là:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Chứng minh EVM bytecode chạy đúng&lt;/li&gt;
+  &lt;li&gt;Biên dịch Solidity to SNARK-friendly circuit.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt; Kết quả &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Rollup contract đảm bảo coordinator không thể gian lận và sẽ chấp nhận các update nếu có proof phù hợp&lt;/li&gt;
+  &lt;li&gt;Ai cũng có thể làm coordinator nếu có đủ sức mạnh tính toán&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;heading-fraud-proof-còn-gọi-là-optimistic-rollup&quot;&gt;Fraud proof (còn gọi là Optimistic Rollup)&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Coordinator sẽ stake 1 khoản vào L1 Rollup Contract&lt;/li&gt;
+  &lt;li&gt;Coordinator sẽ đưa updated root lên L1 mà không cần bằng chứng&lt;/li&gt;
+  &lt;li&gt;Nếu update không valid, trong vòng 7 ngày ai cũng có thể chứng minh điều này bằng việc gửi fraud proof.&lt;/li&gt;
+  &lt;li&gt;Nếu fraud proof là đúng, coordinator sẽ bị Slash, ngược lại người gửi proof sẽ tốn phí.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Để chứng minh Fraud đến Rollup contract trong L1, ta sẽ sử dụng Binary Search. &lt;br /&gt;
+Việc Coordinator và Người gửi Proof (A) tạo ra state(n) và state(n&apos;) khác nhau buộc L1 cần kiểm tra xem ai mới là người đúng. Do đó, sử dụng Merkle tree và tìm kiếm nhị phân, với việc chia đôi từ state(n/2), state(n/4)… có thể dễ dàng tìm được xem state nào bị sai sau Log2(n) round.&lt;/p&gt;
+
+&lt;p&gt;Tuy nhiên, cách này gặp 1 số khó khăn như:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Giao dịch chỉ giải quyết sau 7 ngày (Sau khi hết hạn gian lận)&lt;/li&gt;
+  &lt;li&gt;Khi 1 bằng chứng Fraud được chấp nhận, các Tx sau phải được gửi lại&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt; Kết quả &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Có thể dễ dàng đưa smartcontract vào optimistic Rollup&lt;/li&gt;
+  &lt;li&gt;Thông lượng Tx cao: ~ 4000Tx / s&lt;/li&gt;
+  &lt;li&gt;Ai cũng có thể làm coordinator và verifier&lt;/li&gt;
+  &lt;li&gt;Giải quyết giao dịch chậm 7 ngày.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-vấn-đề-2-coordinator-ngừng-cung-cấp-dịch-vụ&quot;&gt;Vấn đề 2: Coordinator ngừng cung cấp dịch vụ&lt;/h3&gt;
+&lt;p&gt;Cần tạo Coordinator mới, nhưng lại cần trạng thái mới nhất của Rollup.&lt;/p&gt;
+
+&lt;p&gt;Ta thấy, Rollup state có thể phục hồi từ dữ liệu trong L1 bằng việc đọc các msg và re-excecute Tx. Nhưng việc này sẽ rất đắt vì tương tác nhiều trên L1 và cần nhiều dữ liệu.&lt;/p&gt;
+
+&lt;p&gt;Để giảm Tx fees:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Lưu L2 state root trong L1&lt;/li&gt;
+  &lt;li&gt;Lưu Tx data với Data Availability Committee (DAC):
+    &lt;ul&gt;
+      &lt;li&gt;Gồm tập hợp các node tin cậy giữ cho data available&lt;/li&gt;
+      &lt;li&gt;Rẻ hơn lưu ở L1&lt;/li&gt;
+      &lt;li&gt;L1 chấp nhận update khi và chỉ khi tất cả các node trong DAC đều kí. Từ đó giúp đảm bảo các member trong DAC đều chấp nhập dữ liệu Tx.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Tạo 1 coordinator mới phụ thuộc vào tính khả dụng của DAC&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;heading-validium&quot;&gt;Validium&lt;/h4&gt;
+&lt;p&gt;1 L2 sử dụng DAC để lưu trữ và Validity proof (SNARKs):&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Phù hợp cho tài sản giá trị thấp&lt;/li&gt;
+  &lt;li&gt;Chỉ các thành viên DAC mới thấy được dữ liệu&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;heading-điều-gì-xảy-ra-nếu-coordinator-từ-chối-1-tx&quot;&gt;Điều gì xảy ra nếu Coordinator từ chối 1 Tx&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Người tạo có thể post Tx trực tiếp lên L1 Rollup contract.&lt;/li&gt;
+  &lt;li&gt;L1 Rollup contract chỉ chấp nhận update khi mà update có cả Tx trên. Từ đó dẫn đến toàn bộ Rollup bị đóng băng.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;heading-lời-kết&quot;&gt;Lời kết&lt;/h2&gt;
+&lt;p&gt;Ở trên đây là các cách được áp dụng để tăng tốc độ Tx trong blockchain.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;job_title&quot;=&gt;nil, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;social_links&quot;=&gt;[{&quot;name&quot;=&gt;&quot;facebook&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;github&quot;, &quot;url&quot;=&gt;&quot;https://github.com/yizeng/jekyll-theme-simple-texture&quot;}, {&quot;name&quot;=&gt;&quot;instagram&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;linkedin&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;stackoverflow&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;twitter&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;vk&quot;, &quot;url&quot;=&gt;nil}]}</name></author><summary type="html">Trong bài viết hôm nay, mình sẽ giới thiệu đến mọi người một kĩ thuật giúp tăng tốc độ các Tx trong mạng blockchain. Đó là Rollups.</summary></entry><entry><title type="html">Mở rộng Blockchain (Phần 1)</title><link href="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1/" rel="alternate" type="text/html" title="Mở rộng Blockchain (Phần 1)" /><published>2023-08-18T00:00:00+07:00</published><updated>2023-08-18T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/18/scaling-the-blockchain-p1/">&lt;p&gt;Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-payment-channel-ý-tưởng-cơ-bản&quot;&gt;Payment Channel: Ý tưởng cơ bản&lt;/h2&gt;
+&lt;p&gt;A và B đang muốn giao dịch với nhau. A gửi cho B 5 lần, mỗi lần là 0.01 BTC, là 5 Txs. Thay vì làm như thế, có thể làm như sau: A gửi cho B 1BTC. Sau 1 khoảng thời gian (ví dụ 1 tháng), B sẽ trả lại số BTC dư mà chưa dùng. Vậy số giao dịch chỉ giới hạn đến 2.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-unidirectional-payment-channel-kênh-thanh-toán-1-chiều&quot;&gt;Unidirectional Payment Channel: Kênh thanh toán 1 chiều&lt;/h2&gt;
+&lt;p&gt;Ta có: UTXO A: 1BTC.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Tx1: 0.99 cho A/ 0.01 cho B từ UTXO A.&lt;/li&gt;
+  &lt;li&gt;Tx2: 0.98 cho A/ 0.02 cho B&lt;/li&gt;
+  &lt;li&gt;….&lt;/li&gt;
+  &lt;li&gt;Tx5: 0.95 cho A/ 0.05 cho B&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Xong xuôi, B post Tx5 lên Blockchain. Nhưng có vấn đề xảy ra là nếu A sử dụng UTXO trước khi B post lên thì Tx5 mà B post lên sẽ không hợp lệ. Do đó, cần sử dụng 1 địa chỉ chung UTXO AB có dạng Multisig 2-2. Điều này sẽ ngăn chặn việc A dùng UTXO vì chưa có chữ kí của B.&lt;/p&gt;
+
+&lt;p&gt;Nhưng nếu B không post Tx5 lên chuỗi thì sao? Liệu A có lấy lại được 0.95 BTC. Để giải quyết vấn đề này, cần sử dụng một time-locked Tx, đảm bảo sau một khoảng thời gian, nếu B không post Tx5 lên, thì A sẽ lấy lại được 1BTC (B phải gửi cho A). Ngoài ra, Tx này phải được kí trước khi đưa BTC vào trong AB.&lt;/p&gt;
+
+&lt;p&gt;Minh hoạ:&lt;/p&gt;
+
+&lt;p&gt;Sau khi trả hoặc lấy lại tiền, kênh sẽ đóng.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-bidirectional-payment-channel-kênh-thanh-toán-đa-chiều&quot;&gt;Bidirectional Payment Channel: Kênh thanh toán đa chiều&lt;/h2&gt;
+&lt;p&gt;Không sử dụng 2 kênh thanh toán 1 chiều thay thế. Thay vào đó, ta sẽ sử dụng contract.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-trên-ethereum&quot;&gt;Trên Ethereum&lt;/h3&gt;
+&lt;p&gt;A và B sẽ tạo một contract chung, mỗi người đóng góp 0.5 ETH. Lúc này, trạng thái của contract sẽ là: &lt;br /&gt;
+A: 0.5 ETH      B: 0.5 ETH      Nonce: 0. &lt;br /&gt;
+Off chain: B gửi 0.1 ETH cho A bằng cách cả 2 ký vào state mới: &lt;br /&gt;
+A: 0.6,  B: 0.4,  Nonce: 1, A sig,  B sig   &lt;br /&gt;
+Ở trên chuỗi, contract vẫn không đổi. Giả sử, offchain, A và B đã gửi đi gửi lại nhiều giao dịch:&lt;br /&gt;
+A: 0.3,  B: 0.7,  Nonce: 7, A sig,  B sig &lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Lúc này, A muốn kết thúc kênh, sẽ gửi số dư cuối cùng và các chữ ký cho contract. Lúc này sẽ bắt đầu Challenge Period (ví dụ 3 ngày). &lt;br /&gt;
+Onchain: A: 0.3,    B: 0.7,     Nonce: 7. &lt;br /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Nếu trong 3 ngày, B không làm gì thì số tiền và trạng thái của contract sẽ theo những gì A gửi lên.&lt;/li&gt;
+  &lt;li&gt;Ngược lại, nếu B gửi lên 1 state với số Nonce lớn hơn (ví dụ = 9), thì contract sẽ theo state của B.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Vấn đề được đưa ra là việc A và B phải quan sát thường xuyên xem đối phương có gửi state cũ lên không để có thể kịp thời ngăn chặn. Điều này được giải quyết bằng sự trợ giúp của WatchTower.&lt;/p&gt;
+
+&lt;p&gt;Tóm lại, việc giao dịch sẽ chỉ tốn 2 lần onchain:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Tạo channel&lt;/li&gt;
+  &lt;li&gt;Đóng channel và gửi tiền.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-trên-bitcoin&quot;&gt;Trên Bitcoin&lt;/h3&gt;
+&lt;p&gt;Vì trên UTXO không có trạng thái, nên sẽ khó khăn hơn để tạo 1 kênh thanh toán 2 chiều. Giải pháp được đưa ra là khi update kênh theo A, thì A sẽ nhận được Tx mà làm trạng thái cũ của B mất hiệu lực.&lt;/p&gt;
+
+&lt;h4 id=&quot;heading-utxo&quot;&gt;UTXO&lt;/h4&gt;
+&lt;p&gt;Ta sẽ tạo UTXO mà có thể dùng theo 1 trong 2 cách (sử dụng IF trong Opcode):&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Relative time-lock: UTXO chứa số t. 1 Tx được kí hợp lệ có thể sử dụng UTXO này sau t blocks (hoặc nhiều hơn) sau khi nó được tạo ra.&lt;/li&gt;
+  &lt;li&gt;Hash lock: UTXO chứa một số X. Một Tx được kí hợp lệ có thể sử dụng UTXO này nếu có số x mà: SHA256(x) = X.
+(x được gọi là hash preimage của X).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;heading-ví-dụ&quot;&gt;Ví dụ:&lt;/h4&gt;
+&lt;p&gt;Giả sử A và B đưa BTC vào trong 2-2 Multisig UTXO AB, với A là 7BTC, B là 3BTC. &lt;br /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;A tạo số ngẫu nhiên x, và X = SHA256(x).&lt;/li&gt;
+  &lt;li&gt;B tạo số ngẫu nhiên y, và Y = SHA256(y).&lt;/li&gt;
+  &lt;li&gt;Sau đó, A đưa X cho B và ngược lại.&lt;/li&gt;
+  &lt;li&gt;A tạo Tx1 với input là UTXO AB, output là: &lt;br /&gt;
+  1: pay 7 -&amp;gt; A,  &lt;br /&gt;
+  2: 3 -&amp;gt; B (7 ngày timelock) hoặc 3 -&amp;gt; A (với điều kiện đưa ra số y mà Y = SHA256(y)).&lt;/li&gt;
+  &lt;li&gt;B tạo Tx2 với input là UTXO AB, output là: &lt;br /&gt;
+  1: pay 3 -&amp;gt; B, &lt;br /&gt;
+  2: 7 -&amp;gt; A (7 ngày timelock) hoặc 7 -&amp;gt; B (với điều kiện đưa ra số x mà X = SHA256(x)).&lt;/li&gt;
+  &lt;li&gt;A có thể post Tx2, đợi 7 ngày và lấy 7 BTC về.&lt;/li&gt;
+  &lt;li&gt;Giờ nếu A gửi 1BTC cho B offchain. A tạo x&apos; và X&apos; = SHA256(x&apos;). Sau đó đưa X&apos; cho B.&lt;/li&gt;
+  &lt;li&gt;A tạo Tx3 với input là UTXO AB, output là: &lt;br /&gt;
+  1: pay 6 -&amp;gt; A,  &lt;br /&gt;
+  2: 4 -&amp;gt; B (7 ngày timelock) hoặc 4 -&amp;gt; A (với điều kiện đưa ra số y mà Y = SHA256(y)).&lt;/li&gt;
+  &lt;li&gt;B tạo Tx4 với input là UTXO AB, output là: &lt;br /&gt;
+  1: pay 4 -&amp;gt; B, &lt;br /&gt;
+  2: 6 -&amp;gt; A (7 ngày timelock) hoặc 6 -&amp;gt; B (với điều kiện đưa ra số x&apos; mà X&apos; = SHA256(x&apos;)).&lt;/li&gt;
+  &lt;li&gt;Lúc này, A có thể post Tx3 và đợi 7 ngày. Nhưng nếu A post stale state là Tx2, B sẽ sử dụng x để lấy hết BTC. Do đó, A không thể gian lận và post lên trạng thái cũ.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;heading-multihop-payments-thanh-toán-nhiều-lần&quot;&gt;Multihop payments: Thanh toán nhiều lần&lt;/h2&gt;
+&lt;p&gt;A muốn thanh toán cho C qua trung gian không tin cậy là B (Vì A, C có channel với B).&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-the-lightning-network&quot;&gt;The lightning network&lt;/h3&gt;
+&lt;p&gt;Nhiều open payment channel 2 chiều. Khi A muốn tạo kênh với B thì chỉ cần tìm tuyến đường qua đồ thị với đỉnh là các trung gian.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-kết-luận&quot;&gt;Kết luận&lt;/h2&gt;
+&lt;p&gt;Đây là cách tiếp cận đầu tiên để tăng tốc độ các Tx trong blockchain. Ở bài viết sau, mình sẽ giới thiệu một kĩ thuật khác giúp giải quyết vấn đề này.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;job_title&quot;=&gt;nil, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;social_links&quot;=&gt;[{&quot;name&quot;=&gt;&quot;facebook&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;github&quot;, &quot;url&quot;=&gt;&quot;https://github.com/yizeng/jekyll-theme-simple-texture&quot;}, {&quot;name&quot;=&gt;&quot;instagram&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;linkedin&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;stackoverflow&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;twitter&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;vk&quot;, &quot;url&quot;=&gt;nil}]}</name></author><summary type="html">Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.</summary></entry><entry><title type="html">Hệ thống vay DeFi</title><link href="http://localhost:4000/blog/2023/08/17/defi-lending-system/" rel="alternate" type="text/html" title="Hệ thống vay DeFi" /><published>2023-08-17T00:00:00+07:00</published><updated>2023-08-17T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/17/defi-lending-system</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/17/defi-lending-system/">&lt;p&gt;Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-vay-trong-hệ-thống-tập-trung&quot;&gt;Vay trong hệ thống tập trung&lt;/h2&gt;
+&lt;p&gt;Vì sao cần vay? Có các lý do chính như sau:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ví dụ, Bob cần vay ETH để mua một NFT trong game nhưng anh ấy không muốn bán tài sản của mình đi.&lt;/li&gt;
+  &lt;li&gt;Là chiến lược đầu tư, khi thế chấp ETH để nhận UNI, chờ tỉ giá UNI/ETH giảm, thì số UNI bỏ ra để mua 1ETH trả khoản vay sẽ ít hơn, từ đó nhận được UNI lãi.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Trong hệ thống tập trung, người cho vay gửi tiền vào một Tổ chức tài chính tập trung. Người vay sẽ thế chấp 1 loại tài sản nào đó và sẽ được vay. Sau đó, người vay sẽ phải trả tiền lãi cho đến khi trả xong phần đã vay. Người cho vay sẽ được nhận 1 phần lãi đó. &lt;br /&gt; Tuy nhiên, nếu người vay không trả được khoản vay, Tổ chức tài chính tập trung sẽ mua lại tài sản thế chấp, và trả lại cho người vay phần còn thừa. &lt;br /&gt; Nếu giá trị tài sản thế chấp bị thay đổi và ít hơn tài sản vay, việc thanh lý tài sản thế chấp sẽ xảy ra.&lt;/p&gt;
+
+&lt;p&gt;Tuy nhiên, với hệ thống tập trung, có các vấn đề được thấy rõ như sau:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;User cần tin tưởng Tổ chức, nhưng nếu bị hack hoặc bị xâm nhập trái phép, khả năng mất tiền rất cao.&lt;/li&gt;
+  &lt;li&gt;Tổ chức điều chỉnh tỉ lệ lãi,..&lt;/li&gt;
+  &lt;li&gt;Người cho vay sẽ nhận ít tiền lãi hơn, vì phải chia 1 phần cho tổ chức.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Do đó, việc tạo ra hệ thống vay phi tập trung không cần bên thứ 3 và áp dụng tính lập trình là mục tiêu được người dùng hướng đến.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-các-thuật-ngữ&quot;&gt;Các thuật ngữ&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt; Collateral &lt;/strong&gt;: Tài sản thế chấp. Vai trò là đặt cọc để vay.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; Over-collateralization &lt;/strong&gt;: Thế chấp vượt mức. Người vay phải đảm bảo giá trị thế chấp &amp;gt; giá trị vay.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; Under-collateralization &lt;/strong&gt;: Thế chấp dưới mức. Xảy ra khi giá trị thế chấp &amp;lt; giá trị vay.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; Collateral Factor &lt;/strong&gt;: Giá trị lớn nhất có thể vay, tính theo giá trị thế chấp. Ví dụ CF = 0.6, thế chấp có giá trị là 1000 DAI thì giá trị vay lớn nhất có thể là 0.6 * 1000 = 600 DAI.&lt;br /&gt;
+Với tài sản có độ biến động cao, CF thường thấp, ngược lại thì CF cao. Ví dụ: ETH, DAI:  83%, UNI: 75%, MKR:  73%&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; Thanh lý &lt;/strong&gt; : Nếu số tiền vay + lãi (gọi là nợ - Debt) &amp;gt; CF * Collateral (1) &lt;br /&gt;
+=&amp;gt; Tài sản thế chấp sẽ được thanh lý đến khi (1) không còn xảy ra.  Tỉ lệ thanh lý giúp người cho vay có thời gian thanh lý trước khi gặp rủi ro.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; Health &lt;/strong&gt; : Health của 1 món nợ được tính bằng công thức sau: &lt;br /&gt; &lt;img src=&quot;https://latex.codecogs.com/svg.image?%20BorrowCapacity=%5Csum_%7Bi%7D%5E%7B%7Dvalue(collateral_%7Bi%7D)*CF_%7Bi%7D&quot; alt=&quot;Alt text&quot; /&gt; &lt;br /&gt;
+&lt;img src=&quot;https://latex.codecogs.com/svg.image?health=%5Cfrac%7BBorowCapacity%7D%7Btotal%20Debt%7D&quot; alt=&quot;&quot; /&gt; &lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Nếu health &amp;lt; 1: Thanh lý sẽ được kích hoạt đến khi health &amp;gt;= 1.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; Liquidity &lt;/strong&gt;: Thanh khoản. Là loại tài sản mà việc mua bán trên thị trường không thay đổi giá trị thị trường của nó. Nó cũng có khả năng chuyển thành tiền mặt.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-defi-lending&quot;&gt;DeFi Lending&lt;/h2&gt;
+&lt;h3 id=&quot;heading-ý-tưởng-với-orderbook-dapp&quot;&gt;Ý tưởng với OrderBook Dapp&lt;/h3&gt;
+&lt;p&gt;Lưu trữ các giao dịch trên một OrderBook. Người vay tạo giao dịch vay và chờ người cho vay fill.
+Bất lợi:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Nhiều Txs, dẫn đến tính toán phức tạp&lt;/li&gt;
+  &lt;li&gt;Rủi ro: Không trả được nợ,..&lt;/li&gt;
+  &lt;li&gt;Rút tiền phức tạp&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-liquidity-pool&quot;&gt;Liquidity Pool&lt;/h3&gt;
+&lt;p&gt;Over-collateralized lending:  Compound and Aave
+Các LP (Liquidity Provider) cung cấp tài sản vào pool, và nhận những token tương ứng với tài sản mà họ đã cung cấp. Số lượng các token dựa vào Exchange Rate hiện tại. Exchange Rate sẽ được tính lại sau mỗi block.&lt;/p&gt;
+
+&lt;p&gt;Với người vay, họ gửi tài sản vào Pool và nhận cTokens. Sau đó khi muốn vay (ETH), thì token của họ sẽ bị khoá như là Collateral, sau đó Compound sẽ gửi ETH cho họ. &lt;br /&gt;
+Tiền lãi tích luỹ khi vay của người vay sẽ làm tăng Exchange Rate ETH/token, từ đó giúp những người cho vay (giữ các token) được lợi ích khi token sẽ tăng giá.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-the-exchange-rate&quot;&gt;The Exchange Rate&lt;/h3&gt;
+&lt;p&gt;Giả sử với thị trường ETH:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Supplying ETH: thêm vào UnderlyingBalance&lt;/li&gt;
+  &lt;li&gt;Borrowing ETH: thêm vào totalBorrowBalance&lt;/li&gt;
+  &lt;li&gt;Lãi phải trả: thêm lần lượt vào totalBorrowBalance&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://latex.codecogs.com/svg.image?ExchangeRate_%7BETH/token%7D=%5Cfrac%7BUnderlyingBalance&amp;plus;totalBorrowBalance-reserve%7D%7BcTokenSupply%7D&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Do đó, nếu tổng lượng vay càng nhiều, thì Exchange Rate sẽ càng tăng. Ngược lại nếu lượng UnderlyingBalance tăng thì lượng cTokenSupply tương ứng cũng sẽ tăng, từ đó dẫn đến ExchangeRate giảm.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-interest-rate-lãi-xuất&quot;&gt;Interest Rate: Lãi xuất&lt;/h3&gt;
+&lt;p&gt;Lãi xuất được cập nhập một cách liên tục. Xác định bởi nhu cầu về tài sản với quy mô thị trường.&lt;br /&gt;
+Tỉ lệ sử dụng: &lt;br /&gt;
+&lt;img src=&quot;https://latex.codecogs.com/svg.image?U_%7BETH%7D=%5Cfrac%7BtotalBorrowBalance%7D%7BavailableBalance&amp;plus;totalBorrowBalance%7D&quot; alt=&quot;&quot; /&gt; &lt;br /&gt;
+Tỉ lệ này thuộc khoảng [0,1]. &lt;br /&gt;
+Tỉ lệ lãi: interestRate = BaseRate + U(ETH) x slope(ETH).&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-thanh-lý&quot;&gt;Thanh lý&lt;/h3&gt;
+&lt;p&gt;Nếu health &amp;lt; 1, thì ai cũng có thể gọi hàm: &lt;br /&gt;
+liquidate(borrower,   CollateralAsset,   BorrowAsset,  uint amount) &lt;br /&gt;
+Trong đó:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;borrower: address của người vay&lt;/li&gt;
+  &lt;li&gt;CollateralAsset: người thanh lý muốn token từ tài sản này (VD: cDAI)&lt;/li&gt;
+  &lt;li&gt;BorrowAsset: người thanh lý cung cấp tài sản này (ví dụ ETH) &lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Hàm này chuyển ETH của người thanh lý ra thị trường ETH và cung cấp cho người thanh lý cDAI từ tài sản thế chấp của người dùng. Điều này tương đương với người thanh lý đang trả khoản nợ ETH cho người vay và nhận cDAI của người dùng.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-flash-loan&quot;&gt;Flash loan&lt;/h2&gt;
+&lt;p&gt;Là khoản vay nhanh được thực hiện và hoàn trả trong 1 giao dịch. &lt;br /&gt;
+=&amp;gt; zero risk cho người gửi, và không cần thế chấp.&lt;/p&gt;
+&lt;h3 id=&quot;heading-các-trường-hợp-được-sử-dụng&quot;&gt;Các trường hợp được sử dụng&lt;/h3&gt;
+&lt;h4 id=&quot;heading-chênh-lệch-giá&quot;&gt;Chênh lệch giá:&lt;/h4&gt;
+&lt;p&gt;Người dùng Alice thấy chênh lệch giá USDC/DAI trong 2 pool, có thể dùng flash loan để kiếm lời. Ví dụ ở pool A có ExchangeRate là: 1.00, trong khi ở pool B là 1.01 thì Alice có thể flash loan 1 USDC, dùng để đổi được 1.01 DAI từ pool B. Sau đó dùng 1.00 DAI đổi lấy 1 USDC từ pool A, và trả flash loan. Do đó, Alice sẽ lời được 0.01 DAI.&lt;/p&gt;
+
+&lt;h4 id=&quot;heading-hoán-đổi-tài-sản-thế-chấp&quot;&gt;Hoán đổi tài sản thế chấp&lt;/h4&gt;
+&lt;p&gt;Nhận thấy việc thế chấp bằng ETH có thể bị sụt giá dẫn đến thanh lý, người dùng có thể đổi tài sản thế chấp thành USDC. Quá trình như sau:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Nhận 1000 DAI flash loan&lt;/li&gt;
+  &lt;li&gt;Trả 1000 DAI để nhận 1 cETH&lt;/li&gt;
+  &lt;li&gt;Đổi 1 cETH lấy 3000 cUSDC&lt;/li&gt;
+  &lt;li&gt;Gửi 3000 cUSDC làm thế chấp để Mượn 1000 DAI&lt;/li&gt;
+  &lt;li&gt;Trả 1000 DAI flash loan&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;heading-một-số-thông-tin-khác&quot;&gt;Một số thông tin khác&lt;/h2&gt;
+
+&lt;h3 id=&quot;heading-dao-decentralized-orgs&quot;&gt;DAO: Decentralized orgs&lt;/h3&gt;
+&lt;p&gt;Là 1 DApp được triển khai onchain tại 1 địa chỉ cụ thể. &lt;br /&gt;
 Ai cũng có thể gửi tiền vào kho bạc của DAO và gửi đề xuất lên DAO. Đề xuất được thông qua và được các thành viên tham gia vote.
-Ví dụ:</p>
-<ul>
-  <li>PleaseDAO: đầu tư vào NFTs</li>
-  <li>Gitcoin: Tài trợ cho các dự án openSource.</li>
-</ul>
+Ví dụ:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;PleaseDAO: đầu tư vào NFTs&lt;/li&gt;
+  &lt;li&gt;Gitcoin: Tài trợ cho các dự án openSource.&lt;/li&gt;
+&lt;/ul&gt;
 
-<h3 id="giao-thức-compound">Giao thức Compound</h3>
-<p>Là giao thức trên Ethereum, thiết lập thị trường tiền tệ, là những nhóm tài sản có lãi suất theo thuật toán, dựa và cung và cầu của tài sản đó. Các nhà cung cấp và người vay sẽ tương tác trực tiếp với giao thức, không cần phải thương lượng các điều khoản như kì hạn, lãi suất, hoặc tài sản thế chấp,..</p>
+&lt;h3 id=&quot;heading-giao-thức-compound&quot;&gt;Giao thức Compound&lt;/h3&gt;
+&lt;p&gt;Là giao thức trên Ethereum, thiết lập thị trường tiền tệ, là những nhóm tài sản có lãi suất theo thuật toán, dựa và cung và cầu của tài sản đó. Các nhà cung cấp và người vay sẽ tương tác trực tiếp với giao thức, không cần phải thương lượng các điều khoản như kì hạn, lãi suất, hoặc tài sản thế chấp,..&lt;/p&gt;
 
-<h3 id="supplying-assets">Supplying Assets</h3>
-<p>Tổng hợp nguồn cung từ các user. Khi user cung cấp assets, nó trở thành tài nguyên thay thế được, và mang lại tính thanh khoản cáo hơn khi cho vay trực tiếp. Từ đó người cho vay có thể rút tiền bất cứ lúc nào.</p>
+&lt;h3 id=&quot;heading-supplying-assets&quot;&gt;Supplying Assets&lt;/h3&gt;
+&lt;p&gt;Tổng hợp nguồn cung từ các user. Khi user cung cấp assets, nó trở thành tài nguyên thay thế được, và mang lại tính thanh khoản cáo hơn khi cho vay trực tiếp. Từ đó người cho vay có thể rút tiền bất cứ lúc nào.&lt;/p&gt;
 
-<h3 id="borrowing-assets">Borrowing Assets</h3>
-<p>Cho phép người dùng vay dễ dàng, sử dụng cTokens làm thế chấp. Người dùng không cần điều khoản đàm phán, ngày đáo hạn,..</p>
+&lt;h3 id=&quot;heading-borrowing-assets&quot;&gt;Borrowing Assets&lt;/h3&gt;
+&lt;p&gt;Cho phép người dùng vay dễ dàng, sử dụng cTokens làm thế chấp. Người dùng không cần điều khoản đàm phán, ngày đáo hạn,..&lt;/p&gt;
 
-<p>Chi tiết về giao thức Compound, các bạn có thể xem ở <a href="https://compound.finance/documents/Compound.Whitepaper.pdf">đây</a></p>
+&lt;p&gt;Chi tiết về giao thức Compound, các bạn có thể xem ở &lt;a href=&quot;https://compound.finance/documents/Compound.Whitepaper.pdf&quot;&gt;đây&lt;/a&gt;&lt;/p&gt;
 
-<h3 id="cross-chain-atomicswap">Cross-chain AtomicSwap</h3>
-<h4 id="các-thuật-ngữ-cơ-bản">Các thuật ngữ cơ bản</h4>
-<p><strong> HTLC</strong>: hash time-locked contract <br /></p>
+&lt;h3 id=&quot;heading-cross-chain-atomicswap&quot;&gt;Cross-chain AtomicSwap&lt;/h3&gt;
+&lt;h4 id=&quot;heading-các-thuật-ngữ-cơ-bản&quot;&gt;Các thuật ngữ cơ bản&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt; HTLC&lt;/strong&gt;: hash time-locked contract &lt;br /&gt;&lt;/p&gt;
 
-<p><strong> Time-lock </strong> Khoá thời gian, khi đúng khoá thì cần 1 khoảng thời gian nhất định để pass, tức là hết thời gian thì mới mở được. <br /></p>
+&lt;p&gt;&lt;strong&gt; Time-lock &lt;/strong&gt; Khoá thời gian, khi đúng khoá thì cần 1 khoảng thời gian nhất định để pass, tức là hết thời gian thì mới mở được. &lt;br /&gt;&lt;/p&gt;
 
-<p><strong> Hash lock</strong> Yêu cầu key đúng + secret code. Sau khi nhập code thì sẽ hiển thị lên cho mọi người.</p>
+&lt;p&gt;&lt;strong&gt; Hash lock&lt;/strong&gt; Yêu cầu key đúng + secret code. Sau khi nhập code thì sẽ hiển thị lên cho mọi người.&lt;/p&gt;
 
-<h4 id="kịch-bản">Kịch bản</h4>
-<p>Alice muốn Bitcoin, Bob muốn BCash. A và B quyết định đổi cho nhau. Các bước như sau:</p>
-<ul>
-  <li>Alice tạo 2 Hashlock, yêu cầu cùng 1 SecretCode. Nhưng key thì 1 cái là key của A, 1 cái cần key của B.</li>
-  <li>Alice đặt HashlockA và HashlockB vào lần lượt mailBoxA và mailBox B.</li>
-  <li>Alice đưa BCash vào mailbox B, Bob đưa Bitcoin vào mailbox A.</li>
-  <li>Sau đso, Alice đến mailboxA, nhập keyA và secretCode, nhận bitcoin. Đồng thời, sau khi Alice nhập, secretCode hiển thị cho mọi người nên Bob sẽ nhập theo + key vào mailBoxB, nhận được BCash.</li>
-</ul>
+&lt;h4 id=&quot;heading-kịch-bản&quot;&gt;Kịch bản&lt;/h4&gt;
+&lt;p&gt;Alice muốn Bitcoin, Bob muốn BCash. A và B quyết định đổi cho nhau. Các bước như sau:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Alice tạo 2 Hashlock, yêu cầu cùng 1 SecretCode. Nhưng key thì 1 cái là key của A, 1 cái cần key của B.&lt;/li&gt;
+  &lt;li&gt;Alice đặt HashlockA và HashlockB vào lần lượt mailBoxA và mailBox B.&lt;/li&gt;
+  &lt;li&gt;Alice đưa BCash vào mailbox B, Bob đưa Bitcoin vào mailbox A.&lt;/li&gt;
+  &lt;li&gt;Sau đso, Alice đến mailboxA, nhập keyA và secretCode, nhận bitcoin. Đồng thời, sau khi Alice nhập, secretCode hiển thị cho mọi người nên Bob sẽ nhập theo + key vào mailBoxB, nhận được BCash.&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Trường hợp A không nhập SecreteCode hoặc cố ý chỉnh sai SecretCode ở 2 lock, thì time-lock sẽ được sử dụng:</p>
-<ul>
-  <li>Độ dài của locktime của A phải lớn hơn của B (1 tuần &gt;&lt; 1 ngày) vì A biết secretCode. Do đó, khi B biết A lừa dối, B có thể quay lại mailBoxA và lấy tiền về ngay lập tức (vì lúc đó A vẫn đang đợi hết timelock để lấy được tiền). Ngược lại nếu locktime của A nhỏ hơn hoặc bằng B, thì A có thể đợi đến khi hết hạn, nhập code và lấy tiền (vì A có key của B lúc tạo lock).</li>
-</ul>
+&lt;p&gt;Trường hợp A không nhập SecreteCode hoặc cố ý chỉnh sai SecretCode ở 2 lock, thì time-lock sẽ được sử dụng:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Độ dài của locktime của A phải lớn hơn của B (1 tuần &amp;gt;&amp;lt; 1 ngày) vì A biết secretCode. Do đó, khi B biết A lừa dối, B có thể quay lại mailBoxA và lấy tiền về ngay lập tức (vì lúc đó A vẫn đang đợi hết timelock để lấy được tiền). Ngược lại nếu locktime của A nhỏ hơn hoặc bằng B, thì A có thể đợi đến khi hết hạn, nhập code và lấy tiền (vì A có key của B lúc tạo lock).&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2 id="kết-luận">Kết luận</h2>
-<p>Ở trên là toàn bộ hiểu biết của mình về hệ thống vay phi tập trung.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì.]]></summary></entry><entry><title type="html">Sàn giao dịch phi tập trung</title><link href="http://localhost:4000/blog/2023/08/15/dex" rel="alternate" type="text/html" title="Sàn giao dịch phi tập trung" /><published>2023-08-15T00:00:00+07:00</published><updated>2023-08-15T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/15/dex</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/15/dex"><![CDATA[<h2 id="khái-niệm">Khái niệm</h2>
+&lt;h2 id=&quot;heading-kết-luận&quot;&gt;Kết luận&lt;/h2&gt;
+&lt;p&gt;Ở trên là toàn bộ hiểu biết của mình về hệ thống vay phi tập trung.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;job_title&quot;=&gt;nil, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;social_links&quot;=&gt;[{&quot;name&quot;=&gt;&quot;facebook&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;github&quot;, &quot;url&quot;=&gt;&quot;https://github.com/yizeng/jekyll-theme-simple-texture&quot;}, {&quot;name&quot;=&gt;&quot;instagram&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;linkedin&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;stackoverflow&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;twitter&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;vk&quot;, &quot;url&quot;=&gt;nil}]}</name></author><summary type="html">Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì.</summary></entry><entry><title type="html">Sàn giao dịch phi tập trung</title><link href="http://localhost:4000/blog/2023/08/15/dex/" rel="alternate" type="text/html" title="Sàn giao dịch phi tập trung" /><published>2023-08-15T00:00:00+07:00</published><updated>2023-08-15T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/15/dex</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/15/dex/">&lt;h2 id=&quot;heading-khái-niệm&quot;&gt;Khái niệm&lt;/h2&gt;
 
-<p><strong> Sàn giao dịch phi tập trung </strong> là loại ứng dụng phi tập trung, xây dựng với Smartcontract, cho phép users trao đổi ERC20 token hoặc NFT trực tiếp với các users khác.</p>
+&lt;p&gt;&lt;strong&gt; Sàn giao dịch phi tập trung &lt;/strong&gt; là loại ứng dụng phi tập trung, xây dựng với Smartcontract, cho phép users trao đổi ERC20 token hoặc NFT trực tiếp với các users khác.&lt;/p&gt;
 
-<h3 id="lợi-ích">Lợi ích:</h3>
-<ul>
-  <li>Không giữ tiền: Không có bên thứ 3 giữ tiền trung gian các giao dịch</li>
-  <li>Chống kiểm duyệt: Ai gửi Tx đều có thể sử dụng</li>
-  <li>Permissionless: có thể hỗ trợ bất kì asset nào.</li>
-  <li>Thuận tiện: Không phải gửi tài sản trên chuỗi vào một sàn giao dịch</li>
-  <li>Tính lập trình: Thanh khoản có thể xem bởi các smartcontract</li>
-  <li>Tính nguyên tử:</li>
-</ul>
+&lt;h3 id=&quot;heading-lợi-ích&quot;&gt;Lợi ích:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Không giữ tiền: Không có bên thứ 3 giữ tiền trung gian các giao dịch&lt;/li&gt;
+  &lt;li&gt;Chống kiểm duyệt: Ai gửi Tx đều có thể sử dụng&lt;/li&gt;
+  &lt;li&gt;Permissionless: có thể hỗ trợ bất kì asset nào.&lt;/li&gt;
+  &lt;li&gt;Thuận tiện: Không phải gửi tài sản trên chuỗi vào một sàn giao dịch&lt;/li&gt;
+  &lt;li&gt;Tính lập trình: Thanh khoản có thể xem bởi các smartcontract&lt;/li&gt;
+  &lt;li&gt;Tính nguyên tử:&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><strong> Orderbook </strong> là sổ lệnh, bao gồm các lệnh bạn và mua tài sản theo từng mức giá nhất định. Cơ chế khớp lệnh này khiến lệnh của người dùng được thực thi khi giá của sổ lệnh khớp với giá người dùng mua hoặc bán.</p>
+&lt;p&gt;&lt;strong&gt; Orderbook &lt;/strong&gt; là sổ lệnh, bao gồm các lệnh bạn và mua tài sản theo từng mức giá nhất định. Cơ chế khớp lệnh này khiến lệnh của người dùng được thực thi khi giá của sổ lệnh khớp với giá người dùng mua hoặc bán.&lt;/p&gt;
 
-<h2 id="các-loại-dex">Các loại DEX</h2>
-<h3 id="on-chain-orderbook">On-chain orderbook</h3>
-<p>Market makers đặt các order lên chuỗi, người dùng sẽ điền các order này trực tiếp trên chuỗi nếu họ muốn giao dịch. Tuy nhiên, cách này sẽ gây tốn gas rất nhiều.</p>
+&lt;h2 id=&quot;heading-các-loại-dex&quot;&gt;Các loại DEX&lt;/h2&gt;
+&lt;h3 id=&quot;heading-on-chain-orderbook&quot;&gt;On-chain orderbook&lt;/h3&gt;
+&lt;p&gt;Market makers đặt các order lên chuỗi, người dùng sẽ điền các order này trực tiếp trên chuỗi nếu họ muốn giao dịch. Tuy nhiên, cách này sẽ gây tốn gas rất nhiều.&lt;/p&gt;
 
-<h3 id="off-chain-orderbook">Off-chain orderbook</h3>
-<p>Market makers kí các orders ngoài chuỗi. Người dùng sẽ điền các order này rồi submit nó lên chuỗi. Cách này sẽ không tận dụng khả năng lập trình và thanh khoản sẽ không hiển thị với smartcontract.</p>
+&lt;h3 id=&quot;heading-off-chain-orderbook&quot;&gt;Off-chain orderbook&lt;/h3&gt;
+&lt;p&gt;Market makers kí các orders ngoài chuỗi. Người dùng sẽ điền các order này rồi submit nó lên chuỗi. Cách này sẽ không tận dụng khả năng lập trình và thanh khoản sẽ không hiển thị với smartcontract.&lt;/p&gt;
 
-<h3 id="dutch-auctions">Dutch auctions</h3>
-<p>User đặt các order lên chuỗi, giá sẽ từ từ điều chỉnh để thu hút. Market maker sẽ điền order đó khi họ thích mức giá đó. Vấn đề của cách này là điều chỉnh giá chậm</p>
+&lt;h3 id=&quot;heading-dutch-auctions&quot;&gt;Dutch auctions&lt;/h3&gt;
+&lt;p&gt;User đặt các order lên chuỗi, giá sẽ từ từ điều chỉnh để thu hút. Market maker sẽ điền order đó khi họ thích mức giá đó. Vấn đề của cách này là điều chỉnh giá chậm&lt;/p&gt;
 
-<h3 id="automated-market-maker">Automated market maker</h3>
-<p>Market markers sẽ đưa các tài sản vào trong 1 pool. Người dùng sẽ trade với pool đó mới mức giá được xác định bởi thuật toán.<br />
-Lợi ích:</p>
-<ul>
-  <li>Tiết kiệm gas</li>
-  <li>Dễ sử dụng, …</li>
-</ul>
+&lt;h3 id=&quot;heading-automated-market-maker&quot;&gt;Automated market maker&lt;/h3&gt;
+&lt;p&gt;Market markers sẽ đưa các tài sản vào trong 1 pool. Người dùng sẽ trade với pool đó mới mức giá được xác định bởi thuật toán.&lt;br /&gt;
+Lợi ích:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Tiết kiệm gas&lt;/li&gt;
+  &lt;li&gt;Dễ sử dụng, …&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2 id="cách-automated-market-maker-amm-hoạt-động">Cách Automated market maker (AMM) hoạt động</h2>
-<p>Giả sử 1 AMM có 2 loại tài sản, 1 là X (risky, ví dụ: ETH), 2 là Y (stable, ví dụ DAI). AMM lưu trữ x đồng X và y đồng Y. AMM đề nghị mua hoặc bán tài sản X ở một giá trị p nào đó.<br /></p>
+&lt;h2 id=&quot;heading-cách-automated-market-maker-amm-hoạt-động&quot;&gt;Cách Automated market maker (AMM) hoạt động&lt;/h2&gt;
+&lt;p&gt;Giả sử 1 AMM có 2 loại tài sản, 1 là X (risky, ví dụ: ETH), 2 là Y (stable, ví dụ DAI). AMM lưu trữ x đồng X và y đồng Y. AMM đề nghị mua hoặc bán tài sản X ở một giá trị p nào đó.&lt;br /&gt;&lt;/p&gt;
 
-<p>Giả sử, ta muốn duy trì tài sản X và Y trong pool với tỉ lệ a/b. Giả sử là 50/50
-Vì p là giá trị của X nên ta thấy<br />
-                    p.x = y <br />
-                    &lt;=&gt; p = y / x. <br />
+&lt;p&gt;Giả sử, ta muốn duy trì tài sản X và Y trong pool với tỉ lệ a/b. Giả sử là 50/50
+Vì p là giá trị của X nên ta thấy&lt;br /&gt;
+                    p.x = y &lt;br /&gt;
+                    &amp;lt;=&amp;gt; p = y / x. &lt;br /&gt;
 Khi đó, nếu ai đó bán lượng ETH (X) để lấy DAI (Y) thì x sẽ tăng và y giảm xuống. Dó đó giá trị p sẽ giảm đi.
-Điều này tương đương với x, y tỉ lệ nghịch với nhau. <br />
-Gọi x * y = k thì k được gọi là hằng số dự trữ.</p>
-
-<p>Hình ảnh: ///</p>
-
-<p>Ví dụ: Nếu pool có 10 ETH, 1000 DAI. Giá của 1 ETH = 100 DAI. <br />
-Hằng số dự trữ: k = x * y = 10 * 1000 = 10000.</p>
-
-<p>1) Giả sử user muốn đổi DAI lấy ETH. Muốn đổi 500 DAI + 0.3% phí để đổi lấy ETH.  <br />
-Lúc này: y’ = 500 + 1500 = 1500. <br />
-=&gt; x’ = 10000 / 1500 = 6.66 ETH. <br />
-Lúc đó, user này sẽ nhận: 10 - 6.66 = 3.33 ETH =&gt; Giá p của 1 ETH = 150 DAI (Tăng giá).</p>
-
-<p>2) Giả sử user muốn đổi ETH lấy DAI. ĐỔi 6ETH + 0.3% lấy DAI. <br />
-Lúc này: x’ = 10 + 6 = 16 <br />
-=&gt; y’ - 10000/ 16 = 625. User nhận 1000 - 625 = 375 DAI. <br />
-Giá p 1ETH = 62.5 DAI, giảm 37.5 so với ban đầu.</p>
-
-<h3 id="liquidity-provider">Liquidity Provider</h3>
-<p>Là những người cung cấp thanh khoản cho pool, nhận lại được các Liquidity Token, tương đương với thanh khoản mà họ cung cấp. Khi người dùng đổi các tài sản trong pool, phần trăm phí sẽ được trả cho các LP này dựa vào số thanh khoản mà họ cung cấp.</p>
-
-<p>Độ thanh khoản của pool được tính bằng công thức:  L = sqrt(k) = sqrt(x * y).</p>
-
-<h3 id="những-điểm-cần-phát-triển-của-amm">Những điểm cần phát triển của AMM</h3>
-<ul>
-  <li>Phí gas</li>
-  <li>Trượt giá: Biến động giá bởi các giao dịch từ người dùng</li>
-  <li>Chênh lệch giá</li>
-  <li>Hiệu quả sử dụng vốn</li>
-</ul>
-
-<h2 id="concentrated-liquidity">Concentrated Liquidity</h2>
-<p>Để tăng hiệu quả sử dụng vốn, các LP có thể gửi thanh khoản ở mức giá trong khoảng cụ thể. Ví dụ như ở hình ảnh trên, là chuyển đường cong xy = k xuống dưới và sang trái. <br />
-Lí do là vì giá trị p của thanh khoản sẽ chỉ ở trong 1 khoảng nhất định (Ví dụ DAI chỉ ở trong khoảng từ (0.95 ~ 1.05) USD). Do đó, khi PL cung cấp thanh khoản ở khoảng từ (0, ∞) thì hiệu quả sử dụng vốn của họ sẽ không được cao. Do đó, ở mỗi số sàn giao dịch, việc thanh khoản tập trung trông 1 khoảng hữu hạn là 1 vị trí. Vị trí này cần duy trì đủ dữ trữ để hỗ trợ giao dịch trong phạm vi của nó. Từ đó khiến nó hoạt động như một constant product pool với dự trữ lớn hơn trong khoảng đó. Từ đó việc sử dụng vốn sẽ có hiệu quả hơn.</p>
-
-<h2 id="kết-luận">Kết luận</h2>
-<p>Về cách các loại sàn hoạt động, mọi người có thể xem ở các whitePaper, ví dụ với <a href="https://uniswap.org/whitepaper.pdf">Uniswap</a> .</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Khái niệm]]></summary></entry><entry><title type="html">Solidity và State Trie</title><link href="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie" rel="alternate" type="text/html" title="Solidity và State Trie" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/solidity-va-state-trie</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie</p>
-
-<h2 id="solidity">Solidity</h2>
-<p>Solidity là ngôn ngữ lập trình cho Blockchain Ethereum, là ngôn ngữ hướng đối tượng, cấp cao để triển khai các smartcontracts. Smartcontract là chương trình chi phối các hành vi của Account trong Ethereum State. Account contract được tạo ra khi chạy một smartcontract. Mọi người có thể đọc account contract state ở trong storage array, nên không bao giờ được lưu trữ các bí mật trong contract.</p>
-
-<p>Một số dạng biến của Solidity như: uint256, address(byte 32), bool,… Các loại tham chiếu là mảng, struct, string, map,… Khi một giao dịch đi từ A ⇾ B ⇾ C ⇾ D thì tại D, msg.sender là C, nhưng tx.origin là A.</p>
-
-<p>ERC20 là API tiêu chuẩn cho fungible token, cung cấp các chức năng cơ bản để chuyển token hoặc cho phép token được sử dụng bởi bên thứ 3.</p>
-
-<p>Các kiểu lưu trữ:</p>
-<ul>
-  <li>Stack variables: Rẻ để sử dụng, phù hợp với mọi loại dữ liệu (không qua 32 bytes)</li>
-  <li>Calldata: Là 1 mảng byte chỉ đọc, tốn gas</li>
-  <li>Memory: 1 byte mảng, rẻ, nhưng chi phí tăng theo cấp số nhân, lưu được dữ liệu &gt; 32 bytes</li>
-  <li>Storage: Đắt, mappings và các biến state lưu trong này.</li>
-  <li>Event logs: rẻ, không cần truy cập đến contract.</li>
-</ul>
-
-<p>Ở trên là một số hiểu biết của mình về solidity, về mặt coding, mọi người nên xem ở <a href="https://docs.soliditylang.org/en/latest/">đây</a>.</p>
-
-<h2 id="state-trie-ethereum-state-trie">State trie (Ethereum state trie)</h2>
-<p>Hình ảnh đây là cấu trúc được tạo bởi các loại State trong Ethereum: (ở góc phải dưới hình ảnh)</p>
-
-<p><img src="https://i.stack.imgur.com/afWDt.jpg" width="900" height=" 600" /></p>
-
-<p>Có 3 loại state chính là World state, Transaction, và Transaction Receipt.</p>
-
-<h3 id="world-state-trie">World State Trie</h3>
-<p>World State Trie Là mapping giữa địa chỉ và Account State. Nó được update bởi các Tx, và lưu trữ mọi thông tin về accounts và có thể lấy được qua các truy vấn.
-Trong World State Trie có Account Storage Trie, nơi các dữ liệu liên kết với account được lưu trữ. Nó chỉ liên quan đến các contract account và mọi dữ liệu được ánh xạ giữa các số nguyên 32 byte.</p>
-
-<p>Account State là các thông tin về một Ethereum account, như balance, nonce, storage Root, codehash,… và là lá của World State Trie.</p>
-
-<h3 id="transaction-trie">Transaction Trie</h3>
-<p>Transaction Trie lưu trữ các Tx trong Ethereum. Khi các Tx lưu trữ trong block, nó không thể bị thay đổi. Nó được xây dựng theo cấu trúc Modified Merkel Patricia Trie, và chỉ có node root mới được đưa vào trong block.</p>
-
-<h3 id="transaction-receipt-triereceipt-trie">Transaction Receipt Trie(Receipt Trie)</h3>
-<p>Transaction Receipt Trie lưu trữ đầu ra của các Txs. Đầu ra là kết quả của một Tx mà được chạy thành công, bao gồm H(Txs), block number, gas Used, địa chỉ của contract.</p>
-
-<h3 id="ví-dụ-cấu-trúc-của-world-state-một-cách-đơn-giản">Ví dụ cấu trúc của World State (một cách đơn giản)</h3>
-<p>Để đơn giản, ta giả sử các node lá của World State Trie chỉ bao gồm địa chỉ là số dư theo cặp Key - Value. 
-Các loại thông tin:</p>
-<ul>
-  <li>Leaf Node: node lá của cây, chứa các trạng thái của 1 tài khoản có địa chỉ là Key</li>
-  <li>Branch Node: gồm 16 ô, là các tiền tố của Key.</li>
-  <li>Extension Node: node chỉ có 1 child</li>
-  <li>Nibble: Là phần chung trong Key, 1 Nibble = 4 bits, lưu trong keyend hoặc shared nibble.</li>
-  <li>Prefixes:
-    <ul>
-      <li>0: extension node có số chẵn Nibble</li>
-      <li>1: extension node có số lẻ Niblle</li>
-      <li>2: leaf node, có số chẵn Nibble</li>
-      <li>3: leaf node, có số lẻ Nibble.</li>
-    </ul>
-  </li>
-</ul>
-
-<p>Minh Hoạ:
-World State Trie với 4 cặp Key - Value như sau:</p>
-<ul>
-  <li>a711355: 45 ETH</li>
-  <li>a77d337: 1 WEI</li>
-  <li>a7f9365: 1.1 ETH</li>
-  <li>a77d397: 0.12 ETH</li>
-</ul>
-
-<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SiSYWqaPcJtBlnFR4VAaug.png" /></p>
-
-<h2 id="kêt-luận">Kêt luận</h2>
-<p>Ở trên là một số khái niệm sơ bộ về Solidity và cấu trúc của Ethereum, cụ thể về các State Trie.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie]]></summary></entry><entry><title type="html">Stablecoins</title><link href="http://localhost:4000/blog/2023/07/24/stable-coins" rel="alternate" type="text/html" title="Stablecoins" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/stable-coins</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/stable-coins"><![CDATA[<p>Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.</p>
-
-<h2 id="custodial-stablecoin-stablecoin-kí-gửi">Custodial Stablecoin: Stablecoin kí gửi</h2>
-<p>Custodian giữ kho bạc trong 1 ngân hàng truyền thống, mọi giao dịch đều thông qua nó. Ngoài ra, nó có quyền mạnh mẽ như kiểm duyệt khác hàng rút tiền hoặc xoá số dư người dùng. Điều này sẽ nguy hiểm nếu chẳng may bị hack hoặc nhầm lẫn và không đảm bảo sự phi tập trung. Do đó, cách này không được ưu tiên và sử dụng ở thực tế.</p>
-
-<h2 id="synthetic">Synthetic</h2>
-<p>Mục tiêu là xây dựng 1 loại non-custodial stablecoin. Tuy nhiên, có một vấn đề là ETH thường xuyên dao động, không ổn định so với USD.<br />
-<strong> Maker DAO: </strong>  xây dựhng một stablecoin từ tài sản không ổn định. <br />
-Hệ thống MakerDAO:</p>
-<ul>
-  <li>DAI: stablecoin (giá: 0.99 ~ 1.01 USD)</li>
-  <li>MKR:
-    <ul>
-      <li>ai cũng có thể mua để kiếm lãi.</li>
-      <li>Sử dụng để quản trị, ổn định giá DAI trong trường hợp khẩn cấp.</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="đúc-dai">Đúc DAI</h3>
-<p>Giả sử: A muốn trả B bằng DAI nhưng A chỉ có 1 ETH. A sẽ tạo 1 vault trên MakerDAO contract:</p>
-<ul>
-  <li>1 wallet: tài sản mà A kiểm soát.</li>
-  <li>1 vault: tài sản mà A khoá để vay DAI.</li>
-</ul>
-
-<p>Ta có:</p>
-<ul>
-  <li>Ban đầu, A có: 1ETH, 0DAI trong wallet, 0ETH, 0DAI trong vault.</li>
-  <li>Khi A khoá 1 ETH vào vault: trong wallet sẽ không còn ETH, trong vault có 1ETH</li>
-  <li>Việc khoá ETH xem như một cách thế chấp để vay DAI. Vì số lượng thế chấp = 130% số lượng tối đa có thể vay, nên khi A thế chấp 1 ETH (~3000USD) thì chỉ có thể vay tối đa 2300 DAI.</li>
-  <li>Do đó, trong wallet A có 2300DAI, còn vault: 1ETH, -2300DAI.</li>
-  <li>A trả cho B bằng DAI, và có thể trả nợ cho vault để lấy lại 1 ETH.</li>
-</ul>
-
-<h3 id="stabilization">Stabilization</h3>
-<p>A khi thế chấp ETH và vay DAI, phải trả lãi: Phí ổn định. Hầu hết các phí đều đưa cho DAI holders (thông qua DSR), một số còn lại đưa cho MKR holders.</p>
-
-<p><strong> The DAI saving rate (DSR)</strong> <br />
-Bất kì ai giữ DAI có thể khoá DAI của mình trong MakerDAO contract. DSR là tỉ lệ lãi từ DAI đã khoá ở trên contract. Users có thể rút DAI ra từ contract bất cứ lúc nào.</p>
-
-<p><strong> Cơ chế ổn định: </strong> <br /></p>
-<ul>
-  <li>DAI có giá trị &lt; 1$  ⇒ tăng phí ổn định và DSR:
-    <ul>
-      <li>Người đúc DAI được khuyến khích hoàn trả món nợ đã vay sớm vì lãi đang tăng</li>
-      <li>Khuyến khích DAI holders gửi nhiều DAI vào contract</li>
-      <li>Từ đó giúp giảm nguồnn cùng DAI, giúp DAI tăng giá</li>
-    </ul>
-  </li>
-  <li>DAI có giá trị &gt; 1$  ⇒ giảm phí ổn định và DSR.</li>
-</ul>
-
-<h3 id="thanh-toán">Thanh toán</h3>
-<p>Nếu vault debt vượt quá 130% (do lãi), thì tài sản thế chấp sẽ được bán đấu giá. (Tiền lãi - phí) sẽ được trả nợ vault cho A đến khi đạt dưới 130%.</p>
-
-<h2 id="nfts">NFTs</h2>
-<p>NFTs là:</p>
-<ul>
-  <li>Quyền sở hữu token của 1 tài sản kĩ thuật số (như Digital Artwork, vitual games item,…).</li>
-  <li>Không thể có NFT nào giống nhau, nên không thể trao đổi lẫn nhau.</li>
-  <li>Được xác định bởi lịch sử, mức độ tiện ích, tầm quan trọng,…</li>
-</ul>
-
-<p>NFTs được quản lý dưới blockchain vì:</p>
-<ul>
-  <li>Blockchain đảm bảo quyền sở hữu dài hạn cho đến khi bán.</li>
-  <li>Cung cấp một hồ sơ đáng tin cậy về xuất xứ (chống giả mạo).</li>
-</ul>
-
-<h3 id="sở-hữu-tài-sản-kĩ-thuật-số">Sở hữu tài sản kĩ thuật số</h3>
-<p>NFTs hoạt động như một chứng thư pháp lý:</p>
-<ul>
-  <li>Có thể chuyển quyền sở hữu từ bên này sang bên khác</li>
-  <li>Quyền sỏ hữu thể hiện tình trạng sở hữu tài sản, cấp quyền hợp pháp,…</li>
-</ul>
-
-<h3 id="nhận-nfts-như-thế-nào">Nhận NFTs như thế nào</h3>
-<p>Có 2 cách chính là tìm người sở hữu và mua từ học, hoặc lên thị trường và mua.</p>
-
-<h3 id="thị-trường-nft">Thị trường NFT</h3>
-<p>Được xây dựng như một tập các smartcontract, thành một hệ thống tài sản và trao đổi. NFT mang lại sự sở hữu đích thực trên Internet, kích hoạt thương mại kĩ thuật số,… Ví dụ: một số NFT đặc biệt mang lại cho người dùng sự truy cập vào một số IP, trang trên Internet.</p>
-
-<h3 id="nft-cost-issue">NFT cost issue:</h3>
-<p>Đa phần các NFT đều có giá cao, do đó muốn sở hữu thì có thể thuê hoặc tiết kiệm. Sẽ khó bắt đầu kinh doanh NFT nếu không có tiền mặt hoặc nguồn cung cấp đủ lớn.</p>
-
-<p>Một số dịch vụ dựa trên NFTs như: Gameing guild (các item trong game: NFTs), EveryRealm (Bất động sản ảo), Credit Provider,…</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.]]></summary></entry><entry><title type="html">Cơ chế Ethereum</title><link href="http://localhost:4000/blog/2023/07/23/ethereum-mechanics" rel="alternate" type="text/html" title="Cơ chế Ethereum" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/ethereum-mechanics</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/ethereum-mechanics"><![CDATA[<p>Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội</p>
-
-<h3 id="so-sánh-chung">So sánh chung</h3>
-<p>Bitcoin như một máy chuyển trạng thái. Bitcoin rule: S x I ⇾ S, với tập S là các trạng thái, I là tập tất cả các input. Còn với Ethereum, hàm chuyển trạng thái của nó sẽ phong phú hơn nhiều, và mỗi lần chuyển đổi thì sẽ thực hiện toàn bộ chương trình.</p>
-
-<p>Ethereum hỗ trợ các DApp, với Program code được lưu trữ trên blockchain, khi chạy cũng sẽ thay đổi các trạng thái. Các block thì sẽ có khoảng 150 Tx, và các Block Proposer sẽ nhận Tx fee cho block và các phần thưởng khác khi tạo khối thành công.</p>
-
-<p>Ngoài ra, ta đã biết rằng khi các block được proposer trong consensus layer (các beacon block, nên còn được gọi là beacon chain), các node gửi các Tx lên cho execution client hay còn gọi là compute layer để cập nhập các trạng thái (update world state).</p>
-<h2 id="compute-layer">Compute layer</h2>
-<p>World state: tập hợp các tài khoản được xác định bởi các địa chỉ 32 byte (Các thông tin như địa chỉ, số dư,..)</p>
-
-<p>Có 2 loại tài khoản:</p>
-<ul>
-  <li>Owned account: Điều khiển bởi các cặp (Pk, Sk), hay là tài khoản của người dùng.</li>
-  <li>Contracts: Điều khiển bởi code, được tạo lúc tài khoản được tạo, không thể thay đổi.</li>
-</ul>
-
-<p>Các dữ liệu cần thiết với mỗi account:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Account Data</th>
-      <th>Owned</th>
-      <th>Contracts</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>address(tính)</td>
-      <td>H(Pk)</td>
-      <td>H(CreatorAdd, CreatorNonce)</td>
-    </tr>
-    <tr>
-      <td>storage root</td>
-      <td>Không</td>
-      <td>StorageRoot</td>
-    </tr>
-    <tr>
-      <td>code</td>
-      <td>không</td>
-      <td>CodeHash</td>
-    </tr>
-    <tr>
-      <td>balance</td>
-      <td>balance</td>
-      <td>balance</td>
-    </tr>
-    <tr>
-      <td>nonce</td>
-      <td>nonce</td>
-      <td>nonce</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Trong đó, nonce là số Tx mà acount đã thực hành, tính bằng (#Tx sent) + (#accounts created). Số nonce được dùng để chống replay và khi tạo mới thì luôn bằng 0 (với contract).  Các contract có thể bị ghi đè code, nhưng chỉ khi contract cũ đã SELFDESTRUCT.</p>
-
-<p>Mỗi contract có 1 mảng lưu trữ liên quan gồm 2^256 phần tử, mỗi phần tử là 32 bytes. Và storage root là Merkle Patricia hash của mảng.</p>
-
-<h3 id="chuyển-trạng-thái">Chuyển trạng thái</h3>
-<h4 id="tx">Tx</h4>
-<ul>
-  <li>Được kí bởi người tạo.</li>
-  <li>To: nếu = 0 là tạo account mới, code = (init, body). Còn lại là 32-bytes địa chỉ và data (những thứ mà contract gọi và các đối số).</li>
-  <li>From: Địa chỉ khởi tạo và chữ kí vào Tx</li>
-  <li>Value: số Ethereum được gửi.</li>
-  <li>Tx fees: gasLimit, maxFee, maxPriorityFee (Sẽ nói rõ hơn ở phần sau).</li>
-  <li>Nonce: Khớp với nonce hiện tại của người gửi, tránh việc replay Tx.</li>
-  <li>Chain-id: đảm bảo giao dịch gửi đúng chuỗi (không thể dùng giao dịch testnet lên mainnet).</li>
-</ul>
-
-<h4 id="các-loại-tx">Các loại Tx</h4>
-<ul>
-  <li>owned ⇾ owned: chuyển ETH giữa các user</li>
-  <li>owned ⇾ contract: gọi contract với ETH &amp; data</li>
-</ul>
-
-<h4 id="messages">Messages</h4>
-<p>Là các Tx ảo được contract tạo ra, nó không có Signature (vì contract không có). Có 2 loại là:</p>
-<ul>
-  <li>contract ⇾ onwed: contract gửi tiền cho user</li>
-  <li>contract ⇾ contract: contract gọi contract khác.</li>
-</ul>
-
-<h3 id="ethereum-block">Ethereum block</h3>
-<p>Khác với Block của Bitcoin, Block Header của Ethereum có nhiều loại dữ liệu hơn, một số chính như:</p>
-<ul>
-  <li>Consensus data: các dữ liệu như Proposer Id, Previous hash, vote,…</li>
-  <li>Address: Nơi mà gas fee được chuyển đến</li>
-  <li>World state root: Merkle Patricia Tree Hash của tất cả các tài khoản</li>
-  <li>Tx root: Merkle Tree Hash của Tx</li>
-  <li>Tx receipt root: Merkle Hash của các log message</li>
-  <li>Gas used: Sử dụng để điều chỉnh giá gas (ở phần sau).</li>
-</ul>
-
-<h3 id="evm-mechanics">EVM mechanics</h3>
-<p>EVM là môi trường thực thi (execution). Các contract được viết bằng solidity, sau đó sẽ được compile thành EVM bytecode và được các validator sử dụng để chạy các contract. <br />
-EVM hoạt động như một [Stack Machine] (https://en.wikipedia.org/wiki/Stack_machine) với lệnh JUMP (Các program sẽ bị huỷ nếu quá stack, proposer giữ lại gas).</p>
-
-<h3 id="gas">Gas</h3>
-<p>Gas được xem như là nguyên liệu của Ethereum, là khoản phí cần trả để thực hiện các giao dịch hay hoạt động tương tác với smartcontract. Mọi chỉ thị đều tốn gas, giúp ngăn việc gửi Tx có nhiều bước (tốn nhiều tiền hơn). Các Proposer có thể chọn các Tx từ mempool có phí gas cao để tối đa hoá thu nhập.</p>
-
-<h4 id="gas-calculation">Gas calculation:</h4>
-<p>Mỗi block có:</p>
-<ul>
-  <li>baseFee: gasPrice nhỏ nhất cho tất cả Tx trong block. BaseFee dựa vào tổng số gas ở block trước (Gas used ở header), nếu gasUsed là giới hạn (30M) thì baseFee tăng 12.5%, nếu block trước trống thì giảm 12.5%. Còn lại thì giữ nguyên.</li>
-  <li>gasLimit: tổng gas cho phép với Tx</li>
-  <li>maxFee: giá gas tối đa cho phép</li>
-  <li>maxPriorityFee: ‘tips’ tối đa cho Proposer.</li>
-</ul>
-
-<p>GasPrice = min(maxFee, baseFee + maxPriorityFee) <br />
-MaxTxFee = gasLimit x gasPice <br />
-<strong> Cụ thể </strong></p>
-<ul>
-  <li>nếu gasPrice &lt; baseFee: dừng</li>
-  <li>nếu MaxTxFee &gt; sender.balance: dừng</li>
-  <li>trừ MaxTxFee khỏi sender.balance</li>
-  <li>Đặt Gas = gasLimit</li>
-  <li>Chạy Tx, trừ gas từ Gas với mỗi Tx. Nếu Gas &lt; 0 thì dừng, Proposer giữ gasLimit * gasPrice.</li>
-  <li>Xong xuôi, trả lại Gas x gasPrice cho sender</li>
-  <li>gasUsed = gasLimit - Gas. BURN gasUsed x baseFee và gửi gasUsed x (GasPrice - baseFee) cho block proposer.</li>
-</ul>
-
-<p>ETH bị BURN vì giúp giảm lạm phát, tăng tính khan hiếm, có lợi cho nhà đầu tư, chặn các proposer tạo ra các Tx giả, không khuyến khích các thoả thuận ngoài chuỗi.</p>
-
-<h2 id="kết-luận">Kết luận</h2>
-<p>Ở trên là toàn bộ hiểu biết của mình về cơ chế Ethereum.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội]]></summary></entry><entry><title type="html">Proof Of Stake</title><link href="http://localhost:4000/blog/2023/07/23/proof-of-stake" rel="alternate" type="text/html" title="Proof Of Stake" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/proof-of-stake</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/proof-of-stake"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu một cơ chế đồng thuận đang được sử dụng rất nhiều trong các blockchain hiện nay, đó là Proof of Stake.</p>
-
-<h3 id="accountable-safety">Accountable Safety</h3>
-<p>Một giao thức với resilence là n/3 khi giao thức đó an toàn nếu nó có ít hơn n/3 Adverserial node (Ví dụ streamlet). <br />
-Một giao thức với Accountable Safety resilence n/3 là giao thức:</p>
-<ul>
-  <li>An toàn nếu ít hơn Adverserial node.</li>
-  <li>Nếu vi phạm safety, thì những người giám sát (các node không phải người được chọn để đề xuất khối) có thể xác định rõ các node vi phạm.</li>
-  <li>Không có cáo buộc sai với các node trung thực.</li>
-</ul>
-
-<h3 id="finality-và-dynamic-availability">Finality và Dynamic availability</h3>
-<p>Gọi một giao thức là finality nếu nó duy trì safety trong thời gian không đồng bộ (trước GST). Ở các giao thức này, Tx được finalize nhanh hơn confirm trong bitcoin (60 phút). <br />
-Gọi một giao thức là Dynamic availability nếu giao thức đó có thể tiếp tục confirm các giao dịch ngay cả khi nhiều node offline.</p>
-
-<p>Không có giao thức SMR nào đảm bảo cung cấp cả 2. Do đó, một cách giải quyết là sử dụng Nested chains.</p>
-
-<h3 id="nested-chains">Nested chains</h3>
-<ul>
-  <li>Available chain được xác định bởi giao thức Π_ava, thoả mãn Dynamic availability (VD: Nakamoto consensus).</li>
-  <li>Finalized chain được xác định bởi giao thức checkpoint Π_fin thoả mãn security dưới mạng đồng bộ 1 phần.</li>
-  <li>Chuỗi confirm bởi Π_ava là available chain.</li>
-  <li>Π_fin kiểm tra các block trong availbale chain.</li>
-  <li>Tiền tố của checkpoint cuối cùng tạo thành finalized chain. Tương đương với Finalized chain là prefix của available. Chuỗi này safe dưới mạng bất đồng bộ</li>
-  <li>Các block của available chain luôn extend từ điểm checkpoint cuối cùng.</li>
-</ul>
-
-<p>Minh hoạ: hình ảnh</p>
-
-<h2 id="proof-of-stake">Proof of Stake</h2>
-<h3 id="tổng-quan">Tổng quan:</h3>
-<ul>
-  <li>Trong giao thức Pos, các nodes khoá (Stake) tiền của họ trong giao thức để đủ điều kiện tham gia consensus.</li>
-  <li>Càng nhiều coin được stake bởi 1 node thì khả năng cao node đó được chọn làm validator. Vì thuật toán lựa chọn validator là giả ngẫu nhiên.</li>
-  <li>Nếu node bị bắt quả tang thực hiện 1 hành động bất lợi (xác thực giao dịch sai) thì node đó sẽ bị burn số tiền đã stake và không thể tham gia vào quá trình đề xuất khối tiếp theo. (Slashing).</li>
-</ul>
-
-<p>Do đó, trong PoS, nodes sẽ có trách nhiệm trong cách hành động của mình. PoS giúp thay đổi cơ chế block được verify. Ngoài ra, để trở thành validator, các node phải có điều kiện (ví dụ: có ít nhất 32 ETH,..), sau khi đóng 1 khối, khối đó sẽ được các validator khác validate theo nhiều method khác nhau tuỳ vào blockchain.</p>
-
-<h3 id="cụ-thể-với-ethereum-20">Cụ thể với Ethereum 2.0</h3>
-
-<h4 id="chọn-validator-và-block-proposer">Chọn Validator và Block Proposer</h4>
-<p>Để thành một validator, phải gửi ít nhất 32 ETH vào contract và chạy 3 phần mềm riêng biệt (sẽ giới thiệu ở sau) và tham gia hàng đợi. Thời gian của blocks chia thành các slot: 12s, epoch: 32 slot. Sau khi được active, validator đó sẽ tham ra vào quá trình phê duyệt. 1 validator ngẫu nhiên sẽ được chọn để xác thực giao dịch và đề xuất khối ở mỗi slot (Block proposer). Số còn lại sẽ làm giám sát để phê duyệt và kiểm tra xem validator đó có gian lận không.</p>
-
-<p>Chọn Block Proposer quá trình giả ngẫu nhiên gồm nhiều yêu tố như staking age, số tiền stake,… Ở đây, mình sẽ giới thiệu 2 phương pháp lựa chọn là:</p>
-<ul>
-  <li><strong> Randomize block selection: </strong> lựa chọn bằng cách tìm kiếm nodes có sự kết hợp của hash value thấp nhất và stake cao nhất. Vì size của các stakes là công khai nên có thể dự đoán được.</li>
-  <li><strong> Coin Age Selection: </strong> là phương thức chọn các nodes dựa vào khoảng thời gian stake. Coin Age được tính bằng: số ngày đặt cược x số lượng coin. Khi một node forge một block, coin age của nó được cài về 0.</li>
-</ul>
-
-<h4 id="quy-trình-xác-thực">Quy trình xác thực</h4>
-<p>Khi một user tạo Tx và submit lên Ethereum, nó sẽ được kiểm tra tính hợp lệ (Ví dụ đảm bảo số tiền, key đúng,…) sau đó được đưa đến mempool và phát tán nó đến các node khác. <br />
-Một node được chọn làm Block Proposer để đề xuất khối ở slot này, có trách nhiệm đóng và phát tán block vào chuỗi và cập nhập trạng thái. Nodes chạy 3 phần mềm:</p>
-<ul>
-  <li>Execution client: gộp các Txs từ mempool thành “execution payload” và chạy nó ở local để tạo ra sự thay đổi trạng thái. Thông tin này được chuyển đến consensus client</li>
-  <li>Consensus client: đóng gói payload thành 1 phần của “beacon block” (gồm payload, slashing,…) cho phép mạng thống nhất trình tự về các khối.</li>
-  <li>Validator client: Các node nhận được beacon block qua tầng gossip network. Sau đó chuyển đến Execution client của nó để chạy lại, nhằm chắc chắn trạng thái là đúng. Sau đóm Validator client sẽ chứng thực khối đó hợp lệ và là khối tiếp theo trong góc nhìn của chuỗi (available chain). Khối cũng được thêm vào cơ sở dữ liệu local của các node.</li>
-</ul>
-
-<h4 id="finality">Finality</h4>
-<p>Như đã nói ở trên, các block của available chain luôn extend từ điểm checkpoint cuối cùng. Checkpoint là các block đầu tiên ở mỗi epoch. Các validators có thể vote cho cặp checkpoint (1 epoch), nếu ít nhất 2/3 vote cho nó, cặp checkpoint này sẽ được cập nhập, và các block nằm giữa sẽ được cập nhập thành finalized chain. Nếu chuỗi không thể finalized trong nhiều hơn 4 epoch liên tục, stake ETH từ các validator chống lại đa số sẽ bị biến mất, cho phép đa số chiếm hơn 2/3 và finalized chuỗi.</p>
-
-<h2 id="lời-kết">Lời kết</h2>
-<p>Ở trên là cách hoạt động cơ bản của POS. Mọi người có thể xem thêm các thông tin về POS trong Ethereum tại <a href="https://ethereum.org/vi/developers/docs/consensus-mechanisms/pos/">đây</a>.</p>]]></content><author><name>vanhg</name></author><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu một cơ chế đồng thuận đang được sử dụng rất nhiều trong các blockchain hiện nay, đó là Proof of Stake.]]></summary></entry></feed>
+Điều này tương đương với x, y tỉ lệ nghịch với nhau. &lt;br /&gt;
+Gọi x * y = k thì k được gọi là hằng số dự trữ.&lt;/p&gt;
+
+&lt;p&gt;Hình ảnh: ///&lt;/p&gt;
+
+&lt;p&gt;Ví dụ: Nếu pool có 10 ETH, 1000 DAI. Giá của 1 ETH = 100 DAI. &lt;br /&gt;
+Hằng số dự trữ: k = x * y = 10 * 1000 = 10000.&lt;/p&gt;
+
+&lt;p&gt;1) Giả sử user muốn đổi DAI lấy ETH. Muốn đổi 500 DAI + 0.3% phí để đổi lấy ETH.  &lt;br /&gt;
+Lúc này: y&apos; = 500 + 1500 = 1500. &lt;br /&gt;
+=&amp;gt; x&apos; = 10000 / 1500 = 6.66 ETH. &lt;br /&gt;
+Lúc đó, user này sẽ nhận: 10 - 6.66 = 3.33 ETH =&amp;gt; Giá p của 1 ETH = 150 DAI (Tăng giá).&lt;/p&gt;
+
+&lt;p&gt;2) Giả sử user muốn đổi ETH lấy DAI. ĐỔi 6ETH + 0.3% lấy DAI. &lt;br /&gt;
+Lúc này: x&apos; = 10 + 6 = 16 &lt;br /&gt;
+=&amp;gt; y&apos; - 10000/ 16 = 625. User nhận 1000 - 625 = 375 DAI. &lt;br /&gt;
+Giá p 1ETH = 62.5 DAI, giảm 37.5 so với ban đầu.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-liquidity-provider&quot;&gt;Liquidity Provider&lt;/h3&gt;
+&lt;p&gt;Là những người cung cấp thanh khoản cho pool, nhận lại được các Liquidity Token, tương đương với thanh khoản mà họ cung cấp. Khi người dùng đổi các tài sản trong pool, phần trăm phí sẽ được trả cho các LP này dựa vào số thanh khoản mà họ cung cấp.&lt;/p&gt;
+
+&lt;p&gt;Độ thanh khoản của pool được tính bằng công thức:  L = sqrt(k) = sqrt(x * y).&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-những-điểm-cần-phát-triển-của-amm&quot;&gt;Những điểm cần phát triển của AMM&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Phí gas&lt;/li&gt;
+  &lt;li&gt;Trượt giá: Biến động giá bởi các giao dịch từ người dùng&lt;/li&gt;
+  &lt;li&gt;Chênh lệch giá&lt;/li&gt;
+  &lt;li&gt;Hiệu quả sử dụng vốn&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;heading-concentrated-liquidity&quot;&gt;Concentrated Liquidity&lt;/h2&gt;
+&lt;p&gt;Để tăng hiệu quả sử dụng vốn, các LP có thể gửi thanh khoản ở mức giá trong khoảng cụ thể. Ví dụ như ở hình ảnh trên, là chuyển đường cong xy = k xuống dưới và sang trái. &lt;br /&gt;
+Lí do là vì giá trị p của thanh khoản sẽ chỉ ở trong 1 khoảng nhất định (Ví dụ DAI chỉ ở trong khoảng từ (0.95 ~ 1.05) USD). Do đó, khi PL cung cấp thanh khoản ở khoảng từ (0, ∞) thì hiệu quả sử dụng vốn của họ sẽ không được cao. Do đó, ở mỗi số sàn giao dịch, việc thanh khoản tập trung trông 1 khoảng hữu hạn là 1 vị trí. Vị trí này cần duy trì đủ dữ trữ để hỗ trợ giao dịch trong phạm vi của nó. Từ đó khiến nó hoạt động như một constant product pool với dự trữ lớn hơn trong khoảng đó. Từ đó việc sử dụng vốn sẽ có hiệu quả hơn.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-kết-luận&quot;&gt;Kết luận&lt;/h2&gt;
+&lt;p&gt;Về cách các loại sàn hoạt động, mọi người có thể xem ở các whitePaper, ví dụ với &lt;a href=&quot;https://uniswap.org/whitepaper.pdf&quot;&gt;Uniswap&lt;/a&gt; .&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;job_title&quot;=&gt;nil, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;social_links&quot;=&gt;[{&quot;name&quot;=&gt;&quot;facebook&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;github&quot;, &quot;url&quot;=&gt;&quot;https://github.com/yizeng/jekyll-theme-simple-texture&quot;}, {&quot;name&quot;=&gt;&quot;instagram&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;linkedin&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;stackoverflow&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;twitter&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;vk&quot;, &quot;url&quot;=&gt;nil}]}</name></author><summary type="html">Khái niệm</summary></entry><entry><title type="html">Solidity và State Trie</title><link href="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie/" rel="alternate" type="text/html" title="Solidity và State Trie" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/solidity-va-state-trie</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/solidity-va-state-trie/">&lt;p&gt;Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-solidity&quot;&gt;Solidity&lt;/h2&gt;
+&lt;p&gt;Solidity là ngôn ngữ lập trình cho Blockchain Ethereum, là ngôn ngữ hướng đối tượng, cấp cao để triển khai các smartcontracts. Smartcontract là chương trình chi phối các hành vi của Account trong Ethereum State. Account contract được tạo ra khi chạy một smartcontract. Mọi người có thể đọc account contract state ở trong storage array, nên không bao giờ được lưu trữ các bí mật trong contract.&lt;/p&gt;
+
+&lt;p&gt;Một số dạng biến của Solidity như: uint256, address(byte 32), bool,… Các loại tham chiếu là mảng, struct, string, map,… Khi một giao dịch đi từ A ⇾ B ⇾ C ⇾ D thì tại D, msg.sender là C, nhưng tx.origin là A.&lt;/p&gt;
+
+&lt;p&gt;ERC20 là API tiêu chuẩn cho fungible token, cung cấp các chức năng cơ bản để chuyển token hoặc cho phép token được sử dụng bởi bên thứ 3.&lt;/p&gt;
+
+&lt;p&gt;Các kiểu lưu trữ:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Stack variables: Rẻ để sử dụng, phù hợp với mọi loại dữ liệu (không qua 32 bytes)&lt;/li&gt;
+  &lt;li&gt;Calldata: Là 1 mảng byte chỉ đọc, tốn gas&lt;/li&gt;
+  &lt;li&gt;Memory: 1 byte mảng, rẻ, nhưng chi phí tăng theo cấp số nhân, lưu được dữ liệu &amp;gt; 32 bytes&lt;/li&gt;
+  &lt;li&gt;Storage: Đắt, mappings và các biến state lưu trong này.&lt;/li&gt;
+  &lt;li&gt;Event logs: rẻ, không cần truy cập đến contract.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ở trên là một số hiểu biết của mình về solidity, về mặt coding, mọi người nên xem ở &lt;a href=&quot;https://docs.soliditylang.org/en/latest/&quot;&gt;đây&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-state-trie-ethereum-state-trie&quot;&gt;State trie (Ethereum state trie)&lt;/h2&gt;
+&lt;p&gt;Hình ảnh đây là cấu trúc được tạo bởi các loại State trong Ethereum: (ở góc phải dưới hình ảnh)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.stack.imgur.com/afWDt.jpg&quot; width=&quot;900&quot; height=&quot; 600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Có 3 loại state chính là World state, Transaction, và Transaction Receipt.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-world-state-trie&quot;&gt;World State Trie&lt;/h3&gt;
+&lt;p&gt;World State Trie Là mapping giữa địa chỉ và Account State. Nó được update bởi các Tx, và lưu trữ mọi thông tin về accounts và có thể lấy được qua các truy vấn.
+Trong World State Trie có Account Storage Trie, nơi các dữ liệu liên kết với account được lưu trữ. Nó chỉ liên quan đến các contract account và mọi dữ liệu được ánh xạ giữa các số nguyên 32 byte.&lt;/p&gt;
+
+&lt;p&gt;Account State là các thông tin về một Ethereum account, như balance, nonce, storage Root, codehash,… và là lá của World State Trie.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-transaction-trie&quot;&gt;Transaction Trie&lt;/h3&gt;
+&lt;p&gt;Transaction Trie lưu trữ các Tx trong Ethereum. Khi các Tx lưu trữ trong block, nó không thể bị thay đổi. Nó được xây dựng theo cấu trúc Modified Merkel Patricia Trie, và chỉ có node root mới được đưa vào trong block.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-transaction-receipt-triereceipt-trie&quot;&gt;Transaction Receipt Trie(Receipt Trie)&lt;/h3&gt;
+&lt;p&gt;Transaction Receipt Trie lưu trữ đầu ra của các Txs. Đầu ra là kết quả của một Tx mà được chạy thành công, bao gồm H(Txs), block number, gas Used, địa chỉ của contract.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-ví-dụ-cấu-trúc-của-world-state-một-cách-đơn-giản&quot;&gt;Ví dụ cấu trúc của World State (một cách đơn giản)&lt;/h3&gt;
+&lt;p&gt;Để đơn giản, ta giả sử các node lá của World State Trie chỉ bao gồm địa chỉ là số dư theo cặp Key - Value. 
+Các loại thông tin:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Leaf Node: node lá của cây, chứa các trạng thái của 1 tài khoản có địa chỉ là Key&lt;/li&gt;
+  &lt;li&gt;Branch Node: gồm 16 ô, là các tiền tố của Key.&lt;/li&gt;
+  &lt;li&gt;Extension Node: node chỉ có 1 child&lt;/li&gt;
+  &lt;li&gt;Nibble: Là phần chung trong Key, 1 Nibble = 4 bits, lưu trong keyend hoặc shared nibble.&lt;/li&gt;
+  &lt;li&gt;Prefixes:
+    &lt;ul&gt;
+      &lt;li&gt;0: extension node có số chẵn Nibble&lt;/li&gt;
+      &lt;li&gt;1: extension node có số lẻ Niblle&lt;/li&gt;
+      &lt;li&gt;2: leaf node, có số chẵn Nibble&lt;/li&gt;
+      &lt;li&gt;3: leaf node, có số lẻ Nibble.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Minh Hoạ:
+World State Trie với 4 cặp Key - Value như sau:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;a711355: 45 ETH&lt;/li&gt;
+  &lt;li&gt;a77d337: 1 WEI&lt;/li&gt;
+  &lt;li&gt;a7f9365: 1.1 ETH&lt;/li&gt;
+  &lt;li&gt;a77d397: 0.12 ETH&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SiSYWqaPcJtBlnFR4VAaug.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-kêt-luận&quot;&gt;Kêt luận&lt;/h2&gt;
+&lt;p&gt;Ở trên là một số khái niệm sơ bộ về Solidity và cấu trúc của Ethereum, cụ thể về các State Trie.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;job_title&quot;=&gt;nil, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;social_links&quot;=&gt;[{&quot;name&quot;=&gt;&quot;facebook&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;github&quot;, &quot;url&quot;=&gt;&quot;https://github.com/yizeng/jekyll-theme-simple-texture&quot;}, {&quot;name&quot;=&gt;&quot;instagram&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;linkedin&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;stackoverflow&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;twitter&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;vk&quot;, &quot;url&quot;=&gt;nil}]}</name></author><summary type="html">Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie</summary></entry><entry><title type="html">Stablecoins</title><link href="http://localhost:4000/blog/2023/07/24/stable-coins/" rel="alternate" type="text/html" title="Stablecoins" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/24/stable-coins</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/24/stable-coins/">&lt;p&gt;Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-custodial-stablecoin-stablecoin-kí-gửi&quot;&gt;Custodial Stablecoin: Stablecoin kí gửi&lt;/h2&gt;
+&lt;p&gt;Custodian giữ kho bạc trong 1 ngân hàng truyền thống, mọi giao dịch đều thông qua nó. Ngoài ra, nó có quyền mạnh mẽ như kiểm duyệt khác hàng rút tiền hoặc xoá số dư người dùng. Điều này sẽ nguy hiểm nếu chẳng may bị hack hoặc nhầm lẫn và không đảm bảo sự phi tập trung. Do đó, cách này không được ưu tiên và sử dụng ở thực tế.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-synthetic&quot;&gt;Synthetic&lt;/h2&gt;
+&lt;p&gt;Mục tiêu là xây dựng 1 loại non-custodial stablecoin. Tuy nhiên, có một vấn đề là ETH thường xuyên dao động, không ổn định so với USD.&lt;br /&gt;
+&lt;strong&gt; Maker DAO: &lt;/strong&gt;  xây dựhng một stablecoin từ tài sản không ổn định. &lt;br /&gt;
+Hệ thống MakerDAO:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;DAI: stablecoin (giá: 0.99 ~ 1.01 USD)&lt;/li&gt;
+  &lt;li&gt;MKR:
+    &lt;ul&gt;
+      &lt;li&gt;ai cũng có thể mua để kiếm lãi.&lt;/li&gt;
+      &lt;li&gt;Sử dụng để quản trị, ổn định giá DAI trong trường hợp khẩn cấp.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-đúc-dai&quot;&gt;Đúc DAI&lt;/h3&gt;
+&lt;p&gt;Giả sử: A muốn trả B bằng DAI nhưng A chỉ có 1 ETH. A sẽ tạo 1 vault trên MakerDAO contract:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;1 wallet: tài sản mà A kiểm soát.&lt;/li&gt;
+  &lt;li&gt;1 vault: tài sản mà A khoá để vay DAI.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ta có:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ban đầu, A có: 1ETH, 0DAI trong wallet, 0ETH, 0DAI trong vault.&lt;/li&gt;
+  &lt;li&gt;Khi A khoá 1 ETH vào vault: trong wallet sẽ không còn ETH, trong vault có 1ETH&lt;/li&gt;
+  &lt;li&gt;Việc khoá ETH xem như một cách thế chấp để vay DAI. Vì số lượng thế chấp = 130% số lượng tối đa có thể vay, nên khi A thế chấp 1 ETH (~3000USD) thì chỉ có thể vay tối đa 2300 DAI.&lt;/li&gt;
+  &lt;li&gt;Do đó, trong wallet A có 2300DAI, còn vault: 1ETH, -2300DAI.&lt;/li&gt;
+  &lt;li&gt;A trả cho B bằng DAI, và có thể trả nợ cho vault để lấy lại 1 ETH.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-stabilization&quot;&gt;Stabilization&lt;/h3&gt;
+&lt;p&gt;A khi thế chấp ETH và vay DAI, phải trả lãi: Phí ổn định. Hầu hết các phí đều đưa cho DAI holders (thông qua DSR), một số còn lại đưa cho MKR holders.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; The DAI saving rate (DSR)&lt;/strong&gt; &lt;br /&gt;
+Bất kì ai giữ DAI có thể khoá DAI của mình trong MakerDAO contract. DSR là tỉ lệ lãi từ DAI đã khoá ở trên contract. Users có thể rút DAI ra từ contract bất cứ lúc nào.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; Cơ chế ổn định: &lt;/strong&gt; &lt;br /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;DAI có giá trị &amp;lt; 1$  ⇒ tăng phí ổn định và DSR:
+    &lt;ul&gt;
+      &lt;li&gt;Người đúc DAI được khuyến khích hoàn trả món nợ đã vay sớm vì lãi đang tăng&lt;/li&gt;
+      &lt;li&gt;Khuyến khích DAI holders gửi nhiều DAI vào contract&lt;/li&gt;
+      &lt;li&gt;Từ đó giúp giảm nguồnn cùng DAI, giúp DAI tăng giá&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;DAI có giá trị &amp;gt; 1$  ⇒ giảm phí ổn định và DSR.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-thanh-toán&quot;&gt;Thanh toán&lt;/h3&gt;
+&lt;p&gt;Nếu vault debt vượt quá 130% (do lãi), thì tài sản thế chấp sẽ được bán đấu giá. (Tiền lãi - phí) sẽ được trả nợ vault cho A đến khi đạt dưới 130%.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-nfts&quot;&gt;NFTs&lt;/h2&gt;
+&lt;p&gt;NFTs là:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Quyền sở hữu token của 1 tài sản kĩ thuật số (như Digital Artwork, vitual games item,…).&lt;/li&gt;
+  &lt;li&gt;Không thể có NFT nào giống nhau, nên không thể trao đổi lẫn nhau.&lt;/li&gt;
+  &lt;li&gt;Được xác định bởi lịch sử, mức độ tiện ích, tầm quan trọng,…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;NFTs được quản lý dưới blockchain vì:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Blockchain đảm bảo quyền sở hữu dài hạn cho đến khi bán.&lt;/li&gt;
+  &lt;li&gt;Cung cấp một hồ sơ đáng tin cậy về xuất xứ (chống giả mạo).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-sở-hữu-tài-sản-kĩ-thuật-số&quot;&gt;Sở hữu tài sản kĩ thuật số&lt;/h3&gt;
+&lt;p&gt;NFTs hoạt động như một chứng thư pháp lý:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Có thể chuyển quyền sở hữu từ bên này sang bên khác&lt;/li&gt;
+  &lt;li&gt;Quyền sỏ hữu thể hiện tình trạng sở hữu tài sản, cấp quyền hợp pháp,…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-nhận-nfts-như-thế-nào&quot;&gt;Nhận NFTs như thế nào&lt;/h3&gt;
+&lt;p&gt;Có 2 cách chính là tìm người sở hữu và mua từ học, hoặc lên thị trường và mua.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-thị-trường-nft&quot;&gt;Thị trường NFT&lt;/h3&gt;
+&lt;p&gt;Được xây dựng như một tập các smartcontract, thành một hệ thống tài sản và trao đổi. NFT mang lại sự sở hữu đích thực trên Internet, kích hoạt thương mại kĩ thuật số,… Ví dụ: một số NFT đặc biệt mang lại cho người dùng sự truy cập vào một số IP, trang trên Internet.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-nft-cost-issue&quot;&gt;NFT cost issue:&lt;/h3&gt;
+&lt;p&gt;Đa phần các NFT đều có giá cao, do đó muốn sở hữu thì có thể thuê hoặc tiết kiệm. Sẽ khó bắt đầu kinh doanh NFT nếu không có tiền mặt hoặc nguồn cung cấp đủ lớn.&lt;/p&gt;
+
+&lt;p&gt;Một số dịch vụ dựa trên NFTs như: Gameing guild (các item trong game: NFTs), EveryRealm (Bất động sản ảo), Credit Provider,…&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;job_title&quot;=&gt;nil, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;social_links&quot;=&gt;[{&quot;name&quot;=&gt;&quot;facebook&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;github&quot;, &quot;url&quot;=&gt;&quot;https://github.com/yizeng/jekyll-theme-simple-texture&quot;}, {&quot;name&quot;=&gt;&quot;instagram&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;linkedin&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;stackoverflow&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;twitter&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;vk&quot;, &quot;url&quot;=&gt;nil}]}</name></author><summary type="html">Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.</summary></entry><entry><title type="html">Cơ chế Ethereum</title><link href="http://localhost:4000/blog/2023/07/23/ethereum-mechanics/" rel="alternate" type="text/html" title="Cơ chế Ethereum" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/ethereum-mechanics</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/ethereum-mechanics/">&lt;p&gt;Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-so-sánh-chung&quot;&gt;So sánh chung&lt;/h3&gt;
+&lt;p&gt;Bitcoin như một máy chuyển trạng thái. Bitcoin rule: S x I ⇾ S, với tập S là các trạng thái, I là tập tất cả các input. Còn với Ethereum, hàm chuyển trạng thái của nó sẽ phong phú hơn nhiều, và mỗi lần chuyển đổi thì sẽ thực hiện toàn bộ chương trình.&lt;/p&gt;
+
+&lt;p&gt;Ethereum hỗ trợ các DApp, với Program code được lưu trữ trên blockchain, khi chạy cũng sẽ thay đổi các trạng thái. Các block thì sẽ có khoảng 150 Tx, và các Block Proposer sẽ nhận Tx fee cho block và các phần thưởng khác khi tạo khối thành công.&lt;/p&gt;
+
+&lt;p&gt;Ngoài ra, ta đã biết rằng khi các block được proposer trong consensus layer (các beacon block, nên còn được gọi là beacon chain), các node gửi các Tx lên cho execution client hay còn gọi là compute layer để cập nhập các trạng thái (update world state).&lt;/p&gt;
+&lt;h2 id=&quot;heading-compute-layer&quot;&gt;Compute layer&lt;/h2&gt;
+&lt;p&gt;World state: tập hợp các tài khoản được xác định bởi các địa chỉ 32 byte (Các thông tin như địa chỉ, số dư,..)&lt;/p&gt;
+
+&lt;p&gt;Có 2 loại tài khoản:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Owned account: Điều khiển bởi các cặp (Pk, Sk), hay là tài khoản của người dùng.&lt;/li&gt;
+  &lt;li&gt;Contracts: Điều khiển bởi code, được tạo lúc tài khoản được tạo, không thể thay đổi.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Các dữ liệu cần thiết với mỗi account:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Account Data&lt;/th&gt;
+      &lt;th&gt;Owned&lt;/th&gt;
+      &lt;th&gt;Contracts&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;address(tính)&lt;/td&gt;
+      &lt;td&gt;H(Pk)&lt;/td&gt;
+      &lt;td&gt;H(CreatorAdd, CreatorNonce)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;storage root&lt;/td&gt;
+      &lt;td&gt;Không&lt;/td&gt;
+      &lt;td&gt;StorageRoot&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;code&lt;/td&gt;
+      &lt;td&gt;không&lt;/td&gt;
+      &lt;td&gt;CodeHash&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;balance&lt;/td&gt;
+      &lt;td&gt;balance&lt;/td&gt;
+      &lt;td&gt;balance&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;nonce&lt;/td&gt;
+      &lt;td&gt;nonce&lt;/td&gt;
+      &lt;td&gt;nonce&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Trong đó, nonce là số Tx mà acount đã thực hành, tính bằng (#Tx sent) + (#accounts created). Số nonce được dùng để chống replay và khi tạo mới thì luôn bằng 0 (với contract).  Các contract có thể bị ghi đè code, nhưng chỉ khi contract cũ đã SELFDESTRUCT.&lt;/p&gt;
+
+&lt;p&gt;Mỗi contract có 1 mảng lưu trữ liên quan gồm 2^256 phần tử, mỗi phần tử là 32 bytes. Và storage root là Merkle Patricia hash của mảng.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-chuyển-trạng-thái&quot;&gt;Chuyển trạng thái&lt;/h3&gt;
+&lt;h4 id=&quot;heading-tx&quot;&gt;Tx&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Được kí bởi người tạo.&lt;/li&gt;
+  &lt;li&gt;To: nếu = 0 là tạo account mới, code = (init, body). Còn lại là 32-bytes địa chỉ và data (những thứ mà contract gọi và các đối số).&lt;/li&gt;
+  &lt;li&gt;From: Địa chỉ khởi tạo và chữ kí vào Tx&lt;/li&gt;
+  &lt;li&gt;Value: số Ethereum được gửi.&lt;/li&gt;
+  &lt;li&gt;Tx fees: gasLimit, maxFee, maxPriorityFee (Sẽ nói rõ hơn ở phần sau).&lt;/li&gt;
+  &lt;li&gt;Nonce: Khớp với nonce hiện tại của người gửi, tránh việc replay Tx.&lt;/li&gt;
+  &lt;li&gt;Chain-id: đảm bảo giao dịch gửi đúng chuỗi (không thể dùng giao dịch testnet lên mainnet).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;heading-các-loại-tx&quot;&gt;Các loại Tx&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;owned ⇾ owned: chuyển ETH giữa các user&lt;/li&gt;
+  &lt;li&gt;owned ⇾ contract: gọi contract với ETH &amp;amp; data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;heading-messages&quot;&gt;Messages&lt;/h4&gt;
+&lt;p&gt;Là các Tx ảo được contract tạo ra, nó không có Signature (vì contract không có). Có 2 loại là:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;contract ⇾ onwed: contract gửi tiền cho user&lt;/li&gt;
+  &lt;li&gt;contract ⇾ contract: contract gọi contract khác.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-ethereum-block&quot;&gt;Ethereum block&lt;/h3&gt;
+&lt;p&gt;Khác với Block của Bitcoin, Block Header của Ethereum có nhiều loại dữ liệu hơn, một số chính như:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Consensus data: các dữ liệu như Proposer Id, Previous hash, vote,…&lt;/li&gt;
+  &lt;li&gt;Address: Nơi mà gas fee được chuyển đến&lt;/li&gt;
+  &lt;li&gt;World state root: Merkle Patricia Tree Hash của tất cả các tài khoản&lt;/li&gt;
+  &lt;li&gt;Tx root: Merkle Tree Hash của Tx&lt;/li&gt;
+  &lt;li&gt;Tx receipt root: Merkle Hash của các log message&lt;/li&gt;
+  &lt;li&gt;Gas used: Sử dụng để điều chỉnh giá gas (ở phần sau).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-evm-mechanics&quot;&gt;EVM mechanics&lt;/h3&gt;
+&lt;p&gt;EVM là môi trường thực thi (execution). Các contract được viết bằng solidity, sau đó sẽ được compile thành EVM bytecode và được các validator sử dụng để chạy các contract. &lt;br /&gt;
+EVM hoạt động như một [Stack Machine] (https://en.wikipedia.org/wiki/Stack_machine) với lệnh JUMP (Các program sẽ bị huỷ nếu quá stack, proposer giữ lại gas).&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-gas&quot;&gt;Gas&lt;/h3&gt;
+&lt;p&gt;Gas được xem như là nguyên liệu của Ethereum, là khoản phí cần trả để thực hiện các giao dịch hay hoạt động tương tác với smartcontract. Mọi chỉ thị đều tốn gas, giúp ngăn việc gửi Tx có nhiều bước (tốn nhiều tiền hơn). Các Proposer có thể chọn các Tx từ mempool có phí gas cao để tối đa hoá thu nhập.&lt;/p&gt;
+
+&lt;h4 id=&quot;heading-gas-calculation&quot;&gt;Gas calculation:&lt;/h4&gt;
+&lt;p&gt;Mỗi block có:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;baseFee: gasPrice nhỏ nhất cho tất cả Tx trong block. BaseFee dựa vào tổng số gas ở block trước (Gas used ở header), nếu gasUsed là giới hạn (30M) thì baseFee tăng 12.5%, nếu block trước trống thì giảm 12.5%. Còn lại thì giữ nguyên.&lt;/li&gt;
+  &lt;li&gt;gasLimit: tổng gas cho phép với Tx&lt;/li&gt;
+  &lt;li&gt;maxFee: giá gas tối đa cho phép&lt;/li&gt;
+  &lt;li&gt;maxPriorityFee: &apos;tips&apos; tối đa cho Proposer.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;GasPrice = min(maxFee, baseFee + maxPriorityFee) &lt;br /&gt;
+MaxTxFee = gasLimit x gasPice &lt;br /&gt;
+&lt;strong&gt; Cụ thể &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;nếu gasPrice &amp;lt; baseFee: dừng&lt;/li&gt;
+  &lt;li&gt;nếu MaxTxFee &amp;gt; sender.balance: dừng&lt;/li&gt;
+  &lt;li&gt;trừ MaxTxFee khỏi sender.balance&lt;/li&gt;
+  &lt;li&gt;Đặt Gas = gasLimit&lt;/li&gt;
+  &lt;li&gt;Chạy Tx, trừ gas từ Gas với mỗi Tx. Nếu Gas &amp;lt; 0 thì dừng, Proposer giữ gasLimit * gasPrice.&lt;/li&gt;
+  &lt;li&gt;Xong xuôi, trả lại Gas x gasPrice cho sender&lt;/li&gt;
+  &lt;li&gt;gasUsed = gasLimit - Gas. BURN gasUsed x baseFee và gửi gasUsed x (GasPrice - baseFee) cho block proposer.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ETH bị BURN vì giúp giảm lạm phát, tăng tính khan hiếm, có lợi cho nhà đầu tư, chặn các proposer tạo ra các Tx giả, không khuyến khích các thoả thuận ngoài chuỗi.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-kết-luận&quot;&gt;Kết luận&lt;/h2&gt;
+&lt;p&gt;Ở trên là toàn bộ hiểu biết của mình về cơ chế Ethereum.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;job_title&quot;=&gt;nil, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;social_links&quot;=&gt;[{&quot;name&quot;=&gt;&quot;facebook&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;github&quot;, &quot;url&quot;=&gt;&quot;https://github.com/yizeng/jekyll-theme-simple-texture&quot;}, {&quot;name&quot;=&gt;&quot;instagram&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;linkedin&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;stackoverflow&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;twitter&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;vk&quot;, &quot;url&quot;=&gt;nil}]}</name></author><summary type="html">Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội</summary></entry><entry><title type="html">Proof Of Stake</title><link href="http://localhost:4000/blog/2023/07/23/proof-of-stake/" rel="alternate" type="text/html" title="Proof Of Stake" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/07/23/proof-of-stake</id><content type="html" xml:base="http://localhost:4000/blog/2023/07/23/proof-of-stake/">&lt;p&gt;Ở bài viết này, mình sẽ giới thiệu một cơ chế đồng thuận đang được sử dụng rất nhiều trong các blockchain hiện nay, đó là Proof of Stake.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-accountable-safety&quot;&gt;Accountable Safety&lt;/h3&gt;
+&lt;p&gt;Một giao thức với resilence là n/3 khi giao thức đó an toàn nếu nó có ít hơn n/3 Adverserial node (Ví dụ streamlet). &lt;br /&gt;
+Một giao thức với Accountable Safety resilence n/3 là giao thức:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;An toàn nếu ít hơn Adverserial node.&lt;/li&gt;
+  &lt;li&gt;Nếu vi phạm safety, thì những người giám sát (các node không phải người được chọn để đề xuất khối) có thể xác định rõ các node vi phạm.&lt;/li&gt;
+  &lt;li&gt;Không có cáo buộc sai với các node trung thực.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;heading-finality-và-dynamic-availability&quot;&gt;Finality và Dynamic availability&lt;/h3&gt;
+&lt;p&gt;Gọi một giao thức là finality nếu nó duy trì safety trong thời gian không đồng bộ (trước GST). Ở các giao thức này, Tx được finalize nhanh hơn confirm trong bitcoin (60 phút). &lt;br /&gt;
+Gọi một giao thức là Dynamic availability nếu giao thức đó có thể tiếp tục confirm các giao dịch ngay cả khi nhiều node offline.&lt;/p&gt;
+
+&lt;p&gt;Không có giao thức SMR nào đảm bảo cung cấp cả 2. Do đó, một cách giải quyết là sử dụng Nested chains.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-nested-chains&quot;&gt;Nested chains&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Available chain được xác định bởi giao thức Π_ava, thoả mãn Dynamic availability (VD: Nakamoto consensus).&lt;/li&gt;
+  &lt;li&gt;Finalized chain được xác định bởi giao thức checkpoint Π_fin thoả mãn security dưới mạng đồng bộ 1 phần.&lt;/li&gt;
+  &lt;li&gt;Chuỗi confirm bởi Π_ava là available chain.&lt;/li&gt;
+  &lt;li&gt;Π_fin kiểm tra các block trong availbale chain.&lt;/li&gt;
+  &lt;li&gt;Tiền tố của checkpoint cuối cùng tạo thành finalized chain. Tương đương với Finalized chain là prefix của available. Chuỗi này safe dưới mạng bất đồng bộ&lt;/li&gt;
+  &lt;li&gt;Các block của available chain luôn extend từ điểm checkpoint cuối cùng.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Minh hoạ: hình ảnh&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-proof-of-stake&quot;&gt;Proof of Stake&lt;/h2&gt;
+&lt;h3 id=&quot;heading-tổng-quan&quot;&gt;Tổng quan:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Trong giao thức Pos, các nodes khoá (Stake) tiền của họ trong giao thức để đủ điều kiện tham gia consensus.&lt;/li&gt;
+  &lt;li&gt;Càng nhiều coin được stake bởi 1 node thì khả năng cao node đó được chọn làm validator. Vì thuật toán lựa chọn validator là giả ngẫu nhiên.&lt;/li&gt;
+  &lt;li&gt;Nếu node bị bắt quả tang thực hiện 1 hành động bất lợi (xác thực giao dịch sai) thì node đó sẽ bị burn số tiền đã stake và không thể tham gia vào quá trình đề xuất khối tiếp theo. (Slashing).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Do đó, trong PoS, nodes sẽ có trách nhiệm trong cách hành động của mình. PoS giúp thay đổi cơ chế block được verify. Ngoài ra, để trở thành validator, các node phải có điều kiện (ví dụ: có ít nhất 32 ETH,..), sau khi đóng 1 khối, khối đó sẽ được các validator khác validate theo nhiều method khác nhau tuỳ vào blockchain.&lt;/p&gt;
+
+&lt;h3 id=&quot;heading-cụ-thể-với-ethereum-20&quot;&gt;Cụ thể với Ethereum 2.0&lt;/h3&gt;
+
+&lt;h4 id=&quot;heading-chọn-validator-và-block-proposer&quot;&gt;Chọn Validator và Block Proposer&lt;/h4&gt;
+&lt;p&gt;Để thành một validator, phải gửi ít nhất 32 ETH vào contract và chạy 3 phần mềm riêng biệt (sẽ giới thiệu ở sau) và tham gia hàng đợi. Thời gian của blocks chia thành các slot: 12s, epoch: 32 slot. Sau khi được active, validator đó sẽ tham ra vào quá trình phê duyệt. 1 validator ngẫu nhiên sẽ được chọn để xác thực giao dịch và đề xuất khối ở mỗi slot (Block proposer). Số còn lại sẽ làm giám sát để phê duyệt và kiểm tra xem validator đó có gian lận không.&lt;/p&gt;
+
+&lt;p&gt;Chọn Block Proposer quá trình giả ngẫu nhiên gồm nhiều yêu tố như staking age, số tiền stake,… Ở đây, mình sẽ giới thiệu 2 phương pháp lựa chọn là:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt; Randomize block selection: &lt;/strong&gt; lựa chọn bằng cách tìm kiếm nodes có sự kết hợp của hash value thấp nhất và stake cao nhất. Vì size của các stakes là công khai nên có thể dự đoán được.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt; Coin Age Selection: &lt;/strong&gt; là phương thức chọn các nodes dựa vào khoảng thời gian stake. Coin Age được tính bằng: số ngày đặt cược x số lượng coin. Khi một node forge một block, coin age của nó được cài về 0.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;heading-quy-trình-xác-thực&quot;&gt;Quy trình xác thực&lt;/h4&gt;
+&lt;p&gt;Khi một user tạo Tx và submit lên Ethereum, nó sẽ được kiểm tra tính hợp lệ (Ví dụ đảm bảo số tiền, key đúng,…) sau đó được đưa đến mempool và phát tán nó đến các node khác. &lt;br /&gt;
+Một node được chọn làm Block Proposer để đề xuất khối ở slot này, có trách nhiệm đóng và phát tán block vào chuỗi và cập nhập trạng thái. Nodes chạy 3 phần mềm:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Execution client: gộp các Txs từ mempool thành &quot;execution payload&quot; và chạy nó ở local để tạo ra sự thay đổi trạng thái. Thông tin này được chuyển đến consensus client&lt;/li&gt;
+  &lt;li&gt;Consensus client: đóng gói payload thành 1 phần của &quot;beacon block&quot; (gồm payload, slashing,…) cho phép mạng thống nhất trình tự về các khối.&lt;/li&gt;
+  &lt;li&gt;Validator client: Các node nhận được beacon block qua tầng gossip network. Sau đó chuyển đến Execution client của nó để chạy lại, nhằm chắc chắn trạng thái là đúng. Sau đóm Validator client sẽ chứng thực khối đó hợp lệ và là khối tiếp theo trong góc nhìn của chuỗi (available chain). Khối cũng được thêm vào cơ sở dữ liệu local của các node.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;heading-finality&quot;&gt;Finality&lt;/h4&gt;
+&lt;p&gt;Như đã nói ở trên, các block của available chain luôn extend từ điểm checkpoint cuối cùng. Checkpoint là các block đầu tiên ở mỗi epoch. Các validators có thể vote cho cặp checkpoint (1 epoch), nếu ít nhất 2/3 vote cho nó, cặp checkpoint này sẽ được cập nhập, và các block nằm giữa sẽ được cập nhập thành finalized chain. Nếu chuỗi không thể finalized trong nhiều hơn 4 epoch liên tục, stake ETH từ các validator chống lại đa số sẽ bị biến mất, cho phép đa số chiếm hơn 2/3 và finalized chuỗi.&lt;/p&gt;
+
+&lt;h2 id=&quot;heading-lời-kết&quot;&gt;Lời kết&lt;/h2&gt;
+&lt;p&gt;Ở trên là cách hoạt động cơ bản của POS. Mọi người có thể xem thêm các thông tin về POS trong Ethereum tại &lt;a href=&quot;https://ethereum.org/vi/developers/docs/consensus-mechanisms/pos/&quot;&gt;đây&lt;/a&gt;.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;job_title&quot;=&gt;nil, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;social_links&quot;=&gt;[{&quot;name&quot;=&gt;&quot;facebook&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;github&quot;, &quot;url&quot;=&gt;&quot;https://github.com/yizeng/jekyll-theme-simple-texture&quot;}, {&quot;name&quot;=&gt;&quot;instagram&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;linkedin&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;stackoverflow&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;twitter&quot;, &quot;url&quot;=&gt;nil}, {&quot;name&quot;=&gt;&quot;vk&quot;, &quot;url&quot;=&gt;nil}]}</name></author><summary type="html">Ở bài viết này, mình sẽ giới thiệu một cơ chế đồng thuận đang được sử dụng rất nhiều trong các blockchain hiện nay, đó là Proof of Stake.</summary></entry></feed>

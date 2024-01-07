@@ -1,11 +1,7 @@
 ---
-
-title: Cách mình tạo blog này
-# feature-img: "assets/img/blur/bandb.png"
-img_title: "assets/images/title_img/post1.png"
-# tags: [Instruction]
-author: vanhg
-permalink: /blog/2023/02/28/cach-tao-blog
+layout: post
+title: "Cách mình tạo blog này"
+description: "The first 'Hello world' post for Simple Texture theme."
 
 ---
 
@@ -20,7 +16,7 @@ Ban đầu, mình tạo blog dựa trên [Blogger](https://www.blogger.com) củ
 ## Cách tạo blog này
 Đầu tiên, mình muốn gửi lời cảm ơn đến [Dũng](https://github.com/zhaospei) đã giúp đỡ mình rất nhiều trong quá trình tạo blog này. 
 Về việc tạo blog, mình sử dụng Jekyll để tạo trên Github. Mình làm theo những hướng dẫn ở trên link [này](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll) để tạo ra một website cơ bản đầu tiên. Tiếp theo, mình tạo theme dựa trên cảm hứng là theme của [Type-on-Strap](https://sylhare.github.io/Type-on-Strap/). Ngoài ra, mình đã kết nối phần bình luận của [Disqus](https://disqus.com) vào blog này để mọi người có thể comment, nhận xét. Cuối cùng, blog này ra đời sau 1 tuần coding miệt mài của mình.
-<!-- {% include aligner.html images="post-pic/post1.png" column = 1 %} -->
+
 
 ## Đôi lời về blog 
 Vì mình đang tập viết bài trên blog này, nên nếu các bạn thấy nó có điều gì chưa ổn, hãy comment ở dưới để mình cải thiện nhé. Sắp tới, mình sẽ viết những bài viết cả về cuộc sống và học tập của bản thân mình. Mong các bạn sẽ ủng hộ blog này và tìm được gì đó hữu ích trong các bài viết của mình. Cảm ơn rất nhiều.

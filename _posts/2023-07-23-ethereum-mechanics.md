@@ -1,11 +1,11 @@
 ---
-
+layout: post
 title: Cơ chế Ethereum
 # feature-img: "assets/img/blur/bandb.png"
 # img_title: "assets/images/title_img/post1.png"
 # tags: [Instruction]
-author: vanhg
-permalink: /blog/2023/07/23/ethereum-mechanics
+# author: vanhg
+# permalink: /blog/2023/07/23/ethereum-mechanics
 
 ---
 

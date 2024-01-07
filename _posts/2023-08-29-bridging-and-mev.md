@@ -1,11 +1,12 @@
 ---
+layout: post
 
 title: Bridging và MEV
 # feature-img: "assets/img/blur/bandb.png"
 # img_title: "assets/images/title_img/post1.png"
 # tags: [Instruction]
-author: vanhg
-permalink: /blog/2023/08/29/bridging-and-mev
+# author: vanhg
+# permalink: /blog/2023/08/29/bridging-and-mev
 
 ---
 

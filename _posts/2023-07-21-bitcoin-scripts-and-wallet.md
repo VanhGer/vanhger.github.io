@@ -1,11 +1,11 @@
 ---
-
+layout: post
 title: Bitcoin Scripts và Ví
 # feature-img: "assets/img/blur/bandb.png"
 # img_title: "assets/images/title_img/post1.png"
 # tags: [Instruction]
-author: vanhg
-permalink: /blog/2023/07/21/bitcoin-script-and-wallet
+# author: vanhg
+# permalink: /blog/2023/07/21/bitcoin-script-and-wallet
 
 ---
 
