@@ -10,13 +10,12 @@
             font-weight: bold;
 
             display: block;
-
             padding-bottom: 18px;
 
             a {
                 font-size: 1.5em;
                 line-height: 0;
-
+                color: $color-blue-text;
                 display: inline;
 
                 margin-left: 8px;
@@ -71,7 +70,8 @@
                          -o-transition: all .3s ease-in-out;
                             transition: all .3s ease-in-out;
 
-                    background-color: $color-hover;
+                    color: $color-hover;
+                    background-color: transparent;
                 }
             }
         }

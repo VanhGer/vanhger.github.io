@@ -100,4 +100,14 @@
 <url>
 <loc>http://localhost:4000/blog/categories/</loc>
 </url>
+<url>
+<loc>http://localhost:4000/blog/page2/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/page3/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/about/</loc>
+<lastmod>2024-01-08T02:35:54+07:00</lastmod>
+</url>
 </urlset>

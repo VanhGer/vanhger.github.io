@@ -7,15 +7,15 @@
 @import 'simple-texture/common/pace';
 
 html {
-    background: url('../images/theme/noisy_texture_section0-200x200.png') repeat 0 0 #F9F9F9;
+    background: url('../images/theme/noisy_texture_section0-200x200.png') repeat 0 0 $color-yellow-bgr;
 }
 
 body {
-    font-family: $fonts-body;
+    font-family: 'SVN Retron 2000';
     font-size: 18px;
     line-height: 32px;
 
-    color: $color-text;
+    color: $color-text-dark;
 }
 
 .body .unit-body {
@@ -95,6 +95,26 @@ optgroup,
 select,
 textarea {
     font-family: $fonts-body;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    // border: 1px solid black;
+}
+
+.page-next {
+    margin-left: auto;
+}
+
+.page-prev {
+    margin-right: auto;
+}
+
+.page-number {
+    margin: auto;
 }
 
 @import 'simple-texture/blog/overlay';

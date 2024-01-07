@@ -8,17 +8,18 @@
 @import 'simple-texture/home/fullpage';
 
 body {
-    font-family: $fonts-body;
+    // font-family: $fonts-body;
+    font-family: 'SVN Retron 2000';
     font-size: 18px;
-    line-height: 36px;
+    line-height: 40px;
 
     color: $color-text-dark;
 }
 
 h1 {
-    font-size: 5em;
-
+    font-size: 4em;
     text-transform: uppercase;
+    color: $color-blue-text;
 }
 
 h2 {
@@ -80,11 +81,12 @@ textarea {
 }
 
 #section0 {
-    background: url('../images/theme/noisy_texture_section0-200x200.png') repeat 0 0 #F0F0F0;
+    background: url('../images/theme/noisy_texture_section0-200x200.png') repeat 0 0 $color-yellow-bgr;
+    
 }
 
 #section1 {
-    background: url('../images/theme/noisy_texture_section1-200x200.png') repeat 0 0 #150E1F;
+    background: url('../images/theme/noisy_texture_section1-200x200.png') repeat 0 0 $color-dark-bgr;
 }
 
 #fullPage-nav {
@@ -105,11 +107,9 @@ textarea {
          -o-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
     text-decoration: none;
-
-    color: $color-text-light;
+    color: $color-orange-text;
     border: 1px solid #150E1F;
     outline: none;
-
     &:hover {
         border: 1px solid $color-text-light;
     }

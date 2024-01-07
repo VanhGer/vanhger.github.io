@@ -79,4 +79,9 @@ $size: 48;
 
         background-color: #6383A8;
     }
+    .ico-question {
+        @include get-ico-image(question);
+
+        background-color: #35c27b;
+    }
 }

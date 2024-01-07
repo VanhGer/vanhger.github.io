@@ -3,13 +3,15 @@ encoding: UTF-8
 exclude: ["*.gem", "*.gemspec", "Gemfile", "Gemfile.lock", "node_modules", "Rakefile", "starter-kit", "vendor"]
 lang: en # Language code as defined in _data/i18n.yml. en, en-gb, en-us, zh, zh-cn, zh-tw etc.
 permalink: /blog/:year/:month/:day/:title/
-
+paginate: 8
+paginate_path: "/blog/page:num/"
 whitelist: [jekyll-feed, jekyll-redirect-from, jekyll-seo-tag, jekyll-sitemap]
 plugins:
   - jekyll-feed
   - jekyll-redirect-from
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-paginate
 
 markdown: kramdown
 kramdown:
@@ -23,23 +25,23 @@ sass:
 # Site Data
 url: # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: # the subpath of your site, e.g. /blog
-title: Simple Texture
-description: "A gem-based responsive simple texture styled Jekyll theme."
-keywords: 'jekyll,theme,gem-based,blog'
+title: Hiimvanhg
+description: "Vjp."
+keywords: 'vanhg, blog,'
 author:
-  name:
+  name: VanhGer
   job_title:
   location:
-  email:
+  email: vietanhpg2003@gmail.com
   social_links:
     - name: facebook
-      url:
+      url: https://www.facebook.com/iamvanhg/
     - name: github
-      url: https://github.com/yizeng/jekyll-theme-simple-texture
+      url: https://github.com/VanhGer
     - name: instagram
       url:
     - name: linkedin
-      url:
+      url: https://www.linkedin.com/in/pham-gia-viet-anh-68676b223/
     - name: stackoverflow
       url:
     - name: twitter
@@ -47,9 +49,9 @@ author:
     - name: vk
       url:
 home:
-  section1: <h1>Simple Texture</h1>
-  section2: <h2>A gem-based responsive simple texture styled Jekyll theme</h2>
-  section3: <div class="social-links"><a class="ico-github btn" href="https://github.com/yizeng/jekyll-theme-simple-texture" title="View on GitHub"></a></div>
+  section1: <h1>Hiamvanhg</h1> 
+  section2: <h2>Welcome to my blog</h2>
+  # section3: <div class="social-links"><a class="ico-github btn" href="https://github.com/yizeng/jekyll-theme-simple-texture" title="View on GitHub"></a></div>
 blog:
   cc_license: http://creativecommons.org/licenses/by-sa/4.0/ # A link to CC License of your choice.
   cc_license_image: /assets/images/theme/cc-by-sa.png # An image of your CC License. 
@@ -64,5 +66,6 @@ addthis_public_id: # AddThis sharing plugin. See http://www.addthis.com/. E.g. r
 paths:
   home: /
   blog: /blog/
+  about: /about/
   categories: /blog/categories/
   tags: /blog/tags/
