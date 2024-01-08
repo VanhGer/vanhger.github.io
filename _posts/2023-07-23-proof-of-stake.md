@@ -2,11 +2,8 @@
 layout: post
 
 title: Proof Of Stake
-# feature-img: "assets/img/blur/bandb.png"
-# img_title: "assets/images/title_img/post1.png"
-# tags: [Instruction]
-# author: vanhg
-# permalink: /blog/2023/07/23/proof-of-stake
+category: [blockchain, cs251]
+tags: [knowledge]
 
 ---
 

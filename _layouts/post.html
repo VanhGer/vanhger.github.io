@@ -19,7 +19,7 @@ layout: blog
                             <time itemprop="datePublished" class="date-pub {% if page.last_updated == null %}updated{% endif %}"
                                 title="{{ page.date | date_to_xmlschema }}" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%B' }} {{ page.date | date: '%d' }}, {{ page.date | date: '%Y' }} </time>
                             by
-                            <a class="author" href="/" rel="author" title="{{ site.data.i18n[site.lang].show_author }}">
+                            <a class="author" href="/about" rel="author" title="{{ site.data.i18n[site.lang].show_author }}">
                                 <span itemprop="author" itemscope itemtype="http://schema.org/Person">
                                     <span itemprop="name">{% if page.author == null %}{{ site.author.name }}{% else %}{{ page.author }}{% endif %}</span>
                                 </span>

@@ -2,6 +2,7 @@
 layout: post
 title: "Cách mình tạo blog này"
 category: [jekyll, share]
+tags: [tutorial]
 ---
 
 

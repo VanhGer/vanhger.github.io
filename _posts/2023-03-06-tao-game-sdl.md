@@ -1,11 +1,8 @@
 ---
 layout: post
 title: Mình đã tạo một game bằng C++ và SDL2.0
-# # feature-img: "assets/img/blur/iphone2.png"
-# img_title: "assets/images/title_img/post4.png"
-# # tags: [Instruction, Game]
-# author: vanhg
-# permalink: /blog/2023/03/06/tao-game-sdl
+category: [software, games]
+tags: [tutorial]
 ---
 
 

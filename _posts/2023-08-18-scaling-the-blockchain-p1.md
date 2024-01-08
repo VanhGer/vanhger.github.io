@@ -2,11 +2,8 @@
 layout: post
 
 title: Mở rộng Blockchain (Phần 1)
-# feature-img: "assets/img/blur/bandb.png"
-# img_title: "assets/images/title_img/post1.png"
-# tags: [Instruction]
-# author: vanhg
-# permalink: /blog/2023/08/18/scaling-the-blockchain-p1
+category: [blockchain, cs251]
+tags: [knowledge]
 
 ---
 

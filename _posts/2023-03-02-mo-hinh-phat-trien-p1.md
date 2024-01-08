@@ -1,11 +1,8 @@
 ---
 layout: post
 title: Các mô hình phát triển phần mềm (P1)
-# feature-img: "assets/img/blur/red1.png"
-# img_title: "assets/images/title_img/post2.png"
-# tags: [Software]
-# author: vanhg
-# permalink: /blog/2023/03/02/mo-hinh-phat-trien-p1
+category: [software]
+tags: [knowledge]
 
 ---
 

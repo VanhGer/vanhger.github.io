@@ -1,5 +1,5 @@
 en: &en
-  about: 'About'
+  about: 'Home site'
   articles: 'Articles'
   back_to_top: 'Back to Top'
   categories: 'Categories'
@@ -28,7 +28,7 @@ en: &en
   show_comments: 'Show Comments'
   show_license: 'Show License'
   tags: 'Tags'
-  theme_info: '<p><small>Theme <a href="https://github.com/yizeng/jekyll-theme-simple-texture" target="_blank">Simple Texture</a> developed by <a href="https://yizeng.me" target="_blank">Yi Zeng</a>, powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>.</small></p>'
+  theme_info: '<p><small>This theme is inspired by <a href="https://github.com/yizeng/jekyll-theme-simple-texture" target="_blank">Simple Texture</a>, developed by <a href="https://yizeng.me" target="_blank">Yi Zeng</a>, powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>.</small></p>'
   view: 'View'
 en-us:
   <<: *en

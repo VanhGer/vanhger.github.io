@@ -1,11 +1,8 @@
 ---
 layout: post
 title: Tổng quan về Blockchain
-# feature-img: "assets/img/blur/bandb.png"
-# img_title: "assets/images/title_img/post1.png"
-# tags: [Instruction]
-# author: vanhg
-# permalink: /blog/2023/07/14/tong-quan-ve-blockchain
+category: [blockchain, cs251]
+tags: [knowledge]
 
 ---
 

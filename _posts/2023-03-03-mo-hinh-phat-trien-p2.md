@@ -1,11 +1,8 @@
 ---
 layout: post
 title: Các mô hình phát triển phần mềm (P2)
-# feature-img: "assets/img/blur/iphone3.png"
-# img_title: "assets/images/title_img/post3.png"
-# tags: [Software]
-#author: vanhg
-# permalink: /blog/2023/03/03/mo-hinh-phat-trien-p2
+category: [software]
+tags: [knowledge]
 ---
 
 Ở phần 2 này, mình sẽ giới thiệu về 2 loại mô hình truyền thống còn lại là Bản mẫu (Prototype) và mô hình xoắn ốc (Spiral Model).

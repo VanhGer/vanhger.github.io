@@ -2,11 +2,8 @@
 layout: post
 
 title: Solidity và State Trie
-# feature-img: "assets/img/blur/bandb.png"
-# img_title: "assets/images/title_img/post1.png"
-# tags: [Instruction]
-# author: vanhg
-# permalink: /blog/2023/07/24/solidity-va-state-trie
+category: [blockchain, cs251]
+tags: [knowledge]
 
 ---
 

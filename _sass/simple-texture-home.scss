@@ -19,11 +19,13 @@ body {
 h1 {
     font-size: 4em;
     text-transform: uppercase;
-    color: $color-blue-text;
+    color: $color-orange-text;
+    margin-top: -2em;
 }
 
 h2 {
     font-size: 2.225em;
+    color: $color-blue-text;
 }
 
 h3 {
@@ -81,12 +83,13 @@ textarea {
 }
 
 #section0 {
-    background: url('../images/theme/noisy_texture_section0-200x200.png') repeat 0 0 $color-yellow-bgr;
-    
+    background: url('../images/Page_png/light3.png') repeat 0 0 $color-yellow-bgr;
+    background-size: cover;
 }
 
 #section1 {
-    background: url('../images/theme/noisy_texture_section1-200x200.png') repeat 0 0 $color-dark-bgr;
+    background: url('../images/Page_png/dark5.jpg') repeat 0 0 $color-dark-bgr;
+    background-size: cover;
 }
 
 #fullPage-nav {
