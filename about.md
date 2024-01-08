@@ -4,11 +4,31 @@ title: "About"
 permalink: /about/
 ---
 
-A friend of mine writes short stories. One sunny day, I asked if he wanted a website to showcase his works and he agreed. I decided to use GitHub Pages to host his site. That way he wouldn't have to buy a domain and a server.
+# About me
+Hi Im Vanhg.
+My real name is Viet Anh. I'm a third-year student at [VNU-UET](https://uet.vnu.edu.vn). My major is Information Technology.
 
-While doing some research up on GitHub Pages, I accidentally chanced upon this _simple, blog-aware, static site generator_ called [Jekyll](https://jekyllrb.com/) which works really well with GitHub Pages. I figured it would do just fine for my friend and I set about searching for a pretty theme. I wanted a theme with a _book-ish_ vibe. Unfortunately, most of the themes were too modern. Eventually, I caved and begun working on my own theme. With the help of [Poole](https://github.com/poole/poole), the Jekyll Butler, I was able to build **Tale**.
+I can sing, I can write, I can play guitar, I can play football, I can listen to you, I can tell you a dummy story.
+
+I like programming, I like Man United, I like old things, I like reading.
+
+I love fiction books, I love Sherlock Holmes, I love Pixel, I love sadness.
+
+Some facts:
+- I am currently studying IT and mainly Blockchain.
+- I use Arch.
+- I'm a Directioner.
+
+# About this site
+
+This is the place where I share my thoughts, my knowledge and my stories. Hope you all will find something useful here.
+
+``
+How far I will go, how much I will lost ? 
+``
+
 
 ## Contribute
-Feel free to create an issue or make a pull request on [GitHub](https://github.com/chesterhow/tale).
+This blog theme was inspired by [Simple Texture](https://github.com/yizeng/jekyll-theme-simple-texture).
 
 Thanks for reading!
