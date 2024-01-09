@@ -24,7 +24,7 @@ Some facts:
 This is the place where I share my thoughts, my knowledge and my stories. Hope you all will find something useful here.
 
 ``
-How far I will go, how much I will lost ? 
+How far I will go, how much I will lose ? 
 ``
 
 
