@@ -3,6 +3,7 @@ layout: post
 title: "Cách mình tạo blog này"
 category: [jekyll, share]
 tags: [tutorial]
+postnum: 1
 ---
 
 
@@ -17,6 +18,15 @@ Ban đầu, mình tạo blog dựa trên [Blogger](https://www.blogger.com) củ
 ## Cách tạo blog này
 Đầu tiên, mình muốn gửi lời cảm ơn đến [Dũng](https://github.com/zhaospei) đã giúp đỡ mình rất nhiều trong quá trình tạo blog này. 
 Về việc tạo blog, mình sử dụng Jekyll để tạo trên Github. Mình làm theo những hướng dẫn ở trên link [này](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll) để tạo ra một website cơ bản đầu tiên. Tiếp theo, mình tạo theme dựa trên cảm hứng là theme của [Jekyll-Theme-Simple-Texture](https://github.com/yizeng/jekyll-theme-simple-texture/tree/master). Ở đây đã có sẵn hướng dẫn cài đặt, mọi người có thể xem thử. Mình chỉ lại một chút về font chữ (mình rất thích Pixel nên mình chọn font này hehe) và một chút giao diện. Ngoài ra, mình đã kết nối phần bình luận của [Disqus](https://disqus.com) vào blog này để mọi người có thể comment, nhận xét. Cuối cùng, blog này ra đời sau 1 tuần coding miệt mài của mình.
+
+Một số hình ảnh của blog:
+
+<a class="post-image" >
+<img itemprop="image"  src="/assets/images/post_img/post1_1.PNG"/>
+<img itemprop="image"  src="/assets/images/post_img/post1_2.PNG"/>
+<img itemprop="image"  src="/assets/images/post_img/post1_3.PNG"/>
+</a>
+
 
 
 ## Đôi lời về blog 

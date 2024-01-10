@@ -7,6 +7,8 @@
 @import 'simple-texture/common/social-icons';
 @import 'simple-texture/home/fullpage';
 
+
+
 body {
     // font-family: $fonts-body;
     font-family: 'SVN Retron 2000';
@@ -82,14 +84,15 @@ textarea {
     }
 }
 
+
 #section0 {
-    background: url('../images/Page_png/light3.png') repeat 0 0 $color-yellow-bgr;
+    background: url('../images/Page_png/landing1/1.jpg') repeat 0 0 $color-yellow-bgr;
     background-size: cover;
     background-position: center;
 }
 
 #section1 {
-    background: url('../images/Page_png/dark5.jpg') repeat 0 0 $color-dark-bgr;
+    background: url('../images/Page_png/landing2/5.jpg') repeat 0 0 $color-dark-bgr;
     background-size: cover;
     background-position: center;
 }

@@ -44,7 +44,7 @@ body.search-overlay {
 
         content: '';
 
-        background-color: rgba(25, 25, 25, .95);
+        background-color: rgba(25, 25, 25, 0.712);
     }
 }
 
@@ -67,7 +67,7 @@ body.search-overlay {
     left: -200px;
 
     width: 100%;
-
+    font-family: 'SVN Retron 2000';
     opacity: 0;
 
     &.active {
@@ -90,6 +90,7 @@ body.search-overlay {
     button,
     input {
         color: #FFFFFF;
+        font-family: 'SVN Retron 2000';
     }
 
     .overlay-header {

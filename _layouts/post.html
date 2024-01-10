@@ -58,10 +58,10 @@ layout: blog
                     </div>
                     <nav class="pagination">
                         {% if page.previous %}
-                            <a class="internal" rel="prev" href="{{ page.previous.url | relative_url }}" title="{{ site.data.i18n[site.lang].previous_post }} '{{ page.previous.title }}'"> ← {{ page.previous.title }}</a>
+                            <a class="internal" rel="prev" href="{{ page.previous.url | relative_url }}" title="{{ site.data.i18n[site.lang].previous_post }} '{{ page.previous.title }}'"> <<< {{ page.previous.title }}</a>
                         {% endif %}
                         {% if page.next %}
-                            <a class="internal" rel="next" href="{{ page.next.url | relative_url }}" title="{{ site.data.i18n[site.lang].next_post }} '{{ page.next.title }}'">{{ page.next.title }} → </a>
+                            <a class="internal" rel="next" href="{{ page.next.url | relative_url }}" title="{{ site.data.i18n[site.lang].next_post }} '{{ page.next.title }}'">{{ page.next.title }} >>> </a>
                         {% endif %}
                     </nav>
                 </div>
