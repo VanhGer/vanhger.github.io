@@ -5,13 +5,15 @@
                 <ul>
                     <li class="logo">
                         <button class="btn-menu" title="{{ site.data.i18n[site.lang].menu }}"></button>
-                        <a href="{{ site.paths.blog | relative_url }}" >{{ site.title }}</a>
+                        <a href="{{ site.paths.blog | relative_url }}" class="auto-input"></a>
+                        <!-- <p>This is an example: <span class="auto-input"></span></p> -->
                         <!--[if !IE]> -->
                         <button class="btn-search" title="{{ site.data.i18n[site.lang].search }}"></button>
                         <!-- <![endif]-->
                     </li>
                     <li class="nav-link"><a title="{{ site.data.i18n[site.lang].categories }}" href="{{ site.paths.categories | relative_url }}">{{ site.data.i18n[site.lang].categories }}</a></li>
                     <li class="nav-link"><a title="{{ site.data.i18n[site.lang].tags }}" href="{{ site.paths.tags | relative_url }}">{{ site.data.i18n[site.lang].tags }}</a></li>
+                    <li class="nav-link"><a title="About" href="{{ site.paths.about | relative_url }}">About</a></li>
                     <!--[if !IE]> -->
                     <li class="nav-link"><a title="{{ site.data.i18n[site.lang].search }}" class="btn-search" href="#">{{ site.data.i18n[site.lang].search }}</a></li>
                     <!-- <![endif]-->
@@ -20,3 +22,15 @@
         </div>
     </div>
 </header>
+
+<script src="../..//assets/javascripts/autotyping.min.js"></script>
+    <script>
+        const exampleText = ['Hiimvanhg', 'PixelLover'];
+        const exampleTyping = new AutoTyping('.auto-input', exampleText, {
+        typeSpeed: 100,
+        deleteSpeed: 100,
+        waitBeforeDelete: 1000,
+        waitBetweenWords: 500,
+    });
+    exampleTyping.start()
+</script>
