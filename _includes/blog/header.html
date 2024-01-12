@@ -23,7 +23,7 @@
     </div>
 </header>
 
-<script src="../..//assets/javascripts/autotyping.min.js"></script>
+<script src="https://tsanak.github.io/autotyping/dist/autotyping.min.js"></script>
     <script>
         const exampleText = ['Hiimvanhg', 'PixelLover'];
         const exampleTyping = new AutoTyping('.auto-input', exampleText, {
@@ -33,4 +33,19 @@
         waitBetweenWords: 500,
     });
     exampleTyping.start()
+</script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"/>
+
+<!-- JavaScript -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{
+    delimiters: [
+      { left: '$$',  right: '$$',  display: true  },
+      { left: '$',   right: '$',   display: false },
+      { left: '\\[', right: '\\]', display: true  },
+      { left: '\\(', right: '\\)', display: false }
+  ]});">
 </script>

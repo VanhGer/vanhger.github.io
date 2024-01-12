@@ -10,10 +10,13 @@ tags: [knowledge]
 Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.
 
 ## Payment Channel: Ý tưởng cơ bản
+
 A và B đang muốn giao dịch với nhau. A gửi cho B 5 lần, mỗi lần là 0.01 BTC, là 5 Txs. Thay vì làm như thế, có thể làm như sau: A gửi cho B 1BTC. Sau 1 khoảng thời gian (ví dụ 1 tháng), B sẽ trả lại số BTC dư mà chưa dùng. Vậy số giao dịch chỉ giới hạn đến 2.
 
 ## Unidirectional Payment Channel: Kênh thanh toán 1 chiều
-Ta có: UTXO A: 1BTC. 
+
+Ta có: UTXO A: 1BTC.
+
 - Tx1: 0.99 cho A/ 0.01 cho B từ UTXO A.
 - Tx2: 0.98 cho A/ 0.02 cho B
 - ....
@@ -25,13 +28,14 @@ Nhưng nếu B không post Tx5 lên chuỗi thì sao? Liệu A có lấy lại �
 
 Minh hoạ:
 
-
-Sau khi trả hoặc lấy lại tiền, kênh sẽ đóng. 
+Sau khi trả hoặc lấy lại tiền, kênh sẽ đóng.
 
 ## Bidirectional Payment Channel: Kênh thanh toán đa chiều
+
 Không sử dụng 2 kênh thanh toán 1 chiều thay thế. Thay vào đó, ta sẽ sử dụng contract.
 
 ### Trên Ethereum
+
 A và B sẽ tạo một contract chung, mỗi người đóng góp 0.5 ETH. Lúc này, trạng thái của contract sẽ là: <br>
 A: 0.5 ETH      B: 0.5 ETH      Nonce: 0. <br>
 Off chain: B gửi 0.1 ETH cho A bằng cách cả 2 ký vào state mới: <br>
@@ -41,27 +45,34 @@ A: 0.3,  B: 0.7,  Nonce: 7, A sig,  B sig <br>
 
 Lúc này, A muốn kết thúc kênh, sẽ gửi số dư cuối cùng và các chữ ký cho contract. Lúc này sẽ bắt đầu Challenge Period (ví dụ 3 ngày). <br>
 Onchain: A: 0.3,    B: 0.7,     Nonce: 7. <br>
+
 - Nếu trong 3 ngày, B không làm gì thì số tiền và trạng thái của contract sẽ theo những gì A gửi lên.
 - Ngược lại, nếu B gửi lên 1 state với số Nonce lớn hơn (ví dụ = 9), thì contract sẽ theo state của B.
 
 Vấn đề được đưa ra là việc A và B phải quan sát thường xuyên xem đối phương có gửi state cũ lên không để có thể kịp thời ngăn chặn. Điều này được giải quyết bằng sự trợ giúp của WatchTower.
 
 Tóm lại, việc giao dịch sẽ chỉ tốn 2 lần onchain:
+
 - Tạo channel
 - Đóng channel và gửi tiền.
 
 ### Trên Bitcoin
+
 Vì trên UTXO không có trạng thái, nên sẽ khó khăn hơn để tạo 1 kênh thanh toán 2 chiều. Giải pháp được đưa ra là khi update kênh theo A, thì A sẽ nhận được Tx mà làm trạng thái cũ của B mất hiệu lực.
 
 #### UTXO
+
 Ta sẽ tạo UTXO mà có thể dùng theo 1 trong 2 cách (sử dụng IF trong Opcode):
+
 - Relative time-lock: UTXO chứa số t. 1 Tx được kí hợp lệ có thể sử dụng UTXO này sau t blocks (hoặc nhiều hơn) sau khi nó được tạo ra.
 - Hash lock: UTXO chứa một số X. Một Tx được kí hợp lệ có thể sử dụng UTXO này nếu có số x mà: SHA256(x) = X.
 (x được gọi là hash preimage của X).
 
-#### Ví dụ:
+#### Ví dụ
+
 Giả sử A và B đưa BTC vào trong 2-2 Multisig UTXO AB, với A là 7BTC, B là 3BTC. <br>
-- A tạo số ngẫu nhiên x, và X = SHA256(x). 
+
+- A tạo số ngẫu nhiên x, và X = SHA256(x).
 - B tạo số ngẫu nhiên y, và Y = SHA256(y).
 - Sau đó, A đưa X cho B và ngược lại.
 - A tạo Tx1 với input là UTXO AB, output là: <br>
@@ -81,10 +92,13 @@ Giả sử A và B đưa BTC vào trong 2-2 Multisig UTXO AB, với A là 7BTC, 
 - Lúc này, A có thể post Tx3 và đợi 7 ngày. Nhưng nếu A post stale state là Tx2, B sẽ sử dụng x để lấy hết BTC. Do đó, A không thể gian lận và post lên trạng thái cũ.
 
 ## Multihop payments: Thanh toán nhiều lần
-A muốn thanh toán cho C qua trung gian không tin cậy là B (Vì A, C có channel với B). 
+
+A muốn thanh toán cho C qua trung gian không tin cậy là B (Vì A, C có channel với B).
 
 ### The lightning network
-Nhiều open payment channel 2 chiều. Khi A muốn tạo kênh với B thì chỉ cần tìm tuyến đường qua đồ thị với đỉnh là các trung gian. 
+
+Nhiều open payment channel 2 chiều. Khi A muốn tạo kênh với B thì chỉ cần tìm tuyến đường qua đồ thị với đỉnh là các trung gian.
 
 ## Kết luận
+
 Đây là cách tiếp cận đầu tiên để tăng tốc độ các Tx trong blockchain. Ở bài viết sau, mình sẽ giới thiệu một kĩ thuật khác giúp giải quyết vấn đề này.
