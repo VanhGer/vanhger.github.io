@@ -4,7 +4,7 @@ layout: post
 title: Solidity và State Trie
 category: [blockchain, cs251]
 tags: [knowledge]
-
+postnum: 14
 ---
 
 Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie

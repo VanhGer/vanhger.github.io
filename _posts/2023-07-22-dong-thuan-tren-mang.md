@@ -17,6 +17,7 @@ Bitcoin chọn các nodes tham gia vào giao thức bằng các sử dụng POW,
 Bitcoin sử dụng Nakamoto consensus:
 
 <strong> Quy tắc đề xuất: </strong> ở bất kì thời điểm nào, mỗi miner trung thực mở rộng chuỗi nặng nhất (với độ khó cao nhất).
+
 <strong> Quy tắc confirmation: </strong> Miner confirm 1 block (với tiền tố của nó) mà ở độ sâu $k$ trong chuỗi nó nhìn được.
 
 - Ví dụ trong thực tế: $k$ = 6.
@@ -24,7 +25,7 @@ Bitcoin sử dụng Nakamoto consensus:
 - Leader được chọn bởi POW.
 
 So sánh giữa Bitcoin và Streamlet:
-- Streamlet thì không dynamic available: Nó sẽ không đảm bảo liveness nếu n/3 hoặc hơn các nodes offline.
+- Streamlet thì không dynamic available: Nó sẽ không đảm bảo liveness nếu $n/3$ hoặc hơn các nodes offline.
 - Bitcoin thì dynamic available: tiếp tục confirm Tx khi miningpower offline. 
 
 ## Consensus ở Internet

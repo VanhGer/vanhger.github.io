@@ -4,7 +4,7 @@ layout: post
 title: Mở rộng Blockchain (Phần 1)
 category: [blockchain, cs251]
 tags: [knowledge]
-
+postnum: 18
 ---
 
 Với Bitcoin, tốc độ thực hiện giao dịch chỉ có khoảng 7 Tx / sec, còn với Ethereum, con số này là 15. Trong khi đó, với VISA là 2000, Paypal là 200. Vậy để các loại Blockchain này được sử dụng nhiều trên thế giới, cần phải có những giải pháp để tăng tốc độ các giao dịch. Trong bài viết này, mình sẽ giới thiệu đến một cách là sử dụng Payment Channel, hạn chế tương tác với chuỗi càng ít càng tốt, giúp tăng tốc độ.
@@ -27,6 +27,10 @@ Xong xuôi, B post Tx5 lên Blockchain. Nhưng có vấn đề xảy ra là nế
 Nhưng nếu B không post Tx5 lên chuỗi thì sao? Liệu A có lấy lại được 0.95 BTC. Để giải quyết vấn đề này, cần sử dụng một time-locked Tx, đảm bảo sau một khoảng thời gian, nếu B không post Tx5 lên, thì A sẽ lấy lại được 1BTC (B phải gửi cho A). Ngoài ra, Tx này phải được kí trước khi đưa BTC vào trong AB.
 
 Minh hoạ:
+
+<a class="post-image" >
+	<img itemprop="image"  src="/assets/images/post_img/post18_1.PNG"/>
+</a>
 
 Sau khi trả hoặc lấy lại tiền, kênh sẽ đóng.
 

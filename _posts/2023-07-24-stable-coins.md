@@ -4,7 +4,7 @@ layout: post
 title: Stablecoins
 category: [blockchain, cs251]
 tags: [knowledge]
-
+postnum: 15
 ---
 
 Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.

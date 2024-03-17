@@ -4,7 +4,7 @@ layout: post
 title: Mở rộng Blockchain (Phần 2)
 category: [blockchain, cs251]
 tags: [knowledge]
-
+postnum: 19
 ---
 
 Trong bài viết hôm nay, mình sẽ giới thiệu đến mọi người một kĩ thuật giúp tăng tốc độ các Tx trong mạng blockchain. Đó là Rollups.
@@ -15,10 +15,12 @@ Trong layer-1 của blockchain như Ethereum chứa world state. Khi một giao 
 
 Ta có hình minh hoạ như sau:
 
+<a class="post-image" >
+	<img itemprop="image"  src="/assets/images/post_img/post19_1.PNG"/>
+</a>
+
 Từ đây, ta gọi Rollup state là L2, để phân biệt với L1 (layer-1 của blockchain). <br>
 Rollup contract ở L1 sẽ giữ các tài sản và Merkle state root của các Rollup account. Rollup state chỉ bao gồm số dư của các Rollup account.
-
-/// hình ảnh
 
 ## Hiệu năng
 

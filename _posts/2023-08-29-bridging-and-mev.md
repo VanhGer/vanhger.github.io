@@ -4,7 +4,7 @@ layout: post
 title: Bridging và MEV
 category: [blockchain, cs251]
 tags: [knowledge]
-
+postnum: 21
 ---
 
 Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau.
@@ -45,6 +45,9 @@ Khi searchers post Tx lên mempool, những điều sau có thể xảy ra:
 - Mọi validators có thể kiếm MEV payment từ searchers. Từ đó tránh việc centralization.
 
 Minh hoạ:
+<a class="post-image" >
+	<img itemprop="image"  src="/assets/images/post_img/post21_1.PNG"/>
+	</a>
 
 <strong> Builder </strong>: thu thập các Bundles và Txs sau đó build 1 block. (trong block bao gồm feeRecipient (MEV offer) cho validator).
 
@@ -84,8 +87,6 @@ Với wBTC
 - Custodian trung gian sau khi thấy điều này, sẽ gửi msg đến custodian BTC.
 - Custodian BTC sẽ unlock 1 BTC cho Alice.
 
-Minh hoạ:
-
 Vấn đề đưa ra là liệu các Custodian có tin tưởng được không? <br>
 Để giải quyết, ta sẽ sử dụng tBTC như sau:
 
@@ -112,6 +113,10 @@ Vấn đề đưa ra là liệu các Custodian có tin tưởng được không?
 - Bước 2: Xây 1 bridge sử dụng hệ thống message
 
 Minh hoạ
+
+<a class="post-image" >
+	<img itemprop="image"  src="/assets/images/post_img/post21_2.PNG"/>
+	</a>
 
 Có 2 loại hệ thống message: <br>
 <strong> Externally verified </strong>: các bên bên ngoài (Trustee) sẽ xác minh các message trên chuỗi S. <br>

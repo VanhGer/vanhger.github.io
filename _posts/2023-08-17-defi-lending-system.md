@@ -4,7 +4,7 @@ layout: post
 title: Hệ thống vay DeFi
 category: [blockchain, cs251]
 tags: [knowledge]
-
+postnum: 17
 ---
 
 Ở bài viết này, mình sẽ giới thiệu về hệ thống vay trong môi trường phi tập trung. Nhưng trước hết, ta sẽ đi tìm hiểu việc vay trong hệ thống tập trung sẽ như thế nào và chứa những rủi ro gì.

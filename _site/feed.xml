@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2024-01-12T21:29:04+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Hiimvanhg</title><subtitle></subtitle><author><name>VanhGer</name><email>vietanhpg2003@gmail.com</email></author><entry><title type="html">Bridging và MEV</title><link href="http://localhost:4000/blog/2023/08/29/bridging-and-mev/" rel="alternate" type="text/html" title="Bridging và MEV" /><published>2023-08-29T00:00:00+07:00</published><updated>2023-08-29T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/29/bridging-and-mev</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/29/bridging-and-mev/">&lt;p&gt;Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2024-03-17T18:16:20+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Hiimvanhg</title><subtitle></subtitle><author><name>VanhGer</name><email>vietanhpg2003@gmail.com</email></author><entry><title type="html">Bridging và MEV</title><link href="http://localhost:4000/blog/2023/08/29/bridging-and-mev/" rel="alternate" type="text/html" title="Bridging và MEV" /><published>2023-08-29T00:00:00+07:00</published><updated>2023-08-29T00:00:00+07:00</updated><id>http://localhost:4000/blog/2023/08/29/bridging-and-mev</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/29/bridging-and-mev/">&lt;p&gt;Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau.&lt;/p&gt;
 
 &lt;h2 id=&quot;heading-mev&quot;&gt;MEV&lt;/h2&gt;
 
@@ -39,7 +39,10 @@ Ngoài ra, còn nhiều cách để nhận MEV từ việc thay đổi chuỗi T
   &lt;li&gt;Mọi validators có thể kiếm MEV payment từ searchers. Từ đó tránh việc centralization.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Minh hoạ:&lt;/p&gt;
+&lt;p&gt;Minh hoạ:
+&lt;a class=&quot;post-image&quot;&gt;
+	&lt;img itemprop=&quot;image&quot; src=&quot;/assets/images/post_img/post21_1.PNG&quot; /&gt;
+	&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt; Builder &lt;/strong&gt;: thu thập các Bundles và Txs sau đó build 1 block. (trong block bao gồm feeRecipient (MEV offer) cho validator).&lt;/p&gt;
 
@@ -85,8 +88,6 @@ Ngoài ra, còn nhiều cách để nhận MEV từ việc thay đổi chuỗi T
   &lt;li&gt;Custodian BTC sẽ unlock 1 BTC cho Alice.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Minh hoạ:&lt;/p&gt;
-
 &lt;p&gt;Vấn đề đưa ra là liệu các Custodian có tin tưởng được không? &lt;br /&gt;
 Để giải quyết, ta sẽ sử dụng tBTC như sau:&lt;/p&gt;
 
@@ -122,6 +123,10 @@ Ngoài ra, còn nhiều cách để nhận MEV từ việc thay đổi chuỗi T
 
 &lt;p&gt;Minh hoạ&lt;/p&gt;
 
+&lt;p&gt;&lt;a class=&quot;post-image&quot;&gt;
+	&lt;img itemprop=&quot;image&quot; src=&quot;/assets/images/post_img/post21_2.PNG&quot; /&gt;
+	&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;Có 2 loại hệ thống message: &lt;br /&gt;
 &lt;strong&gt; Externally verified &lt;/strong&gt;: các bên bên ngoài (Trustee) sẽ xác minh các message trên chuỗi S. &lt;br /&gt;
 RelayerT chuyển msg cho người nhận khi các trustees đều kí ⟹ nếu DApp-Y tin trustees, thì sẽ biết được DApp-X gửi msg. &lt;br /&gt;
@@ -156,15 +161,13 @@ RelayerT sẽ chạy client nhẹ để xác thực xem chuỗi S có nhận msg
   &lt;li&gt;Committed update state thì đúng. Từ đó, ai cũng có thể xác thực 𝝅.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Minh hoạ: ///&lt;/p&gt;
-
 &lt;h3 id=&quot;heading-review-commitment&quot;&gt;Review: Commitment&lt;/h3&gt;
 
 &lt;p&gt;Được sử dụng với nhiều mục đích, ví dụ Đấu giá kín. Người tham gia cam kết giá, sau khi hết thời gian thì mọi người sẽ mở cam kết của họ. &lt;br /&gt;
 &lt;strong&gt; Cú pháp &lt;/strong&gt; 2 thuật toán: &lt;br /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;commit(msg, r) -&amp;gt; com.  r là randombit, com là string ngắn&lt;/li&gt;
+  &lt;li&gt;commit(msg, r) -&amp;gt; com.  Trong đó, r là randombit, com là string ngắn&lt;/li&gt;
   &lt;li&gt;verify(msg, com, r) -&amp;gt; reject / accept.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -202,26 +205,19 @@ Ví dụ: statement: &quot;Tôi biết một m mà SHA256(m) = 0&quot;.
 
 &lt;h4 id=&quot;heading-arithmetic-circuits-ac&quot;&gt;Arithmetic Circuits (AC)&lt;/h4&gt;
 
-&lt;p&gt;Cho 1 trường hữu hạn:  𝔽={0, …, 𝑝−1} với p là số nguyên tố &amp;gt; 2. &lt;br /&gt;
-Arithmetic Circuit: C: 𝔽^𝑛 ⇾ 𝔽. &lt;br /&gt;
+&lt;p&gt;Cho 1 trường hữu hạn:  $𝔽={0, …, 𝑝−1}$ với p là số nguyên tố &amp;gt; 2. &lt;br /&gt;
+Arithmetic Circuit: C: $𝔽^𝑛 ⇾ 𝔽$. &lt;br /&gt;
 C lấy input là list gồm n phần tử thuộc F, output là 1 phần tử thuộc F. &lt;br /&gt;
-|C| = số gates trong mạch C.
-// minh hoạ&lt;/p&gt;
+|C| = số gates trong mạch C.&lt;/p&gt;
+
+&lt;p&gt;&lt;a class=&quot;post-image&quot;&gt;
+	&lt;img itemprop=&quot;image&quot; src=&quot;/assets/images/post_img/post20_1.PNG&quot; /&gt;
+	&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt; Ví dụ: &lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;table&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td&gt;C_hash(h, m) = 0 nếu SHA256(m) = h, ≠0 nếu ngược lại.&lt;/td&gt;
-          &lt;td&gt;C_hash&lt;/td&gt;
-          &lt;td&gt;~ 20K gates&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/li&gt;
+  &lt;li&gt;C_hash(h, m) = 0 nếu SHA256(m) = h, $!= 0$ nếu ngược lại.&lt;/li&gt;
   &lt;li&gt;C_sig(pk, msg, σ) = 0 nếu chữ kí σ là hợp lệ trên msg với pk.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -250,6 +246,10 @@ C lấy input là list gồm n phần tử thuộc F, output là 1 phần tử t
 
 &lt;p&gt;Minh hoạ:&lt;/p&gt;
 
+&lt;p&gt;&lt;a class=&quot;post-image&quot;&gt;
+	&lt;img itemprop=&quot;image&quot; src=&quot;/assets/images/post_img/post20_2.PNG&quot; /&gt;
+	&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;Một preprocessing NARK là bộ 3 (S, P, V):&lt;/p&gt;
 
 &lt;ul&gt;
@@ -261,7 +261,7 @@ C lấy input là list gồm n phần tử thuộc F, output là 1 phần tử t
 &lt;p&gt;&lt;strong&gt; Yêu cầu &lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Complete: ∀𝑥, 𝑤:  𝐶(𝒙, 𝒘) = 0 ⇒ Pr[ V(𝑣𝑝, 𝑥, P(𝑝𝑝, 𝒙, 𝒘)) = accept] = 1.&lt;/li&gt;
+  &lt;li&gt;Complete: ∀𝑥, 𝑤:  $𝐶(𝒙, 𝒘) = 0 ⇒ Pr[ V(𝑣𝑝, 𝑥, P(𝑝𝑝, 𝒙, 𝒘)) = accept] = 1$.&lt;/li&gt;
   &lt;li&gt;Argument of knowledge: V accepts ⇒ P biết 𝑤&lt;/li&gt;
   &lt;li&gt;Zero knowledge: (𝐶, 𝑝𝑝,𝑣𝑝 ,𝒙, 𝜋)  không tiết lộ gì về 𝒘&lt;/li&gt;
 &lt;/ul&gt;
@@ -271,32 +271,8 @@ Một NARK gọi là SNARK khi việc tạo ra và xác minh proof với thời 
 
 &lt;ul&gt;
   &lt;li&gt;S(𝐶)  ⇾  public parameters  (S𝑝, S𝑣)&lt;/li&gt;
-  &lt;li&gt;
-    &lt;table&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td&gt;P(𝑝𝑝, 𝒙, 𝒘)  ⇾  short proof  𝜋;&lt;/td&gt;
-          &lt;td&gt;𝜋&lt;/td&gt;
-          &lt;td&gt;=𝑂_𝜆(𝐥𝐨𝐠⁡(&lt;/td&gt;
-          &lt;td&gt;𝑪&lt;/td&gt;
-          &lt;td&gt;))&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;table&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td&gt;V(𝑣𝑝, 𝒙, 𝝅)    nhanh để thẩm định:    time(V) = 𝑂_𝜆 (&lt;/td&gt;
-          &lt;td&gt;𝑥&lt;/td&gt;
-          &lt;td&gt;, 𝐥𝐨𝐠⁡(&lt;/td&gt;
-          &lt;td&gt;𝑪&lt;/td&gt;
-          &lt;td&gt;)).&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/li&gt;
+  &lt;li&gt;P(𝑝𝑝, 𝒙, 𝒘)  $\rightarrow$  short proof  𝜋;   $\lVert 𝜋 \rVert =𝑂_𝜆(𝐥𝐨𝐠⁡(\lVert𝑪\rVert))$&lt;/li&gt;
+  &lt;li&gt;V(𝑣𝑝, 𝒙, 𝝅)    nhanh để thẩm định:    $time(V) = 𝑂_𝜆 (\lVert 𝑥 \rVert, 𝐥𝐨𝐠⁡(\lVert 𝑪 \rVert))$.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Do đó, với SNARK thì việc đọc toàn bộ mạch C là không kịp thời gian. VÌ vậy cần bước preprocessing.&lt;/p&gt;
@@ -355,10 +331,12 @@ Bộ 3 (S, P, V) là Argurment of knowledge với mạch C nếu:&lt;/p&gt;
 
 &lt;p&gt;Ta có hình minh hoạ như sau:&lt;/p&gt;
 
+&lt;p&gt;&lt;a class=&quot;post-image&quot;&gt;
+	&lt;img itemprop=&quot;image&quot; src=&quot;/assets/images/post_img/post19_1.PNG&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;Từ đây, ta gọi Rollup state là L2, để phân biệt với L1 (layer-1 của blockchain). &lt;br /&gt;
 Rollup contract ở L1 sẽ giữ các tài sản và Merkle state root của các Rollup account. Rollup state chỉ bao gồm số dư của các Rollup account.&lt;/p&gt;
-
-&lt;p&gt;/// hình ảnh&lt;/p&gt;
 
 &lt;h2 id=&quot;heading-hiệu-năng&quot;&gt;Hiệu năng&lt;/h2&gt;
 
@@ -539,6 +517,10 @@ Việc Coordinator và Người gửi Proof (A) tạo ra state(n) và state(n&ap
 &lt;p&gt;Nhưng nếu B không post Tx5 lên chuỗi thì sao? Liệu A có lấy lại được 0.95 BTC. Để giải quyết vấn đề này, cần sử dụng một time-locked Tx, đảm bảo sau một khoảng thời gian, nếu B không post Tx5 lên, thì A sẽ lấy lại được 1BTC (B phải gửi cho A). Ngoài ra, Tx này phải được kí trước khi đưa BTC vào trong AB.&lt;/p&gt;
 
 &lt;p&gt;Minh hoạ:&lt;/p&gt;
+
+&lt;p&gt;&lt;a class=&quot;post-image&quot;&gt;
+	&lt;img itemprop=&quot;image&quot; src=&quot;/assets/images/post_img/post18_1.PNG&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Sau khi trả hoặc lấy lại tiền, kênh sẽ đóng.&lt;/p&gt;
 
@@ -837,25 +819,23 @@ Lợi ích:&lt;/p&gt;
 
 &lt;p&gt;Giả sử 1 AMM có 2 loại tài sản, 1 là X (risky, ví dụ: ETH), 2 là Y (stable, ví dụ DAI). AMM lưu trữ x đồng X và y đồng Y. AMM đề nghị mua hoặc bán tài sản X ở một giá trị p nào đó.&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;Giả sử, ta muốn duy trì tài sản X và Y trong pool với tỉ lệ a/b. Giả sử là 50/50
-Vì p là giá trị của X nên ta thấy&lt;br /&gt;
-                    p.x = y &lt;br /&gt;
-                    &amp;lt;=&amp;gt; p = y / x. &lt;br /&gt;
-Khi đó, nếu ai đó bán lượng ETH (X) để lấy DAI (Y) thì x sẽ tăng và y giảm xuống. Dó đó giá trị p sẽ giảm đi.
-Điều này tương đương với x, y tỉ lệ nghịch với nhau. &lt;br /&gt;
-Gọi x * y = k thì k được gọi là hằng số dự trữ.&lt;/p&gt;
+&lt;p&gt;Giả sử, ta muốn duy trì tài sản X và Y trong pool với tỉ lệ $a/b$. Giả sử là $50/50$
+Vì p là giá trị của X nên ta thấy: &lt;br /&gt;
+\(p.x = y \iff p = y / x.\)&lt;/p&gt;
 
-&lt;p&gt;Hình ảnh: ///&lt;/p&gt;
+&lt;p&gt;Khi đó, nếu ai đó bán lượng ETH (X) để lấy DAI (Y) thì x sẽ tăng và y giảm xuống. Dó đó giá trị p sẽ giảm đi.
+Điều này tương đương với x, y tỉ lệ nghịch với nhau. &lt;br /&gt;
+Gọi $x * y = k$ thì k được gọi là hằng số dự trữ.&lt;/p&gt;
 
 &lt;p&gt;Ví dụ: Nếu pool có 10 ETH, 1000 DAI. Giá của 1 ETH = 100 DAI. &lt;br /&gt;
-Hằng số dự trữ: k = x &lt;em&gt;y = 10&lt;/em&gt; 1000 = 10000.&lt;/p&gt;
+Hằng số dự trữ: $k = x * y = 10 * 1000 = 10000$.&lt;/p&gt;
 
 &lt;p&gt;1) Giả sử user muốn đổi DAI lấy ETH. Muốn đổi 500 DAI + 0.3% phí để đổi lấy ETH.  &lt;br /&gt;
 Lúc này: y&apos; = 500 + 1500 = 1500. &lt;br /&gt;
 =&amp;gt; x&apos; = 10000 / 1500 = 6.66 ETH. &lt;br /&gt;
-Lúc đó, user này sẽ nhận: 10 - 6.66 = 3.33 ETH =&amp;gt; Giá p của 1 ETH = 150 DAI (Tăng giá).&lt;/p&gt;
+Lúc đó, user này sẽ nhận: 10 - 6.66 = 3.33 ETH $\rightarrow$ Giá p của 1 ETH = 150 DAI (Tăng giá).&lt;/p&gt;
 
-&lt;p&gt;2) Giả sử user muốn đổi ETH lấy DAI. ĐỔi 6ETH + 0.3% lấy DAI. &lt;br /&gt;
+&lt;p&gt;1) Giả sử user muốn đổi ETH lấy DAI. ĐỔi 6ETH + 0.3% lấy DAI. &lt;br /&gt;
 Lúc này: x&apos; = 10 + 6 = 16 &lt;br /&gt;
 =&amp;gt; y&apos; - 10000/ 16 = 625. User nhận 1000 - 625 = 375 DAI. &lt;br /&gt;
 Giá p 1ETH = 62.5 DAI, giảm 37.5 so với ban đầu.&lt;/p&gt;
@@ -1167,7 +1147,7 @@ Bất kì ai giữ DAI có thể khoá DAI của mình trong MakerDAO contract. 
 &lt;h3 id=&quot;heading-evm-mechanics&quot;&gt;EVM mechanics&lt;/h3&gt;
 
 &lt;p&gt;EVM là môi trường thực thi (execution). Các contract được viết bằng solidity, sau đó sẽ được compile thành EVM bytecode và được các validator sử dụng để chạy các contract. &lt;br /&gt;
-EVM hoạt động như một [Stack Machine] (&lt;a href=&quot;https://en.wikipedia.org/wiki/Stack_machine&quot;&gt;https://en.wikipedia.org/wiki/Stack_machine&lt;/a&gt;) với lệnh JUMP (Các program sẽ bị huỷ nếu quá stack, proposer giữ lại gas).&lt;/p&gt;
+EVM hoạt động như một &lt;a href=&quot;https://en.wikipedia.org/wiki/Stack_machine&quot;&gt;Stack Machine&lt;/a&gt; với lệnh JUMP (Các program sẽ bị huỷ nếu quá stack, proposer giữ lại gas).&lt;/p&gt;
 
 &lt;h3 id=&quot;heading-gas&quot;&gt;Gas&lt;/h3&gt;
 
@@ -1226,9 +1206,9 @@ Gọi một giao thức là Dynamic availability nếu giao thức đó có th�
 
 &lt;ul&gt;
   &lt;li&gt;Available chain được xác định bởi giao thức Π_ava, thoả mãn Dynamic availability (VD: Nakamoto consensus).&lt;/li&gt;
-  &lt;li&gt;Finalized chain được xác định bởi giao thức checkpoint Π_fin thoả mãn security dưới mạng đồng bộ 1 phần.&lt;/li&gt;
+  &lt;li&gt;Finalized chain được xác định bởi giao thức checkpoint $Π_{fin}$ thoả mãn security dưới mạng đồng bộ 1 phần.&lt;/li&gt;
   &lt;li&gt;Chuỗi confirm bởi Π_ava là available chain.&lt;/li&gt;
-  &lt;li&gt;Π_fin kiểm tra các block trong availbale chain.&lt;/li&gt;
+  &lt;li&gt;$Π_{fin}$ kiểm tra các block trong availbale chain.&lt;/li&gt;
   &lt;li&gt;Tiền tố của checkpoint cuối cùng tạo thành finalized chain. Tương đương với Finalized chain là prefix của available. Chuỗi này safe dưới mạng bất đồng bộ&lt;/li&gt;
   &lt;li&gt;Các block của available chain luôn extend từ điểm checkpoint cuối cùng.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1266,9 +1246,9 @@ Gọi một giao thức là Dynamic availability nếu giao thức đó có th�
 Một node được chọn làm Block Proposer để đề xuất khối ở slot này, có trách nhiệm đóng và phát tán block vào chuỗi và cập nhập trạng thái. Nodes chạy 3 phần mềm:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Execution client: gộp các Txs từ mempool thành &quot;execution payload&quot; và chạy nó ở local để tạo ra sự thay đổi trạng thái. Thông tin này được chuyển đến consensus client&lt;/li&gt;
-  &lt;li&gt;Consensus client: đóng gói payload thành 1 phần của &quot;beacon block&quot; (gồm payload, slashing,…) cho phép mạng thống nhất trình tự về các khối.&lt;/li&gt;
-  &lt;li&gt;Validator client: Các node nhận được beacon block qua tầng gossip network. Sau đó chuyển đến Execution client của nó để chạy lại, nhằm chắc chắn trạng thái là đúng. Sau đóm Validator client sẽ chứng thực khối đó hợp lệ và là khối tiếp theo trong góc nhìn của chuỗi (available chain). Khối cũng được thêm vào cơ sở dữ liệu local của các node.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Execution client&lt;/strong&gt;: gộp các Txs từ mempool thành &quot;execution payload&quot; và chạy nó ở local để tạo ra sự thay đổi trạng thái. Thông tin này được chuyển đến consensus client&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Consensus client&lt;/strong&gt;: đóng gói payload thành 1 phần của &quot;beacon block&quot; (gồm payload, slashing,…) cho phép mạng thống nhất trình tự về các khối.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Validator client&lt;/strong&gt;: Các node nhận được beacon block qua tầng gossip network. Sau đó chuyển đến Execution client của nó để chạy lại, nhằm chắc chắn trạng thái là đúng. Sau đóm Validator client sẽ chứng thực khối đó hợp lệ và là khối tiếp theo trong góc nhìn của chuỗi (available chain). Khối cũng được thêm vào cơ sở dữ liệu local của các node.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;heading-finality&quot;&gt;Finality&lt;/h4&gt;

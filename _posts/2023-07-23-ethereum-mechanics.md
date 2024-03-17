@@ -3,7 +3,7 @@ layout: post
 title: Cơ chế Ethereum
 category: [blockchain, cs251]
 tags: [knowledge]
-
+postnum: 12
 ---
 
 Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội
@@ -77,7 +77,7 @@ Khác với Block của Bitcoin, Block Header của Ethereum có nhiều loại 
 ### EVM mechanics
 
 EVM là môi trường thực thi (execution). Các contract được viết bằng solidity, sau đó sẽ được compile thành EVM bytecode và được các validator sử dụng để chạy các contract. <br>
-EVM hoạt động như một [Stack Machine] (<https://en.wikipedia.org/wiki/Stack_machine>) với lệnh JUMP (Các program sẽ bị huỷ nếu quá stack, proposer giữ lại gas).
+EVM hoạt động như một [Stack Machine](<https://en.wikipedia.org/wiki/Stack_machine>) với lệnh JUMP (Các program sẽ bị huỷ nếu quá stack, proposer giữ lại gas).
 
 ### Gas
 

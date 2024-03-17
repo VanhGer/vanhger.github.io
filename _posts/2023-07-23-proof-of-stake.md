@@ -4,7 +4,7 @@ layout: post
 title: Proof Of Stake
 category: [blockchain, cs251]
 tags: [knowledge]
-
+postnum: 13
 ---
 
 Ở bài viết này, mình sẽ giới thiệu một cơ chế đồng thuận đang được sử dụng rất nhiều trong các blockchain hiện nay, đó là Proof of Stake.
@@ -28,9 +28,9 @@ Không có giao thức SMR nào đảm bảo cung cấp cả 2. Do đó, một c
 ### Nested chains
 
 - Available chain được xác định bởi giao thức Π_ava, thoả mãn Dynamic availability (VD: Nakamoto consensus).
-- Finalized chain được xác định bởi giao thức checkpoint Π_fin thoả mãn security dưới mạng đồng bộ 1 phần.
+- Finalized chain được xác định bởi giao thức checkpoint $Π_{fin}$ thoả mãn security dưới mạng đồng bộ 1 phần.
 - Chuỗi confirm bởi Π_ava là available chain.
-- Π_fin kiểm tra các block trong availbale chain.
+- $Π_{fin}$ kiểm tra các block trong availbale chain.
 - Tiền tố của checkpoint cuối cùng tạo thành finalized chain. Tương đương với Finalized chain là prefix của available. Chuỗi này safe dưới mạng bất đồng bộ
 - Các block của available chain luôn extend từ điểm checkpoint cuối cùng.
 
@@ -62,9 +62,9 @@ Chọn Block Proposer quá trình giả ngẫu nhiên gồm nhiều yêu tố nh
 Khi một user tạo Tx và submit lên Ethereum, nó sẽ được kiểm tra tính hợp lệ (Ví dụ đảm bảo số tiền, key đúng,...) sau đó được đưa đến mempool và phát tán nó đến các node khác. <br>
 Một node được chọn làm Block Proposer để đề xuất khối ở slot này, có trách nhiệm đóng và phát tán block vào chuỗi và cập nhập trạng thái. Nodes chạy 3 phần mềm:
 
-- Execution client: gộp các Txs từ mempool thành "execution payload" và chạy nó ở local để tạo ra sự thay đổi trạng thái. Thông tin này được chuyển đến consensus client
-- Consensus client: đóng gói payload thành 1 phần của "beacon block" (gồm payload, slashing,...) cho phép mạng thống nhất trình tự về các khối.
-- Validator client: Các node nhận được beacon block qua tầng gossip network. Sau đó chuyển đến Execution client của nó để chạy lại, nhằm chắc chắn trạng thái là đúng. Sau đóm Validator client sẽ chứng thực khối đó hợp lệ và là khối tiếp theo trong góc nhìn của chuỗi (available chain). Khối cũng được thêm vào cơ sở dữ liệu local của các node.
+- **Execution client**: gộp các Txs từ mempool thành "execution payload" và chạy nó ở local để tạo ra sự thay đổi trạng thái. Thông tin này được chuyển đến consensus client
+- **Consensus client**: đóng gói payload thành 1 phần của "beacon block" (gồm payload, slashing,...) cho phép mạng thống nhất trình tự về các khối.
+- **Validator client**: Các node nhận được beacon block qua tầng gossip network. Sau đó chuyển đến Execution client của nó để chạy lại, nhằm chắc chắn trạng thái là đúng. Sau đóm Validator client sẽ chứng thực khối đó hợp lệ và là khối tiếp theo trong góc nhìn của chuỗi (available chain). Khối cũng được thêm vào cơ sở dữ liệu local của các node.
 
 #### Finality
 
