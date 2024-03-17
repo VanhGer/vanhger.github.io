@@ -2,7 +2,6 @@
 layout: post
 title: Các mô hình phát triển phần mềm (P2)
 category: [software]
-tags: [knowledge]
 postnum: 3
 ---
 
@@ -14,7 +13,7 @@ Thực tế, các yêu cầu đặc tả từ khách hàng rất hiếm khi rõ 
 
 Mô hình bản mẫu:
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post3_1.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post3_1.PNG"/>
 </a>
 
 

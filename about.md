@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "About"
+title: About
 permalink: /about/
 ---
 
@@ -29,6 +29,6 @@ How far I will go, how much I will lose ?
 
 
 ## Contribute
-This blog theme was inspired by [Simple Texture](https://github.com/yizeng/jekyll-theme-simple-texture).
+This blog theme was inspired by [Monos Theme](https://github.com/ejjoo/jekyll-theme-monos).
 
 Thanks for reading!

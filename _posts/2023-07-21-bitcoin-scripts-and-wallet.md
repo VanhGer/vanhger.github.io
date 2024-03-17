@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Bitcoin Scripts và Ví
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 9
 ---
 
@@ -42,7 +41,7 @@ Nếu vi phạm xảy ra:
 
 Minh hoạ
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post9_1.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post9_1.PNG"/>
 </a>
 
 ## Ví
@@ -63,7 +62,7 @@ Ví giúp user tạo ra các cặp $Pk- Sk$, tạo ra và xác minh các Tx, đ�
 Có 2 loại ví chính là **Hot wallet** và **Cold wallet**
 
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post9_2.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post9_2.PNG"/>
 </a>
 
 #### Hot wallet

@@ -2,7 +2,6 @@
 layout: post
 title: Các mô hình phát triển phần mềm (P1)
 category: [software]
-tags: [knowledge]
 postnum: 2
 ---
 
@@ -16,7 +15,7 @@ Mô hình thác nước là mô hình phát triển phần mềm theo quy trình
 Minh hoạ mô hình thác nước:
 
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post2_1.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post2_1.PNG"/>
 </a>
 
 Trong giai đoạn định nghĩa yêu cầu, các yêu cầu từ khách hàng sẽ được xác định và đặc tả chi tiết trong tài liệu, làm cơ sở để thực hiện giai đoạn thiết kế. Ở giai đoạn thiết kế, các nhà phát triển phải thảo luận, tìm ra yêu cầu của phần cứng, và đưa ra kiến trúc tổng thể của hệ thống phần mềm. Trong pha triển khai, nhà phát triển sẽ lập trình các chương trình nhỏ để tích hợp trong giai đoạn tiếp theo. Cuối cùng, sẽ là việc tích hợp các chương trình và kiểm thử trước khi đưa ra cho khách hàng sản phẩm.
@@ -35,7 +34,7 @@ Về vấn đề kĩ thuật, mô hình thác nước còn có các điểm cầ
 
 Minh hoạ:
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post2_2.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post2_2.PNG"/>
 </a>
 
 Mô hình chữ V cũng bao gồm các pha gần giống như thác nước. Tuy nhiên để tránh việc chung chung trong kiểm thử, mô hình này đã cụ thể các pha kiểm thử là kiểm thử tích hợp, kiểm thử hệ thống và kiểm thử cấp nhận. V-model đưa việc sinh các test song song với các giai đoạn. Ví dụ khi ở giai đoạn đặc tả yêu cầu, khi có yêu cầu, nhà phát triển sẽ sinh bộ test cho việc đặc tả đó, vv. Sau khi cài đặt xong, sẽ lấy những bộ test đó để kiểm tra hiểu quả của từng pha. Việc sinh test này sẽ khách quan hơn rất nhiều so với mô hình thác nước, và chất lượng bộ test cũng sẽ cao hơn. Lý do chính là việc sinh test do chủ quan người phát triển. Nếu như sinh test trước từng pha, test sẽ cụ thể hơn và giúp tăng khả năng phát hiện lỗi hơn rất nhiều. Ngược lại, việc sinh test sau khi có sản phẩm, bộ test sẽ rất chung chung, dễ pass.

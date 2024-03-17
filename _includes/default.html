@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }} ">
+  {%- include head.html -%}
+  <style>@import url(/public/css/syntax/{{ site.highlighter-theme }}.css);</style>
+  <title>{{ site.title }}</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/syntax/light_theme.css" id="theme1">
+  <link rel="stylesheet" href="/public/css/syntax/dark_theme.css" id="theme2" disabled>
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			{% include sidebar.html %}
+		</div>
+		<div class="content">
+			{{ content }}
+		</div>
+	</div>
+  </body>
+</html>

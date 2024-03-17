@@ -1,161 +1,229 @@
 <!DOCTYPE html>
+<html lang="en "><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="VanhGer" /></head>
+<style>@import url(/public/css/syntax/manni.css);</style>
+  <title>VanhGer</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
 
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en">
-<!--<![endif]-->
+  <link href="/public/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/syntax/light_theme.css" id="theme1">
+  <link rel="stylesheet" href="/public/css/syntax/dark_theme.css" id="theme2" disabled>
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">VanhGer</a>
+	</div>
+	<p class="lead">Hi there !!!</p></div>
 
-<head>
-    <meta charset="utf-8">
-<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Hiimvanhg</title>
-<meta name="generator" content="Jekyll v3.9.3" />
-<meta property="og:title" content="Hiimvanhg" />
-<meta name="author" content="VanhGer" />
-<meta property="og:locale" content="en" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
-<meta property="og:site_name" content="Hiimvanhg" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Hiimvanhg" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"VanhGer"},"headline":"Hiimvanhg","name":"Hiimvanhg","url":"http://localhost:4000/"}</script>
-<!-- End Jekyll SEO tag -->
-
-<meta name="keywords" content="" />
-
-
-
-
-
-<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Hiimvanhg" />
-    <link href='/assets/stylesheets/home.css' rel="stylesheet" type="text/css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-<script>window.Modernizr || document.write('<script src="/assets/javascripts/modernizr-2.8.3.min.js"><\/script>')</script>
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div>
+    <input type="checkbox" id="toggle-btn" onchange="toggleTheme()">
+    <label for="toggle-btn"></label>
+</div>
 <script>
-    window.jQuery || document.write('<script src="/assets/javascripts/jquery-3.3.1.min.js"><\/script>')
+	window.onload = function() {
+		const savedTheme = localStorage.getItem('selectedTheme');
+		
+		if (savedTheme) {
+			const theme = document.getElementById(savedTheme);
+			
+			if (theme) {
+				if (savedTheme === 'theme1') {
+					const tmp = document.getElementById('theme2');
+					tmp.disabled = true;
+					const btn = document.getElementById('toggle-btn');
+					btn.checked = false;
+				} else {
+					const tmp = document.getElementById('theme1');
+					tmp.disabled = true;
+					const btn = document.getElementById('toggle-btn');
+					btn.checked = true;
+				}
+				theme.disabled = false;
+			}
+		}
+	};
+
+	function toggleTheme() {
+		const theme1 = document.getElementById('theme1');
+		const theme2 = document.getElementById('theme2');
+
+		if (theme1.disabled) {
+			theme1.disabled = false;
+			theme2.disabled = true;
+			
+			
+			localStorage.setItem('selectedTheme', 'theme1');
+		} else {
+			theme1.disabled = true;
+			theme2.disabled = false;
+			
+			localStorage.setItem('selectedTheme', 'theme2');
+		}
+	}
 </script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
-<script>
-    window.Pace || document.write('<script src="/assets/javascripts/pace.min.js"><\/script>')
-</script>
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Blog</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
 
-    
-</head>
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#tutorial">
+				<span class="name">tutorial</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#software">
+				<span class="name">software</span>
+				<span class="badge">3</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#cs251">
+				<span class="name">cs251</span>
+				<span class="badge">17</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+  <header class="post-header home">
+    <div class="post-title">Blog</div>
+  </header>
 
-<body>
-    
+  <div class="post-content"><ul class="post-list"><li class="post-list-item">
+        <!----><span class="post-date">2023/08/29</span>
+      	<a class="post-link" href="/cs251/2023/08/29/bridging-and-mev.html">
+    	    Bridging và MEV
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/08/20</span>
+      	<a class="post-link" href="/cs251/2023/08/20/zksnark.html">
+    	    Quyền riêng tư trên blockchain và Zk-SNARK
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/08/19</span>
+      	<a class="post-link" href="/cs251/2023/08/19/scaling-the-blockchain-p2.html">
+    	    Mở rộng Blockchain (Phần 2)
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/08/18</span>
+      	<a class="post-link" href="/cs251/2023/08/18/scaling-the-blockchain-p1.html">
+    	    Mở rộng Blockchain (Phần 1)
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/08/17</span>
+      	<a class="post-link" href="/cs251/2023/08/17/defi-lending-system.html">
+    	    Hệ thống vay DeFi
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/08/15</span>
+      	<a class="post-link" href="/cs251/2023/08/15/dex.html">
+    	    Sàn giao dịch phi tập trung
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/07/24</span>
+      	<a class="post-link" href="/cs251/2023/07/24/stable-coins.html">
+    	    Stablecoins
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/07/24</span>
+      	<a class="post-link" href="/cs251/2023/07/24/solidity-va-state-trie.html">
+    	    Solidity và State Trie
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/07/23</span>
+      	<a class="post-link" href="/cs251/2023/07/23/proof-of-stake.html">
+    	    Proof Of Stake
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/07/23</span>
+      	<a class="post-link" href="/cs251/2023/07/23/ethereum-mechanics.html">
+    	    Cơ chế Ethereum
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/07/22</span>
+      	<a class="post-link" href="/cs251/2023/07/22/dong-thuan-tren-mang.html">
+    	    Đồng thuận trên mạng
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/07/21</span>
+      	<a class="post-link" href="/cs251/2023/07/21/fundamentals-of-consensus.html">
+    	    Cơ bản về đồng thuận
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/07/21</span>
+      	<a class="post-link" href="/cs251/2023/07/21/bitcoin-scripts-and-wallet.html">
+    	    Bitcoin Scripts và Ví
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/07/20</span>
+      	<a class="post-link" href="/cs251/2023/07/20/co-che-bitcoin.html">
+    	    Cơ chế Bitcoin
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/07/20</span>
+      	<a class="post-link" href="/cs251/2023/07/20/cau-tao-block-va-pow.html">
+    	    Cấu tạo block và PoW
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/07/15</span>
+      	<a class="post-link" href="/cs251/2023/07/15/blockchain-technology.html">
+    	    Kĩ thuật Blockchain
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/07/14</span>
+      	<a class="post-link" href="/cs251/2023/07/14/tong-quan-ve-blockchain.html">
+    	    Tổng quan về Blockchain
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/03/06</span>
+      	<a class="post-link" href="/software/2023/03/06/tao-game-sdl.html">
+    	    Mình đã tạo một game bằng C++ và SDL2.0
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/03/03</span>
+      	<a class="post-link" href="/software/2023/03/03/mo-hinh-phat-trien-p2.html">
+    	    Các mô hình phát triển phần mềm (P2)
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/03/02</span>
+      	<a class="post-link" href="/software/2023/03/02/mo-hinh-phat-trien-p1.html">
+    	    Các mô hình phát triển phần mềm (P1)
+		</a></li><li class="post-list-item">
+        <!----><span class="post-date">2023/02/28</span>
+      	<a class="post-link" href="/tutorial/2023/02/28/cach-tao-blog.html">
+    	    Cách mình tạo blog này
+		</a></li></ul></div>
+</article>
 
-    <ul id="menu">
-        <li data-menuanchor="bio"><a href="#bio">Biography</a></li>
-        <li data-menuanchor="social"><a href="#social">Social Links</a></li>
-    </ul>
-
-    <div id="section0" class="section" data-name="bio">
-
-        <!--[if IE]>
-    <p class="site-notice">You are using an outdated browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true" target="_blank">activate Google Chrome Frame</a> to improve your experience.</p>
-<![endif]-->
-<noscript>
-    <p class="site-notice">This site requires JavaScript. Here are the instructions <a href="http://www.enable-javascript.com/" target="_blank">how to enable JavaScript in your web browser</a>.</p>
-</noscript>
 
 
-        <div class="headings animated fadeInLeft">
-            <!-- <h1>Hiamvanhg</h1>
-            <h2>Welcome to my blog</h2>
-             -->
-            <h1>Hiimvanhg</h1> 
-            <h2>Welcome to my site</h2>
+</div>
 
-            <!-- <h2>
-                <a class="btn-enter btn-light" title="Enter Blog" href="/blog/">Enter Blog</a>
-            </h2> -->
-            
-        </div>
-        <a class="btn-continue animated bounce" title="More" href="#social"></a>
-    </div>
-
-    <div id="section1" class="section" data-name="social">
-        <h1 class="animated hidden">
-            <a class="btn-enter btn-light" title="Enter Blog" href="/blog/">Enter Blog</a>
-        </h1>
-        <div class="social-links animated hidden">
-            <!-- <a class="btn-light ico-question" href="/feed.xml" rel="me" target="_blank" title="feed"></a> -->
-            <!-- 
-                <a class="btn-light ico-gmail" href="mailto:vietanhpg2003@gmail.com" rel="me" target="_blank" title="email"></a>
-             -->
-            <a class="btn-light ico-question" href="/about/" rel="me" target="_blank" title="About"></a>
-            
-                
-                    <a class="btn-light ico-facebook" href="https://www.facebook.com/iamvanhg/" rel="me" target="_blank" title="facebook"></a>
-                
-            
-                
-                    <a class="btn-light ico-github" href="https://github.com/VanhGer" rel="me" target="_blank" title="github"></a>
-                
-            
-                
-            
-                
-                    <a class="btn-light ico-linkedin" href="https://www.linkedin.com/in/pham-gia-viet-anh-68676b223/" rel="me" target="_blank" title="linkedin"></a>
-                
-            
-                
-            
-                
-            
-                
-            
-        </div>
-    </div>
-
-    <script src="/assets/javascripts/jquery.fullPage.min.js"></script>
-<script src="/assets/javascripts/jquery.easing.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $.fn.fullpage({
-            anchors: ['bio', 'social'],
-            css3: true,
-            fixedElements: '.site-notice',
-            menu: '#menu',
-            navigation: true,
-            navigationPosition: 'right',
-            resize: false,
-            scrollingSpeed: 500,
-
-            afterLoad: function (anchorLink, index) {
-                if (index === 1) {
-                    $('#section0 .headings, #section0').removeClass('hidden').addClass('fadeInDown');
-                    $('.btn-continue').removeClass('hidden').addClass('bounce');
-                }
-                if (index === 2) {
-                    $('#section1 h1, #section1 .social-links').removeClass('hidden').addClass('fadeInUp');
-                }
-            },
-
-            onLeave: function (index, direction) {
-                if (index == 1 && direction == 'down') {
-                    $('#section0 .headings, #section0 .btn-continue').addClass('hidden').removeClass('bounce fadeInDown fadeInLeft');
-                }
-                if (index == 2 && direction == 'up') {
-                    $('#section1 h1, #section1 .social-links').addClass('hidden').removeClass('fadeInUp');
-                }
-            }
-        });
-    });
-
-</script>
-
-</body>
-
+		</div>
+	</div>
+  </body>
 </html>

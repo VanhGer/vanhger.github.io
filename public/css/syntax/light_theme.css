@@ -1,0 +1,15 @@
+:root {
+    --side_bar_color:  #5c7677;
+    --side_bar_lead: #F8FAE5;
+    --side_bar_nav_item: #F8FAE5;
+    --side_bar_nav_item_hover: #E0CCBE;
+    --body_color: #3c4d4e;
+    --background_color: #ebebeb;
+    --text_color: #000000;
+    --post_link_color: #333333;
+    --header_color: #333333;
+    --post_title_color: #000000;
+    --post_date_color: #555555;
+    --a-link-color:  #12a769;
+
+}

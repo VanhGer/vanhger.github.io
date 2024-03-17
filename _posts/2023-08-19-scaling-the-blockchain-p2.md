@@ -2,8 +2,7 @@
 layout: post
 
 title: Mở rộng Blockchain (Phần 2)
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 19
 ---
 
@@ -16,7 +15,7 @@ Trong layer-1 của blockchain như Ethereum chứa world state. Khi một giao 
 Ta có hình minh hoạ như sau:
 
 <a class="post-image" >
-	<img itemprop="image"  src="/assets/images/post_img/post19_1.PNG"/>
+	<img itemprop="image"  src="/public/images/post_img/post19_1.PNG"/>
 </a>
 
 Từ đây, ta gọi Rollup state là L2, để phân biệt với L1 (layer-1 của blockchain). <br>

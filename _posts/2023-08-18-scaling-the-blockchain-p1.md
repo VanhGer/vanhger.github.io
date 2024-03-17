@@ -2,8 +2,7 @@
 layout: post
 
 title: Mở rộng Blockchain (Phần 1)
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 18
 ---
 
@@ -29,7 +28,7 @@ Nhưng nếu B không post Tx5 lên chuỗi thì sao? Liệu A có lấy lại �
 Minh hoạ:
 
 <a class="post-image" >
-	<img itemprop="image"  src="/assets/images/post_img/post18_1.PNG"/>
+	<img itemprop="image"  src="/public/images/post_img/post18_1.PNG"/>
 </a>
 
 Sau khi trả hoặc lấy lại tiền, kênh sẽ đóng.

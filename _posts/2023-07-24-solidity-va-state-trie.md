@@ -2,8 +2,7 @@
 layout: post
 
 title: Solidity và State Trie
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 14
 ---
 

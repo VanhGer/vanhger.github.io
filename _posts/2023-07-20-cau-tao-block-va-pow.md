@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Cấu tạo block và PoW
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 7
 
 ---
@@ -23,7 +22,7 @@ Các block chứa các dữ liệu về Tx được lưu vào trong sổ cái c�
 
 Minh hoạ:
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post7_1.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post7_1.PNG"/>
 </a>
 
 

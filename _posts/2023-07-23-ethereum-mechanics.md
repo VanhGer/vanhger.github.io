@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Cơ chế Ethereum
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 12
 ---
 

@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Cơ bản về đồng thuận
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 10
 ---
 
@@ -48,7 +47,7 @@ SMR gồm 2 phần:
 Các wallet không chạy giao thức SMR và cũng không giao tiếp với nhau. Nó hỏi các replicas về các log và chọn kết quả được nhiều replicas gửi về nhất.
 
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post10_1.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post10_1.PNG"/>
 </a>
 
 ### Bảo mật cho SMR
@@ -78,7 +77,7 @@ Mong muốn giao thức phải đảm bảo an toàn dưới môi trường bán
 Thời gian chia thành các epoch, mỗi epoch là $2\Delta$ giây. Có $n$ replicas cố định, mỗi epoch **e** được chỉ định 1 leader **Le** bởi hàm Hash.
 
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post10_2.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post10_2.PNG"/>
 </a>
 
 ### Baby streamlet
@@ -103,7 +102,7 @@ Tuy nhiên, có một nhược điểm là nếu Leader là adversary và networ
 Chứng minh: với $f < n/3$, với mỗi epoch $e$, chỉ có tối đa 1 notarized block với epoch là e trong góc nhìn của bất kì replica trung thực nào.
 
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post10_3.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post10_3.PNG"/>
 </a>
 
 Giả sử 2 khối cùng epoch $e$ là B và B'. Vì $f < n/3$ nên tồn tại replica vote cho cả B, B'. Mà số vote của B và B' lớn hơn $2n/3$ \rightarrow số replica vote cho cả 2 là $> n/3$. Đây là vô lý. Vậy khi network chưa đồng bộ, giao thức này đảm bảo an toàn.
@@ -111,7 +110,7 @@ Giả sử 2 khối cùng epoch $e$ là B và B'. Vì $f < n/3$ nên tồn tại
 Với các block có epoch khác nhau, có thể cùng ở chung 1 độ cao. Gọi 2 block đó là B1 và B2. 
 
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post10_4.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post10_4.PNG"/>
 </a>
 
 Ban đầu, ở B, adversarial đề xuất B1 cho 66 replica trung thực, nên B1 chưa được notarized (vì có 66 vote). Tiếp theo, B2 được đề xuất bởi 1 replica trung thực, và được notarized nhưng trong đó có 1 adversarial vote cho B1, nên B1 cũng được notarized. Từ đó dẫn đến vi phạm safety.
@@ -131,7 +130,7 @@ Chứng minh tính an toàn:<br>
 	Hình Minh Hoạ: 
 
 	<a class="post-image" >
-	<img itemprop="image"  src="/assets/images/post_img/post10_5.PNG"/>
+	<img itemprop="image"  src="/public/images/post_img/post10_5.PNG"/>
 	</a>
 		
     Vậy, Streamlet đảm bảo safety<br>

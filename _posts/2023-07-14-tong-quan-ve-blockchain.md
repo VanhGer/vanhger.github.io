@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Tổng quan về Blockchain
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 5
 ---
 
@@ -19,7 +18,7 @@ Nói một cách đơn giản, blockchain như một loại cơ sở dữ liệu
 Trong Blockchain, quyền quyết định và điều khiển của mạng lưới thì phân bổ cho các user thay vì tập trung tại 1 user hoặc 1 tổ chức. Các giao dịch (Tx) được verified và ghi vào mạng máy tính phân tán hoạt động cùng nhau để duy trì tính toàn vẹn.
 
 <a class="post-image" >
-<img   src="/assets/images/post_img/post5_1.PNG"/>
+<img   src="/public/images/post_img/post5_1.PNG"/>
 </a>
 
 Ở trong core, blockchain lưu giao dịch giữa 2 bên. Khi 1 user gửi 1 Tx, nó được truyền đi khắp mạng lưới. Các nodes xác minh giao dịch bằng xác minh chữ kí số (Digital Signature) và các thông tin khác. Khi giao dịch được xác minh, nó sẽ cùng với các Tx khác được thêm vào block. Các block sẽ liên kết với nhau bằng phương pháp mã hoá, tạo thành chuỗi. Quá trình xác minh và thêm vào chuỗi sẽ được thông qua cơ chế đồng thuận.
@@ -38,7 +37,7 @@ Mã hoá là chìa khoá duy trì bảo mật, minh bạch và chống giả m�
 Tiền điện tử (Tiền mã hoá) là 1 loại tiền kĩ thuật số phi tập trung, sử dụng mật mã để bảo mật. Nó có thể hoạt động độc lập với các trung gian như ngân hàng, cổng thanh toán,..
 
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post5_2.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post5_2.PNG"/>
 </a>
 
 

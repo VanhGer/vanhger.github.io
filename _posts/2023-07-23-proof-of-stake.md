@@ -2,8 +2,7 @@
 layout: post
 
 title: Proof Of Stake
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 13
 ---
 

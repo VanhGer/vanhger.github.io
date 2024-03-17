@@ -1,9 +1,7 @@
 ---
-
 title: Cơ chế Bitcoin
 layout: post
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 8
 ---
 
@@ -26,7 +24,7 @@ Input gồm 3 phần chính:
 - ScriptSig: Script Signature. Nó mã hoá Public key và chữ kí của người sở hữu Bitcoin ở hiện tại.
 
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post8_1.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post8_1.PNG"/>
 </a>
 
 Output: là những bitcoin mới được khoá với Hash của Public Key của người nhận. Bitcoin sử dụng mô hình UTXO là Bitcoin chỉ có thể sử dụng 1 lần, sau mỗi giao dịch thì bitcoin cũ sẽ bị loại bỏ và một lượng bitcoin mới được tạo ra. Output gồm 2 phần chính:

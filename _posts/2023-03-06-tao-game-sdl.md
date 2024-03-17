@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Mình đã tạo một game bằng C++ và SDL2.0
-category: [software, games]
-tags: [tutorial]
+category: [software]
 postnum: 4
 ---
 

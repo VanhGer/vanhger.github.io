@@ -1,71 +1,58 @@
-# Site Settings
-encoding: UTF-8
-exclude: ["*.gem", "*.gemspec", "Gemfile", "Gemfile.lock", "node_modules", "Rakefile", "starter-kit", "vendor"]
-lang: en # Language code as defined in _data/i18n.yml. en, en-gb, en-us, zh, zh-cn, zh-tw etc.
-permalink: /blog/:year/:month/:day/:title/
-paginate: 7
-paginate_path: "/blog/page:num/"
-whitelist: [jekyll-feed, jekyll-redirect-from, jekyll-seo-tag, jekyll-sitemap]
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+#
+# If you need help with YAML syntax, here are some quick references for you: 
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+
+title: VanhGer
+email: vietanhpg2003@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Hi there !!!
+# baseurl: "/" # the subpath of your site, e.g. /blog
+# url: "http://ejjoo.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+github_username: VanhGer
+highlighter: rouge
+svg:
+  optimize: true
+# Build settings
+# theme: minima
+highlighter-theme: manni
+date_format: "%Y-%M-%D"
 plugins:
   - jekyll-feed
-  - jekyll-redirect-from
-  - jekyll-seo-tag
-  - jekyll-sitemap
-  - jekyll-paginate
+category_dir: category/
+tag_dir: tag/
 
-markdown: kramdown
-kramdown:
-  auto_id_prefix: 'heading-'
-  smart_quotes: ["apos", "apos", "quot", "quot"]
-  toc_levels: 1..3
-
-sass:
-  style: compressed
-
-# Site Data
-url: # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: # the subpath of your site, e.g. /blog
-title: Hiimvanhg
-description: ""
-keywords: 'vanhg, blog,'
-author:
-  name: VanhGer
-  job_title:
-  location:
-  email: vietanhpg2003@gmail.com
-  social_links:
-    - name: facebook
-      url: https://www.facebook.com/iamvanhg/
-    - name: github
-      url: https://github.com/VanhGer
-    - name: instagram
-      url:
-    - name: linkedin
-      url: https://www.linkedin.com/in/pham-gia-viet-anh-68676b223/
-    - name: stackoverflow
-      url:
-    - name: twitter
-      url: 
-    - name: vk
-      url:
-home:
-  section1: <h1>Hiamvanhg</h1> 
-  section2: <h2>Welcome to my blog</h2>
-  # section3: <div class="social-links"><a class="ico-github btn" href="https://github.com/yizeng/jekyll-theme-simple-texture" title="View on GitHub"></a></div>
-blog:
-  cc_license: http://creativecommons.org/licenses/by-sa/4.0/ # A link to CC License of your choice.
-  cc_license_image: /assets/images/theme/cc-by-sa.png # An image of your CC License. 
-  footer_content: 
-
-disqus:
-  shortname: # e.g. yizeng
-  public_key: # e.g. ULZ0b9TFefCUJHKQd4JCKv2v3u27YoG7YG8zXPewkWrT333Z0Se9YnxLzoV6VM8W
-google_tag_manager: # e.g. 'GTM-KCQJXZ8F'
-addthis_public_id: # AddThis sharing plugin. See http://www.addthis.com/. E.g. ra-53329e27694534j5 
-
-paths:
-  home: /
-  blog: /blog/
-  about: /about/
-  categories: /blog/categories/
-  tags: /blog/tags/
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/

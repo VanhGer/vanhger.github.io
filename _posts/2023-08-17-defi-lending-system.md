@@ -2,8 +2,7 @@
 layout: post
 
 title: Hệ thống vay DeFi
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 17
 ---
 

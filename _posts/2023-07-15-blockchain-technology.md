@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Kĩ thuật Blockchain
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 6
 ---
 
@@ -60,7 +59,7 @@ Ngoài ra, để đảm bảm security, không thể tìm được bộ $(S, i, 
 Mục tiêu của Merkle tree là khi commit danh sách $S$ ở trên, có thể chứng minh được $mi = S[i]$.
 Cây merkle được xây dựng như sau:
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post6_1.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post6_1.PNG"/>
 </a>
 
 
@@ -82,7 +81,7 @@ Làm cách nào mà các nodes có thể xác thực được các Tx? Thực t�
 + $Verify(pK, msg, σ)$. Output: accept / reject
 
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post6_2.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post6_2.PNG"/>
 </a>
 
 Khi tạo ra các Tx, user đưa $Sk$ + $msg$ để tạo ra chữ kí $σ$. Các verifier sẽ sử dụng $pK$, $msg$ và $σ$ để verify các Tx. Việc sử dụng chữ kí số này giúp đảm bảo uỷ quyền Tx, khả năng bầu cử và sự đồng thuận bỏ phiếu của user.

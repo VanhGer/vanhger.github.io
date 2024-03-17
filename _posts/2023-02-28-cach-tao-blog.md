@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "Cách mình tạo blog này"
-category: [jekyll, share]
-tags: [tutorial]
+category: [tutorial]
 postnum: 1
 ---
 
@@ -25,9 +24,9 @@ Về việc tạo blog, mình sử dụng Jekyll để tạo trên Github. Mình
 Một số hình ảnh của blog:
 
 <a class="post-image" >
-<img itemprop="image"  src="/assets/images/post_img/post1_1.PNG"/>
-<img itemprop="image"  src="/assets/images/post_img/post1_2.PNG"/>
-<img itemprop="image"  src="/assets/images/post_img/post1_3.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post1_1.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post1_2.PNG"/>
+<img itemprop="image"  src="/public/images/post_img/post1_3.PNG"/>
 </a>
 
 ## Đôi lời về blog

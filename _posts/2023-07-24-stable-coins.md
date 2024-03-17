@@ -2,8 +2,7 @@
 layout: post
 
 title: Stablecoins
-category: [blockchain, cs251]
-tags: [knowledge]
+category: [cs251]
 postnum: 15
 ---
 

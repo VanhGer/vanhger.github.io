@@ -1,11 +1,7 @@
 ---
 layout: post
 title: Đồng thuận trên mạng
-category:
-  - blockchain
-  - cs251
-tags:
-  - knowledge
+category: [cs251]
 postnum: 11
 ---
 Ở bài trước, ta đã biết rằng các node sẽ tham gia vào giao thức có thể là Adversary và có thể gây hại cho blockchain. Vậy làm cách nào để chọn các node hợp lý để tham gia vào consensus.
@@ -45,7 +41,7 @@ Khi adversay đào block mới, nhưng không công bố. Các miner trung thự
 Vì Network delay, các honest blocks ở cùng 1 độ cao. Do đó, tỉ lệ phát triển các khối honest sẽ chậm hơn so với $1 - \beta$. Do đó, Adversary sẽ thành công nếu $\beta \ge (1 - \beta) / 2$ (Trường hợp chỉ có 2 chuỗi fork).
 
 <a class="post-image" >
-	<img itemprop="image"  src="/assets/images/post_img/post11_1.PNG"/>
+	<img itemprop="image"  src="/public/images/post_img/post11_1.PNG"/>
 	</a>
 
 ### Security
