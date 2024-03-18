@@ -1,4 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-03-18T01:51:30+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">VanhGer</title><subtitle>Hi there !!!</subtitle><entry><title type="html">Bridging và MEV</title><link href="http://localhost:4000/cs251/2023/08/29/bridging-and-mev.html" rel="alternate" type="text/html" title="Bridging và MEV" /><published>2023-08-29T00:00:00+07:00</published><updated>2023-08-29T00:00:00+07:00</updated><id>http://localhost:4000/cs251/2023/08/29/bridging-and-mev</id><content type="html" xml:base="http://localhost:4000/cs251/2023/08/29/bridging-and-mev.html"><![CDATA[<p>Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-03-18T23:03:10+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">VanhGer</title><subtitle>Hi there !!!</subtitle><entry><title type="html">Taxua trip: An Unexpected Fear</title><link href="http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear.html" rel="alternate" type="text/html" title="Taxua trip: An Unexpected Fear" /><published>2024-03-18T00:00:00+07:00</published><updated>2024-03-18T00:00:00+07:00</updated><id>http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear</id><content type="html" xml:base="http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear.html"><![CDATA[<p>Hi there! It’s me again. I’ve just finished my trip to Ta Xua for one week, and a lot of feelings are still
+here with me rightnow. So, I think it’s great to write some down.</p>
+
+<p>Well, Ta Xua is located in the landscape of the Bac Yen district in Son La province. It offers an enchanting blend
+of untouched nature and a sense of tranquility that is rare to find in popular.</p>
+
+<p>I went there with my group of friends, and we stayed there for 2 days, renting motobikes to travel around. Unfortunately, the weather on the first day wasn’t too supportive. It was cloudy and foggy, with temperatures around 20 degrees Celsius, so persionally, I found it hard to go by motobike. However, on the second day, it was sunny and windy, and of course, we enjoyed many beautiful moments that day. Here are some pictures Ta Xua and us:</p>
+
+<p><a class="post-image" style="display: flex; width: 50%; padding: 2vw; ">
+	<img itemprop="image" src="/public/images/post_img/post22_1.jpg" style="margin-right: 1vw;" />
+    <img itemprop="image" src="/public/images/post_img/post22_2.jpg" style="margin-right: 1vw;" />
+</a></p>
+
+<p><a class="post-image" style="display: flex; width: 50%; padding: 2vw; ">
+	<img itemprop="image" src="/public/images/post_img/post22_3.jpg" style="margin-right: 1vw;" />
+    <img itemprop="image" src="/public/images/post_img/post22_4.jpg" style="margin-right: 1vw;" />
+</a></p>
+
+<p>It was fun, right? But look at the blog title… Yeah you see, I experienced a pretty terrible fear.</p>
+
+<p>There is one thing you shoud know about Ta Xua: it is situated on the mountain, so in order to travel around its tourist destinations, we must drive downhill and uphill many times. The road, therefore, is narrow and dangerous, so we had to drive very carefully. I think it’s the trade-off to admire the magnificient scenery. And do you remember what I said in the first day? It was foggy and cloudy. So, when my friend and I were driving downhill, we had an accident. We spun around, fell to the ground, and narrowly avoided being crashed into by the car behind. God blessed us; we were still fine after that and continued driving to the homestay.</p>
+
+<p>But is that done? Not yet, at least not to me. For the rest of the day and the next day, I felt affaid of going downhill, and everytime I was on the motobike, I remembered that terrible moment. My hands were shaking when holding the handlebars, and even going uphill I had a hard time. So, on the first night there, I knew that I shouldn’t travel anymore, because I was scared of going downhill, scared of… death.</p>
+
+<p>Then, on the second day, I saw that the weather is better, no more fog, and the sun rising made me feel better. Also, our team have only 4 boys, if I didn’t drive,the other girls would have to and it would have been a worse situation. So, with no choice, I continued drive. And well, at the end of that trip, I drove carefully and didn’t have any accidents. Thanks God.</p>
+
+<p>That story showed me that when I experience a new fear, I also experienced some physiscal reactions like fast breath, shaking hand,… which I thought only happened in the movie. Man proposes God deposes, I had a chance to feel that and that changed my mind a little bit, hihi.</p>
+
+<p>To end this post, I will share with you some pictures from my memorable trip that my friends captured: <a href="https://www.tiktok.com/@chiichii.03/photo/7342578503658786050">here</a>.</p>]]></content><author><name></name></author><category term="[&quot;life&quot;]" /><summary type="html"><![CDATA[Hi there! It’s me again. I’ve just finished my trip to Ta Xua for one week, and a lot of feelings are still here with me rightnow. So, I think it’s great to write some down.]]></summary></entry><entry><title type="html">Bridging và MEV</title><link href="http://localhost:4000/cs251/2023/08/29/bridging-and-mev.html" rel="alternate" type="text/html" title="Bridging và MEV" /><published>2023-08-29T00:00:00+07:00</published><updated>2023-08-29T00:00:00+07:00</updated><id>http://localhost:4000/cs251/2023/08/29/bridging-and-mev</id><content type="html" xml:base="http://localhost:4000/cs251/2023/08/29/bridging-and-mev.html"><![CDATA[<p>Trong bài viết này, mình sẽ giới thiệu các bạn đến MEV và Bridging giữa các blockchain khác nhau.</p>
 
 <h2 id="mev">MEV</h2>
 
@@ -1182,79 +1210,4 @@ MaxTxFee = gasLimit x gasPice <br />
 
 <h2 id="kết-luận">Kết luận</h2>
 
-<p>Ở trên là toàn bộ hiểu biết của mình về cơ chế Ethereum.</p>]]></content><author><name></name></author><category term="[&quot;cs251&quot;]" /><summary type="html"><![CDATA[Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội]]></summary></entry><entry><title type="html">Proof Of Stake</title><link href="http://localhost:4000/cs251/2023/07/23/proof-of-stake.html" rel="alternate" type="text/html" title="Proof Of Stake" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/cs251/2023/07/23/proof-of-stake</id><content type="html" xml:base="http://localhost:4000/cs251/2023/07/23/proof-of-stake.html"><![CDATA[<p>Ở bài viết này, mình sẽ giới thiệu một cơ chế đồng thuận đang được sử dụng rất nhiều trong các blockchain hiện nay, đó là Proof of Stake.</p>
-
-<h3 id="accountable-safety">Accountable Safety</h3>
-
-<p>Một giao thức với resilence là n/3 khi giao thức đó an toàn nếu nó có ít hơn n/3 Adverserial node (Ví dụ streamlet). <br />
-Một giao thức với Accountable Safety resilence n/3 là giao thức:</p>
-
-<ul>
-  <li>An toàn nếu ít hơn Adverserial node.</li>
-  <li>Nếu vi phạm safety, thì những người giám sát (các node không phải người được chọn để đề xuất khối) có thể xác định rõ các node vi phạm.</li>
-  <li>Không có cáo buộc sai với các node trung thực.</li>
-</ul>
-
-<h3 id="finality-và-dynamic-availability">Finality và Dynamic availability</h3>
-
-<p>Gọi một giao thức là finality nếu nó duy trì safety trong thời gian không đồng bộ (trước GST). Ở các giao thức này, Tx được finalize nhanh hơn confirm trong bitcoin (60 phút). <br />
-Gọi một giao thức là Dynamic availability nếu giao thức đó có thể tiếp tục confirm các giao dịch ngay cả khi nhiều node offline.</p>
-
-<p>Không có giao thức SMR nào đảm bảo cung cấp cả 2. Do đó, một cách giải quyết là sử dụng Nested chains.</p>
-
-<h3 id="nested-chains">Nested chains</h3>
-
-<ul>
-  <li>Available chain được xác định bởi giao thức Π_ava, thoả mãn Dynamic availability (VD: Nakamoto consensus).</li>
-  <li>Finalized chain được xác định bởi giao thức checkpoint $Π_{fin}$ thoả mãn security dưới mạng đồng bộ 1 phần.</li>
-  <li>Chuỗi confirm bởi Π_ava là available chain.</li>
-  <li>$Π_{fin}$ kiểm tra các block trong availbale chain.</li>
-  <li>Tiền tố của checkpoint cuối cùng tạo thành finalized chain. Tương đương với Finalized chain là prefix của available. Chuỗi này safe dưới mạng bất đồng bộ</li>
-  <li>Các block của available chain luôn extend từ điểm checkpoint cuối cùng.</li>
-</ul>
-
-<p>Minh hoạ: hình ảnh</p>
-
-<h2 id="proof-of-stake">Proof of Stake</h2>
-
-<h3 id="tổng-quan">Tổng quan</h3>
-
-<ul>
-  <li>Trong giao thức Pos, các nodes khoá (Stake) tiền của họ trong giao thức để đủ điều kiện tham gia consensus.</li>
-  <li>Càng nhiều coin được stake bởi 1 node thì khả năng cao node đó được chọn làm validator. Vì thuật toán lựa chọn validator là giả ngẫu nhiên.</li>
-  <li>Nếu node bị bắt quả tang thực hiện 1 hành động bất lợi (xác thực giao dịch sai) thì node đó sẽ bị burn số tiền đã stake và không thể tham gia vào quá trình đề xuất khối tiếp theo. (Slashing).</li>
-</ul>
-
-<p>Do đó, trong PoS, nodes sẽ có trách nhiệm trong cách hành động của mình. PoS giúp thay đổi cơ chế block được verify. Ngoài ra, để trở thành validator, các node phải có điều kiện (ví dụ: có ít nhất 32 ETH,..), sau khi đóng 1 khối, khối đó sẽ được các validator khác validate theo nhiều method khác nhau tuỳ vào blockchain.</p>
-
-<h3 id="cụ-thể-với-ethereum-20">Cụ thể với Ethereum 2.0</h3>
-
-<h4 id="chọn-validator-và-block-proposer">Chọn Validator và Block Proposer</h4>
-
-<p>Để thành một validator, phải gửi ít nhất 32 ETH vào contract và chạy 3 phần mềm riêng biệt (sẽ giới thiệu ở sau) và tham gia hàng đợi. Thời gian của blocks chia thành các slot: 12s, epoch: 32 slot. Sau khi được active, validator đó sẽ tham ra vào quá trình phê duyệt. 1 validator ngẫu nhiên sẽ được chọn để xác thực giao dịch và đề xuất khối ở mỗi slot (Block proposer). Số còn lại sẽ làm giám sát để phê duyệt và kiểm tra xem validator đó có gian lận không.</p>
-
-<p>Chọn Block Proposer quá trình giả ngẫu nhiên gồm nhiều yêu tố như staking age, số tiền stake,… Ở đây, mình sẽ giới thiệu 2 phương pháp lựa chọn là:</p>
-
-<ul>
-  <li><strong> Randomize block selection: </strong> lựa chọn bằng cách tìm kiếm nodes có sự kết hợp của hash value thấp nhất và stake cao nhất. Vì size của các stakes là công khai nên có thể dự đoán được.</li>
-  <li><strong> Coin Age Selection: </strong> là phương thức chọn các nodes dựa vào khoảng thời gian stake. Coin Age được tính bằng: số ngày đặt cược x số lượng coin. Khi một node forge một block, coin age của nó được cài về 0.</li>
-</ul>
-
-<h4 id="quy-trình-xác-thực">Quy trình xác thực</h4>
-
-<p>Khi một user tạo Tx và submit lên Ethereum, nó sẽ được kiểm tra tính hợp lệ (Ví dụ đảm bảo số tiền, key đúng,…) sau đó được đưa đến mempool và phát tán nó đến các node khác. <br />
-Một node được chọn làm Block Proposer để đề xuất khối ở slot này, có trách nhiệm đóng và phát tán block vào chuỗi và cập nhập trạng thái. Nodes chạy 3 phần mềm:</p>
-
-<ul>
-  <li><strong>Execution client</strong>: gộp các Txs từ mempool thành “execution payload” và chạy nó ở local để tạo ra sự thay đổi trạng thái. Thông tin này được chuyển đến consensus client</li>
-  <li><strong>Consensus client</strong>: đóng gói payload thành 1 phần của “beacon block” (gồm payload, slashing,…) cho phép mạng thống nhất trình tự về các khối.</li>
-  <li><strong>Validator client</strong>: Các node nhận được beacon block qua tầng gossip network. Sau đó chuyển đến Execution client của nó để chạy lại, nhằm chắc chắn trạng thái là đúng. Sau đóm Validator client sẽ chứng thực khối đó hợp lệ và là khối tiếp theo trong góc nhìn của chuỗi (available chain). Khối cũng được thêm vào cơ sở dữ liệu local của các node.</li>
-</ul>
-
-<h4 id="finality">Finality</h4>
-
-<p>Như đã nói ở trên, các block của available chain luôn extend từ điểm checkpoint cuối cùng. Checkpoint là các block đầu tiên ở mỗi epoch. Các validators có thể vote cho cặp checkpoint (1 epoch), nếu ít nhất 2/3 vote cho nó, cặp checkpoint này sẽ được cập nhập, và các block nằm giữa sẽ được cập nhập thành finalized chain. Nếu chuỗi không thể finalized trong nhiều hơn 4 epoch liên tục, stake ETH từ các validator chống lại đa số sẽ bị biến mất, cho phép đa số chiếm hơn 2/3 và finalized chuỗi.</p>
-
-<h2 id="lời-kết">Lời kết</h2>
-
-<p>Ở trên là cách hoạt động cơ bản của POS. Mọi người có thể xem thêm các thông tin về POS trong Ethereum tại <a href="https://ethereum.org/vi/developers/docs/consensus-mechanisms/pos/">đây</a>.</p>]]></content><author><name></name></author><category term="[&quot;cs251&quot;]" /><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu một cơ chế đồng thuận đang được sử dụng rất nhiều trong các blockchain hiện nay, đó là Proof of Stake.]]></summary></entry></feed>
+<p>Ở trên là toàn bộ hiểu biết của mình về cơ chế Ethereum.</p>]]></content><author><name></name></author><category term="[&quot;cs251&quot;]" /><summary type="html"><![CDATA[Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội]]></summary></entry></feed>

@@ -348,9 +348,11 @@ div label {
 	position: relative;
 	cursor: pointer;
 	display :block;
-	width: 50px;
-	height: 30px;
-	background: #cccccc;
+	width: 40px;
+	height: 20px;
+	background: #c5be9b;
+	margin-left: 5px;
+	margin-right: 5px;
 	border-radius: 50px;
 	transition: 300ms linear;
 }
@@ -358,12 +360,12 @@ div label {
 div label:before {
 	position: absolute;
 	top: 50%;
-	left: 2px;
+	left: 3px;
 	transform: translateY(-50%);
 	content: "";
 	display: block;
-	width: 25px;
-	height: 25px;
+	width: 15px;
+	height: 15px;
 	background: #ffffff;
 	border-radius: 50%;
 	transition: left 300ms linear;
@@ -374,5 +376,5 @@ div input:checked + label {
 }
 
 div input:checked + label:before {
-	left: 23px;
+	left: 21px;
 }
