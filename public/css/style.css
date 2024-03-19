@@ -49,13 +49,13 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	font-family: 'Gelasio', 'Nanum Myeongjo', serif;
+	font-family:Arial, Helvetica, sans-serif;
 	color: var(--body_color);
 }
 
 a {
 	text-decoration: none;
-	color: #459e60;
+	color: #25ad99;
 	background-color: transparent;
 }
 
