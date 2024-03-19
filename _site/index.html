@@ -20,10 +20,10 @@
 	<p class="lead">Hi there !!!</p></div>
 
 <div style="display: flex;">
-	<div> 🔆 </div>
+	<img src="/public/images/theme/sun.png" style="width: 20px;" id="sun">
     <input type="checkbox" id="toggle-btn" onchange="toggleTheme()">
     <label for="toggle-btn"></label>
-	<div>🌑</div>
+	<img src="/public/images/theme/moon.png" style="width: 20px;" id="moon">
 </div>
 <script>
 	window.onload = function() {
@@ -38,11 +38,19 @@
 					tmp.disabled = true;
 					const btn = document.getElementById('toggle-btn');
 					btn.checked = false;
+					const tmp2 = document.getElementById('sun');
+					tmp2.src = "/public/images/theme/sun.png";
+					const tmp3 = document.getElementById('moon');
+					tmp3.src = "/public/images/theme/moon.png";
 				} else {
 					const tmp = document.getElementById('theme1');
 					tmp.disabled = true;
 					const btn = document.getElementById('toggle-btn');
 					btn.checked = true;
+					const tmp2 = document.getElementById('sun');
+					tmp2.src = "/public/images/theme/sun2.png";
+					const tmp3 = document.getElementById('moon');
+					tmp3.src = "/public/images/theme/moon2.png";
 				}
 				theme.disabled = false;
 			}
@@ -56,13 +64,19 @@
 		if (theme1.disabled) {
 			theme1.disabled = false;
 			theme2.disabled = true;
-			
+			const tmp2 = document.getElementById('sun');
+			tmp2.src = "/public/images/theme/sun.png";
+			const tmp3 = document.getElementById('moon');
+			tmp3.src = "/public/images/theme/moon.png";
 			
 			localStorage.setItem('selectedTheme', 'theme1');
 		} else {
 			theme1.disabled = true;
 			theme2.disabled = false;
-			
+			const tmp2 = document.getElementById('sun');
+			tmp2.src = "/public/images/theme/sun2.png";
+			const tmp3 = document.getElementById('moon');
+			tmp3.src = "/public/images/theme/moon2.png";
 			localStorage.setItem('selectedTheme', 'theme2');
 		}
 	}
