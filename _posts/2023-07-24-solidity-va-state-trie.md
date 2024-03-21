@@ -72,7 +72,7 @@ World State Trie với 4 cặp Key - Value như sau:
 - a7f9365: 1.1 ETH
 - a77d397: 0.12 ETH
 
-<img src = "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SiSYWqaPcJtBlnFR4VAaug.png">
+<img src = "https://samczsun.com/content/images/size/w1000/2021/05/YZGxe-1-.png">
 
 ## Kêt luận
 

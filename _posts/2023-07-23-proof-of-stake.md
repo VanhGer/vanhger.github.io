@@ -33,7 +33,10 @@ Không có giao thức SMR nào đảm bảo cung cấp cả 2. Do đó, một c
 - Tiền tố của checkpoint cuối cùng tạo thành finalized chain. Tương đương với Finalized chain là prefix của available. Chuỗi này safe dưới mạng bất đồng bộ
 - Các block của available chain luôn extend từ điểm checkpoint cuối cùng.
 
-Minh hoạ: hình ảnh
+Minh hoạ:
+<a class="post-image" >
+	<img itemprop="image"  src="/public/images/post_img/post13_1.PNG"/>
+</a>
 
 ## Proof of Stake
 
