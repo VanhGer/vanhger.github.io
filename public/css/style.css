@@ -49,7 +49,7 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	color: var(--body_color);
 }
 
@@ -81,7 +81,7 @@ code {
 .container {
 	min-height: 100%;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	flex-flow: row nowrap;
 	background-color: var(--background_color);
 }
@@ -91,6 +91,9 @@ code {
 	flex: 1 1 auto;
 	padding: 0px 30px;
 	color: var(--text_color);
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sidebar {
@@ -201,14 +204,17 @@ article .share .gplus:hover {
 
 .page-header {
 	color: #e74c3c;
+	font-weight: bold;
 	text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
 }
 
 article {
-	padding: 0 5% 0;
-	font-size: 17px;
+	padding: 0 0 0;
+	font-size: 20px;
 	margin-bottom: 100px;
+	/* margin-left: 10%; */
 	line-height: 1.9;
+	max-width: min(100%, 800px);
 }
 
 article.home div a, article.home pre a { color: #2c3e50; }
@@ -257,6 +263,7 @@ header.post-header {
 	margin-bottom: 30px;
 	border-bottom: 1px solid #ccc;
 	text-align: center;
+
 }
 
 header.home {
@@ -265,8 +272,9 @@ header.home {
 
 .post-title {
 	font-size: 1.5em;
-	color: var(--post_title_color);
+	color: var(--post_link_color);
 	font-weight: bold;
+	
 }
 
 .post-date {
@@ -347,7 +355,7 @@ input {
 div label {
 	position: relative;
 	cursor: pointer;
-	display :block;
+	display :flex;
 	width: 40px;
 	height: 20px;
 	background: #c5be9b;
