@@ -14,15 +14,27 @@ of untouched nature and a sense of tranquility that is rare to find in popular.
 
 I went there with my group of friends, and we stayed there for 2 days, renting motobikes to travel around. Unfortunately, the weather on the first day wasn't too supportive. It was cloudy and foggy, with temperatures around 20 degrees Celsius, so persionally, I found it hard to go by motobike. However, on the second day, it was sunny and windy, and of course, we enjoyed many beautiful moments that day. Here are some pictures Ta Xua and us:
 
-<a class="post-image" style="display: flex; width: 50%; padding: 2vw; ">
-	<img itemprop="image"  src="/public/images/post_img/post22_1.jpg" style="margin-right: 1vw;"/>
-    <img itemprop="image"  src="/public/images/post_img/post22_2.jpg" style="margin-right: 1vw;"/>
-</a>
+<figure class="post-image" style="display: flex;">
+    <div style="display: inline; width: 50%; padding: 5px; justify-content: center; text-align: center">
+        <img itemprop="image"  src="/public/images/post_img/post22_1.jpg" style="margin-right: 1vw;"/>
+        <figcaption style="font-size: 10px">Cloud in Taxua</figcaption>
+    </div>
+    <div style="display: inline; width: 50%; padding: 5px; justify-content: center; text-align: center">
+        <img itemprop="image"  src="/public/images/post_img/post22_2.jpg" style="margin-right: 1vw;"/>
+        <figcaption style="font-size: 10px">Sunset...without the sun</figcaption>
+    </div>
+</figure>
 
-<a class="post-image" style="display: flex; width: 50%; padding: 2vw; ">
-	<img itemprop="image"  src="/public/images/post_img/post22_3.jpg" style="margin-right: 1vw;"/>
-    <img itemprop="image"  src="/public/images/post_img/post22_4.jpg" style="margin-right: 1vw;"/>
-</a>
+<figure class="post-image" style="display: flex;">
+    <div style="display: inline; padding: 5px; justify-content: center; text-align: center">
+        <img itemprop="image"  src="/public/images/post_img/post22_3.jpg" style="margin-right: 1vw;"/>
+        <figcaption style="font-size: 10px">Me & my friends</figcaption>
+    </div>
+    <div style="display: inline; padding: 5px; justify-content: center; text-align: center">
+        <img itemprop="image"  src="/public/images/post_img/post22_4.jpg" style="margin-right: 1vw;"/>
+        <figcaption style="font-size: 10px">The sun is here...</figcaption>
+    </div>
+</figure>
 
 It was fun, right? But look at the blog title... Yeah you see, I experienced a pretty terrible fear. 
 

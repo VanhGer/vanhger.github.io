@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-04-05T21:25:52+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">VanhGer</title><subtitle>Hi there !!!</subtitle><entry><title type="html">Taxua trip: An Unexpected Fear</title><link href="http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear.html" rel="alternate" type="text/html" title="Taxua trip: An Unexpected Fear" /><published>2024-03-18T00:00:00+07:00</published><updated>2024-03-18T00:00:00+07:00</updated><id>http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear</id><content type="html" xml:base="http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear.html"><![CDATA[<p>Hi there! It’s me again. I’ve just finished my trip to Ta Xua for one week, and a lot of feelings are still
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-04-07T09:22:35+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">VanhGer</title><subtitle>Hi there !!!</subtitle><entry><title type="html">Taxua trip: An Unexpected Fear</title><link href="http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear.html" rel="alternate" type="text/html" title="Taxua trip: An Unexpected Fear" /><published>2024-03-18T00:00:00+07:00</published><updated>2024-03-18T00:00:00+07:00</updated><id>http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear</id><content type="html" xml:base="http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear.html"><![CDATA[<p>Hi there! It’s me again. I’ve just finished my trip to Ta Xua for one week, and a lot of feelings are still
 here with me rightnow. So, I think it’s great to write some down.</p>
 
 <p>Well, Ta Xua is located in the landscape of the Bac Yen district in Son La province. It offers an enchanting blend
@@ -6,15 +6,27 @@ of untouched nature and a sense of tranquility that is rare to find in popular.<
 
 <p>I went there with my group of friends, and we stayed there for 2 days, renting motobikes to travel around. Unfortunately, the weather on the first day wasn’t too supportive. It was cloudy and foggy, with temperatures around 20 degrees Celsius, so persionally, I found it hard to go by motobike. However, on the second day, it was sunny and windy, and of course, we enjoyed many beautiful moments that day. Here are some pictures Ta Xua and us:</p>
 
-<p><a class="post-image" style="display: flex; width: 50%; padding: 2vw; ">
-	<img itemprop="image" src="/public/images/post_img/post22_1.jpg" style="margin-right: 1vw;" />
-    <img itemprop="image" src="/public/images/post_img/post22_2.jpg" style="margin-right: 1vw;" />
-</a></p>
+<figure class="post-image" style="display: flex;">
+    <div style="display: inline; width: 50%; padding: 5px; justify-content: center; text-align: center">
+        <img itemprop="image" src="/public/images/post_img/post22_1.jpg" style="margin-right: 1vw;" />
+        <figcaption style="font-size: 10px">Cloud in Taxua</figcaption>
+    </div>
+    <div style="display: inline; width: 50%; padding: 5px; justify-content: center; text-align: center">
+        <img itemprop="image" src="/public/images/post_img/post22_2.jpg" style="margin-right: 1vw;" />
+        <figcaption style="font-size: 10px">Sunset...without the sun</figcaption>
+    </div>
+</figure>
 
-<p><a class="post-image" style="display: flex; width: 50%; padding: 2vw; ">
-	<img itemprop="image" src="/public/images/post_img/post22_3.jpg" style="margin-right: 1vw;" />
-    <img itemprop="image" src="/public/images/post_img/post22_4.jpg" style="margin-right: 1vw;" />
-</a></p>
+<figure class="post-image" style="display: flex;">
+    <div style="display: inline; padding: 5px; justify-content: center; text-align: center">
+        <img itemprop="image" src="/public/images/post_img/post22_3.jpg" style="margin-right: 1vw;" />
+        <figcaption style="font-size: 10px">Me &amp; my friends</figcaption>
+    </div>
+    <div style="display: inline; padding: 5px; justify-content: center; text-align: center">
+        <img itemprop="image" src="/public/images/post_img/post22_4.jpg" style="margin-right: 1vw;" />
+        <figcaption style="font-size: 10px">The sun is here...</figcaption>
+    </div>
+</figure>
 
 <p>It was fun, right? But look at the blog title… Yeah you see, I experienced a pretty terrible fear.</p>
 

@@ -98,9 +98,10 @@ code {
 
 .sidebar {
 	/*position: fixed;*/
-	display: flex;
+	display: inline-flex;
 	flex-flow: column nowrap;
-	flex: 0 0 220px;
+	flex: 0 0 200px;
+	/*max-width: 200px;*/
 	padding: 15px;
 	z-index: 1;
 	background-color: var(--side_bar_color);
@@ -117,7 +118,7 @@ code {
 }
 
 .sidebar-brand > a {
-	font-size: 200%;
+	font-size: 150%;
 	font-family: 'Gelasio';
 	color: #fff;
 }
@@ -133,10 +134,11 @@ code {
 
 .sidebar-nav {
 	margin-top: 20px;
+	display: inline-flex;
 }
 
 .nav-title {
-	font-size: 100%;
+	font-size: 80%;
 	font-family: "Noto Sans";
 	text-transform: uppercase;
 	border-bottom: 1px solid gray;
@@ -144,7 +146,7 @@ code {
 }
 
 a.nav-item {
-	font-size: 120%;
+	font-size: 100%;
 	font-family: "Noto Sans";
 	text-transform: capitalize;
 	color: var(--side_bar_nav_item);
@@ -211,7 +213,9 @@ article .share .gplus:hover {
 article {
 	padding: 0 0 0;
 	font-size: 20px;
-	margin-bottom: 100px;
+	margin-bottom: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
 	/* margin-left: 10%; */
 	line-height: 1.9;
 	max-width: min(100%, 800px);
