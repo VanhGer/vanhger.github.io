@@ -1,4 +1,196 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-04-07T09:22:35+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">VanhGer</title><subtitle>Hi there !!!</subtitle><entry><title type="html">Taxua trip: An Unexpected Fear</title><link href="http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear.html" rel="alternate" type="text/html" title="Taxua trip: An Unexpected Fear" /><published>2024-03-18T00:00:00+07:00</published><updated>2024-03-18T00:00:00+07:00</updated><id>http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear</id><content type="html" xml:base="http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear.html"><![CDATA[<p>Hi there! It’s me again. I’ve just finished my trip to Ta Xua for one week, and a lot of feelings are still
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-07-27T22:07:54+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">VanhGer</title><subtitle>Hi there !!!</subtitle><entry><title type="html">My private distributed storage using GETH and IPFS.</title><link href="http://localhost:4000/tech/2024/07/24/private-distributed-storage.html" rel="alternate" type="text/html" title="My private distributed storage using GETH and IPFS." /><published>2024-07-24T00:00:00+07:00</published><updated>2024-07-24T00:00:00+07:00</updated><id>http://localhost:4000/tech/2024/07/24/private-distributed-storage</id><content type="html" xml:base="http://localhost:4000/tech/2024/07/24/private-distributed-storage.html"><![CDATA[<h2 id="intro">Intro</h2>
+
+<p>Last semester, I studied System Administration subject and worked on a project about Ethereum applications. Specifically, my topic involved using Ethereum Private Blockchain as a distributed storage system. I found this quite challenging initially because I knew nothing about distributed storage or how to build DApps on Ethereum. I asked my teacher for help, and he suggested some keywords like Geth and IPFS. I then researched these topics extensively, experimented, and ultimately earned an A+ score for my project. I believe it’s worth sharing my experience with everyone who is interested. So, let’s dive into it!<br />
+<br /></p>
+
+<blockquote>
+  <p>This post does not explain in detail what Geth and IPFS are. Instead, I will outline the structure of my project and the way I implemented it.</p>
+</blockquote>
+
+<blockquote>
+  <p>My repository is <a href="https://github.com/VanhGer/ethereum_ipfs">here</a>. It includes the set up tutorial, so I will not mention it in this post. I suggest reading the tutorial simultaneously with reviewing the code.</p>
+</blockquote>
+
+<h2 id="geth-and-ethereum-private-blockchain">Geth and Ethereum Private Blockchain</h2>
+
+<p>Geth is an Ethereum client written in Go. Running Geth transforms a computer into an Ethereum node. Since I only have one computer, I decided to create multiple nodes using Docker, as I wanted to learn it. I set up three Ethereum nodes using Geth. In order to make my network private, I created a bootstrap node. The bootstrap node is a normal node that is designated to be the entry point that other nodes use to join the network.</p>
+
+<p>So, I have 4 nodes in my private network. To start my private blockchain with these nodes, I needed to configure my chain a little bit. First, I created a local chain with a unique <code class="highlighter-rouge">chainId</code>, which Ethereum supports. I also configured some features for my private chain such as the gas limit and consensus protocol,…. Finally, I used Docker to run all the nodes with the set up above to create my private blockchain ^^. You can read my setup in <code class="highlighter-rouge">Dockerfile</code> and <code class="highlighter-rouge">docker-compose.yml</code>.
+Actually, I primarily followed this tutorial from <a href="https://geth.ethereum.org/docs/fundamentals/private-network"> Geth </a>, but I ran all the nodes in Docker.</p>
+
+<p>To test my private blockchain, I created accounts for each node and made some transactions:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eth.sendTransaction<span class="o">({</span>to: <span class="s2">"0xb166b7aaed24a12b3dd5dfa668ba3b9d10b1950d"</span>, from: eth.accounts[0], value: 25000<span class="o">})</span>
+</code></pre></div></div>
+
+<p>Here is the demo: <br /></p>
+
+<video controls="" width="100%">
+  <source src="/public/images/post_img/post24_eth.mp4" type="video/mp4" />
+</video>
+
+<h2 id="ipfs">IPFS</h2>
+
+<p>IPFS is a distributed file system in a peer-to-peer (P2P) network architecture. The machines participating in the system can store and upload data without going through a server. When a file is added to IPFS, it is split into smaller blocks. Each block is hashed using a cryptographic hash function, producing a unique identifier (hash) for each block. This hash is returned to the user, who can then retrieve their file using this hash.</p>
+
+<p>I created two nodes, each running IPFS via Docker to participate in my distributed system. They share the same SWARM key to join the same network and communicate with each other.</p>
+
+<p>To run IPFS on the two Docker nodes, I added this image to them and copied the SWARM key:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ipfs/go-ipfs:latest
+
+COPY swarm.key /swarm.key
+</code></pre></div></div>
+
+<p>Here is how I set up and use my private IPFS:</p>
+
+<video controls="" width="100%">
+  <source src="/public/images/post_img/post24_ipfs.mp4" type="video/mp4" />
+</video>
+
+<h2 id="combine">Combine</h2>
+
+<p>Now it’s time to combine my private blockchain and IPFS. Users can use my project to upload pictures into distributed storage.</p>
+
+<p>Here is the structure for my project:</p>
+
+<p><a class="post-image" display="center">
+	<img itemprop="image" src="/public/images/post_img/post24_components.png" width="100%" />
+</a></p>
+
+<p>There are 4 components:</p>
+<ul>
+  <li>Frontend: Where users interact with my system.</li>
+  <li>Backend: Handle request from user via the frontend.</li>
+  <li>IPFS: My distributed storage, consisting of 2 nodes</li>
+  <li>Private Ethereum Network: My private network, consisting of 3 nodes.</li>
+</ul>
+
+<h3 id="how-it-works">How it works</h3>
+
+<p>First, let’s look at the uploading process:</p>
+
+<p><a class="post-image" display="center">
+	<img itemprop="image" src="/public/images/post_img/post24_uploading.png" width="100%" />
+</a></p>
+
+<p>The user uploads a file with the corresponding name to our system via the frontend. The file and name are then sent to the backend. The backend uploads the file to the private IPFS and receives a hash. Next, this hash  is stored in the private Ethereum network by invoking smartcontract via a transaction, which also indicates whether the file was stored successfully.</p>
+
+<p><br /></p>
+
+<p>Now, let’s dive into the downloading process:</p>
+
+<p><a class="post-image" display="center">
+	<img itemprop="image" src="/public/images/post_img/post24_downloading.png" width="100%" />
+</a></p>
+
+<p>When a user requests his files via the frontend,  the request is sent to the backend. The backend retrieves the hash file from the private Ethereum network by invoking the smart contract.  Then, the frontend receives the hash and uses it to get the file from the private IPFS. Finally, the file is sent back to the user.</p>
+
+<h3 id="smartcontract">SmartContract</h3>
+
+<p>Above is the basic workflow of my project. To store and retrieve the file hash from the network, I wrote a smart contract
+with two functions: one for storing the hash and one for retrieving it. I used <a href="https://hardhat.org/">Hardhat</a> to deploy the contract on Ethereum.</p>
+
+<p>Here is the contract and the setup of my project:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span> <span class="nx">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+
+<span class="nx">contract</span> <span class="nx">Store</span> <span class="p">{</span>
+    <span class="nx">struct</span> <span class="nx">File</span> <span class="p">{</span>
+        <span class="nx">string</span> <span class="nx">filename</span><span class="p">;</span>
+        <span class="nx">string</span> <span class="nx">cid</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span> <span class="o">=&gt;</span> <span class="nx">File</span><span class="p">[])</span> <span class="kr">public</span> <span class="nx">userFiles</span><span class="p">;</span>
+
+    <span class="kd">function</span> <span class="nx">storeFile</span><span class="p">(</span><span class="nx">string</span> <span class="nx">memory</span> <span class="nx">_filename</span><span class="p">,</span> <span class="nx">string</span> <span class="nx">memory</span> <span class="nx">_cid</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
+        <span class="nx">File</span><span class="p">[]</span> <span class="nx">storage</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">userFiles</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">];</span>
+        <span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">File</span><span class="p">(</span><span class="nx">_filename</span><span class="p">,</span> <span class="nx">_cid</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">getUserFiles</span><span class="p">()</span> <span class="kr">public</span> <span class="nx">view</span> <span class="nx">returns</span> <span class="p">(</span><span class="nx">File</span><span class="p">[]</span> <span class="nx">memory</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">userFiles</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># init hardhat</span>
+npx hardhat init
+<span class="c"># select: Create an empty hardhat.config.js</span>
+
+<span class="c"># compile smart contract</span>
+npx hardhat compile
+
+<span class="c"># deploy smart contract</span>
+npx hardhat ignition deploy ./ignition/modules/Store.js <span class="nt">--network</span> localhost
+</code></pre></div></div>
+
+<p>I recommend following the tutorial of HardHat <a href="https://hardhat.org/tutorial">here</a>. I found HardHat quite user-friendly for beginners like me, and it took only two days to deploy everything. Since I coded the backend in Javascript, I needed to import <code class="highlighter-rouge">ethers</code> library to interact with the Ethereum blockchain.</p>
+
+<p>Finally, let’s see how my project performs:</p>
+
+<video controls="" width="100%">
+  <source src="/public/images/post_img/post24_full.mp4" type="video/mp4" />
+</video>
+
+<h2 id="end">End</h2>
+
+<p>After this post, I hope you understand the architecture of my project, and this post will help you in some ways. You can find the full demo video and slide in Vietnamese here:</p>
+<ul>
+  <li><a href="https://docs.google.com/presentation/d/1dLJEqgNMOMhueeNHYI7sPO8pDQ5MQoF4BMYc7ME8j40/edit?usp=sharing">Slide</a></li>
+  <li><a href="https://drive.google.com/file/d/17bx_PUr3_f4eeOGlOKWLOrX5fm-N8g-w/view?usp=sharing">Video</a></li>
+</ul>
+
+<p>If you have any questions or need clarification, feel free to comment on this post. Additionally, I encourage you to contribute to the project by creating issues or making pull requests on the repository.</p>]]></content><author><name></name></author><category term="tech" /><summary type="html"><![CDATA[Intro]]></summary></entry><entry><title type="html">Tình yêu và những sự hối tiếc</title><link href="http://localhost:4000/life/2024/06/10/tinh-yeu-va-su-hoi-tiec.html" rel="alternate" type="text/html" title="Tình yêu và những sự hối tiếc" /><published>2024-06-10T00:00:00+07:00</published><updated>2024-06-10T00:00:00+07:00</updated><id>http://localhost:4000/life/2024/06/10/tinh-yeu-va-su-hoi-tiec</id><content type="html" xml:base="http://localhost:4000/life/2024/06/10/tinh-yeu-va-su-hoi-tiec.html"><![CDATA[<p>Well, mình không nghĩ mình sẽ viết blog về chủ đề tình yêu của bản thân, bởi vì tình yêu trong những trải nghiệm của mình có vẻ khá là kì lạ. Nhưng mà ai biết được, vào một sáng sớm Hà Nội mưa rả ríc thế này, sau một giấc mơ mơ hồ, mình lại có cảm hứng để viết ra một chút, hihi.</p>
+
+<p><a class="post-image" display="center">
+	<img itemprop="image" src="/public/images/post_img/post23_1.jpg" />
+</a></p>
+
+<h2 id="tình-yêu-từ-bản-thân-mình">Tình yêu từ bản thân mình</h2>
+
+<p>Dù sao thì, mình mới 21 tuổi, và trải nghiệm yêu đương của mình cũng không được phong phú lắm. Nói hoa mĩ là thế, chứ thật ra mình chưa bắt đầu 1 mối tình nào nghiêm túc cả. Những kí ức của mình về tình yêu chỉ là đơn giản những lần yêu đơn phương hoặc một vài giây phút mập mờ nhỏ bé. Mình không biết cách để tiếp tục những cảm xúc đó, hoặc đơn giản mình chưa học được cách đón nhận tình yêu từ người khác. Thế nên mình nhiều lần đã chọn cách né tránh, hoặc chạy chốn khi nhận ra những người mình đang thích có vẻ như cũng đã bật đèn xanh cho mình. Nghĩ lại thấy mình tệ thật.</p>
+
+<p>Hiển nhiên, mình cũng từng yêu đơn phương, một mình, và không dám thổ lộ. Lạ thay, mình lại có vẻ hứng thú với cảm giác theo đuổi một người, nghĩ về họ, mơ tưởng về khoảng thời gian tốt đẹp của mình với họ trong tâm trí hơn là việc thực hiện điều đó… Nhiều lúc không hiểu tại sao mình lại làm thế, liệu mình có bị biến thái nhân cách hay tâm lí mình nhát gái hay không ???</p>
+
+<p><a class="post-image" display="center">
+	<img itemprop="image" src="/public/images/post_img/post23_2.jpg" />
+</a></p>
+
+<p>Mình cũng đã từng phạm những sai lầm, dẫn đến mất đi những mối quan hệ có vẻ như đang tiến triển rất tốt. Lẽ ra, mình nên suy nghĩ kĩ hơn, trưởng thành hơn trong cách nhìn nhận thế giới xung quanh, hoặc chỉ đơn giản, mình nên… tốt hơn. Bởi lẽ, không như những tình yêu đơn phương, mình cảm thấy có chút gì đó hối tiếc và tự ti khi đắm chìm vào trong kí ức này, hoặc chỉ đơn giản là mơ về nó. Có lẽ mình cần học cách đối mặt với nó trong suốt cuộc đời, hoặc cho đến khi tâm hồn của mình được chữa lành bằng những kí ức tươi đẹp hơn.</p>
+
+<h2 id="hối-tiếc-của-tuổi-trẻ">Hối tiếc của tuổi trẻ</h2>
+
+<p>Những sai lầm của mình khá là… ngu. Nhưng sai lầm này có lẽ là tệ nhất mà mình từng mắc phải.</p>
+
+<p>Mình từng vô cớ unfriend bạn, một người mình rất thích, dù không hiểu tại sao lại làm như vậy. Trước đó, mình và bạn có học chung với nhau một năm cấp 2. Mối quan hệ lúc đó chỉ đơn giản là bạn bè ngô nghê như những người khác. Rồi khi bạn chuyển trường, mình vẫn còn liên lạc với bạn qua Facebook (thật may lúc đó mình và bạn dùng Facebook sớm như zzz), cũng chia sẻ những câu chuyện khá là trẻ con khác. Mình kể về những người học cùng lớp cấp 2 đó giờ thay đổi ra sao, hay những thay đổi trong chiều cao và ngoại hình của họ, đôi khi khiến bạn khó hiểu tại sao họ lại cao nhanh thế, cao hơn cả bạn nữa. Bạn cũng kể về những lần nghịch dại ở nhà ông bà, bạn vô tình làm cháy chiếc bóng bay, suýt làm cháy nhà. Bạn cũng kể về những cảm xúc ở môi trường mới, hoặc về vài chuyện mà mình cũng không nhớ nữa. Thật tiếc khi những tin nhắn đó không còn :(.</p>
+
+<p><a class="post-image" display="center">
+	<img itemprop="image" src="/public/images/post_img/post23_3.jpg" />
+</a></p>
+
+<p>Bẵng đi một thời gian, khi thi vào năm cấp 3, mình vô tình gặp bạn ở cổng trường. Well, khá là trùng hợp lẫn khó tả, dưới cái nắng chói chang mùa hạ, mình không nghĩ dạo này bạn thay đổi nhiều như thế. Một vài câu chuyện, và chúng mình add lại acc facebook nhau, vì cơ bản account cũ của mình đã mất. Không hiểu tại sao, tin nhắn đầu tiên của mình cho bạn lúc đó, lại là “<strong>Miss U</strong>”.
+Về nhà, mình cùng bạn hỏi han nhau xem kì thi lần này thế nào, với những hi vọng về việc sẽ lại học cùng một trường lần nữa. Nhưng thật tiếc, mình và bạn vẫn học khác trường. Bạn gửi cho mình 1 tin nhắn khiến mình lúc đó ngây thơ vừa nhìn vào màn hình, vừa cười trong vô thức: “<strong>Miss U</strong>”.</p>
+
+<p>Hờ, có vẻ cả mùa hè ở trong tay mình rồi, mình tự nhủ. Rồi khi lên cấp 3, môi trường mới khiến mình vất vả thích nghi, và có những tư tưởng lệch lạc. Mình vẫn nhắn tin với bạn, kể những câu chuyện cỏn con, hoặc vài lời bâng quơ vô cớ. Bọn mình nói về nhạc rap, và bạn bảo cũng hay nghe Bray, nhưng bài bạn thích nghe lại là Qua Ta của Hades. Mình cũng bảo là mình ở Kí túc xá, ăn cơm có vẻ không hợp, bạn cũng khoe là bạn nấu cơm ngon lắm, để bạn nấu cho ăn thử 1 hôm. Ơ kìa, cảm giác trong lồng ngực mình là gì vậy, tình yêu là thế ư ??? Mình ngại, cũng chả dám nhắn là đồng ý, rồi tin nhắn cũng bị trôi qua. Ngu thật Vanh ạ.</p>
+
+<p>Tại sao mình lại làm thế ư, vì lúc đó mình quá tự cao về bản thân, và cho rằng việc bạn thích mình là hiển nhiên, còn mình không cần thiết phải thích bạn. “Ơ kìa, mày từng mơ gặp bạn rồi còn nắm tay cơ mà, sao lúc đó lại nghĩ như thế hả VanhG”. Chịu, chả hiểu tâm lý của 1 thằng lớp 10 này như thế nào nữa.</p>
+
+<p>Và tiếp theo, với cái tư tưởng đó, mình chọn cách né tránh tình yêu lẽ ra là sẽ rất đẹp và có 1 kết thúc trọn vẹn hơn. Mình dần không nhắn tin với bạn, hoặc reply một cách qua loa. Đỉnh điểm, 1 ngày mình unfriend với bạn. Ơ damn, tại sao lại vậy ???
+Dấu hỏi to lớn trong đầu mình mỗi khi nghĩ lại, mình bị gì vậy, tâm thần hả? Và có vẻ bạn cũng không hiểu giống mình, và chắc bạn cũng nhận lại nhiều tổn thương mà lẽ ra bạn không nên nhận nó. Haizz, tuổi trẻ, nghĩ lại thấy thật hối hận và trách bản thân lẽ ra có thể làm tốt hơn.</p>
+
+<p><a class="post-image" display="center">
+	<img itemprop="image" src="/public/images/post_img/post23_4.jpg" />
+</a></p>
+
+<p>Rồi 1 khoảng thời gian, hình như mình cũng có kết bạn lại với bạn, nhưng có thể mọi người cũng đoán được, nó quá trễ rồi. Thi thoảng, mình không biết cảm xúc của mình dành cho bạn là gì, có thể là sự hối tiếc hoặc cảm giác được yêu hơn là việc mình thật sự thích bạn. Nhưng dù nó là gì đi nữa, nó cũng khiến mình có những cảm xúc mạnh mẽ khi nghĩ về bạn.</p>
+
+<p>Lần gần nhất, có lẽ là năm trước, mình và bạn nhắn tin như những người bạn cũ từng quen và vì trong một hoàn cảnh đặc biệt khác về gia đình (mình không tiện kể hihi), cũng không đề cập nhiều đến những việc khác. Mình biết bạn đã hạnh phúc hơn và có được một chàng trai ấm áp, ít nhất là bạn xứng đáng được như vậy.</p>
+
+<h2 id="đôi-lời">Đôi lời</h2>
+
+<p>Mình biết rằng ai cũng có những sai lầm, và mình hiện tại cũng đang cố gắng đối mặt và vượt qua mỗi khi nghĩ về nó. Đôi khi nó cũng mãnh liệt và dữ dội, đi sâu cả vào trong những giấc mơ của mình (ví dụ là hôm nay…). Mình chọn cách viết ra, vì nó có thể giúp mình bớt đi 1 phần sự hối hận và tiếc nuối. Mình cũng biết, bộ não con người có giới hạn, những kí ức đẹp đẽ về bạn rồi sẽ bị mình quên đi theo năm tháng, nên mình chọn viết ra, xem như là lưu giữ những kỉ niệm này mãi mãi, nhỉ ?</p>]]></content><author><name></name></author><category term="[&quot;life&quot;]" /><summary type="html"><![CDATA[Well, mình không nghĩ mình sẽ viết blog về chủ đề tình yêu của bản thân, bởi vì tình yêu trong những trải nghiệm của mình có vẻ khá là kì lạ. Nhưng mà ai biết được, vào một sáng sớm Hà Nội mưa rả ríc thế này, sau một giấc mơ mơ hồ, mình lại có cảm hứng để viết ra một chút, hihi.]]></summary></entry><entry><title type="html">Taxua trip: An Unexpected Fear</title><link href="http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear.html" rel="alternate" type="text/html" title="Taxua trip: An Unexpected Fear" /><published>2024-03-18T00:00:00+07:00</published><updated>2024-03-18T00:00:00+07:00</updated><id>http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear</id><content type="html" xml:base="http://localhost:4000/life/2024/03/18/taxua-trip-and-an-unexpected-fear.html"><![CDATA[<p>Hi there! It’s me again. I’ve just finished my trip to Ta Xua for one week, and a lot of feelings are still
 here with me rightnow. So, I think it’s great to write some down.</p>
 
 <p>Well, Ta Xua is located in the landscape of the Bac Yen district in Son La province. It offers an enchanting blend
@@ -980,246 +1172,4 @@ World State Trie với 4 cặp Key - Value như sau:</p>
 
 <h2 id="kêt-luận">Kêt luận</h2>
 
-<p>Ở trên là một số khái niệm sơ bộ về Solidity và cấu trúc của Ethereum, cụ thể về các State Trie.</p>]]></content><author><name></name></author><category term="[&quot;cs251&quot;]" /><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie]]></summary></entry><entry><title type="html">Stablecoins</title><link href="http://localhost:4000/cs251/2023/07/24/stable-coins.html" rel="alternate" type="text/html" title="Stablecoins" /><published>2023-07-24T00:00:00+07:00</published><updated>2023-07-24T00:00:00+07:00</updated><id>http://localhost:4000/cs251/2023/07/24/stable-coins</id><content type="html" xml:base="http://localhost:4000/cs251/2023/07/24/stable-coins.html"><![CDATA[<p>Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.</p>
-
-<h2 id="custodial-stablecoin-stablecoin-kí-gửi">Custodial Stablecoin: Stablecoin kí gửi</h2>
-
-<p>Custodian giữ kho bạc trong 1 ngân hàng truyền thống, mọi giao dịch đều thông qua nó. Ngoài ra, nó có quyền mạnh mẽ như kiểm duyệt khác hàng rút tiền hoặc xoá số dư người dùng. Điều này sẽ nguy hiểm nếu chẳng may bị hack hoặc nhầm lẫn và không đảm bảo sự phi tập trung. Do đó, cách này không được ưu tiên và sử dụng ở thực tế.</p>
-
-<h2 id="synthetic">Synthetic</h2>
-
-<p>Mục tiêu là xây dựng 1 loại non-custodial stablecoin. Tuy nhiên, có một vấn đề là ETH thường xuyên dao động, không ổn định so với USD.<br />
-<strong> Maker DAO: </strong>  xây dựhng một stablecoin từ tài sản không ổn định. <br />
-Hệ thống MakerDAO:</p>
-
-<ul>
-  <li>DAI: stablecoin (giá: 0.99 ~ 1.01 USD)</li>
-  <li>MKR:
-    <ul>
-      <li>ai cũng có thể mua để kiếm lãi.</li>
-      <li>Sử dụng để quản trị, ổn định giá DAI trong trường hợp khẩn cấp.</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="đúc-dai">Đúc DAI</h3>
-
-<p>Giả sử: A muốn trả B bằng DAI nhưng A chỉ có 1 ETH. A sẽ tạo 1 vault trên MakerDAO contract:</p>
-<ul>
-  <li>1 wallet: tài sản mà A kiểm soát.</li>
-  <li>1 vault: tài sản mà A khoá để vay DAI.</li>
-</ul>
-
-<p>Ta có:</p>
-<ul>
-  <li>Ban đầu, A có: 1ETH, 0DAI trong wallet, 0ETH, 0DAI trong vault.</li>
-  <li>Khi A khoá 1 ETH vào vault: trong wallet sẽ không còn ETH, trong vault có 1ETH</li>
-  <li>Việc khoá ETH xem như một cách thế chấp để vay DAI. Vì số lượng thế chấp = 130% số lượng tối đa có thể vay, nên khi A thế chấp 1 ETH (~3000USD) thì chỉ có thể vay tối đa 2300 DAI.</li>
-  <li>Do đó, trong wallet A có 2300DAI, còn vault: 1ETH, -2300DAI.</li>
-  <li>A trả cho B bằng DAI, và có thể trả nợ cho vault để lấy lại 1 ETH.</li>
-</ul>
-
-<h3 id="stabilization">Stabilization</h3>
-
-<p>A khi thế chấp ETH và vay DAI, phải trả lãi: Phí ổn định. Hầu hết các phí đều đưa cho DAI holders (thông qua DSR), một số còn lại đưa cho MKR holders.</p>
-
-<p><strong> The DAI saving rate (DSR)</strong> <br />
-Bất kì ai giữ DAI có thể khoá DAI của mình trong MakerDAO contract. DSR là tỉ lệ lãi từ DAI đã khoá ở trên contract. Users có thể rút DAI ra từ contract bất cứ lúc nào.</p>
-
-<p><strong> Cơ chế ổn định: </strong> <br /></p>
-<ul>
-  <li>DAI có giá trị &lt; 1$  ⇒ tăng phí ổn định và DSR:
-    <ul>
-      <li>Người đúc DAI được khuyến khích hoàn trả món nợ đã vay sớm vì lãi đang tăng</li>
-      <li>Khuyến khích DAI holders gửi nhiều DAI vào contract</li>
-      <li>Từ đó giúp giảm nguồnn cùng DAI, giúp DAI tăng giá</li>
-    </ul>
-  </li>
-  <li>DAI có giá trị &gt; 1$  ⇒ giảm phí ổn định và DSR.</li>
-</ul>
-
-<h3 id="thanh-toán">Thanh toán</h3>
-
-<p>Nếu vault debt vượt quá 130% (do lãi), thì tài sản thế chấp sẽ được bán đấu giá. (Tiền lãi - phí) sẽ được trả nợ vault cho A đến khi đạt dưới 130%.</p>
-
-<h2 id="nfts">NFTs</h2>
-
-<p>NFTs là:</p>
-<ul>
-  <li>Quyền sở hữu token của 1 tài sản kĩ thuật số (như Digital Artwork, vitual games item,…).</li>
-  <li>Không thể có NFT nào giống nhau, nên không thể trao đổi lẫn nhau.</li>
-  <li>Được xác định bởi lịch sử, mức độ tiện ích, tầm quan trọng,…</li>
-</ul>
-
-<p>NFTs được quản lý dưới blockchain vì:</p>
-<ul>
-  <li>Blockchain đảm bảo quyền sở hữu dài hạn cho đến khi bán.</li>
-  <li>Cung cấp một hồ sơ đáng tin cậy về xuất xứ (chống giả mạo).</li>
-</ul>
-
-<h3 id="sở-hữu-tài-sản-kĩ-thuật-số">Sở hữu tài sản kĩ thuật số</h3>
-
-<p>NFTs hoạt động như một chứng thư pháp lý:</p>
-<ul>
-  <li>Có thể chuyển quyền sở hữu từ bên này sang bên khác</li>
-  <li>Quyền sỏ hữu thể hiện tình trạng sở hữu tài sản, cấp quyền hợp pháp,…</li>
-</ul>
-
-<h3 id="nhận-nfts-như-thế-nào">Nhận NFTs như thế nào</h3>
-
-<p>Có 2 cách chính là tìm người sở hữu và mua từ học, hoặc lên thị trường và mua.</p>
-
-<h3 id="thị-trường-nft">Thị trường NFT</h3>
-
-<p>Được xây dựng như một tập các smartcontract, thành một hệ thống tài sản và trao đổi. NFT mang lại sự sở hữu đích thực trên Internet, kích hoạt thương mại kĩ thuật số,… Ví dụ: một số NFT đặc biệt mang lại cho người dùng sự truy cập vào một số IP, trang trên Internet.</p>
-
-<h3 id="nft-cost-issue">NFT cost issue</h3>
-
-<p>Đa phần các NFT đều có giá cao, do đó muốn sở hữu thì có thể thuê hoặc tiết kiệm. Sẽ khó bắt đầu kinh doanh NFT nếu không có tiền mặt hoặc nguồn cung cấp đủ lớn.</p>
-
-<p>Một số dịch vụ dựa trên NFTs như: Gameing guild (các item trong game: NFTs), EveryRealm (Bất động sản ảo), Credit Provider,…</p>]]></content><author><name></name></author><category term="[&quot;cs251&quot;]" /><summary type="html"><![CDATA[Stable coin là 1 loại tiền điện tử được tạo để giao dịch với một giá trị không đổi. Mục đích sinh ra Stablecoin là tích hợp tiền tệ trên thế giới thật vào các ứng dụng trên chuỗi và cho phép những người không thể có USD nắm giữ và giao dịch 1 tài sản tương đương.]]></summary></entry><entry><title type="html">Cơ chế Ethereum</title><link href="http://localhost:4000/cs251/2023/07/23/ethereum-mechanics.html" rel="alternate" type="text/html" title="Cơ chế Ethereum" /><published>2023-07-23T00:00:00+07:00</published><updated>2023-07-23T00:00:00+07:00</updated><id>http://localhost:4000/cs251/2023/07/23/ethereum-mechanics</id><content type="html" xml:base="http://localhost:4000/cs251/2023/07/23/ethereum-mechanics.html"><![CDATA[<p>Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội</p>
-
-<h3 id="so-sánh-chung">So sánh chung</h3>
-
-<p>Bitcoin như một máy chuyển trạng thái. Bitcoin rule: S x I ⇾ S, với tập S là các trạng thái, I là tập tất cả các input. Còn với Ethereum, hàm chuyển trạng thái của nó sẽ phong phú hơn nhiều, và mỗi lần chuyển đổi thì sẽ thực hiện toàn bộ chương trình.</p>
-
-<p>Ethereum hỗ trợ các DApp, với Program code được lưu trữ trên blockchain, khi chạy cũng sẽ thay đổi các trạng thái. Các block thì sẽ có khoảng 150 Tx, và các Block Proposer sẽ nhận Tx fee cho block và các phần thưởng khác khi tạo khối thành công.</p>
-
-<p>Ngoài ra, ta đã biết rằng khi các block được proposer trong consensus layer (các beacon block, nên còn được gọi là beacon chain), các node gửi các Tx lên cho execution client hay còn gọi là compute layer để cập nhập các trạng thái (update world state).</p>
-
-<h2 id="compute-layer">Compute layer</h2>
-
-<p>World state: tập hợp các tài khoản được xác định bởi các địa chỉ 32 byte (Các thông tin như địa chỉ, số dư,..)</p>
-
-<p>Có 2 loại tài khoản:</p>
-
-<ul>
-  <li>Owned account: Điều khiển bởi các cặp (Pk, Sk), hay là tài khoản của người dùng.</li>
-  <li>Contracts: Điều khiển bởi code, được tạo lúc tài khoản được tạo, không thể thay đổi.</li>
-</ul>
-
-<p>Các dữ liệu cần thiết với mỗi account:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Account Data</th>
-      <th>Owned</th>
-      <th>Contracts</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>address(tính)</td>
-      <td>H(Pk)</td>
-      <td>H(CreatorAdd, CreatorNonce)</td>
-    </tr>
-    <tr>
-      <td>storage root</td>
-      <td>Không</td>
-      <td>StorageRoot</td>
-    </tr>
-    <tr>
-      <td>code</td>
-      <td>không</td>
-      <td>CodeHash</td>
-    </tr>
-    <tr>
-      <td>balance</td>
-      <td>balance</td>
-      <td>balance</td>
-    </tr>
-    <tr>
-      <td>nonce</td>
-      <td>nonce</td>
-      <td>nonce</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Trong đó, nonce là số Tx mà acount đã thực hành, tính bằng (#Tx sent) + (#accounts created). Số nonce được dùng để chống replay và khi tạo mới thì luôn bằng 0 (với contract).  Các contract có thể bị ghi đè code, nhưng chỉ khi contract cũ đã SELFDESTRUCT.</p>
-
-<p>Mỗi contract có 1 mảng lưu trữ liên quan gồm 2^256 phần tử, mỗi phần tử là 32 bytes. Và storage root là Merkle Patricia hash của mảng.</p>
-
-<h3 id="chuyển-trạng-thái">Chuyển trạng thái</h3>
-
-<h4 id="tx">Tx</h4>
-
-<ul>
-  <li>Được kí bởi người tạo.</li>
-  <li>To: nếu = 0 là tạo account mới, code = (init, body). Còn lại là 32-bytes địa chỉ và data (những thứ mà contract gọi và các đối số).</li>
-  <li>From: Địa chỉ khởi tạo và chữ kí vào Tx</li>
-  <li>Value: số Ethereum được gửi.</li>
-  <li>Tx fees: gasLimit, maxFee, maxPriorityFee (Sẽ nói rõ hơn ở phần sau).</li>
-  <li>Nonce: Khớp với nonce hiện tại của người gửi, tránh việc replay Tx.</li>
-  <li>Chain-id: đảm bảo giao dịch gửi đúng chuỗi (không thể dùng giao dịch testnet lên mainnet).</li>
-</ul>
-
-<h4 id="các-loại-tx">Các loại Tx</h4>
-
-<ul>
-  <li>owned ⇾ owned: chuyển ETH giữa các user</li>
-  <li>owned ⇾ contract: gọi contract với ETH &amp; data</li>
-</ul>
-
-<h4 id="messages">Messages</h4>
-
-<p>Là các Tx ảo được contract tạo ra, nó không có Signature (vì contract không có). Có 2 loại là:</p>
-
-<ul>
-  <li>contract ⇾ onwed: contract gửi tiền cho user</li>
-  <li>contract ⇾ contract: contract gọi contract khác.</li>
-</ul>
-
-<h3 id="ethereum-block">Ethereum block</h3>
-
-<p>Khác với Block của Bitcoin, Block Header của Ethereum có nhiều loại dữ liệu hơn, một số chính như:</p>
-
-<ul>
-  <li>Consensus data: các dữ liệu như Proposer Id, Previous hash, vote,…</li>
-  <li>Address: Nơi mà gas fee được chuyển đến</li>
-  <li>World state root: Merkle Patricia Tree Hash của tất cả các tài khoản</li>
-  <li>Tx root: Merkle Tree Hash của Tx</li>
-  <li>Tx receipt root: Merkle Hash của các log message</li>
-  <li>Gas used: Sử dụng để điều chỉnh giá gas (ở phần sau).</li>
-</ul>
-
-<h3 id="evm-mechanics">EVM mechanics</h3>
-
-<p>EVM là môi trường thực thi (execution). Các contract được viết bằng solidity, sau đó sẽ được compile thành EVM bytecode và được các validator sử dụng để chạy các contract. <br />
-EVM hoạt động như một <a href="https://en.wikipedia.org/wiki/Stack_machine">Stack Machine</a> với lệnh JUMP (Các program sẽ bị huỷ nếu quá stack, proposer giữ lại gas).</p>
-
-<h3 id="gas">Gas</h3>
-
-<p>Gas được xem như là nguyên liệu của Ethereum, là khoản phí cần trả để thực hiện các giao dịch hay hoạt động tương tác với smartcontract. Mọi chỉ thị đều tốn gas, giúp ngăn việc gửi Tx có nhiều bước (tốn nhiều tiền hơn). Các Proposer có thể chọn các Tx từ mempool có phí gas cao để tối đa hoá thu nhập.</p>
-
-<h4 id="gas-calculation">Gas calculation</h4>
-
-<p>Mỗi block có:</p>
-
-<ul>
-  <li>baseFee: gasPrice nhỏ nhất cho tất cả Tx trong block. BaseFee dựa vào tổng số gas ở block trước (Gas used ở header), nếu gasUsed là giới hạn (30M) thì baseFee tăng 12.5%, nếu block trước trống thì giảm 12.5%. Còn lại thì giữ nguyên.</li>
-  <li>gasLimit: tổng gas cho phép với Tx</li>
-  <li>maxFee: giá gas tối đa cho phép</li>
-  <li>maxPriorityFee: ‘tips’ tối đa cho Proposer.</li>
-</ul>
-
-<p>GasPrice = min(maxFee, baseFee + maxPriorityFee) <br />
-MaxTxFee = gasLimit x gasPice <br />
-<strong> Cụ thể </strong></p>
-
-<ul>
-  <li>nếu gasPrice &lt; baseFee: dừng</li>
-  <li>nếu MaxTxFee &gt; sender.balance: dừng</li>
-  <li>trừ MaxTxFee khỏi sender.balance</li>
-  <li>Đặt Gas = gasLimit</li>
-  <li>Chạy Tx, trừ gas từ Gas với mỗi Tx. Nếu Gas &lt; 0 thì dừng, Proposer giữ gasLimit * gasPrice.</li>
-  <li>Xong xuôi, trả lại Gas x gasPrice cho sender</li>
-  <li>gasUsed = gasLimit - Gas. BURN gasUsed x baseFee và gửi gasUsed x (GasPrice - baseFee) cho block proposer.</li>
-</ul>
-
-<p>ETH bị BURN vì giúp giảm lạm phát, tăng tính khan hiếm, có lợi cho nhà đầu tư, chặn các proposer tạo ra các Tx giả, không khuyến khích các thoả thuận ngoài chuỗi.</p>
-
-<h2 id="kết-luận">Kết luận</h2>
-
-<p>Ở trên là toàn bộ hiểu biết của mình về cơ chế Ethereum.</p>]]></content><author><name></name></author><category term="[&quot;cs251&quot;]" /><summary type="html"><![CDATA[Mặc dù bitcoin được ra đời từ rất sớm và được sử dụng cho đến hiện tại, nó vẫn chứa nhiều nhược điểm. Phần chính là các ScriptPk của UTXO không thể thực hiện các quy tắc phức tạp về tài sản. Ví dụ khi muốn đưa ra giới hạn lượng BTC sử dụng trong 1 ngày là 2BTC, không thể làm với UTXO Script được. Do đó, Ethereum ra đời với nhiều ưu điểm vượt trội]]></summary></entry></feed>
+<p>Ở trên là một số khái niệm sơ bộ về Solidity và cấu trúc của Ethereum, cụ thể về các State Trie.</p>]]></content><author><name></name></author><category term="[&quot;cs251&quot;]" /><summary type="html"><![CDATA[Ở bài viết này, mình sẽ giới thiệu về Solidity và World State Trie]]></summary></entry></feed>
