@@ -315,6 +315,7 @@ header.home {
 	font-size: 0.8em;
 	display: inline-block;
 	width: 80px;
+	margin: 0.5rem;
 }
 
 .author .author-image {

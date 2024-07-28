@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="feat: comment">
+    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="fix: css">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/disqus.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/disqus.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2024-06-10-tinh-yeu-va-su-hoi-tiec.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2024-06-10-tinh-yeu-va-su-hoi-tiec.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +36,12 @@
   <component name="GitRewordedCommitMessages">
     <option name="commitMessagesMapping">
       <RewordedCommitMessageMapping>
-        <option name="originalMessage" value="feat: new post" />
-        <option name="rewordedMessage" value="feat: new post" />
+        <option name="originalMessage" value="fix: css and disqus" />
+        <option name="rewordedMessage" value="fix: css and disqus" />
       </RewordedCommitMessageMapping>
     </option>
     <option name="currentCommit" value="1" />
-    <option name="onto" value="4ec31ab296d7bd0b33f6c63b9aafa5a7be2a1938" />
+    <option name="onto" value="bca7933c0fa99bab9776602aaa689ef6b91ae556" />
   </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
@@ -74,7 +74,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.rust.reset.selective.auto.import&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/vanhger/Downloads/tmp/Type-on-Strap&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/vanhger/Projects/vanhger.github.io&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -83,6 +83,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images/post_img" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -93,6 +98,7 @@
       <updated>1710700774655</updated>
       <workItem from="1710700775791" duration="663000" />
       <workItem from="1722132426146" duration="1176000" />
+      <workItem from="1722156085923" duration="7067000" />
     </task>
     <task id="LOCAL-00001" summary="feat: new post">
       <option name="closed" value="true" />
@@ -134,7 +140,87 @@
       <option name="project" value="LOCAL" />
       <updated>1722095645289</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix: change disqus">
+      <option name="closed" value="true" />
+      <created>1722135699475</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722135699475</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix: disqus">
+      <option name="closed" value="true" />
+      <created>1722136512529</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1722136512529</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix: add Permission-Policy">
+      <option name="closed" value="true" />
+      <created>1722137058080</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1722137058080</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix: add Permission-Policy">
+      <option name="closed" value="true" />
+      <created>1722137120537</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1722137120537</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix: Permission-Policy">
+      <option name="closed" value="true" />
+      <created>1722137469620</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1722137469620</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix: css and disqus">
+      <option name="closed" value="true" />
+      <created>1722155639687</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1722155639687</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fix: css and disqus">
+      <option name="closed" value="true" />
+      <created>1722157076685</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1722157076685</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix: css and disqus">
+      <option name="closed" value="true" />
+      <created>1722157234940</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1722157234940</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix: css">
+      <option name="closed" value="true" />
+      <created>1722157746293</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1722157746293</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix: css">
+      <option name="closed" value="true" />
+      <created>1722158830665</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1722158830665</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,7 +241,14 @@
     <MESSAGE value="feat: new post" />
     <MESSAGE value="feat: fix comment" />
     <MESSAGE value="feat: fix comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: fix comment" />
+    <MESSAGE value="fix: change disqus" />
+    <MESSAGE value="fix: disqus" />
+    <MESSAGE value="fix: add Permission-Policy" />
+    <MESSAGE value="squash! fix: add Permission-Policy" />
+    <MESSAGE value="fix: Permission-Policy" />
+    <MESSAGE value="fix: css" />
+    <MESSAGE value="fix: css" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: css" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

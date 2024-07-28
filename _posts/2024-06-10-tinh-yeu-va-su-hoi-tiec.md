@@ -2,7 +2,7 @@
 layout: post
 title: Tình yêu và những sự hối tiếc
 category:
-  - life
+  - love
 postnum: 23
 ---
 Well, mình không nghĩ mình sẽ viết blog về chủ đề tình yêu của bản thân, bởi vì tình yêu trong những trải nghiệm của mình có vẻ khá là kì lạ. Nhưng mà ai biết được, vào một sáng sớm Hà Nội mưa rả ríc thế này, sau một giấc mơ mơ hồ, mình lại có cảm hứng để viết ra một chút, hihi.
