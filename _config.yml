@@ -37,6 +37,9 @@ plugins:
 category_dir: category/
 tag_dir: tag/
 
+disqus:
+  shortname: vanhger # Your discus shortname for comments
+
 defaults:
   -
     scope:
@@ -44,10 +47,11 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      comments: true
+      comments: true   # change to false to default to comments off site-wide
+      published: true  # default to published
 
-disqus:
-  shortname: vanhger                               # Your discus shortname for comments
+
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

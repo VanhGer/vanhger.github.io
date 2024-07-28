@@ -3,6 +3,7 @@ layout: post
 title: My private distributed storage using GETH and IPFS.
 category: tech
 postnum: 24
+comments: true
 ---
 
 ## Intro
