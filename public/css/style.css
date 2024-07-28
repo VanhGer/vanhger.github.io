@@ -118,7 +118,7 @@ code {
 
 .comments {
 	display: inline;
-	width: 100%;
+	width: min(100%, 1000px);
 	padding: 10vw;
 }
 
