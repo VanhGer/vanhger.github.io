@@ -1,5 +1,5 @@
 <!-- Disqus comments section goes here (if comments are enabled) -->
-{% if page.comments == true and jekyll.environment == "production" %}
+{% if page.comments == true %}
 
 <div class="comments">
     <div id="disqus_thread"></div>
@@ -10,10 +10,10 @@
         /* You shouldn't need to edit ANYTHING below to get this working! */
         /* Instead, edit the key `disqus.shortname` in _config.yml */
 
-        var disqus_config = function (){
-            this.page.url = '{{ page.url | absolute_url }}';
-            this.page.identifier = '{{ page.url }}';
-        };
+        // var disqus_config = function (){
+        //     this.page.url = '{{ page.url | absolute_url }}';
+        //     this.page.identifier = '{{ page.url }}';
+        // };
 
         (function() {
             var d = document, s = d.createElement('script');

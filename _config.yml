@@ -47,7 +47,7 @@ defaults:
       comments: true
 
 disqus:
-  shortname: vanhger-github-io                                 # Your discus shortname for comments
+  shortname: vanhger                               # Your discus shortname for comments
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
