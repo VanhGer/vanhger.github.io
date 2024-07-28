@@ -73,7 +73,7 @@ a:hover {
 /*}*/
 
 pre {
-	padding: 0;
+	padding: 0.3rem;
 	max-width: calc(100vw - 20rem);
 	/*overflow: auto;*/
 	/*tab-size: 2;*/
@@ -110,6 +110,7 @@ code {
 	padding: 1rem;
 	/*padding: 0px 30px*/
 	color: var(--text_color);
+	flex-direction: column;
 	display: flex;
 	justify-content: center;
 	align-items: center;
