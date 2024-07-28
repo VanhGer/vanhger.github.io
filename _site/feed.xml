@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-07-28T09:26:44+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">VanhGer</title><subtitle>Hi there !!!</subtitle><entry><title type="html">My private distributed storage using GETH and IPFS.</title><link href="http://localhost:4000/tech/2024/07/24/private-distributed-storage.html" rel="alternate" type="text/html" title="My private distributed storage using GETH and IPFS." /><published>2024-07-24T00:00:00+07:00</published><updated>2024-07-24T00:00:00+07:00</updated><id>http://localhost:4000/tech/2024/07/24/private-distributed-storage</id><content type="html" xml:base="http://localhost:4000/tech/2024/07/24/private-distributed-storage.html"><![CDATA[<h2 id="intro">Intro</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-07-28T12:28:32+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">VanhGer</title><subtitle>Hi there !!!</subtitle><entry><title type="html">My private distributed storage.</title><link href="http://localhost:4000/tech/2024/07/24/private-distributed-storage.html" rel="alternate" type="text/html" title="My private distributed storage." /><published>2024-07-24T00:00:00+07:00</published><updated>2024-07-24T00:00:00+07:00</updated><id>http://localhost:4000/tech/2024/07/24/private-distributed-storage</id><content type="html" xml:base="http://localhost:4000/tech/2024/07/24/private-distributed-storage.html"><![CDATA[<h2 id="intro">Intro</h2>
 
 <p>Last semester, I studied System Administration subject and worked on a project about Ethereum applications. Specifically, my topic involved using Ethereum Private Blockchain as a distributed storage system. I found this quite challenging initially because I knew nothing about distributed storage or how to build DApps on Ethereum. I asked my teacher for help, and he suggested some keywords like Geth and IPFS. I then researched these topics extensively, experimented, and ultimately earned an A+ score for my project. I believe it’s worth sharing my experience with everyone who is interested. So, let’s dive into it!<br />
 <br /></p>
@@ -20,13 +20,16 @@ Actually, I primarily followed this tutorial from <a href="https://geth.ethereum
 
 <p>To test my private blockchain, I created accounts for each node and made some transactions:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eth.sendTransaction<span class="o">({</span>to: <span class="s2">"0xb166b7aaed24a12b3dd5dfa668ba3b9d10b1950d"</span>, from: eth.accounts[0], value: 25000<span class="o">})</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eth.sendTransaction({to: "0xb166b7aaed24a12b3dd5dfa668ba3b9d10b1950d", from: eth.accounts[0], value: 25000})
+
 </code></pre></div></div>
 
 <p>Here is the demo: <br /></p>
 
 <video controls="" width="100%">
+
   <source src="/public/images/post_img/post24_eth.mp4" type="video/mp4" />
+
 </video>
 
 <h2 id="ipfs">IPFS</h2>
@@ -37,15 +40,20 @@ Actually, I primarily followed this tutorial from <a href="https://geth.ethereum
 
 <p>To run IPFS on the two Docker nodes, I added this image to them and copied the SWARM key:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ipfs/go-ipfs:latest
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+FROM ipfs/go-ipfs:latest
+
 
 COPY swarm.key /swarm.key
+
 </code></pre></div></div>
 
 <p>Here is how I set up and use my private IPFS:</p>
 
 <video controls="" width="100%">
+
   <source src="/public/images/post_img/post24_ipfs.mp4" type="video/mp4" />
+
 </video>
 
 <h2 id="combine">Combine</h2>
@@ -93,37 +101,62 @@ with two functions: one for storing the hash and one for retrieving it. I used <
 
 <p>Here is the contract and the setup of my project:</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// SPDX-License-Identifier: MIT</span>
+
 <span class="nx">pragma</span> <span class="nx">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
 
+
 <span class="nx">contract</span> <span class="nx">Store</span> <span class="p">{</span>
+
     <span class="nx">struct</span> <span class="nx">File</span> <span class="p">{</span>
+
         <span class="nx">string</span> <span class="nx">filename</span><span class="p">;</span>
+
         <span class="nx">string</span> <span class="nx">cid</span><span class="p">;</span>
+
     <span class="p">}</span>
+
 
     <span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span> <span class="o">=&gt;</span> <span class="nx">File</span><span class="p">[])</span> <span class="kr">public</span> <span class="nx">userFiles</span><span class="p">;</span>
 
+
     <span class="kd">function</span> <span class="nx">storeFile</span><span class="p">(</span><span class="nx">string</span> <span class="nx">memory</span> <span class="nx">_filename</span><span class="p">,</span> <span class="nx">string</span> <span class="nx">memory</span> <span class="nx">_cid</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
+
         <span class="nx">File</span><span class="p">[]</span> <span class="nx">storage</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">userFiles</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">];</span>
+
         <span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">File</span><span class="p">(</span><span class="nx">_filename</span><span class="p">,</span> <span class="nx">_cid</span><span class="p">));</span>
+
     <span class="p">}</span>
+
 
     <span class="kd">function</span> <span class="nx">getUserFiles</span><span class="p">()</span> <span class="kr">public</span> <span class="nx">view</span> <span class="nx">returns</span> <span class="p">(</span><span class="nx">File</span><span class="p">[]</span> <span class="nx">memory</span><span class="p">)</span> <span class="p">{</span>
+
         <span class="k">return</span> <span class="nx">userFiles</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">];</span>
+
     <span class="p">}</span>
+
 <span class="p">}</span>
+
 </code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># init hardhat</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c"># init hardhat</span>
+
 npx hardhat init
+
 <span class="c"># select: Create an empty hardhat.config.js</span>
 
+
 <span class="c"># compile smart contract</span>
+
 npx hardhat compile
 
+
 <span class="c"># deploy smart contract</span>
+
 npx hardhat ignition deploy ./ignition/modules/Store.js <span class="nt">--network</span> localhost
+
 </code></pre></div></div>
 
 <p>I recommend following the tutorial of HardHat <a href="https://hardhat.org/tutorial">here</a>. I found HardHat quite user-friendly for beginners like me, and it took only two days to deploy everything. Since I coded the backend in Javascript, I needed to import <code class="highlighter-rouge">ethers</code> library to interact with the Ethereum blockchain.</p>
@@ -131,7 +164,9 @@ npx hardhat ignition deploy ./ignition/modules/Store.js <span class="nt">--netwo
 <p>Finally, let’s see how my project performs:</p>
 
 <video controls="" width="100%">
+
   <source src="/public/images/post_img/post24_full.mp4" type="video/mp4" />
+
 </video>
 
 <h2 id="end">End</h2>

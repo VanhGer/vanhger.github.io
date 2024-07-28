@@ -1,9 +1,8 @@
 ---
 layout: post
-title: My private distributed storage using GETH and IPFS.
+title: My private distributed storage.
 category: tech
 postnum: 24
-comments: true
 ---
 
 ## Intro
@@ -24,15 +23,20 @@ Actually, I primarily followed this tutorial from <a href = "https://geth.ethere
 
 To test my private blockchain, I created accounts for each node and made some transactions:
 
-```bash
-eth.sendTransaction({to: "0xb166b7aaed24a12b3dd5dfa668ba3b9d10b1950d", from: eth.accounts[0], value: 25000})
 ```
+eth.sendTransaction({to: "0xb166b7aaed24a12b3dd5dfa668ba3b9d10b1950d", from: eth.accounts[0], value: 25000})
+
+```
+
+
 
 Here is the demo: <br>
 
 
 <video controls width="100%">
+
   <source src="/public/images/post_img/post24_eth.mp4" type="video/mp4">
+
 </video>
 
 
@@ -47,15 +51,20 @@ I created two nodes, each running IPFS via Docker to participate in my distribut
 To run IPFS on the two Docker nodes, I added this image to them and copied the SWARM key:
 
 ```bash
+
 FROM ipfs/go-ipfs:latest
 
+
 COPY swarm.key /swarm.key
+
 ```
 
 Here is how I set up and use my private IPFS:
 
 <video controls width="100%">
+
   <source src="/public/images/post_img/post24_ipfs.mp4" type="video/mp4">
+
 </video>
 
 
@@ -105,39 +114,64 @@ with two functions: one for storing the hash and one for retrieving it. I used <
 Here is the contract and the setup of my project:
 
 ```javascript
+
 // SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
+
 contract Store {
+
     struct File {
+
         string filename;
+
         string cid;
+
     }
+
 
     mapping(address => File[]) public userFiles;
 
+
     function storeFile(string memory _filename, string memory _cid) public {
+
         File[] storage files = userFiles[msg.sender];
+
         files.push(File(_filename, _cid));
+
     }
 
+
     function getUserFiles() public view returns (File[] memory) {
+
         return userFiles[msg.sender];
+
     }
+
 }
+
 ```
 
 
 ```bash
+
 # init hardhat
+
 npx hardhat init
+
 # select: Create an empty hardhat.config.js
 
+
 # compile smart contract
+
 npx hardhat compile
 
+
 # deploy smart contract
+
 npx hardhat ignition deploy ./ignition/modules/Store.js --network localhost
+
 ```
 
 I recommend following the tutorial of HardHat <a href="https://hardhat.org/tutorial">here</a>. I found HardHat quite user-friendly for beginners like me, and it took only two days to deploy everything. Since I coded the backend in Javascript, I needed to import `ethers` library to interact with the Ethereum blockchain.
@@ -145,7 +179,9 @@ I recommend following the tutorial of HardHat <a href="https://hardhat.org/tutor
 Finally, let's see how my project performs:
 
 <video controls width="100%">
+
   <source src="/public/images/post_img/post24_full.mp4" type="video/mp4">
+
 </video>
 
 
