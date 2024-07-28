@@ -37,9 +37,17 @@ plugins:
 category_dir: category/
 tag_dir: tag/
 
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      comments: true
 
-comments:
-  disqus_shortname: vanhger-github-io                                  # Your discus shortname for comments
+disqus:
+  shortname: vanhger-github-io                                 # Your discus shortname for comments
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

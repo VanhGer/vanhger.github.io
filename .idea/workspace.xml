@@ -4,25 +4,61 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="" />
+    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="feat: comment">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/post.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/post.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "VanhGer"
+  }
+}]]></component>
+  <component name="GitRewordedCommitMessages">
+    <option name="commitMessagesMapping">
+      <RewordedCommitMessageMapping>
+        <option name="originalMessage" value="feat: new post" />
+        <option name="rewordedMessage" value="feat: new post" />
+      </RewordedCommitMessageMapping>
+    </option>
+    <option name="currentCommit" value="1" />
+    <option name="onto" value="4ec31ab296d7bd0b33f6c63b9aafa5a7be2a1938" />
+  </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:VanhGer/vanhger.github.io.git",
+    "accountId": "6f5aefd8-d930-4d58-b2de-012b2c08e99f"
+  }
+}]]></component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="3v1dza3w" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2dpMsgB0M2kKYsCDsiSD8ryFYll" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -30,11 +66,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/NguyenThanhSon/VanhGer/vanhger.github.io",
+    "last_opened_file_path": "/home/vanhger/Downloads/tmp/Type-on-Strap",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -52,10 +89,69 @@
       <option name="presentableId" value="Default" />
       <updated>1710700774655</updated>
       <workItem from="1710700775791" duration="663000" />
+      <workItem from="1722132426146" duration="1176000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: new post">
+      <option name="closed" value="true" />
+      <created>1722092607705</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722092607705</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: new post">
+      <option name="closed" value="true" />
+      <created>1722092616612</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1722092616612</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: new post">
+      <option name="closed" value="true" />
+      <created>1722092910299</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722092910299</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: comment">
+      <option name="closed" value="true" />
+      <created>1722093403950</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722093403950</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: comment">
+      <option name="closed" value="true" />
+      <created>1722095645289</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722095645289</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: new post" />
+    <MESSAGE value="feat: fix comment" />
+    <MESSAGE value="feat: fix comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: fix comment" />
   </component>
 </project>
