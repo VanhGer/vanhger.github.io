@@ -4,12 +4,178 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="fix: css">
+    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="feat: new post">
+      <change afterPath="$PROJECT_DIR$/_includes/navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_includes/pagination.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_includes/search.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_includes/search_event.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_layouts/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_pages/Love/index.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_pages/index.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2024-06-10-tinh-yeu-va-su-hoi-tiec.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2024-06-10-tinh-yeu-va-su-hoi-tiec.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/default.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/google-analytics.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/head.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/header.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/post.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/post.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/social.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/category.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/default.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/default.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/post.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-02-28-cach-tao-blog.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Tutorial/2023-02-28-cach-tao-blog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-03-02-mo-hinh-phat-trien-p1.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Software/2023-03-02-mo-hinh-phat-trien-p1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-03-03-mo-hinh-phat-trien-p2.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Software/2023-03-03-mo-hinh-phat-trien-p2.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-03-06-tao-game-sdl.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Software/2023-03-06-tao-game-sdl.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-07-14-tong-quan-ve-blockchain.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-07-14-tong-quan-ve-blockchain.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-07-15-blockchain-technology.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-07-15-blockchain-technology.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-07-20-cau-tao-block-va-pow.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-07-20-cau-tao-block-va-pow.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-07-20-co-che-bitcoin.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-07-20-co-che-bitcoin.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-07-21-bitcoin-scripts-and-wallet.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-07-21-bitcoin-scripts-and-wallet.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-07-21-fundamentals-of-consensus.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-07-21-fundamentals-of-consensus.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-07-22-dong-thuan-tren-mang.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-07-22-dong-thuan-tren-mang.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-07-23-ethereum-mechanics.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-07-23-ethereum-mechanics.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-07-23-proof-of-stake.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-07-23-proof-of-stake.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-07-24-solidity-va-state-trie.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-07-24-solidity-va-state-trie.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-07-24-stable-coins.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-07-24-stable-coins.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-08-15-dex.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-08-15-dex.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-08-17-defi-lending-system.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-08-17-defi-lending-system.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-08-18-scaling-the-blockchain-p1.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-08-18-scaling-the-blockchain-p1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-08-19-scaling-the-blockchain-p2.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-08-19-scaling-the-blockchain-p2.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-08-20-zksnark.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-08-20-zksnark.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-08-29-bridging-and-mev.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blockchain/Cs251/2023-08-29-bridging-and-mev.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2024-03-18-taxua-trip-and-an-unexpected-fear.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Life/2024-03-18-taxua-trip-and-an-unexpected-fear.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2024-06-10-tinh-yeu-va-su-hoi-tiec.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Love/2024-06-10-tinh-yeu-va-su-hoi-tiec.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2024-07-24-private-distributed-storage.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Software/2024-07-24-private-distributed-storage.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2024-07-28-song-voi.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Life/2024-07-28-song-voi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/about.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/category.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/autumn.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/borland.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/bw.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/colorful.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/dark_theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/default.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/emacs.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/friendly.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/fruity.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/light_theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/manni.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/monokai.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/murphy.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/native.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/pastie.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/perldoc.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/tango.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/trac.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/vim.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/syntax/vs.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/background/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/background/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/background/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/background/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/landing1/0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/landing1/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/landing1/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/landing1/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/landing1/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/landing2/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/landing2/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/landing2/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/landing2/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/landing2/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Page_png/landing2/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post10_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post10_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post10_3.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post10_4.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post10_5.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post11_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post13_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post18_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post19_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post1_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post1_2.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post1_3.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post20_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post20_2.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post21_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post21_2.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post22_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post22_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post22_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post22_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post22_5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post23_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post23_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post23_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post23_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post24_components.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post24_downloading.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post24_eth.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post24_full.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post24_ipfs.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post24_uploading.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post25_burned_out.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post25_lay.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post25_live_so_fast.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post25_time.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post2_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post2_2.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post3_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post5_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post5_2.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post6_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post6_2.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post7_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post8_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post9_1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/post_img/post9_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/simple-icons/eye-48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/simple-icons/facebook-48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/simple-icons/github-48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/simple-icons/gmail-48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/simple-icons/instagram-48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/simple-icons/linkedin-48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/simple-icons/question-48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/simple-icons/rss-48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/simple-icons/stackoverflow-48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/simple-icons/twitter-48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/simple-icons/vk-48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/btn-menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/btn-more-small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/btn-more.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/btn-search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/cc-by-sa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/moon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/moon2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/noisy_texture_F9F9F9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/noisy_texture_section0-200x200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/noisy_texture_section1-200x200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/sun.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/theme/sun2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery-3.4.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery-3.4.1.slim.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery.min.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,18 +240,30 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.rust.reset.selective.auto.import&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/vanhger/Projects/vanhger.github.io&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/vanhger/Work/zkp-implementation&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_pages" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/_pages/Tutorial" />
+      <recent name="$PROJECT_DIR$/_pages/Software" />
+      <recent name="$PROJECT_DIR$/_pages/Blockchain" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/images/post_img" />
+      <recent name="$PROJECT_DIR$/_pages/Love" />
+      <recent name="$PROJECT_DIR$/_pages/Software" />
+      <recent name="$PROJECT_DIR$/_pages/Life" />
+      <recent name="$PROJECT_DIR$/_pages/Blockchain/Cs251" />
+      <recent name="$PROJECT_DIR$/_pages/Tutorial" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -98,7 +276,21 @@
       <updated>1710700774655</updated>
       <workItem from="1710700775791" duration="663000" />
       <workItem from="1722132426146" duration="1176000" />
-      <workItem from="1722156085923" duration="7067000" />
+      <workItem from="1722156085923" duration="8445000" />
+      <workItem from="1722215412635" duration="752000" />
+      <workItem from="1722236144326" duration="70000" />
+      <workItem from="1722309763508" duration="54000" />
+      <workItem from="1722388435196" duration="4575000" />
+      <workItem from="1722394288428" duration="11349000" />
+      <workItem from="1722413224507" duration="34000" />
+      <workItem from="1722419714224" duration="7635000" />
+      <workItem from="1722440929738" duration="300000" />
+      <workItem from="1722441255886" duration="182000" />
+      <workItem from="1722441494756" duration="2513000" />
+      <workItem from="1722469939002" duration="4909000" />
+      <workItem from="1722477651567" duration="1524000" />
+      <workItem from="1722518186224" duration="16254000" />
+      <workItem from="1722575297764" duration="1522000" />
     </task>
     <task id="LOCAL-00001" summary="feat: new post">
       <option name="closed" value="true" />
@@ -220,11 +412,22 @@
       <option name="project" value="LOCAL" />
       <updated>1722158830665</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="feat: new post">
+      <option name="closed" value="true" />
+      <created>1722181263608</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1722181263608</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.scss" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -238,7 +441,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: new post" />
     <MESSAGE value="feat: fix comment" />
     <MESSAGE value="feat: fix comment" />
     <MESSAGE value="fix: change disqus" />
@@ -248,7 +450,8 @@
     <MESSAGE value="fix: Permission-Policy" />
     <MESSAGE value="fix: css" />
     <MESSAGE value="fix: css" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: css" />
+    <MESSAGE value="feat: new post" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: new post" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
