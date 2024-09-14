@@ -1,8 +1,8 @@
 ---
-date: 2024-09-15
+date: "2024-09-15"
 tags:
-  - story
-thumbnail: /assets/img/thumbnail/post_27.jpg
+  - stories
+thumbnail: "/assets/img/thumbnail/post_27.jpg"
 title: Midnight Sun
 postnum: 27
 ---
