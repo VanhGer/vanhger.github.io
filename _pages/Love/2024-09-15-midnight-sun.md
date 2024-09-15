@@ -58,3 +58,9 @@ I feel so alive
 Một lần nữa, anh được nghe lại giọng em hát. Chỉ tiếc là lần này, mình không còn đứng cùng nhau.
 
 Love you, my midnight sun, **Katie Price**.
+
+<a class="post-image" display="center" >
+	<img itemprop="image"  src="/assets/img/post_img/post27_katie.jpg"/>
+</a>
+
+
