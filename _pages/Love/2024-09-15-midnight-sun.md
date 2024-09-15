@@ -35,3 +35,26 @@ Anh có lẽ sẽ chẳng thể đưa ra được câu trả lời cho câu hỏ
 Đó hoàn toàn là lỗi của anh, dù em đã bảo rằng không phải, và nói với anh rằng đó trái lại là những gì em mong muốn, muốn được ngắm nhìn thế giới như những người bình thường, chứ không phải qua căn gác ngăn cách bởi những cửa sổ chống tia cực tím. Em cũng nói yêu anh, và bảo với anh rằng điều đó làm em cảm thấy rất hạnh phúc. Anh chỉ trách bản thân không đủ tinh tế, để rồi khiến căn bệnh đó hành hạ em trong suốt những ngày cuối đời còn lại. Anh tin rằng, nếu như anh không gặp em khi đó, em sẽ tiếp tục cuộc sống lâu hơn và liệu rằng vào một thời điểm nào đó sau này, chúng ta vẫn sẽ gặp lại nhau theo một cách nào đó khác ?
 
 
+## Hiện tại
+
+Có quá nhiều câu hỏi kèm theo những hối tiếc ở trong đầu anh mỗi khi anh nhớ về em. Anh không biết liệu mình có thể vượt qua những chuyện đó, nhưng anh vẫn sẽ tiếp tục sống theo những gì mà những vì sao chỉ lối cho anh, bởi vì đó là những gì em nói muốn được nhìn thấy ở anh sau này.
+Hôm nay, radio lại phát lên giai điệu của "Charlie's Song", bài hát mà em đã viết tặng cho anh:
+```
+I wish, I could be where you are
+They say don't you ever give up
+It's so hard to be something when you're not
+
+But I have walked alone
+With the stars in the moonlit night
+I have walked alone
+No one by my side
+
+Now I walk with you
+With my head held high
+In the darkest sky
+I feel so alive
+```
+
+Một lần nữa, anh được nghe lại giọng em hát. Chỉ tiếc là lần này, mình không còn đứng cùng nhau.
+
+Love you, my midnight sun, **Katie Price**.
