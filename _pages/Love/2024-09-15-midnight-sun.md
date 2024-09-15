@@ -13,5 +13,18 @@ Mỗi ngày, anh mơ về những hoài niệm đẹp đẽ mà ta đã cùng nh
 	<img itemprop="image"  src="/assets/img/post_img/post27_missing.jpg"/>
 </a>
 
+## Gặp nhau
+
+Đã 3 tháng trôi qua kể từ ngày anh chuyển đến Berkeley, ngôi trường mà anh luôn ao ước khi anh chỉ mới 15 tuổi. Mọi chuyện với anh đều tốt, anh đang có một tương lai tương sáng với những cơ hội mà anh được trao tặng từ nơi này. Nhưng anh biết rằng, anh có thể không với tới những điều này, nếu như lúc đó anh không gặp được em. Em là người đã cho anh niềm tin và khát vọng, là ánh sáng giúp anh tìm thấy được bản ngã của chính mình. Anh không nghĩ rằng cô gái mà anh gặp đang ngồi hát trước cửa ga tàu vào đêm đó sẽ thay đổi cả cuộc đời của mình như vậy.
+
+<a class="post-image" display="center" >
+	<img itemprop="image"  src="/assets/img/post_img/post27_guitar.jpg"/>
+</a>
+
+Ngày đó, anh đã bị mê mẩn trước giọng hát và tiếng đàn của em, khi em cất giọng ngay khi chuyến tàu đêm cuối cùng về thị trấn tới đích. Có những đồng xu lẻ được các hành khách đưa tặng vào trong hộp đàn, tô điểm ở giữa là một gói kẹo M&M màu vàng đậm, chắc là của một cô bé nào đó gửi tặng. Thật lạ, thị trấn này nhỏ thế, nhưng anh chưa từng gặp em bao giờ trong suốt 18 năm ở đây, và cũng thật lạ khi em nhận lời làm quen của anh.
+
+Sau đó là những đêm đi chơi cùng nhau, ta lái xe đi hết 1 vòng quanh cái thị trấn này, những địa điểm thường ngày anh xem là tẻ nhạt, vì em mà khoác lên gam màu tươi mới, tràn đầy sức sống. Nhưng anh lúc đó vẫn chưa biết sự thật mà em đang che giấu, vẫn thắc mắc tại sao em và anh chỉ có thể gặp nhau vào buổi tối, khi mặt trời đã khất dưới đỉnh đồi sau lưng. Và anh liệu có ích kỉ không, khi không muốn tình yêu của chúng ta mãi nằm trong đêm đen, mặc dù trong những buổi hẹn đó, màn đêm bao vây anh như biến mất khi có một mặt trời soi rọi ?
+
+
 
 
