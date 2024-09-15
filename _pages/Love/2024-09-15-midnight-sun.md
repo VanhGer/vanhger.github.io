@@ -25,6 +25,13 @@ Ngày đó, anh đã bị mê mẩn trước giọng hát và tiếng đàn củ
 
 Sau đó là những đêm đi chơi cùng nhau, ta lái xe đi hết 1 vòng quanh cái thị trấn này, những địa điểm thường ngày anh xem là tẻ nhạt, vì em mà khoác lên gam màu tươi mới, tràn đầy sức sống. Nhưng anh lúc đó vẫn chưa biết sự thật mà em đang che giấu, vẫn thắc mắc tại sao em và anh chỉ có thể gặp nhau vào buổi tối, khi mặt trời đã khất dưới đỉnh đồi sau lưng. Và anh liệu có ích kỉ không, khi không muốn tình yêu của chúng ta mãi nằm trong đêm đen, mặc dù trong những buổi hẹn đó, màn đêm bao vây anh như biến mất khi có một mặt trời soi rọi ?
 
+## Chia xa
 
+<a class="post-image" display="center" >
+	<img itemprop="image"  src="/assets/img/post_img/post27_lasttrip.jpg"/>
+</a>
+
+Anh có lẽ sẽ chẳng thể đưa ra được câu trả lời cho câu hỏi ở trên, và anh nghĩ rằng em cũng thế. Chúng ta ở cạnh nhau trong 1 tháng đầy ắp hạnh phúc nhưng ngắn ngủi. Một tháng để em cho anh niềm tin quay trở lại với đam mê bơi lội sau chấn thương nặng đó, một tháng để anh cùng em đến những nơi mà em chưa từng đặt chân, một tháng để anh nhận ra cuộc đời này bất công như thế nào. Nhưng tại sao, tại sao em không nói với anh về bệnh [XP](https://en.wikipedia.org/wiki/Xeroderma_pigmentosum) của em sớm hơn, tại sao em không nói trước rằng tiếp xúc trực tiếp với ánh nắng mặt trời sẽ làm cạn kiệt sức khỏe của em, tại sao em lại làm như thế với anh?  Để rồi buổi đêm mà chúng ta gọi là đẹp nhất trong cuộc đời đó, lại kết thúc khi bình minh đang ló rạng, và dù anh đã lái xe nhanh hết mức thể, em vẫn phải chịu những đau đớn mà những tia nắng đáng chết đó mang lại. Ngang trái thay, ngày mà em tận hưởng được những gì em mong muốn được trải nghiệm, cũng chính là ngày mà căn bệnh quái ác đó bắt đầu tiến triển, khiến thời gian của em không còn nhiều nữa.
+Đó hoàn toàn là lỗi của anh, dù em đã bảo rằng không phải, và nói với anh rằng đó trái lại là những gì em mong muốn, muốn được ngắm nhìn thế giới như những người bình thường, chứ không phải qua căn gác ngăn cách bởi những cửa sổ chống tia cực tím. Em cũng nói yêu anh, và bảo với anh rằng điều đó làm em cảm thấy rất hạnh phúc. Anh chỉ trách bản thân không đủ tinh tế, để rồi khiến căn bệnh đó hành hạ em trong suốt những ngày cuối đời còn lại. Anh tin rằng, nếu như anh không gặp em khi đó, em sẽ tiếp tục cuộc sống lâu hơn và liệu rằng vào một thời điểm nào đó sau này, chúng ta vẫn sẽ gặp lại nhau theo một cách nào đó khác ?
 
 
