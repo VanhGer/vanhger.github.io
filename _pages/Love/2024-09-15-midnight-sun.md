@@ -64,3 +64,8 @@ Love you, my midnight sun, **Katie Price**.
 </a>
 
 
+## Lời kết
+
+Ở trên là một Fic mà mình đặt góc nhìn của bản thân vào nhân vật nam chính trong bộ phim [Midnight Sun](https://www.imdb.com/title/tt4799066/), một bộ phim rất hay và cảm động. Nếu mọi người chưa xem phim này thì mình rất mong mọi người có thể xem thử ạ :)).
+
+Cảm ơn mọi người đã đọc bài viết này của mình.
