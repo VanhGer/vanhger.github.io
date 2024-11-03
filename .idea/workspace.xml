@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="feat: new theme">
+    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="feat: new post">
+      <change afterPath="$PROJECT_DIR$/_includes/default.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_layouts/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_layouts/main.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/default.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_pages/About.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_pages/index.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +27,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="new_post" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -34,12 +44,12 @@
   <component name="GitRewordedCommitMessages">
     <option name="commitMessagesMapping">
       <RewordedCommitMessageMapping>
-        <option name="originalMessage" value="fix: css and disqus" />
-        <option name="rewordedMessage" value="fix: css and disqus" />
+        <option name="originalMessage" value="feat: new post" />
+        <option name="rewordedMessage" value="feat: new post" />
       </RewordedCommitMessageMapping>
     </option>
     <option name="currentCommit" value="1" />
-    <option name="onto" value="bca7933c0fa99bab9776602aaa689ef6b91ae556" />
+    <option name="onto" value="8894dda9374bf55352a25b095a52cd9fe9561090" />
   </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
@@ -67,6 +77,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -84,18 +95,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_pages/Life" />
+      <recent name="$PROJECT_DIR$/_pages/Story" />
       <recent name="$PROJECT_DIR$/_pages" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/_pages/Tutorial" />
-      <recent name="$PROJECT_DIR$/_pages/Software" />
-      <recent name="$PROJECT_DIR$/_pages/Blockchain" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/unrelease" />
+      <recent name="$PROJECT_DIR$/_pages/Blog" />
+      <recent name="$PROJECT_DIR$/_pages/Story" />
       <recent name="$PROJECT_DIR$/_pages/Love" />
-      <recent name="$PROJECT_DIR$/_pages/Software" />
       <recent name="$PROJECT_DIR$/_pages/Life" />
-      <recent name="$PROJECT_DIR$/_pages/Blockchain/Cs251" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -130,6 +141,14 @@
       <workItem from="1724807961648" duration="29000" />
       <workItem from="1724808167134" duration="3000" />
       <workItem from="1724852625763" duration="3175000" />
+      <workItem from="1724895027003" duration="75000" />
+      <workItem from="1726335004670" duration="3826000" />
+      <workItem from="1726376005387" duration="2078000" />
+      <workItem from="1726406413683" duration="909000" />
+      <workItem from="1726451947417" duration="632000" />
+      <workItem from="1727409341574" duration="1747000" />
+      <workItem from="1730300688952" duration="1408000" />
+      <workItem from="1730618397116" duration="8946000" />
     </task>
     <task id="LOCAL-00001" summary="feat: new post">
       <option name="closed" value="true" />
@@ -267,7 +286,135 @@
       <option name="project" value="LOCAL" />
       <updated>1722576932967</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="feat: new post">
+      <option name="closed" value="true" />
+      <created>1726344364082</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1726344364082</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fix: fix index for Story category">
+      <option name="closed" value="true" />
+      <created>1726344879907</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1726344879907</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fix: fix post">
+      <option name="closed" value="true" />
+      <created>1726345090414</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1726345090414</updated>
+    </task>
+    <task id="LOCAL-00021" summary="refactor: move post">
+      <option name="closed" value="true" />
+      <created>1726345228397</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1726345228397</updated>
+    </task>
+    <task id="LOCAL-00022" summary="test">
+      <option name="closed" value="true" />
+      <created>1726345337869</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1726345337869</updated>
+    </task>
+    <task id="LOCAL-00023" summary="test">
+      <option name="closed" value="true" />
+      <created>1726376126154</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1726376126154</updated>
+    </task>
+    <task id="LOCAL-00024" summary="test part 1 of the newest post">
+      <option name="closed" value="true" />
+      <created>1726376246142</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1726376246142</updated>
+    </task>
+    <task id="LOCAL-00025" summary="test part 2 of the newest post">
+      <option name="closed" value="true" />
+      <created>1726376412972</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1726376412972</updated>
+    </task>
+    <task id="LOCAL-00026" summary="test part 3 of the newest post">
+      <option name="closed" value="true" />
+      <created>1726376916216</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1726376916216</updated>
+    </task>
+    <task id="LOCAL-00027" summary="test part 4 of the newest post">
+      <option name="closed" value="true" />
+      <created>1726379358696</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1726379358696</updated>
+    </task>
+    <task id="LOCAL-00028" summary="test part 5 of the newest post">
+      <option name="closed" value="true" />
+      <created>1726379456648</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1726379456648</updated>
+    </task>
+    <task id="LOCAL-00029" summary="test part 6 of the newest post">
+      <option name="closed" value="true" />
+      <created>1726379603620</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1726379603620</updated>
+    </task>
+    <task id="LOCAL-00030" summary="refactor: change post folder">
+      <option name="closed" value="true" />
+      <created>1726379742567</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1726379742567</updated>
+    </task>
+    <task id="LOCAL-00031" summary="refactor: page">
+      <option name="closed" value="true" />
+      <created>1726406662366</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1726406662367</updated>
+    </task>
+    <task id="LOCAL-00032" summary="feat: new post">
+      <option name="closed" value="true" />
+      <created>1730626267951</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1730626267951</updated>
+    </task>
+    <task id="LOCAL-00033" summary="feat: new post">
+      <option name="closed" value="true" />
+      <created>1730626285667</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1730626285667</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,9 +444,21 @@
     <MESSAGE value="fix: Permission-Policy" />
     <MESSAGE value="fix: css" />
     <MESSAGE value="fix: css" />
-    <MESSAGE value="feat: new post" />
     <MESSAGE value="feat: new theme" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: new theme" />
+    <MESSAGE value="fix: fix index for Story category" />
+    <MESSAGE value="fix: fix post" />
+    <MESSAGE value="refactor: move post" />
+    <MESSAGE value="test" />
+    <MESSAGE value="test part 1 of the newest post" />
+    <MESSAGE value="test part 2 of the newest post" />
+    <MESSAGE value="test part 3 of the newest post" />
+    <MESSAGE value="test part 4 of the newest post" />
+    <MESSAGE value="test part 5 of the newest post" />
+    <MESSAGE value="test part 6 of the newest post" />
+    <MESSAGE value="refactor: change post folder" />
+    <MESSAGE value="refactor: page" />
+    <MESSAGE value="feat: new post" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: new post" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
