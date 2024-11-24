@@ -34,7 +34,7 @@ Mình tham dự pop-up city tên là [Invisible Garden](https://invisible.garden
 
 Bên cạnh đó, mình cũng có lần đầu tiên được tham dự lễ hội lớn như Devcon, được sống trong không khí "thế giới vl" trong suốt gần 1 tuần. Ngoài ra mình cũng có lần đầu tiên được tiếp xúc và trò chuyện với những người đang làm những công việc mà mình mơ ước, và lắng nghe những lời khuyên từ họ thật sự giúp ích cho tầm nhìn và suy nghĩ của mình rất nhiều.
 
-Ngoài ra đây cũng là lần đầu mình thử những món ăn lạ (đa phần là rất cay), có những món ngon nhưng cũng có những món khá là 3 chấm. Bên Thái Lan thì hợp pháp hóa cần xa, nên mình cũng có lần đầu mình thử món này. Thật sự mà nói thì nó không như những gì mình nghĩ vì mùi khó chịu và thật sự không mang lại cảm giác "high" một chút nào. 
+Ngoài ra đây cũng là lần đầu mình thử những món ăn lạ (đa phần là rất cay), có những món ngon nhưng cũng có những món khá là 3 chấm. Bên Thái Lan thì hợp pháp hóa cần sa, nên mình cũng có lần đầu mình thử món này. Thật sự mà nói thì nó không như những gì mình nghĩ vì mùi khó chịu và thật sự không mang lại cảm giác "high" một chút nào. 
 
 <figure class="post-image" style="text-align: center;">
     <img itemprop="image" src="/assets/img/post_img/post30/scorpion.jpg" />
@@ -77,10 +77,7 @@ Còn nhiều thứ nữa mà mình cần cải thiện lắm, nhưng mình biế
 Điều tuyệt vời là mình quen được nhiều bạn mới, và những người giúp đỡ mình rất nhiều, cả về tư tưởng và kiến thức. 
 Mình xin cảm ơn đến họ trong bài viết này, và hi vọng được gặp lại những người bạn này trong tương lai gần.
 
-Đầu tiên chắc sẽ là Dr.Guo, người hướng dẫn và thầy dạy ZKP cho mình trong suốt hơn 1 tháng ở Invisible Garden.
-Thầy dạy rất hay và dễ hiểu, cũng chính thầy rủ mình tham gia HackerHouse, và từ đó gặp gỡ được thêm nhiều người mạnh hơn. 
-Thầy cũng cho mình lời khuyên từ kinh nghiệm nghiên cứu PhD của thầy, và nhiều thứ khác cũng hay ho nữa. 
-Mình cũng được tham gia một group học tập về ZKP của thầy qua Discord, và hôm qua là hôm đầu tiên mọi người nói chuyện trên đó hihi.
+Đầu tiên chắc sẽ là Dr.Guo, người hướng dẫn và thầy dạy ZKP cho mình trong suốt hơn 1 tháng ở Invisible Garden. Thầy dạy rất hay và dễ hiểu, cũng chính thầy rủ mình tham gia HackerHouse, và từ đó gặp gỡ được thêm nhiều người mạnh hơn. Thầy cũng cho mình lời khuyên từ kinh nghiệm nghiên cứu PhD của thầy, và nhiều thứ khác cũng hay ho nữa. Mình cũng được tham gia một group học tập về ZKP của thầy qua Discord, và hôm qua là hôm đầu tiên mọi người nói chuyện trên đó hihi.
 
 <figure class="post-image" style="display: inline; flex-direction: row">
         <div style="padding: 5%; justify-content: center; text-align: center">
@@ -138,8 +135,7 @@ Cuối cùng, Devcon, một trải nghiệm có 1-0-2 của mình. Ban đầu m�
     <figcaption style="font-size: 0.8rem">Thẻ Devcon này</figcaption>
 </figure>
 
-Devcon rất lớn với quy mô quốc tế, khiến cho mình bị ngợp ở ngày đầu tiên. Rất nhiều sessions hay và bổ ích, từ 10-25 phút, và việc đi lại giữa các địa điểm tổ chức session (dù chỉ trong 1 tòa nhà duy nhất), 
-khiến mình bị "mệt". Rất may là đồ ăn luôn được phục vụ đầy đủ, với quá nhiều món, từ Tây, Tàu, Thái đến cả đặc sản Việt Nam như Phở và Gỏi cuốn. Mình cảm thấy tuyệt khi ở đó, dù có 3 ngày nhưng cũng đủ để mình trải nghiệm không khí lớn như vậy, và cũng rất là vui nữa (đi lễ hội mà, kk).
+Devcon rất lớn với quy mô quốc tế, khiến cho mình bị ngợp ở ngày đầu tiên. Rất nhiều sessions hay và bổ ích, từ 10-25 phút, và việc đi lại giữa các địa điểm tổ chức session (dù chỉ trong 1 tòa nhà duy nhất), khiến mình bị "mệt". Rất may là đồ ăn luôn được phục vụ đầy đủ, với quá nhiều món, từ Tây, Tàu, Thái đến cả đặc sản Việt Nam như Phở và Gỏi cuốn. Mình cảm thấy tuyệt khi ở đó, dù có 3 ngày nhưng cũng đủ để mình trải nghiệm không khí lớn như vậy, và cũng rất là vui nữa (đi lễ hội mà, kk).
 
 
 
