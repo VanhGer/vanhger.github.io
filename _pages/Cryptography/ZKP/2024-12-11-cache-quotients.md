@@ -218,7 +218,7 @@ We apply RLC to the 4 pairings as follows:
 Before combining, note that pairing (1) is transformed as follows:
 $e([A(x)]_1,[T(x)]_2) \cdot e(-[Q_A(x)]_1, [Z_N(x)]_2)= e([M(x)]_1 − β · [A(x)]_1, [1]_2)$
 
-For further details, refer to the [code]().
+For further details, refer to the [code](https://github.com/VanhGer/research/blob/main/cq/src/verifier.rs).
 
 ## Appendix
 
@@ -304,7 +304,7 @@ The computation cost is $O(N)$ as it involves linear operations on precomputed v
 
 ## Implementation
 
-My implementation is [here]().
+My implementation is [here](https://github.com/VanhGer/research/tree/main/cq).
 ## Reference:
 - [CQ lookup argument](https://eprint.iacr.org/2022/1763.pdf).
 - [Feist and Khovratovich Algorithm](https://eprint.iacr.org/2017/602.pdf).
