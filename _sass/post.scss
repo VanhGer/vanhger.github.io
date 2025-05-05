@@ -5,7 +5,8 @@
 
 .inner-header {
   display:none;
-  background: linear-gradient(180deg, rgb(175, 158, 137) 0%, rgb(173, 151, 131) 100%);
+  //background: linear-gradient(180deg, rgb(175, 158, 137) 0%, rgb(173, 151, 131) 100%);
+  background: $color-brown-lloyd;
   //background: #6c3900;
   border-radius:1rem 1rem 0 0;
   //border: 1px solid #1E1E1F;

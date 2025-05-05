@@ -79,14 +79,14 @@
 
   &:hover {
     transform:scale(1.25);
-    svg { fill:$color-darkorange; }
+    svg { fill:$color-darkgreen-lloyd; }
   }
 }
 
 .nav-lh svg {
-  margin-left:-0.25rem;
+  margin-left:0.5rem;
   position:relative;
-  fill:$color-darkorange;
+  fill:$color-gold-lloyd;
   transform:translateY(-2px);
 }
 .nav-sh svg { 
@@ -101,7 +101,7 @@
 .nav-list-expander svg { width:20px; }
 
 .nav-sh svg { width:16px; }
-.nav-lh svg { width:18px; }
+.nav-lh svg { width:20px; }
 
 }
 
@@ -152,14 +152,15 @@
     left:0;
     border-radius:1.5rem;
 
-    background:rgba($color-darkblue-2, .375);
-    width:3rem;
-    height:3rem;
+    //background:rgba($color-darkblue-2, .375);
+    background:rgba($color-darkgreen-lloyd, .5);
+    width:2.3rem;
+    height:2.3rem;
     transition:.3s;
   }
   &:hover:before {
     width:105%;
-    background:$color-lightblue;
+    background:rgba($color-darkgreen-lloyd, .75);
   }
 
   svg { transform:none; }
