@@ -6,7 +6,7 @@
 .inner-header {
   display:none;
   //background: linear-gradient(180deg, rgb(175, 158, 137) 0%, rgb(173, 151, 131) 100%);
-  background: $color-brown-lloyd;
+  background: $color-darkgreen-lloyd;
   //background: #6c3900;
   border-radius:1rem 1rem 0 0;
   //border: 1px solid #1E1E1F;
@@ -19,11 +19,12 @@
     margin:1px 4px;
     border-radius:50%;
     display:inline-block;
+    background: $color-gold-lloyd;
   }
 }
 
 .inner-content {
-  background: #eee7dd;
+  background: $color-yellow-background;
 
   img {
     display:block;
@@ -158,11 +159,11 @@
   &::before { border-color:transparent hsl(51, 31%, 55%) transparent transparent; }
 }
 .theme-1 { 
-  background:$color-retro-red;
+  background:$color-brown-lloyd;
   &::before { border-color:transparent $color-retro-red transparent transparent; }
 }
 .theme-2 { 
-  background: $color-darkblue-2;
+  background: $color-darkgreen-lloyd;
   &::before { border-color:transparent $color-darkblue-2 transparent transparent; }
 }
 
@@ -186,7 +187,10 @@ main {
   h3, .sh3 { font-size:1.125rem; }
   h4, .sh4 { font-size:1rem; }
 
-  p { text-align:justify; }
+  p, li {
+    text-align:justify;
+    color: $color-brown-lloyd;
+  }
 
   u {
     color:$color-rose;
@@ -196,7 +200,7 @@ main {
   em { padding-right:2px; }
 
   a {
-    color:$color-darkblue;
+    color:$color-darkgreen-lloyd;
     text-decoration:none;
 
     &::before {
@@ -465,7 +469,7 @@ main {
   }
 
   .date {
-    color:$color-darkblue-2;
+    color:$color-darkgreen-lloyd;
     font-size:0.875rem;
     text-transform:uppercase;
   }
@@ -477,7 +481,7 @@ main {
   bottom:2rem;
   right:2rem;
   width:48px;
-  background:$color-darkblue-2;
+  background:$color-darkgreen-lloyd;
   cursor:pointer;
 
   &, &:before{

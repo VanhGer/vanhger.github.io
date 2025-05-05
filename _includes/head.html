@@ -40,6 +40,15 @@
     src: local('Lato'),
          url("{{ site.baseurl }}/assets/fonts/Lato-Regular.woff2") format("woff2");
 }
+
+@font-face {
+    font-family: 'Hmt';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: local('Hmt'),
+    url("{{ site.baseurl }}/assets/fonts/HmtRegular-WRrv.ttf") format("ttf");
+}
 </style>
 
 <script src="{{ '/assets/js/fontfaceobserver.js' | prepend: site.baseurl }}" type="text/javascript"></script>
@@ -47,11 +56,13 @@
     const nunitoObserver = new FontFaceObserver('Nunito Sans');
     const righteousObserver = new FontFaceObserver('Righteous');
     const latoObserver = new FontFaceObserver('Lato');
+    const hmtObserver = new FontFaceObserver('Hmt');
   
     Promise.all([
         nunitoObserver.load(),
         righteousObserver.load(),
         latoObserver.load(),
+        hmtObserver.load(),
     ]).then(function(){
         document.documentElement.className += " fonts-loaded";
     });

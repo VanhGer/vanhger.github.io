@@ -10,11 +10,11 @@
     padding:1rem 0 1rem 1.5rem;
     line-height:150%;
     font-weight:bold;
-    color:slategrey;
+    color:$color-green-1;
   }
 
   a {
-    color: #305973;
+    color: $color-darkgreen-lloyd;
     text-decoration:none;
   }
 
@@ -83,9 +83,9 @@
   }
   .title_post:hover,
   .category:hover {
-    color:$color-darkblue;
+    color:$color-darkgreen-lloyd;
   }
-  .category{ color:#305973; }
+  .category{ color: $color-green-lloyd; }
 
   .txt_post {
     display:-webkit-box;
@@ -139,7 +139,7 @@
 }
 .pagination-number.active {
   color:#fff;
-  background:#305973;
+  background:$color-darkgreen-lloyd;
 }
 
 @include mq(tablet){

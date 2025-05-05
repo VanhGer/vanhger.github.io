@@ -92,7 +92,10 @@
     margin:0;
   }
 
-  h3 { display:none; }
+  h3 {
+    display:none;
+    color: $color-gold-lloyd;
+  }
 
   ul{
     text-align:center;
@@ -113,11 +116,11 @@
 
         svg {
           width:16px;
-          fill:dimgrey;
+          fill: $color-yellow-ninja;
         }
 
         &:hover{
-          svg { fill: $color-darkgreen-lloyd; }
+          svg { fill: $color-gold-lloyd; }
 
           transform:scale(1.5) translateY(-12.5%);
         }
@@ -126,7 +129,7 @@
   }
 
   span { font-size:0.875rem; }
-  a { color:$color-darkorange; }
+  a { color:$color-gold-lloyd; }
 }
 
 .sidebar-right{ display:none; }
@@ -245,7 +248,7 @@
 
   img, mark { transition:.5s ease; }
   mark { 
-    color:$color-wenge;
+    color:$color-yellow-ninja;
     word-break:break-word;
   }
 
@@ -262,7 +265,7 @@
 
   &:hover {
     mark { 
-      color:$color-darkgreen-lloyd;
+      color:$color-gold-lloyd;
       //margin-left:40px;
     }
     img { 

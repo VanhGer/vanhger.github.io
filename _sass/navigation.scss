@@ -58,6 +58,7 @@
 
   a { font-weight:400; }
 }
+.nav-item span { color:$color-yellow-ninja; }
 
 .nav-list-link {
   position:relative;
@@ -75,11 +76,14 @@
   cursor:pointer;
 
   &, svg { transition:.3s; }
-  svg { width:18px; }
+  svg {
+    fill: $color-yellow-ninja;
+    width:18px;
+  }
 
   &:hover {
     transform:scale(1.25);
-    svg { fill:$color-darkgreen-lloyd; }
+    svg { fill:$color-gold-lloyd; }
   }
 }
 
