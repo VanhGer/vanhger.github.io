@@ -4,24 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="fix: UI.">
-      <change afterPath="$PROJECT_DIR$/assets/fonts/HmtRegular-WRrv.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/img/background.png" afterDir="false" />
+    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="feat: New UI">
+      <change afterPath="$PROJECT_DIR$/unrelease/2025-15-05-bon-nam-dai-hoc-cua-toi-p1.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/post.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/navigation.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/navigation.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/pagination.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/pagination.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/post.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/post.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/search.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/search.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/sidebar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/sidebar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/toc.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/toc.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/vars.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/vars.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +49,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;git@github.com:VanhGer/vanhger.github.io.git&quot;,
-    &quot;accountId&quot;: &quot;6f5aefd8-d930-4d58-b2de-012b2c08e99f&quot;
+    &quot;accountId&quot;: &quot;0c172fa0-09ed-48b3-a1b3-45fbbac78790&quot;
   }
 }</component>
   <component name="MacroExpansionManager">
@@ -94,7 +79,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/vanhger/Work/vanhger/vanhger.github.io/assets/fonts",
+    "last_opened_file_path": "/home/vanhger/Work/vanhger/vanhger.github.io",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -167,7 +152,11 @@
       <workItem from="1746403319810" duration="3029000" />
       <workItem from="1746407003678" duration="931000" />
       <workItem from="1746409062822" duration="1238000" />
-      <workItem from="1746438488585" duration="11931000" />
+      <workItem from="1746438488585" duration="12040000" />
+      <workItem from="1746513902122" duration="99000" />
+      <workItem from="1747297177612" duration="657000" />
+      <workItem from="1747384175274" duration="381000" />
+      <workItem from="1748044794135" duration="2400000" />
     </task>
     <task id="LOCAL-00001" summary="feat: new post">
       <option name="closed" value="true" />
@@ -441,7 +430,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746407848999</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="feat: New UI">
+      <option name="closed" value="true" />
+      <created>1746455598273</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1746455598273</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -486,7 +483,8 @@
     <MESSAGE value="refactor: page" />
     <MESSAGE value="feat: new post" />
     <MESSAGE value="fix: UI." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: UI." />
+    <MESSAGE value="feat: New UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: New UI" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
