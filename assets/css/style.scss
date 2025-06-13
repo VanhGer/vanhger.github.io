@@ -7,15 +7,15 @@ html, body {
   padding:0;
 }
 
-//body {
-//  background: rgba(27, 26, 26, 0.78);
-//  //background: #c35356;
-//}
-
 body {
-  background: url('../img/background2.png') no-repeat center center fixed;
-  background-size: cover;
+  background: #dadad9;
+  //background: #c35356;
 }
+
+//body {
+//  background: url('../img/background2.png') no-repeat center center fixed;
+//  background-size: cover;
+//}
 
 .fonts-loaded {
   a, span, p, ul, li { font-family:"Nunito Sans", 'Lucida Sans', sans-serif; }

@@ -50,12 +50,14 @@
     width:9rem;
     aspect-ratio:1;
     border-radius:50%;
+    border: 0.1rem solid black;
+    padding: 0.1rem;
     outline:4.5rem solid rgba(64, 64, 64, 0.1);
     outline-offset:-4.5rem;
     transition:.3s;
 
     &:hover {
-      outline:4px solid $color-avatar;
+      outline:4px solid $color-white-1;
       outline-offset:8px;
     }
   }
@@ -94,7 +96,7 @@
 
   h3 {
     display:none;
-    color: $color-gold-lloyd;
+    color: $color-black-1;
   }
 
   ul{
@@ -116,11 +118,11 @@
 
         svg {
           width:16px;
-          fill: $color-yellow-ninja;
+          fill: $color-black-1;
         }
 
         &:hover{
-          svg { fill: $color-gold-lloyd; }
+          svg { fill: $color-black-2; }
 
           transform:scale(1.5) translateY(-12.5%);
         }
@@ -129,7 +131,7 @@
   }
 
   span { font-size:0.875rem; }
-  a { color:$color-gold-lloyd; }
+  a { color:$color-black-1; }
 }
 
 .sidebar-right{ display:none; }
@@ -142,7 +144,7 @@
     width:2.75rem;
     aspect-ratio:1;
     text-align:center;
-    background:$color-darkgreen-lloyd;
+    background:$color-black-1;
     border:none;
     border-radius:50%;
     margin-left:1rem;
@@ -151,7 +153,7 @@
     cursor:pointer;
 
     &:hover {
-      border:2px solid $color-green-lloyd;
+      border:2px solid $color-black-2;
       animation:leaves .75s ease-in-out infinite alternate;
     }
   }
@@ -159,11 +161,11 @@
   @keyframes leaves {
     0% {
       transform:scale(1.0);
-      background:$color-darkgreen-lloyd;
+      background:$color-black-1;
     }
     100% {
       transform:scale(1.25);
-      background:$color-darkgreen-lloyd;
+      background:$color-black-1;
     }
   }
 
@@ -248,7 +250,7 @@
 
   img, mark { transition:.5s ease; }
   mark { 
-    color:$color-yellow-ninja;
+    color:$color-black-1;
     word-break:break-word;
   }
 
@@ -265,7 +267,7 @@
 
   &:hover {
     mark { 
-      color:$color-gold-lloyd;
+      color:$color-black-2;
       //margin-left:40px;
     }
     img { 

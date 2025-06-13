@@ -24,7 +24,7 @@
 }
 
 .inner-content {
-  background: $color-yellow-background;
+  background: $color-white-1;
 
   img {
     display:block;
@@ -189,7 +189,7 @@ main {
 
   p, li {
     text-align:justify;
-    color: $color-brown-lloyd;
+    color: $color-black-1;
   }
 
   u {
@@ -200,13 +200,13 @@ main {
   em { padding-right:2px; }
 
   a {
-    color:$color-darkgreen-lloyd;
+    color: $color-navi-1;
     text-decoration:none;
 
     &::before {
       position:absolute;
       content:attr(data-content);
-      color:midnightblue;
+      color: #bcbce4;
       text-decoration:underline;
       text-decoration-style:wavy;
       text-underline-offset:4px;
@@ -401,6 +401,7 @@ main {
   margin:1rem 0;
   padding:0;
 
+
   li {
     float:left;
     position:relative;
@@ -411,6 +412,7 @@ main {
     list-style:none;
     transition:.3s;
     overflow: hidden;
+    border: 1px black;
 
     &:hover {
       box-shadow:8px 8px 16px -4px rgba(0, 0, 255, .2);
@@ -469,7 +471,7 @@ main {
   }
 
   .date {
-    color:$color-darkgreen-lloyd;
+    color:$color-black-1;
     font-size:0.875rem;
     text-transform:uppercase;
   }
@@ -481,7 +483,7 @@ main {
   bottom:2rem;
   right:2rem;
   width:48px;
-  background:$color-darkgreen-lloyd;
+  background:$color-black-1;
   cursor:pointer;
 
   &, &:before{
@@ -633,8 +635,9 @@ main {
 .inner-header { display:block; }
 
 .inner-content {
-  border-radius:0 0 1rem 1rem;
-  box-shadow:0 16px 16px 8px rgba(31, 35, 46, 0.15);
+  border-radius:0.4rem;
+  border: 0.2rem solid black;
+  //box-shadow:0 16px 16px 8px rgba(31, 35, 46, 0.15);
 }
 
 .top-arrow { left:calc(#{$sidebarwd} + var(--pagewidth-desktop) - 4rem); }

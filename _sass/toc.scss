@@ -8,13 +8,13 @@
   font-size:1.25rem;
   font-weight:600;
   padding:0 0 4px 12px;
-  border-bottom:$color-yellow-ninja 2px solid;
-  color:$color-light-yellow;
+  border-bottom:$color-black-2 2px solid;
+  color:$color-black-1;
   svg {
     width:16px;
     display:inline-flex;
     transform:translateY(2px);
-    fill: $color-yellow-ninja;
+    fill: $color-black-1;
   }
 }
 
@@ -44,7 +44,7 @@
     a {
       animation:.5s ease-out 0s 1 slide;
       cursor: pointer;
-      color: $color-light-yellow;
+      color: $color-brown-lloyd;
     }
 
     @keyframes slide {
@@ -54,7 +54,7 @@
   }
    
   .is-active-link{
-    color:$color-gold-lloyd !important;
+    color:$color-black-1 !important;
     font-weight:950;
   }
 }

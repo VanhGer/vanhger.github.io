@@ -58,7 +58,7 @@
 
   a { font-weight:400; }
 }
-.nav-item span { color:$color-yellow-ninja; }
+.nav-item span { color:$color-black-2; }
 
 .nav-list-link {
   position:relative;
@@ -77,20 +77,21 @@
 
   &, svg { transition:.3s; }
   svg {
-    fill: $color-yellow-ninja;
+    fill: $color-black-2;
     width:18px;
+    margin-right: 0.9rem;
   }
 
   &:hover {
     transform:scale(1.25);
-    svg { fill:$color-gold-lloyd; }
+    svg { fill:$color-black-1; }
   }
 }
 
 .nav-lh svg {
   margin-left:0.5rem;
   position:relative;
-  fill:$color-gold-lloyd;
+  fill:$color-black-1;
   transform:translateY(-2px);
 }
 .nav-sh svg { 
@@ -137,7 +138,8 @@
   display:flex;
   width:95%;
   align-items:center;
-
+  border: 0.1rem solid black;
+  border-radius: 0.4rem;
   &:hover {
     span {
       font-weight:600;
@@ -157,14 +159,14 @@
     border-radius:1.5rem;
 
     //background:rgba($color-darkblue-2, .375);
-    background:rgba($color-darkgreen-lloyd, .5);
+    //background:rgba($color-beige, .5);
     width:2.3rem;
     height:2.3rem;
     transition:.3s;
   }
   &:hover:before {
     width:105%;
-    background:rgba($color-darkgreen-lloyd, .75);
+    //background:rgba($color-beige, .75);
   }
 
   svg { transform:none; }

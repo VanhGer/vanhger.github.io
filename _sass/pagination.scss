@@ -10,11 +10,11 @@
     padding:1rem 0 1rem 1.5rem;
     line-height:150%;
     font-weight:bold;
-    color:$color-green-1;
+    color:$color-black-2;
   }
 
   a {
-    color: $color-darkgreen-lloyd;
+    color: $color-black-2;
     text-decoration:none;
   }
 
@@ -55,6 +55,7 @@
     width:100%;
     aspect-ratio:5/3;
     border-radius:0;
+    border: 0.1rem solid black;
 
     &:hover { opacity:0.8; }
   }
@@ -83,9 +84,9 @@
   }
   .title_post:hover,
   .category:hover {
-    color:$color-darkgreen-lloyd;
+    color:$color-black-2;
   }
-  .category{ color: $color-green-lloyd; }
+  .category{ color: $color-black-1; }
 
   .txt_post {
     display:-webkit-box;
@@ -139,7 +140,7 @@
 }
 .pagination-number.active {
   color:#fff;
-  background:$color-darkgreen-lloyd;
+  background:$color-black-1;
 }
 
 @include mq(tablet){
