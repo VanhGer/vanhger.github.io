@@ -4,21 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="24052025">
+    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="13062025">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/navigation.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/navigation.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/pagination.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/pagination.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/post.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/post.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/search.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/search.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/sidebar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/sidebar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/toc.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/toc.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/vars.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/vars.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unrelease/2025-15-05-bon-nam-dai-hoc-cua-toi-p1.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_pages/Blog/Life/2025-13-06-bon-nam-dai-hoc-cua-toi.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/Blog/Life/2025-13-06-bon-nam-dai-hoc-cua-toi.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +158,8 @@
       <workItem from="1748044794135" duration="2400000" />
       <workItem from="1749338227535" duration="1200000" />
       <workItem from="1749804499533" duration="1927000" />
-      <workItem from="1749824341521" duration="2852000" />
+      <workItem from="1749824341521" duration="3341000" />
+      <workItem from="1749831414159" duration="83000" />
     </task>
     <task id="LOCAL-00001" summary="feat: new post">
       <option name="closed" value="true" />
@@ -452,7 +441,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746455598273</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="13062025">
+      <option name="closed" value="true" />
+      <created>1749830970325</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1749830970325</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -473,7 +470,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: fix comment" />
     <MESSAGE value="feat: fix comment" />
     <MESSAGE value="fix: change disqus" />
     <MESSAGE value="fix: disqus" />
@@ -498,7 +494,8 @@
     <MESSAGE value="feat: new post" />
     <MESSAGE value="fix: UI." />
     <MESSAGE value="feat: New UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: New UI" />
+    <MESSAGE value="13062025" />
+    <option name="LAST_COMMIT_MESSAGE" value="13062025" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
