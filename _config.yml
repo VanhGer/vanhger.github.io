@@ -41,7 +41,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-loading-lazy
-
+  - jekyll-polyglot
 
 exclude:
   - docs/
@@ -68,6 +68,12 @@ defaults:
 kramdown:
   input: GFM
   hard_wrap: true
+
+languages: ["en", "sv", "de", "fr"]
+default_lang: "en"
+exclude_from_localization: ["javascript", "images", "css", "public", "sitemap"]
+parallel_localization: true
+url: https://polyglot.untra.io
 
 # Exclude from processing.
 # The following items will not be processed, by default.
