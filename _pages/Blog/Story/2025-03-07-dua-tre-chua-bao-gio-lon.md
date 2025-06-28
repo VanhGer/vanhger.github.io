@@ -107,9 +107,9 @@ Cảm ơn mọi người đã đọc bài viết này. Dưới đây mình có 2
 
 > Sắp tới mình sẽ không viết blog về cảm xúc cá nhân nữa, mọi người đọc ở trên chắc cũng hiểu phần nào lý do. Cảm ơn những bạn bè đã đọc những gì mình viết từ trước đến nay, điều đó thật sự có ý nghĩa với mình.
 
-> Sáng thứ 7, ngày 5/7, mình sẽ nhận bằng tốt nghiệp. Rất mong mọi người nếu tiện có thể qua chụp với mình một tấm ảnh kỉ niệm ạ, mình thật sự rất quý trọng điều đó. 
+> Chiều thứ 7, ngày 5/7, mình sẽ nhận bằng tốt nghiệp. Rất mong mọi người nếu tiện có thể qua chụp với mình một tấm ảnh kỉ niệm ạ, mình thật sự rất quý trọng điều đó. 
 > Vì không thể gửi hết thiệp mời cho mọi người được nên rất mong mọi người có thể inbox cho mình trước hihi, mình sẽ phản hồi bằng thiệp và lời mời trân trọng nhất ạ.
-> Hẹn mọi người lúc 10h30 sáng tại Đại học Quốc Gia Hà Nội, 144 Xuân Thủy, Cầu Giấy nhé ^^.
+> Hẹn mọi người từ 2h - 5h chiều tại Đại học Quốc Gia Hà Nội, 144 Xuân Thủy, Cầu Giấy nhé ^^.
 
 
 

@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="13062025">
-      <change afterPath="$PROJECT_DIR$/_pages/Blog/Story/2025-03-07-dua-tre-chua-bao-gio-lon.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
-    </list>
+    <list default="true" id="92304351-4b8c-4b73-b28b-86dfe02d4c62" name="Changes" comment="finale" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,7 +75,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/vanhger/Work/vanhger/van-ghia.github.io",
+    "last_opened_file_path": "/home/vanhger/Work/vanhger/vanhger.github.io",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -170,6 +165,7 @@
       <workItem from="1750147659721" duration="10000" />
       <workItem from="1750208072508" duration="12000" />
       <workItem from="1750253341032" duration="1751000" />
+      <workItem from="1751044864417" duration="192000" />
     </task>
     <task id="LOCAL-00001" summary="feat: new post">
       <option name="closed" value="true" />
@@ -459,7 +455,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749830970325</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="finale">
+      <option name="closed" value="true" />
+      <created>1751045043330</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1751045043330</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -480,7 +484,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: fix comment" />
     <MESSAGE value="fix: change disqus" />
     <MESSAGE value="fix: disqus" />
     <MESSAGE value="fix: add Permission-Policy" />
@@ -505,7 +508,8 @@
     <MESSAGE value="fix: UI." />
     <MESSAGE value="feat: New UI" />
     <MESSAGE value="13062025" />
-    <option name="LAST_COMMIT_MESSAGE" value="13062025" />
+    <MESSAGE value="finale" />
+    <option name="LAST_COMMIT_MESSAGE" value="finale" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
